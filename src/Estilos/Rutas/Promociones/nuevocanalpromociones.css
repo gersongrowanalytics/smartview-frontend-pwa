@@ -1,0 +1,376 @@
+#Contenedor-Canales-Promociones{
+    /* height: 400px; */
+    /* background-color: red; */
+    margin-top: 40px;
+    margin-left: 70px;
+    /* display: flex; */
+    /* width: 100%; */
+    
+    /* overflow: scroll; */
+
+
+    height: 80vh;
+    position: relative;
+    overflow: scroll;
+    /* margin: 10em auto 20em; */
+    /* max-width: 960px; */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin-right: 10px;
+}
+
+.Fila-Canal-Promocion{
+    width: 339px;
+    margin-right: 20px;
+}
+
+.Cabecera-Canal-Promocion{
+    width: 339px;
+    height: 48px;
+    /* background: #E41A37; */
+    border-radius: 11px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+    
+    
+    
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.Card-Promocion{
+    margin-top: 30px;
+    width: 339px;
+    height: 242px;
+    /* border: 1px solid #E41A37; */
+    box-sizing: border-box;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.Card-Fecha-Vigencia-Promocion{
+
+    width: 95px;
+    height: 31px;
+    /* background: #E41A37; */
+    border-radius: 9px 0px 0px 9px;
+    position: absolute;
+    /* right: -1px; */
+    right: 54px;
+    top: 17px;
+    display: flex;
+
+    transform: translateX(55px);
+    transition-duration: 500ms;
+}
+
+.Card-Fecha-Vigencia-Promocion-nuevo{
+
+    width: 95px;
+    height: 31px;
+    /* background: #E41A37; */
+    border-radius: 9px 0px 0px 9px;
+    position: absolute;
+    right: 53px;
+    top: 17px;
+    display: flex;
+
+    transform: translateX(55px);
+    transition-duration: 500ms;
+}
+
+/* .Card-Fecha-Vigencia-Promocion:hover{
+    transform: translateX(-0px);
+    transition-duration: 500ms;
+} */
+
+.Icono-Calendario-Promocion{
+    width: 26px;
+    /* height: 18px; */
+}
+
+.Primera-Parte-Fecha-Vigencia-Promocion{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Segunda-Parte-Fecha-Vigencia-Promocion{
+    width: 50%;
+    align-self: center;
+    margin-left: -5px;
+}
+
+.Fecha-Inicio-Vigencia-Promocion{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 11px;
+    color: #FFFFFF;
+    margin-bottom: 1px;
+}
+
+.Fecha-Final-Vigencia-Promocion{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 11px;
+    color: #FFFFFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrap {
+    height: 80vh;
+    position: relative;
+    overflow: scroll;
+    margin: 10em auto 20em;
+    max-width: 960px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /*overscroll-behavior: contain;*/
+  }
+  
+  .scenes {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .track {
+    flex: 1 0 calc(22% + 7px);
+    scroll-snap-align: start;
+  }
+  
+  .track + .track {
+    margin-left: -1px;
+  }
+  
+.heading {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    border: solid #fff;
+    border-width: 0 1px;
+    z-index: 1;
+    background: #efefef;
+    font-weight: 700;
+}
+  
+  .entry {
+    border: 1px solid #ebebeb;
+    border-top: 0;
+    background: #fff;
+    height: 8em;
+    padding: 1em;
+  }
+  
+  
+  @media (max-width: 767px) {
+    .track {
+      flex: 1 0 calc(50% + 7px);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*  */
+
+.Nombre-Producto-Card-Promocion{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 15px;
+    color: #1E1E1E;
+}
+
+.Descripcion-Producto-Card-Promocion{
+
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 13px;
+    color: #1E1E1E;
+
+}
+
+.Valor-Producto-Card-Promocion{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 10px;
+    line-height: 14px;
+    color: #1E1E1E;
+
+}
+
+.Titulo-Card-Promocion{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 15px;
+    line-height: 18px;
+    /* color: #E41A37; */
+
+    width: 100%;
+    text-align: -webkit-center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.Subtitulo-Card-Promocion{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 11px;
+    line-height: 13px;
+    /* color: rgba(228, 26, 55, 0.7); */
+    width: 100%;
+    text-align: -webkit-center;
+    padding-bottom: 5px;
+}
+
+.Nombre-Tipo-Promocion-Card-Promocion{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FDA019;
+    width: 100%;
+    text-align: -webkit-center;
+    padding-bottom: 15px;
+}
+
+.Descripcion-Gratis-Card-Promocion{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 9px;
+    line-height: 11px;
+    color: white;
+
+    /* position: absolute; */
+    top: 0;
+}
+
+.Icono-Gratis-Card-Promocion{
+    /* position: absolute; */
+    top: 0;
+    width: 15px;
+}
+
+.Cuerpo-Card-Promocion{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.Primera-Cuerpo-Card-Promocion{
+    width: 50%;
+    height: 100%;
+    /* background-color: red; */
+    text-align-last: center;
+}
+
+.Segunda-Cuerpo-Card-Promocion{
+    width: 50%;
+    height: 100%;
+    /* background-color: blue; */
+    text-align-last: center;
+    position: relative;
+}
+
+.Imagen-Card-Promocion{
+    width: 105px;
+    height: 59px;
+    margin-bottom: 10px;
+}
+
+.Contenedor-Descripcion-Gratis-Card-Promocion{
+    position: absolute;
+    background-color: #F93258;
+    border-radius: 15px;
+    width: 50px;
+    height: 15px;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: -10px;
+}
+
+.Contenedor-Btn-Editar-Card-Promocion{
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+
+    width: 62.34px;
+    height: 20.33px;
+    /* background: #E41A37;
+    border: 1px solid #E41A37; */
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Btn-Editar-Card-Promocion{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 13px;
+    color: #FFFFFF;
+}

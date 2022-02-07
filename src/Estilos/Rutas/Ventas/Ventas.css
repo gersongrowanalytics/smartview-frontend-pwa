@@ -1,0 +1,224 @@
+.Contenedor-Filtro-Ventas{
+    height: 60px;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    padding-left: 40px;
+}
+
+.Borde-Filtro-Contenedor{
+    width: 170px;
+    height: 36px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    padding-right: 50px;
+    padding-left: 10px;
+    padding-top: 7px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.Contenedor-Cuerpo-Filtro{
+    width: 170px;
+    /* height: 84px; */
+    background: #FFFFFF;
+    /* background: red; */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    position: absolute;
+    left: 0;
+    margin-top: 0px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.Fila-Cuerpo-Filtro{
+    height: 30px;
+    padding-left: 10px;
+    /* padding-top: 7px;
+    padding-bottom: 7px; */
+    cursor: pointer;
+    position: relative;
+}
+
+.Fila-Cuerpo-Filtro:hover{
+    background: #FFFF00;
+}
+
+.Fila-Cuerpo-Filtro:hover .Linea-Fila-Filtro{
+    width: 7px;
+    height: 30px;
+    background: #1E1E1E;
+    position: absolute;
+    left: 0;
+}
+
+.Contenedor-Filtro-Fecha-Ventas{
+    width: 84px;
+    height: 36px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Contenedor-Cuerpo-Filtro-Fecha-Ventas{
+    width: 200.16px;
+    height: 186px;
+    background: #FFFFFF;
+    box-shadow: 0px 3px 8px #C4C4C4;
+    border-radius: 0px 0px 8px 8px;
+    position: absolute;
+    left: -55px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Contenedor-Btn-Descargar-Ventas{
+    width: 84px;
+    height: 36px;
+    background: #000000;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.Contenedor-Img-Banner-Ventas{
+    width: 100%;
+    height: 517px;
+}
+
+.Titulo-Ventas{
+    margin-top: 30px;
+    margin-left: 60px;
+}
+
+.Icono-Flecha-Abajo-Filtro-Ventas{
+    width: 20px;
+    right: 10px;
+    position: absolute;
+}
+
+.Contenedor-Cuadros-Avances-Ventas{
+    margin-left: 55px;
+    margin-right: 55px;
+    margin-top: 0px;
+    padding-top: 10px;
+}
+
+.Contenedor-Tarjeta-Avance-Ventas{
+    width: 100%;
+    height: 135px;
+    
+    box-shadow: 0px 0px 4px 2px #E5E5E5;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+
+    background: #FFFFFF;
+    border: 1px solid #FFCD1B;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.Titulo-Tarjeta-Avance-Ventas{
+    width: 100%;
+    height: 39px;
+    background: #FFCD1B;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    padding-top: 7px;
+    padding-left: 15px;
+}
+
+.Iconos-Tarjeta-Avance-Ventas{
+    width: 25px;
+}
+
+.Contenedor-Tarjetas-Categorias-Avance-Ventas{
+    margin-top: 30px;
+    /* width: 100%; */
+    /* height: 286px; */
+    /* display: flex; */
+    margin-left: 55px;
+    margin-right: 55px;
+}
+
+.Tarjeta-Categorias-Avance-Ventas{
+    width: 18%;
+    height: 286px;
+    /* background: blue; */
+    box-shadow: 0px 4px 4px #E5E5E5;
+    border-radius: 8px;
+    margin-right: 2%;
+    margin-left: 5px;
+}
+
+.Contenedor-Tajeta-Avance-Rebate-Ventas{
+    width: 31%;
+    margin-right: 3%;
+    margin-left: 4px;
+    /* height: 286px; */
+}
+
+.Primera-Tarjeta-Categorias-Avance-Ventas{
+    height: 65%;
+    width: 100%;
+    background: green;
+}
+
+.Segunda-Tarjeta-Categorias-Avance-Ventas{
+    height: 35%;
+    width: 100%;
+    /* background: red; */
+}
+
+.Filta-Segunda-Tarjeta-Categorias-Avance-Ventas{
+    height: 25%;
+    width: 100%;
+    /* background: hotpink; */
+    position: relative;
+}
+
+.Icono-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas{
+    position: absolute;
+    left: 10px;
+    top: 1px;
+}
+
+.Texto-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas{
+    position: absolute;
+    left: 40px;
+    top: 5px;
+}
+
+.Total-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
+
+.Item-Filtro-Mes-Ventas{
+    width: 33.99px;
+    height: 33.99px;
+    border-radius: 27px;
+    padding-top: 8px;
+    cursor: pointer;
+}
+
+.Item-Filtro-Mes-Ventas:hover{
+    background: #FFFF00;
+    font-weight: bold;
+}

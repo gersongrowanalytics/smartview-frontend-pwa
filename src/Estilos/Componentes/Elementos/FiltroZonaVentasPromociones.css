@@ -1,0 +1,19 @@
+.Contenedor-Cuerpo-Filtro-Zonas-Ventas-Promociones{
+    width: 650px;
+    height: 304px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    position: absolute;
+    top: 40px;
+    overflow-y: auto;
+}
+
+.Fila-Filtro-Zona-Ventas-Promociones{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.Fila-Filtro-Zona-Ventas-Promociones:hover{
+    background: #E6F1FC;
+}

@@ -1,0 +1,87 @@
+.Contenedor-Top{
+    width: 100%;
+    height: 60px;
+    background: #FFFF00;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.Logo-KC-Creciendo-Juntos{
+    width: 60px;
+    margin-right: 20px;
+    margin-left: 40px;
+}
+
+.Contenedor-Items-Top{
+    margin-left: 10px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 35px;
+    padding-right: 30px;
+    cursor: pointer;
+    border-radius: 27px;
+    position: relative;
+    /* background: red; */
+}
+
+.Contenedor-Items-Top:hover{
+    background: #000000;
+    /* background: red; */
+    color: #FFFF00;
+}
+
+.Contenedor-Items-Mi-Cuenta-Top{
+    position: absolute;
+    right: 40px;
+}
+
+.Contenedor-Fecha-Actualizacion-Top{
+    width: 100%;
+    height: 34px;
+    background: #F1F1F1;
+    padding-left: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.Cuerpo-Item-Filtro-Top{
+    position: absolute;
+    width: 144px;
+    /* height: 77px; */
+    background: #FFFFFF;
+    border-radius: 0px 0px 8px 8px;
+    top: 48px;
+    z-index: 1;
+    box-shadow: 0px 3px 8px #C4C4C4;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.Fila-Cuerpo-Item-Filtro-Top{
+    position: relative;
+    padding-left: 25px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.Fila-Cuerpo-Item-Filtro-Top:hover{
+    background: #FFFF00;
+}
+
+.Icono-Fila-Cuerpo-Item-Filtro-Top{
+    width: 18px;
+    position: absolute;
+    left: 5px;
+    top: 6px;
+}
+
+.Img-Icono-Top{
+    width: 30px;
+    position: absolute;
+    left: 3px;
+    top: 4px;
+}

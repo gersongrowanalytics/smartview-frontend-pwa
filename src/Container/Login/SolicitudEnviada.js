@@ -13,14 +13,25 @@ const SolicitudEnviada = () => {
       
   return (
     <div id="Login-Contenedor-Formulario">
-            <div className='Login-Banner' id='banner'>
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p> 
+             <div className='Login-Banner banner' style={{top: "0"}}>
+                <p>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
+                </p>
+            </div>
+            <div className='Login-Banner banner banner2' style={{top:"0"}}>
+               <p>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+               </p>
             </div>
 
             <div id='Login-Formulario'>
@@ -48,14 +59,25 @@ const SolicitudEnviada = () => {
                 </Button>
            
             </div>
-            <div className='Login-Banner' >
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</p>
-                <p className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</p>
+            <div className='Login-Banner banner' style={{bottom:"0"}}>
+                <p>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
+                </p>
+            </div>
+            <div className='Login-Banner banner banner2'style={{bottom:"0"}}>
+               <p>                
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+               </p>
             </div>
             {/* <button
                 onClick={() => EnviarLogin()}

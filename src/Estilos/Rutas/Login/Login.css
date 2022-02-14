@@ -16,10 +16,11 @@
     flex-direction: column;
     align-items: center;
     place-content: center;
-    position: relative;
+    position: absolute;
     /* background-color: rgb(220, 202, 202); */
     width: 40%;
     height: 100vh;
+
 }
 
 #Login-Formulario-Input{
@@ -149,10 +150,36 @@
     position: relative;
     width: 100%;
     height: 100px;
-    /* background: red; */
     display: flex;
     align-items: center;
 }
+
+.banner{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+}
+
+.banner p{
+    display: inline-block;
+    padding-left: 100%;
+    animation: banner 30s linear infinite;
+    animation-delay: 0s;
+}
+
+.banner2 p {
+    animation-delay: 15s;
+}
+
+@keyframes banner { 
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+
 
 .ant-form-item-control-input-content {
     height: 47px !important;
@@ -161,6 +188,9 @@
 @media screen and (max-width: 425px) {
     #Login-Formulario{
         width: 100%;
+    }
+    #Banner-Icono{
+        width: 21%;
     }
 }
 
@@ -177,29 +207,29 @@
 }
 
 .Login-Banner-Letras-SinRelleno{
--webkit-text-stroke: 0.7px black;
-color: transparent; 
-font-family: Segoe UI;
-font-style: normal;
-font-weight: bold;
-font-size: 16px;
-line-height: 21px;
-text-align: center;
-letter-spacing: 0.105em;
-margin: 0px 15px;
+    -webkit-text-stroke: 0.7px black;
+    color: transparent; 
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0.105em;
+    margin: 0px 30px;
 }
 
 .Login-Banner-Letras-ConRelleno{
--webkit-text-stroke: 0.7px black;
-color: transparent; 
-font-style: normal;
-font-family: Segoe UI;
-font-weight: 900;
-font-size: 16px;
-line-height: 22px;
-letter-spacing: 0.105em;
-color: #1E1E1E;
-margin: 0px 15px;
+    -webkit-text-stroke: 0.7px black;
+    color: transparent; 
+    font-style: normal;
+    font-family: Segoe UI;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.105em;
+    color: #1E1E1E;
+    margin: 0px 30px;
 }
 
 #Login-Formulario-Subtitulo{
@@ -219,6 +249,24 @@ margin: 0px 15px;
 /* .seleccionar {
     font-weight: bold;
 } */
+/* ant-select-item ant-select-item-option ant-select-item-option-active
+.ant-select-item ant-select-item-option:hover{
+    background: #FFFF00 !important;
+} */
+.ant-select-item-option-active{
+    background: #FFFF00 !important;
+}
+.ant-select-item-option-selected{
+    background: #ffff0085 !important;
+}
+.ant-select-item-option{
+    font-family: Segoe UI !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 21px !important;
+    color: #1E1E1E !important;
+}
 
 #Banner-Fondo{
     background: #FFFF00;

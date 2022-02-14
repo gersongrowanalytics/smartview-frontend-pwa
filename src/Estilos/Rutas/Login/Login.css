@@ -1,0 +1,309 @@
+#Login-Contenedor-Formulario{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: white;
+    display: flex;
+    place-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Login-Formulario{
+    margin:0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    place-content: center;
+    position: relative;
+    /* background-color: rgb(220, 202, 202); */
+    width: 40%;
+    height: 100vh;
+}
+
+#Login-Formulario-Input{
+    width: 299px;
+    height: 47px;
+    background: #FFFFFF;
+    padding-left: 10px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 21px;
+    border-radius: 8px;
+}
+
+#Login-Formulario-Input-Contrasenia{
+    width: 299px;
+    height: 38px;
+    background: #FFFFFF;
+    padding-left: 10px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 21px;
+    border-radius: 8px;
+}
+
+#Login-Formulario-Texto{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    color: #1E1E1E;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: -13px;
+    text-decoration: underline;
+}
+
+#Login-Formulario-Boton{
+    width: 299px;
+    height: 47px;
+    background: #FFFF00;
+    display: flex;
+    align-items: center;
+    place-content: center;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1E1E1E;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+#Login-Formulario-Boton-Desactivado{
+    width: 299px;
+    height: 47px;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    place-content: center;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    color: #FFFF00;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+#Icono{
+    width: 20%;
+}
+
+#Banner-Icono{
+    width: 11%;
+}
+#Login-Formulario-Titulo{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    color: #1E1E1E;
+    margin-bottom: 20px;
+}
+
+#Login-Formulario-Titulo-Solicitud{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    color: #1E1E1E;
+    margin-top: 10px;
+}
+
+#Solicitud-Informacion{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #A4A3A3;
+    width: 465px;
+}
+
+.ant-select-selector{
+    border-radius: 8px !important;
+    height: 46px !important;
+    padding: 3px 11px !important;
+
+}
+
+.Login-Banner{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    /* background: red; */
+    display: flex;
+    align-items: center;
+}
+
+.ant-form-item-control-input-content {
+    height: 47px !important;
+}
+
+@media screen and (max-width: 425px) {
+    #Login-Formulario{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Login-Banner{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 425px) and (max-width: 768px) {
+    #Login-Formulario{
+        width: 80%;
+    }
+}
+
+.Login-Banner-Letras-SinRelleno{
+-webkit-text-stroke: 0.7px black;
+color: transparent; 
+font-family: Segoe UI;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 21px;
+text-align: center;
+letter-spacing: 0.105em;
+margin: 0px 15px;
+}
+
+.Login-Banner-Letras-ConRelleno{
+-webkit-text-stroke: 0.7px black;
+color: transparent; 
+font-style: normal;
+font-family: Segoe UI;
+font-weight: 900;
+font-size: 16px;
+line-height: 22px;
+letter-spacing: 0.105em;
+color: #1E1E1E;
+margin: 0px 15px;
+}
+
+#Login-Formulario-Subtitulo{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    color: #1E1E1E;
+}
+
+/* .ant-form-item-explain-error{
+    margin-top: 10px !important;
+} */
+
+/* .seleccionar {
+    font-weight: bold;
+} */
+
+#Banner-Fondo{
+    background: #FFFF00;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    place-content: center;
+}
+
+#Banner{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    place-content: center;
+}
+
+#Banner-Animacion{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    place-content: center;
+    animation-name: PreloadAnimacion;
+    animation-delay: 0s;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes PreloadAnimacion{
+    from{ top   : 0; }
+    to { top   : -100%; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+div.Login-Banner span {
+    -moz-animation: 10s Login-Banner;
+    -webkit-animation: 10s Login-Banner;
+    -o-animation: 10s Login-Banner;
+    animation: 10s Login-Banner;
+}
+
+div.Login-Banner-left span {
+    -moz-animation: 10s Login-Banner-left;
+    -webkit-animation: 10s Login-Banner-left;
+    -o-animation: 10s Login-Banner-left;
+    animation: 10s Login-Banner-left;
+  }
+  @-webkit-keyframes Login-Banner { from { margin-left: 100% }
+    to {margin-left: 0%;width: 100%;} }
+  @-moz-keyframes Login-Banner { from { margin-left: 100%; }
+    to {margin-left: 0%;width: 100%;} }
+   @-o-keyframes Login-Banner { from { margin-left: 100%; }
+    to {margin-left: 0%;width: 100%;} }
+  @keyframes Login-Banner { from { margin-left: 100%; }
+    to {margin-left: 0%;width: 100%;} }
+  
+  @-webkit-keyframes Login-Banner-left { from {margin-left: 0%;}
+   to {margin-left: -100%} }
+  @-moz-keyframes Login-Banner-left { from {margin-left: 0%;}
+   to {margin-left: -100%} }
+  @-o-keyframes Login-Banner-left { from {margin-left: 0%;}
+   to {margin-left: -100%;} }
+  @keyframes Login-Banner-left { from {margin-left: 0%;}
+   to {margin-left: -100%;} }

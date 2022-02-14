@@ -1,36 +1,26 @@
-import React from 'react';
-import {useSelector, useDispatch} from "react-redux";
-import {
-    loginReducer
-} from '../../Redux/Acciones/Auth'
+import React, {useState} from 'react'
+import LoginBanner from './LoginBanner'
+import LoginFormulario from './LoginFormulario'
 
 const Login = () => {
-    
-    const dispatch = useDispatch()
-    
-    const EnviarLogin = () => {
+    const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
-        let valores = {
-            usuario : "Administrador",
-            contrasena : "gerson$$"
+    const MostrarFormulario = () => {
+        setMostrarFormulario(true);
+    }; 
+    
+  return (
+    <div>
+        {
+            mostrarFormulario == true
+            ?<LoginFormulario/>
+            :null
         }
+        <LoginBanner
+            setMostrarFormulario = {MostrarFormulario}
+        />
+    </div>
+  )
+}
 
-        dispatch(loginReducer(valores))
-    }
-
-    // const cargando_login = useSelector(({login}) => login.cargando_login)
-
-    
-    return (
-        <div>
-            login
-            <button
-                onClick={() => EnviarLogin()}
-            >
-                Login
-            </button>
-        </div>
-    );
-};
-
-export default Login;
+export default Login

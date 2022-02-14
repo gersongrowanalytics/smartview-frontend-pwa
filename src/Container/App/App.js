@@ -4,6 +4,10 @@ import Login from '../Login/Login'
 import {useSelector, useDispatch} from "react-redux";
 import Rutas from '../../Rutas';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import RestablecerContrasenia from '../Login/RestablecerContrasenia';
+import FormularioCambiarContrasenia from '../Login/FormularioCambiarContrasenia';
+import SolicitudEnviada from '../Login/SolicitudEnviada';
+
 
 function App() {
 
@@ -17,9 +21,13 @@ function App() {
             }}
         >
             {
-                authUser == null
+                // authUser == null
+                true == true
                 ?<Routes>
                     <Route exact path='/login' element={<Login/>}/>
+                    <Route exact path='/restablecer' element={<RestablecerContrasenia/>}/>
+                    <Route exact path='/cambiar-contrasenia' element={<FormularioCambiarContrasenia/>}/>
+                    <Route exact path='/solicitud-enviada' element={<SolicitudEnviada/>}/>
                 </Routes>
                 :<>
                     <Rutas />

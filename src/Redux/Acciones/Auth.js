@@ -3,6 +3,7 @@ import {
 } from "../../Constantes/ActionTypes";
 import config from '../../config'
 import { estadoRequestReducer } from "./EstadoRequest"
+import { message } from "antd";
 
 export const loginReducer = (usuario) => async ( dispatch, getState) => {
 
@@ -38,8 +39,9 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
                 localStorage.setItem('tpuprivilegio', data.datos.tpuprivilegio)
 
                 dispatch(loginCorrecto(data.datos))
+                message.success(data.mensaje);
             }else{
-
+                message.error(data.mensaje);
             }
         }
     }).catch((error)=> {
@@ -52,4 +54,10 @@ export const loginCorrecto = (user) => {
         type: SIGNIN_USER_SUCCESS,
         payload: user
     };
+};
+
+export const cerrarSesionReducer = () => async (dispatch) => {
+    
+    localStorage.clear();
+    window.location.href = window.location.href;
 };

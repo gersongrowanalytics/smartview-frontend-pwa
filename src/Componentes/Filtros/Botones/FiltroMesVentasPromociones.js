@@ -27,7 +27,7 @@ const FiltroMesVentasPromociones = () => {
                 onClick={() => setMostrarMeses(!mostrarMeses)}
             >
                 <div>
-                    Mes
+                    {mesSeleccionadoFiltro}
                 </div>
             </div>
 

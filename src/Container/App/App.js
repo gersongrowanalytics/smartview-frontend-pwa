@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes } from "react-router-dom";
+import {Route, Routes, Navigate } from "react-router-dom";
 import Login from '../Login/Login'
 import {useSelector, useDispatch} from "react-redux";
 import Rutas from '../../Rutas';
@@ -22,15 +22,17 @@ function App() {
             }}
         >
             {
-                // authUser == null
-                true == true
+                authUser == null
+                // true == true
                 ?<Routes>
                     <Route exact path='/login' element={<Login/>}/>
                     <Route exact path='/restablecer' element={<RestablecerContrasenia/>}/>
                     <Route exact path='/cambiar-contrasenia' element={<FormularioCambiarContrasenia/>}/>
                     <Route exact path='/solicitud-enviada' element={<SolicitudEnviada/>}/>
+                    <Route path="*" element={<Navigate replace to="/login" />} />
                 </Routes>
                 :<>
+                    {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
                     <Rutas />
                 </>
             }

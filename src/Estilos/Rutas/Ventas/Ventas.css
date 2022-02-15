@@ -6,21 +6,6 @@
     padding-left: 40px;
 }
 
-.Borde-Filtro-Contenedor{
-    width: 170px;
-    height: 36px;
-    border: 1px solid #1E1E1E;
-    box-sizing: border-box;
-    border-radius: 8px;
-    position: relative;
-    display: flex;
-    padding-right: 50px;
-    padding-left: 10px;
-    padding-top: 7px;
-    margin-right: 15px;
-    cursor: pointer;
-}
-
 .Contenedor-Cuerpo-Filtro{
     width: 170px;
     /* height: 84px; */
@@ -175,7 +160,14 @@
 .Primera-Tarjeta-Categorias-Avance-Ventas{
     height: 65%;
     width: 100%;
-    background: green;
+    
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+    position: relative;
+
+    border-radius: 8px 8px 0px 0px;
+
 }
 
 .Segunda-Tarjeta-Categorias-Avance-Ventas{
@@ -221,4 +213,43 @@
 .Item-Filtro-Mes-Ventas:hover{
     background: #FFFF00;
     font-weight: bold;
+}
+
+.Tarjeta-Categoria-Ventas-Img{
+    height: 100%;
+    width: 100%;
+}
+
+.Tarjeta-Titulo-Categorias-Avance-Ventas{
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    text-align-last: center;
+}
+
+.Switch-Avance-Ventas > .ant-switch-checked{
+    background: transparent !important;
+    border: 1px solid black;
+}
+
+.Switch-Avance-Ventas > .ant-switch-checked > .ant-switch-handle::before {
+    background-color: black;
+}
+
+.Switch-Avance-Ventas > .ant-switch-checked > .ant-switch-handle {
+    margin-top: -1px;
+}
+
+
+.Switch-Avance-Ventas > .ant-switch{
+    background: transparent !important;
+    border: 1px solid black;
+}
+
+.Switch-Avance-Ventas > .ant-switch > .ant-switch-handle::before {
+    background-color: black;
+}
+
+.Switch-Avance-Ventas > .ant-switch > .ant-switch-handle {
+    margin-top: -1px;
 }

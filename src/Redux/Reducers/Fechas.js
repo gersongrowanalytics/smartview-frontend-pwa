@@ -20,7 +20,9 @@ const INIT_STATE = {
     anoFiltroSelec : '',
 
     mesSeleccionadoFiltro : meses[fecha.getMonth()],
-    anioSeleccionadoFiltro : fecha.getFullYear()
+    anioSeleccionadoFiltro : fecha.getFullYear(),
+
+    aplicandoFiltroFechas : false
 };
 
 export default (state = INIT_STATE, action) => {
@@ -73,13 +75,15 @@ export default (state = INIT_STATE, action) => {
     case SELECCIONAR_MES_FILTRO:{
         return {
             ...state,
-            mesSeleccionadoFiltro : action.payload
+            mesSeleccionadoFiltro : action.payload,
+            aplicandoFiltroFechas : true
         }
     }
     case SELECCIONAR_ANIO_FILTRO:{
         return {
             ...state,
-            anioSeleccionadoFiltro : action.payload
+            anioSeleccionadoFiltro : action.payload,
+            aplicandoFiltroFechas : true
         }
     }
     default:

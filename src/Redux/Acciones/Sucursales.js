@@ -63,3 +63,12 @@ export const obtenerSucursalesReducer = () =>async (dispatch, getState) => {
         })
     });
 }
+
+export const SeleccionarSucursalReducer = (sucid) => async (dispatch, getState) => {
+	
+	dispatch({
+		type: FILTRO_SELECCIONAR_SUCURSAL_USUARIO,
+		payload : sucid
+	})
+
+}

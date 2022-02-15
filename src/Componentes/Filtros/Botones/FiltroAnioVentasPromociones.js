@@ -24,7 +24,7 @@ const FiltroAnioVentasPromociones = () => {
                 onClick={() => setMostrarAnio(!mostrarAnio)}
             >
                 <div>
-                    Año
+                    {anioSeleccionadoFiltro}
                 </div>
             </div>
 

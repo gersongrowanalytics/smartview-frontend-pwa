@@ -17,6 +17,15 @@
     letter-spacing: -0.015em;
 }
 
+.Wbold-S13-H17-C1E1E1E{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 17px;
+    color: #1E1E1E;
+}
+
 
 .W600-S14-H19-C1E1E1E{
     font-family: Segoe UI;
@@ -197,4 +206,23 @@
     line-height: 19px;
     letter-spacing: -0.015em;
     color: #FFBB37;
+}
+
+.Wnormal-S12-H16-C1EC0ED{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #1EC0ED;
+}
+
+.Wbold-S20-H27-CFFFFFF-L0015{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
 }

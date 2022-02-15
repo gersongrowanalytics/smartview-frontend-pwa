@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Route, Routes } from "react-router-dom";
+import {Route, Routes, Navigate } from "react-router-dom";
 import Top from '../Componentes/Top/Top';
 import '../Estilos/Rutas/Rutas.css'
 import Ventas from './Ventas/Ventas'
@@ -25,6 +25,7 @@ const Rutas = () => {
                 <Routes>
                     <Route exact path='/ventas' element={<Ventas/>}/>
                     <Route exact path='/promociones' element={<Promociones/>}/>
+                    <Route path="*" element={<Navigate replace to="/ventas" />} />
                 </Routes>
             </div>
             

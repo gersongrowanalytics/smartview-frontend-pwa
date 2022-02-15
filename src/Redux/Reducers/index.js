@@ -5,6 +5,7 @@ import Auth from './Auth'
 import Fechas from './Fechas'
 import Sucursales from './Sucursales'
 import Promociones from './Promociones/Promociones'
+import Ventas from './Ventas/Ventas'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -12,7 +13,8 @@ const createRootReducer = (history) => combineReducers({
     auth          : Auth,
     fechas        : Fechas,
     sucursales    : Sucursales,
-    promociones   : Promociones
+    promociones   : Promociones,
+    ventas   : Ventas
 });
 
 export default createRootReducer

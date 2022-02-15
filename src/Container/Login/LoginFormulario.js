@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {
     loginReducer
 } from '../../Redux/Acciones/Auth'
-import {Form, Input, Select, Button } from "antd";
+import {Form, Input, Select, Button, message } from "antd";
 import '../../Estilos/Rutas/Login/Login.css';
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
 import {Link} from "react-router-dom";
@@ -20,15 +20,20 @@ const LoginFormulario = () => {
         console.log(pais);
     }
 
-    const onFinish = (e) =>  {
-        e['pais'] = txtPaisSeleccionado
-        console.log(e)
-        dispatch(loginReducer(e));
+    const onFinish = (datos) =>  {
+        datos['pais'] = txtPaisSeleccionado;
+        console.log(datos)
+        if(datos['correo'] == "Administrador@gmail.com" && datos['contrasenia'] == "gerson$$"){
+            message.success("This is a success message");
+        }else{
+            message.error("Ingrese una usuario y contraseña válidos");
+        }
+        dispatch(loginReducer(datos));
     };
-    
+
     const EnviarLogin = () => {
         let valores = {
-            usuario : "Administrador",
+            usuario : "Administrador@gmail.com",
             contrasena : "gerson$$"
         }
         dispatch(loginReducer(valores))

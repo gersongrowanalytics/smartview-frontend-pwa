@@ -16,12 +16,15 @@ const BancoImagen = () => {
     const [Imagenes, setImagenes] = useState([])
     const [FocusBoton, setFocusBoton] = useState(false)
 
-    
+    const { prosSinImagenes, prosConImagenes } = useSelector(({bancoImagen}) => bancoImagen)
 
     let data = useMemo(() => Imagenes, [Imagenes])
     
     useEffect(() => {
       dispatch(dataBancoImagen())
+      setImagenes(JSON.parse(prosConImagenes))
+      setConImagenes(JSON.parse(prosConImagenes))
+      setSinImagenes(JSON.parse(prosSinImagenes))
     },[])
     
     const DataSinImagenes = () => {

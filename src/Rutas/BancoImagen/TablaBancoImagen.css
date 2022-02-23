@@ -126,3 +126,18 @@ table tbody tr td {
   margin-right: 16px;
   color: white;
 }
+
+#test{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen-upload > input
+{
+    display: none;
+}
+
+#previsualizacion img{
+  height: 65px;
+}

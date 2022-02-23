@@ -1,5 +1,8 @@
 import {
-    OBTENER_DATOS_IMAGENES
+    OBTENER_DATOS_IMAGENES,
+    OBTENER_DATOS_EDITANDO_SINIMAGENES,
+    OBTENER_DATOS_EDITANDO_CONIMAGENES,
+    OBTENER_DATOS_FILTRADO_CONIMAGENES
 } from '../../../Constantes/BancoImagen/BancoImagen'
 
 const INIT_STATE = {
@@ -13,8 +16,26 @@ export default (state = INIT_STATE, action) => {
         case OBTENER_DATOS_IMAGENES: {
             return {
                 ...state,
-                prosSinImagenes: action.payload.SinImagenes,
-                prosConImagenes: action.payload.ConImagenes,
+                prosSinImagenes: JSON.parse(action.payload.SinImagenes),
+                prosConImagenes: JSON.parse(action.payload.ConImagenes),
+            }
+        }
+        case OBTENER_DATOS_EDITANDO_SINIMAGENES: {
+            return {
+                ...state,
+                prosSinImagenes: JSON.parse(action.payload.SinImagenes),
+            }
+        }
+        case OBTENER_DATOS_EDITANDO_CONIMAGENES: {
+            return {
+                ...state,
+                prosConImagenes: JSON.parse(action.payload.ConImagenes),
+            }
+        }
+        case OBTENER_DATOS_FILTRADO_CONIMAGENES: {
+            return {
+                ...state,
+                prosConImagenes: JSON.parse(action.payload.ConImagenes),
             }
         }
         default:

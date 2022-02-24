@@ -5,13 +5,13 @@ import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons'
 import { BusquedaBancoImagenReducer } from '../../Redux/Acciones/BancoImagen/BancoImagen';
 
-export const BuscarImagen = () => {
-
+export const BuscarImagen = (props) => {
+  
   const dispatch = useDispatch() 
-
-  const buscarTxtBuscar = (e) => {
-    // console.log(e)
-    dispatch(BusquedaBancoImagenReducer(e))
+  
+  const buscarTxtBuscar = (texto) => {
+    let urlImagen = props.datosImagenes[0].proimagen
+    dispatch(BusquedaBancoImagenReducer(texto, urlImagen))
   }
 
   return (

@@ -2,14 +2,14 @@ import React, { useMemo, useEffect, useState } from 'react'
 import { useTable, useGlobalFilter } from 'react-table'
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Button } from 'antd';
-// import { Columnas } from './Columnas'
 import './TablaBancoImagen.css'
 import { BuscarImagen } from './BuscarImagen'
 import { 
     dataBancoImagen, 
     EditandoFilaBancoImagenesReducer,
     OpcionesImagenPrevImagenReducer,
-    AgregarImagenBancoImagenReducer 
+    AgregarImagenBancoImagenReducer,
+    CancelarEditarBancoImagenReducer 
 } from '../../Redux/Acciones/BancoImagen/BancoImagen';
 import ImagenDefault  from '../../Assets/Img/BancoImagen/SinImagen.png';
 import Editar from '../../Assets/Img/BancoImagen/Editar.png';
@@ -20,6 +20,7 @@ const BancoImagen = () => {
     const dispatch = useDispatch()   
     const [FocusBoton, setFocusBoton] = useState(false)
     const [data, setdata] = useState([]);
+    const [imagenPrevi, setimagenPrevi] = useState("")
 
     const { 
       prosSinImagenes, 
@@ -29,7 +30,7 @@ const BancoImagen = () => {
     const cargarDatosTabla = async() => {
       await dispatch(dataBancoImagen())
     }
-    // console.log(data)
+
     useEffect(() => {
         cargarDatosTabla()
         DataConImagenes()
@@ -79,7 +80,7 @@ const BancoImagen = () => {
             accessor: 'proimagen',
             Aggregated: ({ value }) => `${value} Names`,
             Cell: ({ row }) => {
-            //   console.log(row.index, row)
+            //   console.log(row.index, row.original)
                 return (
                     <>
                         {
@@ -98,18 +99,19 @@ const BancoImagen = () => {
                                                             <input 
                                                                 id='file-input' 
                                                                 type="file"
-                                                                onChange={(e) =>{
+                                                                onChange={(e) => {
                                                                     let reader = new FileReader()
                                                                     reader.onload = function(){
                                                                         let prev = document.getElementById('previsualizacion'),
                                                                             image = document.createElement('img');
 
+                                                                        setimagenPrevi(reader.result)
                                                                         image.src = reader.result;
-
+                                                                        
                                                                         prev.innerHTML = '';
                                                                         prev.append(image);
 
-                                                                        dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index))
+                                                                        dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
                                                                     };
                                                                     reader.readAsDataURL(e.target.files[0]);
                                                                 }}  
@@ -119,13 +121,19 @@ const BancoImagen = () => {
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <div id="previsualizacion"></div>
+                                                        <img 
+                                                            id='imagenPrev' 
+                                                            src={imagenPrevi}
+                                                            style={{height: '65px'}}
+                                                        />  
                                                         <CheckCircleOutlined             
-                                                            style={{fontSize: '40px', cursor: 'pointer'}}
-                                                            onClick={() => dispatch(AgregarImagenBancoImagenReducer(row.original.imagenPrev, row.original.prosku))}
+                                                            style={{fontSize: '30px', cursor: 'pointer', marginRight: '5px'}}
+                                                            // onClick={() => dispatch(AgregarImagenBancoImagenReducer(row.original.imagenPrev, row.original.prosku, row.index, row.original.proimagen))}
+                                                            onClick={()=>ConfirmarEditar(row.original.imagenPrev, row.original.prosku, row.index, row.original.proimagen)}
                                                         />
                                                         <CloseCircleOutlined
-                                                            style={{fontSize: '40px', cursor: 'pointer'}}
+                                                            style={{fontSize: '30px', cursor: 'pointer'}}
+                                                            onClick={() => dispatch(CancelarEditarBancoImagenReducer(row.index, row.original.proimagen))}
                                                         />
                                                     </>  
                                                 )
@@ -153,6 +161,13 @@ const BancoImagen = () => {
 
     const columns = useMemo(() => Columnas, [prosSinImagenes,prosConImagenes])
     
+    const ConfirmarEditar = async (imagenPrev, prosku, posicion, proimagen) => {
+        // await dispatch(AgregarImagenBancoImagenReducer(imagenPrev, prosku, posicion, proimagen))
+        if (proimagen == '/') {
+            // DataSinImagenes()
+            console.log('HOLA')
+        }
+    }
     const DataSinImagenes = () => {
         setdata(prosSinImagenes)
         setFocusBoton(true)
@@ -214,7 +229,9 @@ const BancoImagen = () => {
                     </button>
                 </Col>
                 <Col md={7} lg={14} xl={14} className="Buscar">
-                    <BuscarImagen/>
+                    <BuscarImagen 
+                        datosImagenes = {data}
+                    />
                 </Col>
             </Row>
             <Row>
@@ -238,8 +255,9 @@ const BancoImagen = () => {
                                             row.original.mostrando ? (
                                                 <tr   
                                                     {...row.getRowProps()}
-                                                    onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))}}
-                                                    onMouseLeave={() => {}}
+                                                    onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))
+                                                    console.log(row.original)}}
+                                                    onMouseLeave={()=>{}}
                                                 >
                                                     {row.cells.map(cell => {
                                                         return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>

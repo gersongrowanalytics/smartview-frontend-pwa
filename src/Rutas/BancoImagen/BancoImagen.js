@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useState } from 'react'
 import { useTable, useGlobalFilter } from 'react-table'
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Spin } from 'antd';
 import './TablaBancoImagen.css'
 import { BuscarImagen } from './BuscarImagen'
 import { 
@@ -13,7 +13,8 @@ import {
 } from '../../Redux/Acciones/BancoImagen/BancoImagen';
 import ImagenDefault  from '../../Assets/Img/BancoImagen/SinImagen.png';
 import Editar from '../../Assets/Img/BancoImagen/Editar.png';
-import { CheckCircleOutlined, CloseCircleOutlined, FormOutlined, PictureFilled, PictureOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, CheckCircleTwoTone, CloseCircleOutlined, CloseCircleTwoTone, LoadingOutlined, PictureFilled, PictureOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import Fechas from '../../Componentes/Rutas/BancoImagen/Fechas';
 
 const BancoImagen = () => {
 
@@ -24,7 +25,8 @@ const BancoImagen = () => {
 
     const { 
       prosSinImagenes, 
-      prosConImagenes 
+      prosConImagenes,
+      cargandoTablaBancoImagen 
     } = useSelector(({bancoImagen}) => bancoImagen);
 
     const cargarDatosTabla = async() => {
@@ -48,37 +50,48 @@ const BancoImagen = () => {
         {
           Header: 'Item',
           accessor: 'proid',
-          Aggregated: ({ value }) => `${value} Names`,
         },
         {
             Header: 'SKU',
             accessor: 'prosku',
-            Aggregated: ({ value }) => `${value} Names`,
         },
         {
             Header: 'Nombre',
             accessor: 'pronombre',
-            Aggregated: ({ value }) => `${value} Names`,
         },
         {
             Header: 'Categoria',
             accessor: 'catnombre',
-            Aggregated: ({ value }) => `${value} Names`,
         },
         {
             Header: 'Fecha Inicio',
             accessor: 'created_at',
-            Aggregated: ({ value }) => `${value} Names`,
+            Cell: ({row}) => {
+                return(
+                    <>
+                        <Fechas
+                            fecha={row.original.created_at}
+                        ></Fechas>
+                    </>
+                )
+            }
         },
         {
             Header: 'Fecha Final',
             accessor: 'updated_at',
-            Aggregated: ({ value }) => `${value} Names`,
+            Cell: ({row}) => {
+                return(
+                    <>
+                        <Fechas
+                            fecha={row.original.updated_at}
+                        ></Fechas>
+                    </>
+                )
+            }
         },
         {
             Header: 'Imagen Producto',
             accessor: 'proimagen',
-            Aggregated: ({ value }) => `${value} Names`,
             Cell: ({ row }) => {
             //   console.log(row.index, row.original)
                 return (
@@ -126,12 +139,13 @@ const BancoImagen = () => {
                                                             src={imagenPrevi}
                                                             style={{height: '65px'}}
                                                         />  
-                                                        <CheckCircleOutlined             
+                                                        <CheckCircleTwoTone             
                                                             style={{fontSize: '30px', cursor: 'pointer', marginRight: '5px'}}
                                                             // onClick={() => dispatch(AgregarImagenBancoImagenReducer(row.original.imagenPrev, row.original.prosku, row.index, row.original.proimagen))}
                                                             onClick={()=>ConfirmarEditar(row.original.imagenPrev, row.original.prosku, row.index, row.original.proimagen)}
                                                         />
-                                                        <CloseCircleOutlined
+                                                        <CloseCircleTwoTone
+                                                            twoToneColor="#eb2f96"
                                                             style={{fontSize: '30px', cursor: 'pointer'}}
                                                             onClick={() => dispatch(CancelarEditarBancoImagenReducer(row.index, row.original.proimagen))}
                                                         />
@@ -235,44 +249,51 @@ const BancoImagen = () => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={22} xl={22} offset={1}>
-                    <table {...getTableProps()}>
-                        <thead>
-                            {headerGroups.map(headerGroup => (
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map(column => (
-                                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <Col lg={22} xl={22} style={{marginLeft: '39px'}}>
+                    <Spin
+                        // indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                        size='large'
+                        spinning={cargandoTablaBancoImagen}
+                    >
+                        <table {...getTableProps()}>
+                            <thead>
+                                {headerGroups.map(headerGroup => (
+                                    <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                    ))}
+                                    </tr>
                                 ))}
-                                </tr>
-                            ))}
-                        </thead>
-                        <tbody {...getTableBodyProps()}>
-                            {rows.map(row => {
-                                prepareRow(row)
-                                return (
-                                    <>
-                                        {
-                                            row.original.mostrando ? (
-                                                <tr   
-                                                    {...row.getRowProps()}
-                                                    onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))
-                                                    console.log(row.original)}}
-                                                    onMouseLeave={()=>{}}
-                                                >
-                                                    {row.cells.map(cell => {
-                                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                                    })}
-                                                </tr>
-                                            ): (
-                                                <></>
-                                            )
-                                        }
-                                        
-                                    </>
-                                )
-                            })}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody {...getTableBodyProps()}>
+                                {rows.map(row => {
+                                    prepareRow(row)
+                                    return (
+                                        <>
+                                            {
+                                                row.original.mostrando ? (
+                                                    <tr   
+                                                        {...row.getRowProps()}
+                                                        onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))
+                                                        }}
+                                                        onMouseLeave={()=>{}}
+                                                    >
+                                                        {row.cells.map(cell => {
+                                                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                                        })}
+                                                    </tr>
+                                                ): (
+                                                    <></>
+                                                )
+                                            }
+                                            
+                                        </>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    </Spin>
+                    
                 </Col>    
             </Row>
         </div>

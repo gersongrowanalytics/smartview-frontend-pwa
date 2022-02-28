@@ -7,10 +7,17 @@ import {
     OBTENER_DATOS_EDITANDO_CONIMAGENES,
     OBTENER_DATOS_FILTRADO_CONIMAGENES,
     OBTENER_DATOS_FILTRADO_SINIMAGENES,
-    OBTENER_DATOS_SINIMAGENES
+    OBTENER_DATOS_SINIMAGENES,
+    CARGANDO_TABLA_DATOS_IMAGENES
 } from '../../../Constantes/BancoImagen/BancoImagen'
 
 export const dataBancoImagen = () => async ( dispatch, getState ) => {
+
+    dispatch({
+        type: CARGANDO_TABLA_DATOS_IMAGENES,
+        payload: true
+    })
+
     await fetch(config.api+'control-promociones/mostrar-productos',
         {
             mode:'cors',
@@ -46,7 +53,8 @@ export const dataBancoImagen = () => async ( dispatch, getState ) => {
                     type: OBTENER_DATOS_IMAGENES,
                     payload: {
                         ConImagenes: JSON.stringify(data.prosConImagenes), 
-                        SinImagenes: JSON.stringify(data.prosSinImagenes) 
+                        SinImagenes: JSON.stringify(data.prosSinImagenes),
+                        cargandoTablaBancoImagen: false 
                     }
                 })
             }else{

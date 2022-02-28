@@ -7,7 +7,7 @@ table {
 
 table tbody tr{
   text-align: center;
-  height: 80px;
+  height: 75px !important;
   border: 1px  solid #E5E5E5 !important;
 }
 
@@ -141,3 +141,4 @@ table tbody tr td {
 #previsualizacion img{
   height: 65px;
 }
+

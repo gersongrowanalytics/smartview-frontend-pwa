@@ -9,11 +9,11 @@ const Fechas = (props) => {
     const [mostrarFecha, setmostrarFecha] = useState(false)
 
     const fecha = new Date(props.fecha)
-    console.log(props.fecha)
+    // console.log(props.fecha)
     let mes = fecha.getMonth()
     let anio = fecha.getFullYear()
     let dia = fecha.getDay()
-    console.log(dia, mes, anio)
+    // console.log(dia, mes, anio)
 
     let diasMes = new Date(anio, mes, 0).getDate()
 
@@ -48,7 +48,7 @@ const Fechas = (props) => {
     // onclick={()=> setFechaActual(MesesSiguientes())}
 
     const Hoy = (dia) => {
-        console.log(anio, mes, dia)
+        // console.log(anio, mes, dia)
         return dia.isSame(new Date(props.fecha), 'day')
     }
 

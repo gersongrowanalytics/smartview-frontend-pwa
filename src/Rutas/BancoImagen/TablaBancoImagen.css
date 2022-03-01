@@ -78,7 +78,7 @@ table tbody tr td {
   display: flex !important;
   justify-content: flex-end !important;
   margin-bottom: 19px !important;
-  padding-right: 60px !important;
+  padding-right: 54px !important;
 }
 
 .Botones{
@@ -142,3 +142,30 @@ table tbody tr td {
   height: 65px;
 }
 
+.Tabla-Responsive{
+  position: relative;
+  height: 440px;
+  width: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+@media screen and (max-width: 1023px) {
+  .Tabla-Responsive{
+    overflow-x: auto;
+  }
+  .Buscar {
+    padding-right: 0px !important;
+    justify-content: center;
+  }
+}
+.Tabla-Responsive::-webkit-scrollbar{
+  /* display: none; */
+}
+
+tbody tr > td .ant-spin-nested-loading div .OcultarSpin {
+  display: none;
+}
+
+tbody tr > td:nth-child(4) .ant-spin-nested-loading div .OcultarSpin {
+  display: block;
+}

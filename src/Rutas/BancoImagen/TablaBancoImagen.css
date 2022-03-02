@@ -1,0 +1,171 @@
+table {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  border-collapse: collapse !important;
+  /* border-spacing: 0 5px !important; */
+}
+
+table tbody tr{
+  text-align: center;
+  height: 75px !important;
+  border: 1px  solid #E5E5E5 !important;
+}
+
+table tbody td{
+  padding: 10px;
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: #323233;
+  /* background-color: white !important; */
+}
+
+table thead {
+  background: #1EC0ED;
+  /* border-radius: 8px 8px 0px 0px !important; */
+  height: 71px;
+  align-items: center;
+}
+
+table thead tr th:first-child{
+  border-radius: 15px 0px 0px 0px !important;
+}
+
+table thead tr th:last-child{
+  border-radius: 0px 15px 0px 0px !important;
+}
+
+table thead tr th{
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+}
+
+table tbody tr td {
+  border: 1px 0px solid #E5E5E5;
+  box-sizing: border-box;
+}
+
+
+.Titulo{
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 35px;
+  text-align: center;
+  letter-spacing: -0.015em;
+  padding-left: 40px;
+  color: #1E1E1E;
+}
+
+.Campo-Buscar{
+  width: 632px !important;
+  height: 36px !important;
+  border: 1px solid #1E1E1E !important;
+  box-sizing: border-box !important;
+  border-radius: 27px !important;
+}
+
+.Buscar {
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin-bottom: 19px !important;
+  padding-right: 54px !important;
+}
+
+.Botones{
+  height: 36px;
+  border: 1px solid #1E1E1E;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-right: 16px;
+  background: white;
+}
+
+.Botones-Texto{
+  margin: 0px 20px;
+}
+
+.Botones:hover{
+  cursor: pointer;
+  background: #3646C4;
+  height: 36px;
+  border: 1px solid #3646C4;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-right: 16px;
+  color: white;
+}
+
+.Botones:focus{
+  cursor: pointer;
+  background: #3646C4;
+  height: 36px;
+  border: 1px solid #3646C4;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-right: 16px;
+  color: white;
+}
+
+.Botones-Activo{
+  cursor: pointer;
+  background: #3646C4;
+  height: 36px;
+  border: 1px solid #3646C4;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-right: 16px;
+  color: white;
+}
+
+#test{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen-upload > input
+{
+    display: none;
+}
+
+#previsualizacion img{
+  height: 65px;
+}
+
+.Tabla-Responsive{
+  position: relative;
+  height: 440px;
+  width: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+@media screen and (max-width: 1023px) {
+  .Tabla-Responsive{
+    overflow-x: auto;
+  }
+  .Buscar {
+    padding-right: 0px !important;
+    justify-content: center;
+  }
+}
+.Tabla-Responsive::-webkit-scrollbar{
+  /* display: none; */
+}
+
+tbody tr > td .ant-spin-nested-loading div .OcultarSpin {
+  display: none;
+}
+
+tbody tr > td:nth-child(4) .ant-spin-nested-loading div .OcultarSpin {
+  display: block;
+}

@@ -21,7 +21,7 @@ class LoginBanner extends React.Component {
     componentDidMount(){
         setTimeout(() => {
             this.animacionBanner()
-        }, 1000);
+        }, 5000);
     }
     render(){
         return (

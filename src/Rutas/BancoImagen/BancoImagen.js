@@ -10,8 +10,7 @@ import {
     OpcionesImagenPrevImagenReducer,
     AgregarImagenBancoImagenReducer,
     CancelarEditarBancoImagenReducer,
-    CargandoEditarFilaBancoImagenReducer,
-    MantenerEditandoBancoImagenesReducer 
+    CargandoEditarFilaBancoImagenReducer
 } from '../../Redux/Acciones/BancoImagen/BancoImagen';
 import ImagenDefault  from '../../Assets/Img/BancoImagen/SinImagen.png';
 import Editar from '../../Assets/Img/BancoImagen/Editar.png';
@@ -32,6 +31,7 @@ const BancoImagen = () => {
       cargandoRegistroEditar 
     } = useSelector(({bancoImagen}) => bancoImagen);
 
+    console.log(cargandoTablaBancoImagen)
     const cargarDatosTabla = async() => {
       await dispatch(dataBancoImagen())
     }
@@ -95,11 +95,7 @@ const BancoImagen = () => {
         {
             Header: 'Imagen Producto',
             accessor: 'proimagen',
-            Cell: ({ row }) => {
-                if (row.original.proid == '556') {
-                    console.log(row.original)
-                }
-            //   
+            Cell: ({ row }) => {   
                 return (
                     <>
                         {
@@ -147,7 +143,6 @@ const BancoImagen = () => {
                                                         />  
                                                         <CheckCircleTwoTone             
                                                             style={{fontSize: '30px', cursor: 'pointer', marginRight: '5px'}}
-                                                            // onClick={() => dispatch(AgregarImagenBancoImagenReducer(row.original.imagenPrev, row.original.prosku, row.index, row.original.proimagen))}
                                                             onClick={()=>ConfirmarEditar(row.original.imagenPrev, row.original.prosku, row.index, row.original.proimagen)}
                                                         />
                                                         <CloseCircleTwoTone
@@ -187,8 +182,7 @@ const BancoImagen = () => {
             dispatch(AgregarImagenBancoImagenReducer(imagenPrev, prosku, posicion, proimagen))
         }, 5000)
         if (proimagen == '/') {
-            // DataSinImagenes()
-            console.log('HOLA')
+            DataSinImagenes()
         }
     }
     const DataSinImagenes = () => {
@@ -258,66 +252,67 @@ const BancoImagen = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{ paddingLeft: '39px', paddingRight: '39px'}} className='Tabla-Responsive'>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{ paddingLeft: '39px', paddingRight: '39px'}}>
                     <Spin
                         size='large'
                         spinning={cargandoTablaBancoImagen}
                     >
-                        <table {...getTableProps()}>
-                            <thead>
-                                {headerGroups.map( headerGroup => (
-                                    <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map(column => (
-                                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                        <div className='Contenedor-Tabla Tabla-Responsive'>
+                            <table {...getTableProps()}>
+                                <thead>
+                                    {headerGroups.map( headerGroup => (
+                                        <tr {...headerGroup.getHeaderGroupProps()}>
+                                        {headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                        ))}
+                                        </tr>
                                     ))}
-                                    </tr>
-                                ))}
-                            </thead>
-                            <tbody {...getTableBodyProps()}>
-                                {rows.map( row => {
-                                    prepareRow(row)
-                                    return (
-                                        <>                                  
-                                            {
-                                                row.original.mostrando ? (
-                                                        <tr   
-                                                            {...row.getRowProps()}
-                                                            onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))
-                                                            }}
-                                                            // onMouseLeave={() => {dispatch(MantenerEditandoBancoImagenesReducer(row.index, row.original.proimagen, row.original.imagenPrev))
-                                                            // }}
-                                                        >
-                                                            {row.cells.map( cell => {
-                                                                return( 
-                                                                    <td {...cell.getCellProps()}>
-                                                                        {
-                                                                            (row.original.cargandoSpin == true && row.cells[6].column.Header == 'Imagen Producto') ? (
-                                                                                <Spin
-                                                                                    size='large'
-                                                                                    spinning={cargandoRegistroEditar}
-                                                                                    className='OcultarSpin'
-                                                                                >
-                                                                                    {cell.render('Cell')} 
-                                                                                </Spin>
-                                                                            ) : (
-                                                                                <>
-                                                                                    {cell.render('Cell')} 
-                                                                                </>
-                                                                            )
-                                                                        }
-                                                                    </td>
-                                                                )
-                                                            })}
-                                                        </tr>
-                                                ): (
-                                                    <></>
-                                                )
-                                            } 
-                                        </>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody {...getTableBodyProps()}>
+                                    {rows.map( row => {
+                                        prepareRow(row)
+                                        return (
+                                            <>                                  
+                                                {
+                                                    row.original.mostrando ? (
+                                                            <tr   
+                                                                {...row.getRowProps()}
+                                                                onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))
+                                                                }}
+                                                                onMouseLeave={() => {}}
+                                                            >
+                                                                {row.cells.map( cell => {
+                                                                    return( 
+                                                                        <td {...cell.getCellProps()}>
+                                                                            {
+                                                                                (row.original.cargandoSpin == true && row.cells[6].column.Header == 'Imagen Producto') ? (
+                                                                                    <Spin
+                                                                                        size='large'
+                                                                                        spinning={cargandoRegistroEditar}
+                                                                                        className='OcultarSpin'
+                                                                                    >
+                                                                                        {cell.render('Cell')} 
+                                                                                    </Spin>
+                                                                                ) : (
+                                                                                    <>
+                                                                                        {cell.render('Cell')} 
+                                                                                    </>
+                                                                                )
+                                                                            }
+                                                                        </td>
+                                                                    )
+                                                                })}
+                                                            </tr>
+                                                    ): (
+                                                        <></>
+                                                    )
+                                                } 
+                                            </>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     </Spin>
                     
                 </Col>    

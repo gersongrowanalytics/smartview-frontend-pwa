@@ -386,3 +386,20 @@ div.Login-Banner-left span {
    to {margin-left: -100%;} }
   @keyframes Login-Banner-left { from {margin-left: 0%;}
    to {margin-left: -100%;} }
+
+
+.Banner-Icono-Grow-Text{
+    animation-name: rotacion;
+	animation-duration: 18s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes rotacion {
+    0% {
+      transform:rotate(0deg);
+    }
+    100% {
+      transform:rotate(360deg);
+    }
+}

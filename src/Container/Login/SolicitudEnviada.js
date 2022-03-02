@@ -85,23 +85,23 @@ const SolicitudEnviada = () => {
             </div>
             <div className='Login-Banner banner' style={{bottom:"0"}}>
                 <p>
-                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                 </p>
             </div>
             <div className='Login-Banner banner banner2'style={{bottom:"0"}}>
-               <p>                
-                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                <p>     
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
-               </p>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                </p>
             </div>
             {/* <button
                 onClick={() => EnviarLogin()}

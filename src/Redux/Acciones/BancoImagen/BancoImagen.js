@@ -326,36 +326,5 @@ export const CargandoEditarFilaBancoImagenReducer = (accion, posicion, urlImagen
 }
     
 
-// export const MantenerEditandoBancoImagenesReducer = (posicion, urlImagen, imagenPrev) => async(dispatch, getState) => {
-//     let prosConImagenes = getState().bancoImagen.prosConImagenes
-//     let prosSinImagenes = getState().bancoImagen.prosSinImagenes
-
-//     if (urlImagen === "/") {
-//         await prosSinImagenes.map((imagenes, pos)=>{
-//             if (pos == posicion) {
-//                 if (prosSinImagenes[pos]['imagenPrev'] != "0" ) {
-//                     prosSinImagenes[pos]['editando'] = true
-//                 }
-//             }else{
-//                 prosSinImagenes[pos]['editando'] = false
-//             }
-//         })
-//     }else{
-//         await prosConImagenes.map((imagenes, pos)=>{
-//             if (pos == posicion) {
-//                 if (prosConImagenes[pos]['imagenPrev'] === imagenPrev ) {
-//                     console.log(prosConImagenes[pos]['proid'])
-//                     prosConImagenes[pos]['editando'] = true
-//                 }
-//             }
-//         })
-//         dispatch({
-//             type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
-//             payload: {
-//                 ConImagenes: JSON.stringify(prosConImagenes) 
-//             }
-//         })
-//     }
-// }
 
 

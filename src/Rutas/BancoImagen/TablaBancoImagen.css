@@ -1,17 +1,17 @@
-table {
+.Contenedor-Tabla table {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
   border-collapse: collapse !important;
   /* border-spacing: 0 5px !important; */
 }
 
-table tbody tr{
+.Contenedor-Tabla  table tbody tr{
   text-align: center;
   height: 75px !important;
   border: 1px  solid #E5E5E5 !important;
 }
 
-table tbody td{
+.Contenedor-Tabla table tbody td{
   padding: 10px;
   font-family: Segoe UI;
   font-style: normal;
@@ -22,22 +22,22 @@ table tbody td{
   /* background-color: white !important; */
 }
 
-table thead {
+.Contenedor-Tabla table thead {
   background: #1EC0ED;
   /* border-radius: 8px 8px 0px 0px !important; */
   height: 71px;
   align-items: center;
 }
 
-table thead tr th:first-child{
+.Contenedor-Tabla table thead tr th:first-child{
   border-radius: 15px 0px 0px 0px !important;
 }
 
-table thead tr th:last-child{
+.Contenedor-Tabla table thead tr th:last-child{
   border-radius: 0px 15px 0px 0px !important;
 }
 
-table thead tr th{
+.Contenedor-Tabla table thead tr th{
   font-family: Segoe UI;
   font-style: normal;
   font-weight: bold;
@@ -48,7 +48,7 @@ table thead tr th{
   color: #FFFFFF;
 }
 
-table tbody tr td {
+.Contenedor-Tabla table tbody tr td {
   border: 1px 0px solid #E5E5E5;
   box-sizing: border-box;
 }

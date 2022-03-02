@@ -8,7 +8,8 @@ import {
     OBTENER_DATOS_FILTRADO_CONIMAGENES,
     OBTENER_DATOS_FILTRADO_SINIMAGENES,
     OBTENER_DATOS_SINIMAGENES,
-    CARGANDO_TABLA_DATOS_IMAGENES
+    CARGANDO_TABLA_DATOS_IMAGENES,
+    MOSTRAR_CARGANDO_EDITAR_REGISTRO
 } from '../../../Constantes/BancoImagen/BancoImagen'
 
 export const dataBancoImagen = () => async ( dispatch, getState ) => {
@@ -77,7 +78,11 @@ export const EditandoFilaBancoImagenesReducer = (posicion, urlImagen) => async (
             if(pos == posicion){
                 prosSinImagenes[pos]['editando'] = true
             }else{
-                prosSinImagenes[pos]['editando'] = false
+                if (prosSinImagenes[pos]['imagenPrev'] == '0') {
+                    prosSinImagenes[pos]['editando'] = false
+                }else{
+                    prosSinImagenes[pos]['editando'] = true
+                }
             }
         })
         dispatch({
@@ -91,7 +96,11 @@ export const EditandoFilaBancoImagenesReducer = (posicion, urlImagen) => async (
             if(pos == posicion){
                 prosConImagenes[pos]['editando'] = true
             }else{
-                prosConImagenes[pos]['editando'] = false
+                if (prosConImagenes[pos]['imagenPrev'] == '0') {
+                    prosConImagenes[pos]['editando'] = false
+                }else{
+                    prosConImagenes[pos]['editando'] = true
+                }
             }
         })
         dispatch({
@@ -120,7 +129,8 @@ export const BusquedaBancoImagenReducer = (filtro, urlImagen) => async (dispatch
         dispatch({
             type: OBTENER_DATOS_FILTRADO_SINIMAGENES,
             payload: {
-                SinImagenes: JSON.stringify(prosSinImagenes) 
+                SinImagenes: JSON.stringify(prosSinImagenes),
+                cargandoRegistroEditar:  false
             }
         })
     }else{
@@ -136,7 +146,8 @@ export const BusquedaBancoImagenReducer = (filtro, urlImagen) => async (dispatch
         dispatch({
             type: OBTENER_DATOS_FILTRADO_CONIMAGENES,
             payload: {
-                ConImagenes: JSON.stringify(prosConImagenes) 
+                ConImagenes: JSON.stringify(prosConImagenes),
+                cargandoRegistroEditar:  false
             }
         })
     }
@@ -157,7 +168,8 @@ export const OpcionesImagenPrevImagenReducer = (valor, posicion, urlImagen) => a
         dispatch({
             type: OBTENER_DATOS_FILTRADO_SINIMAGENES,
             payload: {
-                SinImagenes: JSON.stringify(prosSinImagenes) 
+                SinImagenes: JSON.stringify(prosSinImagenes), 
+                cargandoRegistroEditar:  false
             }
         })
     }else{
@@ -169,7 +181,8 @@ export const OpcionesImagenPrevImagenReducer = (valor, posicion, urlImagen) => a
         dispatch({
             type: OBTENER_DATOS_FILTRADO_CONIMAGENES,
             payload: {
-                ConImagenes: JSON.stringify(prosConImagenes) 
+                ConImagenes: JSON.stringify(prosConImagenes),
+                cargandoRegistroEditar:  false 
             }
         })
     }
@@ -219,6 +232,7 @@ export const AgregarImagenBancoImagenReducer = (imagen, prosku, posicion, urlIma
                             prosConImagenes[pos]['proimagen'] = imagen
                             prosConImagenes[pos]['imagenPrev'] = "0"
                             prosConImagenes[pos]['editando'] = false
+                            prosConImagenes[pos]['cargandoSpin'] = false
                         }
                     })
                 }
@@ -233,14 +247,16 @@ export const AgregarImagenBancoImagenReducer = (imagen, prosku, posicion, urlIma
         dispatch({
             type: OBTENER_DATOS_SINIMAGENES,
             payload: {
-                SinImagenes: JSON.stringify(prosSinImagenes) 
+                SinImagenes: JSON.stringify(prosSinImagenes), 
+                cargandoRegistroEditar:  false
             }
         })
     }else{
         dispatch({
             type: OBTENER_DATOS_FILTRADO_CONIMAGENES,
             payload: {
-                ConImagenes: JSON.stringify(prosConImagenes) 
+                ConImagenes: JSON.stringify(prosConImagenes),
+                cargandoRegistroEditar:  false
             }
         })
     }
@@ -280,9 +296,66 @@ export const CancelarEditarBancoImagenReducer = (posicion, urlImagen) => async (
             }
         })
     }
-    
 }
 
+export const CargandoEditarFilaBancoImagenReducer = (accion, posicion, urlImagen) => async(dispatch, getState) => {
+    let prosConImagenes = getState().bancoImagen.prosConImagenes
+    let prosSinImagenes = getState().bancoImagen.prosSinImagenes
 
+    if (urlImagen === "/") {
+        await prosSinImagenes.map((imagenes, pos)=>{
+            if (pos == posicion) {
+                prosSinImagenes[pos]['cargandoSpin'] = true
+            }else{
+                prosSinImagenes[pos]['cargandoSpin'] = false
+            }
+        })
+    }else{
+        await prosConImagenes.map((imagenes, pos)=>{
+            if (pos == posicion) {
+                prosConImagenes[pos]['cargandoSpin'] = true
+            }else{
+                prosConImagenes[pos]['cargandoSpin'] = false
+            }
+        })
+    }
+    dispatch({
+        type: MOSTRAR_CARGANDO_EDITAR_REGISTRO,
+        payload: accion
+    })
+}
+    
+
+// export const MantenerEditandoBancoImagenesReducer = (posicion, urlImagen, imagenPrev) => async(dispatch, getState) => {
+//     let prosConImagenes = getState().bancoImagen.prosConImagenes
+//     let prosSinImagenes = getState().bancoImagen.prosSinImagenes
+
+//     if (urlImagen === "/") {
+//         await prosSinImagenes.map((imagenes, pos)=>{
+//             if (pos == posicion) {
+//                 if (prosSinImagenes[pos]['imagenPrev'] != "0" ) {
+//                     prosSinImagenes[pos]['editando'] = true
+//                 }
+//             }else{
+//                 prosSinImagenes[pos]['editando'] = false
+//             }
+//         })
+//     }else{
+//         await prosConImagenes.map((imagenes, pos)=>{
+//             if (pos == posicion) {
+//                 if (prosConImagenes[pos]['imagenPrev'] === imagenPrev ) {
+//                     console.log(prosConImagenes[pos]['proid'])
+//                     prosConImagenes[pos]['editando'] = true
+//                 }
+//             }
+//         })
+//         dispatch({
+//             type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
+//             payload: {
+//                 ConImagenes: JSON.stringify(prosConImagenes) 
+//             }
+//         })
+//     }
+// }
 
 

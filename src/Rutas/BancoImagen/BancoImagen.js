@@ -9,11 +9,13 @@ import {
     EditandoFilaBancoImagenesReducer,
     OpcionesImagenPrevImagenReducer,
     AgregarImagenBancoImagenReducer,
-    CancelarEditarBancoImagenReducer 
+    CancelarEditarBancoImagenReducer,
+    CargandoEditarFilaBancoImagenReducer,
+    MantenerEditandoBancoImagenesReducer 
 } from '../../Redux/Acciones/BancoImagen/BancoImagen';
 import ImagenDefault  from '../../Assets/Img/BancoImagen/SinImagen.png';
 import Editar from '../../Assets/Img/BancoImagen/Editar.png';
-import { CheckCircleOutlined, CheckCircleTwoTone, CloseCircleOutlined, CloseCircleTwoTone, LoadingOutlined, PictureFilled, PictureOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { CheckCircleTwoTone,CloseCircleTwoTone,PlusCircleOutlined } from '@ant-design/icons';
 import Fechas from '../../Componentes/Rutas/BancoImagen/Fechas';
 
 const BancoImagen = () => {
@@ -26,7 +28,8 @@ const BancoImagen = () => {
     const { 
       prosSinImagenes, 
       prosConImagenes,
-      cargandoTablaBancoImagen 
+      cargandoTablaBancoImagen,
+      cargandoRegistroEditar 
     } = useSelector(({bancoImagen}) => bancoImagen);
 
     const cargarDatosTabla = async() => {
@@ -93,7 +96,10 @@ const BancoImagen = () => {
             Header: 'Imagen Producto',
             accessor: 'proimagen',
             Cell: ({ row }) => {
-            //   console.log(row.index, row.original)
+                if (row.original.proid == '556') {
+                    console.log(row.original)
+                }
+            //   
                 return (
                     <>
                         {
@@ -155,7 +161,7 @@ const BancoImagen = () => {
                                         </>
                                     }
                                 </div>
-                            ): (
+                            ) : (
                                 <div>
                                     { 
                                         row.original.proimagen === "/" ? (
@@ -176,7 +182,10 @@ const BancoImagen = () => {
     const columns = useMemo(() => Columnas, [prosSinImagenes,prosConImagenes])
     
     const ConfirmarEditar = async (imagenPrev, prosku, posicion, proimagen) => {
-        // await dispatch(AgregarImagenBancoImagenReducer(imagenPrev, prosku, posicion, proimagen))
+        dispatch(CargandoEditarFilaBancoImagenReducer(true, posicion, proimagen))
+        setTimeout(() => {
+            dispatch(AgregarImagenBancoImagenReducer(imagenPrev, prosku, posicion, proimagen))
+        }, 5000)
         if (proimagen == '/') {
             // DataSinImagenes()
             console.log('HOLA')
@@ -207,12 +216,12 @@ const BancoImagen = () => {
     return (
         <div>
             <Row>
-                <Col lg={24} xl={24} style={{marginTop: "19px", marginBottom: "11px"}}>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{marginTop: "19px", marginBottom: "11px"}}>
                     <span className='Titulo'>Banco de Imagen</span>
                 </Col>
             </Row>
             <Row>
-                <Col md={17} lg={10} xl={10} style={{marginBottom:"19px"}}>
+                <Col xs={24} sm={24} md={24} lg={10} xl={10} style={{marginBottom:"19px"}}>
                     <button 
                         className={FocusBoton ? 'Botones-Activo' : 'Botones'} 
                         style={{marginLeft:"39px"}}
@@ -242,22 +251,21 @@ const BancoImagen = () => {
                         <span className='Botones-Texto'>Inactivos</span>
                     </button>
                 </Col>
-                <Col md={7} lg={14} xl={14} className="Buscar">
+                <Col xs={24} sm={24} md={24} lg={14} xl={14} className="Buscar">
                     <BuscarImagen 
                         datosImagenes = {data}
                     />
                 </Col>
             </Row>
             <Row>
-                <Col lg={22} xl={22} style={{marginLeft: '39px'}}>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{ paddingLeft: '39px', paddingRight: '39px'}} className='Tabla-Responsive'>
                     <Spin
-                        // indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
                         size='large'
                         spinning={cargandoTablaBancoImagen}
                     >
                         <table {...getTableProps()}>
                             <thead>
-                                {headerGroups.map(headerGroup => (
+                                {headerGroups.map( headerGroup => (
                                     <tr {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map(column => (
                                         <th {...column.getHeaderProps()}>{column.render('Header')}</th>
@@ -266,27 +274,45 @@ const BancoImagen = () => {
                                 ))}
                             </thead>
                             <tbody {...getTableBodyProps()}>
-                                {rows.map(row => {
+                                {rows.map( row => {
                                     prepareRow(row)
                                     return (
-                                        <>
+                                        <>                                  
                                             {
                                                 row.original.mostrando ? (
-                                                    <tr   
-                                                        {...row.getRowProps()}
-                                                        onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))
-                                                        }}
-                                                        onMouseLeave={()=>{}}
-                                                    >
-                                                        {row.cells.map(cell => {
-                                                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                                        })}
-                                                    </tr>
+                                                        <tr   
+                                                            {...row.getRowProps()}
+                                                            onMouseEnter={() => {dispatch(EditandoFilaBancoImagenesReducer(row.index, row.original.proimagen))
+                                                            }}
+                                                            // onMouseLeave={() => {dispatch(MantenerEditandoBancoImagenesReducer(row.index, row.original.proimagen, row.original.imagenPrev))
+                                                            // }}
+                                                        >
+                                                            {row.cells.map( cell => {
+                                                                return( 
+                                                                    <td {...cell.getCellProps()}>
+                                                                        {
+                                                                            (row.original.cargandoSpin == true && row.cells[6].column.Header == 'Imagen Producto') ? (
+                                                                                <Spin
+                                                                                    size='large'
+                                                                                    spinning={cargandoRegistroEditar}
+                                                                                    className='OcultarSpin'
+                                                                                >
+                                                                                    {cell.render('Cell')} 
+                                                                                </Spin>
+                                                                            ) : (
+                                                                                <>
+                                                                                    {cell.render('Cell')} 
+                                                                                </>
+                                                                            )
+                                                                        }
+                                                                    </td>
+                                                                )
+                                                            })}
+                                                        </tr>
                                                 ): (
                                                     <></>
                                                 )
-                                            }
-                                            
+                                            } 
                                         </>
                                     )
                                 })}

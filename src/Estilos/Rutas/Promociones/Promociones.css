@@ -1,0 +1,37 @@
+.Banner-Noticias-Promociones{
+    width: 853px;
+    height: 436px;
+    margin-top: -26px;
+    margin-left: -35px;
+    margin-right: -35px;
+    margin-bottom: -25px;
+}
+
+.Cont-Promociones .ant-modal-content{
+    background: transparent !important;
+}
+
+.Cont-Modal-Txt-Promociones{
+    /* background-color: red; */
+    width: 420px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+}
+
+.Btn-Entendido-Modal-Promociones{
+    width: 84px;
+    height: 36px;
+    background: #000000;
+    border-radius: 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}

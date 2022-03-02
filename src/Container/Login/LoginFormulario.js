@@ -6,6 +6,7 @@ import {
 import {Form, Input, Select, Button } from "antd";
 import '../../Estilos/Rutas/Login/Login.css';
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
+import GrowLogoColor from '../../Assets/Logo/colorlogoCompletoKim.png';
 import {Link} from "react-router-dom";
 
 
@@ -14,6 +15,11 @@ const LoginFormulario = () => {
     const [txtPaisSeleccionado, setTxtPaisSeleccionado] = useState("0");
 
     const dispatch = useDispatch()
+
+    
+    const {
+        cargandoLogin
+    } = useSelector(({auth}) => auth);
     
     const seleccionarPais = (pais) => {
         setTxtPaisSeleccionado(pais)
@@ -66,9 +72,9 @@ const LoginFormulario = () => {
                </p>
             </div>
             <div id='Login-Formulario'>
-            <img
-                id="Icono" 
-                src={GrowIcono} />
+                <img
+                    id="Icono" 
+                    src={GrowLogoColor} />
             
             <span id="Login-Formulario-Titulo">
                 Iniciar sesión
@@ -160,8 +166,9 @@ const LoginFormulario = () => {
                         (txtPaisSeleccionado == "0" || txtPaisSeleccionado == "") ? true :false
                     }
                     id={
-                        (txtPaisSeleccionado == "0" || txtPaisSeleccionado == "") ? "Login-Formulario-Boton-Desactivado" : "Login-Formulario-Boton"
+                        (txtPaisSeleccionado == "0" || txtPaisSeleccionado == "") ? "Login-Formulario-Boton" : "Login-Formulario-Boton"
                     }
+                    loading={cargandoLogin}
                 >
                     Iniciar Sesión
                 </Button>

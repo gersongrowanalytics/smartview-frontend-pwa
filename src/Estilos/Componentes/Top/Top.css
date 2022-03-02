@@ -1,10 +1,13 @@
 .Contenedor-Top{
     width: 100%;
     height: 60px;
-    background: #FFFF00;
+    background: #558CFF;
     display: flex;
     align-items: center;
-    position: relative;
+    /* position: relative; */
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 .Logo-KC-Creciendo-Juntos{
@@ -19,8 +22,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 35px;
-    padding-right: 30px;
+    padding-left: 53px;
+    padding-right: 34px;
     cursor: pointer;
     border-radius: 27px;
     position: relative;
@@ -28,9 +31,9 @@
 }
 
 .Contenedor-Items-Top:hover{
-    background: #000000;
+    background: #3646C3;
     /* background: red; */
-    color: #FFFF00;
+    color: white;
 }
 
 .Contenedor-Items-Mi-Cuenta-Top{
@@ -46,6 +49,8 @@
     padding-left: 40px;
     display: flex;
     align-items: center;
+    margin-top: 60px;
+    margin-bottom: -25px;
 }
 
 .Cuerpo-Item-Filtro-Top{
@@ -70,7 +75,7 @@
 }
 
 .Fila-Cuerpo-Item-Filtro-Top:hover{
-    background: #FFFF00;
+    background: #E4E6EB;
 }
 
 .Icono-Fila-Cuerpo-Item-Filtro-Top{
@@ -83,7 +88,7 @@
 .Img-Icono-Top{
     width: 30px;
     position: absolute;
-    left: 3px;
+    left: 25px;
     top: 4px;
 }
 
@@ -120,4 +125,32 @@
     height: 45px;
     display: flex;
     align-items: center;
+    margin-top: 8px;
+}
+
+.Contenedor-Cerrar-Sesion-Top{
+    border-radius: 100px;
+    border: 1px solid black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Cerrar-Sesion-Top{
+    width: 35px;
+}
+
+.Contenedor-Persona-Blanco{
+    background-color: black;
+    border-radius: 100px;
+    width: 57px;
+    height: 57px;
+    display: flex;
+    align-items: center;
+    place-content: center;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.Icono-Persona-Blanco-Top{
+    width: 50px;
 }

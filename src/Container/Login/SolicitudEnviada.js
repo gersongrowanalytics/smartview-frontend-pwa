@@ -3,12 +3,23 @@ import {Form, Input, Select, Button } from "antd";
 import '../../Estilos/Rutas/Login/Login.css';
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
 import {Link} from "react-router-dom";
+import GrowLogoColor from '../../Assets/Logo/colorlogoCompletoKim.png';
+import {
+    RecuperarContraseniaReducer
+} from '../../Redux/Acciones/Auth'
+import {useSelector, useDispatch} from "react-redux";
 
 const SolicitudEnviada = () => {
 
     const onFinish = (e) =>  {
         console.log(e)
-      };
+    };
+
+    const {
+        data_recupear
+    } = useSelector(({auth}) => auth);
+    
+    const dispatch = useDispatch()
 
       
   return (
@@ -37,26 +48,39 @@ const SolicitudEnviada = () => {
             <div id='Login-Formulario'>
                 <img
                     id="Icono" 
-                    src={GrowIcono} />
+                    src={GrowLogoColor} />
             
                 <span id="Login-Formulario-Titulo-Solicitud">
                     Su solicitud fue enviada a su correo con éxito
                 </span>
                 <br></br>
                 <p id='Solicitud-Informacion'>
-                    Si no has recibido el email de confirmación, puedes &nbsp;<span style={{color: "#1876F2"}}>reenviarlo.</span>
+                    Si no has recibido el email de confirmación, puedes &nbsp;
+                    <span 
+                        onClick={() => {
+                             
+                            let nuevaData = {
+                                "correo" : localStorage.getItem('emailEnviarRecuperar')
+                            }
+
+                            dispatch(RecuperarContraseniaReducer(nuevaData))
+                        }}
+                        style={{color: "#1876F2", cursor:'pointer'}}>reenviarlo.</span>
                 </p>
                 <br/>
                     <Link to="/login" >
                             <span id="Login-Formulario-Texto" style={{textDecoration: "auto"}}>Iniciar Sesión</span>
                     </Link>
                 <br/>  
-                <Button 
-                    htmlType="submit"
-                    id="Login-Formulario-Boton-Desactivado"
-                >
-                    Listo
-                </Button>
+                <Link to="/login" >
+                    <Button 
+                        htmlType="submit"
+                        id="Btn-Solicitud-Enviada"
+                        className='Wbold-S18-H24-CFFFFFF'
+                    >
+                        Listo
+                    </Button>
+                </Link>
            
             </div>
             <div className='Login-Banner banner' style={{bottom:"0"}}>

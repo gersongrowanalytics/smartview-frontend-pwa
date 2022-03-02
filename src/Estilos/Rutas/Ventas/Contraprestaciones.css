@@ -1,0 +1,193 @@
+.Contenedor-Contraprestaciones{
+    margin-left: 40px;
+    margin-right: 70px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.Contenedor-Tabla-Ventas-Contraprestaciones{
+    width: 100%;
+    height: 300px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px 2px #E5E5E5;
+    border-radius: 8px;
+
+    overflow: auto;
+    padding-left: 25px;
+    padding-top: 8px;
+}
+
+.Contenedor-Monto-Ventas-Contraprestaciones{
+    width: 100%;
+    height: 300px;
+    background: #558CFF;
+    border-radius: 8px;
+    margin-left: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Circulo-Monto-Ventas-Contraprestaciones{
+    width: 143px;
+    height: 143px;
+    background: #FFFFFF;
+    border-radius: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Txt-Monto-Ventas-Contraprestaciones{
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+}
+
+.Tabla-Ventas-Contraprestaciones thead .Th-Tabla-Ventas-Contraprestaciones{
+    margin-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.Tabla-Ventas-Contraprestaciones tbody .Td-Tabla-Ventas-Contraprestaciones{
+    text-align: center;
+}
+
+.ver-detalle-tabla-ventas-contraprestaciones{
+    cursor: pointer;
+}
+
+.Contenedor-Tabla-Contraprestaciones{
+    position: relative;
+    width: 100%;
+    height: 400px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    /* transform: matrix(1, 0, 0, -1, 0, 0); */
+    border-radius: 8px 8px 0px 0px;
+    overflow: auto;
+}
+
+.Tabla-Contraprestaciones{
+    top: 0;
+    position: absolute;
+    left: -1750px;
+}
+
+.Tabla-Contraprestaciones-Ocultar{
+    animation-duration: 1s;
+    position: absolute;
+    left: -1750px;
+    animation-name: animacion-tabla-ocultar;
+}
+
+.Tabla-Contraprestaciones-Mostrar{
+    animation-duration: 1s;
+    position: absolute;
+    left: 0px;
+    animation-name: animacion-tabla-mostrar;
+}
+
+@keyframes animacion-tabla-ocultar {
+    from {left: 0px;}
+    to {left: -1750px;}
+}
+
+@keyframes animacion-tabla-mostrar {
+    from {left: 1250px;}
+    to {left: 0px;}
+}
+
+
+
+
+.Tabla-Contraprestaciones-Retroceder-Ocultar{
+    animation-duration: 1s;
+    position: absolute;
+    left: 1250px;
+    animation-name: animacion-tabla-retroceder-ocultar;
+}
+
+@keyframes animacion-tabla-retroceder-ocultar {
+    from {left: 0px;}
+    to {left: 1250px;}
+}
+
+
+
+.Tabla-Contraprestaciones-Retroceder-Mostrar{
+    animation-duration: 1s;
+    position: absolute;
+    left: 0px;
+    animation-name: animacion-tabla-retroceder-mostrar;
+}
+
+@keyframes animacion-tabla-retroceder-mostrar {
+    from {left: -1750px;}
+    to {left: 0px;}
+}
+
+
+
+.Tabla-Contraprestaciones thead th{
+    background: #3646C4;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    white-space: nowrap;
+
+    /* position: absolute; */
+}
+
+.Tabla-Contraprestaciones tbody tr{
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+}
+
+.Tabla-Contraprestaciones tbody td{
+    padding-left: 60px;
+    /* padding-right: 60px; */
+    padding-top: 3px;
+    padding-bottom: 3px;
+    white-space: nowrap;
+}
+
+.Btn-Flecha-Retroceder-Contraprestaciones{
+    width: 48px;
+    height: 48px;
+    background: #558CFF;
+    position: absolute;
+    left: -80px;
+    border-radius: 100px;
+    top: 160px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 29px;
+
+    cursor: pointer;
+}
+
+.Btn-Flecha-Avanzar-Contraprestaciones{
+    width: 48px;
+    height: 48px;
+    background: #558CFF;
+    position: absolute;
+    right: -80px;
+    border-radius: 100px;
+    top: 160px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 29px;
+    
+    cursor: pointer;
+}

@@ -17,6 +17,16 @@
     letter-spacing: -0.015em;
 }
 
+.Wbold-S14-H19-L0015-CFFFFFF{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    color: #FFFFFF;
+    letter-spacing: -0.015em;
+}
+
 .Wbold-S13-H17-C1E1E1E{
     font-family: Segoe UI;
     font-style: normal;
@@ -24,6 +34,24 @@
     font-size: 13px;
     line-height: 17px;
     color: #1E1E1E;
+}
+
+.Wbold-S14-H19-CFF3742{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    color: #FF3742;
+}
+
+.W600-S12-H16-CFF3742{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FF3742;
 }
 
 
@@ -36,6 +64,62 @@
     color: #1E1E1E;
 }
 
+.W600-S14-H19-CFFFFFF{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
+.W600-S12-H19-C1E1E1E{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 19px;
+    color: #1E1E1E;
+}
+
+.W600-S12-H16-CFFFFFF{
+    font-family: Segoe UI !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    color: #FFFFFF !important;
+}
+
+.W600-S12-H16-C1E1E1E{
+    font-family: Segoe UI !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    color: #1E1E1E !important;
+}
+
+.W600-S12-H16-C1EC0ED-L0015-underline{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    text-decoration-line: underline;
+    color: #1EC0ED;
+}
+
+.W600-S12-H16-C1E1E1E:hover{
+    font-family: Segoe UI !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    color: #1E1E1E !important;
+}
+
 .Wnormal-S14-H19-C1E1E1E{
     font-family: Segoe UI;
     font-style: normal;
@@ -43,6 +127,16 @@
     font-size: 14px;
     line-height: 19px;
     color: #1E1E1E;
+}
+
+
+.Wnormal-S14-H19-CFF3742{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #FF3742;
 }
 
 .Wnormal-S14-H19-L0015-C1E1E1E{
@@ -62,7 +156,24 @@
     font-size: 12px;
     line-height: 16px;
     color: #1E1E1E;
+}
 
+.Wbold-S12-H16-CFFFFFF{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.Wbold-S12-H16-CFFFFFF:hover{
+    font-family: Segoe UI !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    color: #FFFFFF !important;
 }
 
 .W600-S11-H15-C1E1E1E{
@@ -74,6 +185,15 @@
     color: #1E1E1E;
 }
 
+.W600-S11-H15-CFFFFFF{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 15px;
+    color: #FFFFFF;
+}
+
 .Wbold-S14-H19-CFFFF00{
     font-family: Segoe UI;
     font-style: normal;
@@ -82,6 +202,16 @@
     line-height: 19px;
     color: #FFFF00;
 }
+
+.Wbold-S14-H19-CFFFFFF{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
 
 
 .Wbold-S26-H35-C1E1E1E{
@@ -105,13 +235,13 @@
 }
 
 .Wbold-S18-H24-CFFFFFF{
-    font-family: Segoe UI;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.015em;
-    color: #FFFFFF;
+    font-family: Segoe UI !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    line-height: 24px !important;
+    letter-spacing: -0.015em !important;
+    color: #FFFFFF !important;
 }
 
 .Wnormal-S16-H21-CFFFFFF{
@@ -208,6 +338,17 @@
     color: #FFBB37;
 }
 
+
+.W600-S14-H19-L0015-CFFFFFF{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
 .Wnormal-S12-H16-C1EC0ED{
     font-family: Segoe UI;
     font-style: normal;
@@ -215,6 +356,15 @@
     font-size: 12px;
     line-height: 16px;
     color: #1EC0ED;
+}
+
+.Wnormal-S12-H16-C1876F2{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #1876F2;
 }
 
 .Wbold-S20-H27-CFFFFFF-L0015{
@@ -225,4 +375,80 @@
     line-height: 27px;
     letter-spacing: -0.015em;
     color: #FFFFFF;
+}
+
+.Wbold-S27-H36-C000000{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 27px;
+    line-height: 36px;
+    color: #000000;
+}
+
+.W600-S14-H19-CC4C4C4-L0015{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #C4C4C4;
+}
+
+.Wnormal-S11-H15-C706C64-L0015{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 15px;
+    letter-spacing: -0.015em;
+    color: #706C64;
+}
+
+.Wnormal-S11-H15-C1E1E1E{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 15px;
+    color: #1E1E1E;
+}
+
+.Wbold-S15-H24-L0015-C000000{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    color: #000000;
+}
+
+.Wnormal-S15-H24-L0015-C00008{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.Wbold-S40-H53-C3646C4{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 53px;
+    color: #3646C4;
+}
+
+.Wbold-S9-H12-CE41A37{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 12px;
+    color: #E41A37;
 }

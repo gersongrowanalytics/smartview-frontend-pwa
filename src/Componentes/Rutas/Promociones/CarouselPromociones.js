@@ -1,7 +1,7 @@
 import React from 'react';
 import './car.scss'
 import ImagenHover from './ImagenHover'
-
+import IconoFlecha from '../../../Assets/Img/Promociones/flecha.png'
 
 // =========================
 // Slide
@@ -219,8 +219,8 @@ class CarouselPromociones extends React.Component {
             }
           }
         }
-        console.log(this.state.current)
-      }, 105);
+        
+      }, 305);
     }
 
     if(this.state.activarCarouselRetroceder == true){
@@ -242,8 +242,8 @@ class CarouselPromociones extends React.Component {
             })
           }
         }
-        console.log(this.state.current)
-      }, 105);
+        
+      }, 305);
     }
 
     
@@ -268,6 +268,9 @@ class CarouselPromociones extends React.Component {
           :'slider'
         } 
         aria-labelledby={headingId}
+        style={{
+          position:'relative'
+        }}
       >
         <ul className="slider__wrapper" style={wrapperTransform}>
           <h3 id={headingId} className="visuallyhidden">{heading}</h3>
@@ -275,7 +278,9 @@ class CarouselPromociones extends React.Component {
           {slides.map((slide, posicion) => {
             return (
               <div
-                onClick={() => seleccionarCategoria(slide.scaid, posicion, slide.catid)}
+                onClick={() => {
+                  seleccionarCategoria(slide.scaid, posicion, slide.catid)
+                }}
                 onDoubleClick = {() => deseleccionarCategoria()}
               >
                 <Slide
@@ -333,7 +338,107 @@ class CarouselPromociones extends React.Component {
 
             </div>
         </div>
-    
+        
+        {
+          seleccionoPromocion == true
+          ?<div 
+            className='Flecha-Retroceder-Carousel-Promocion'
+            style={{
+              top: "70px",
+              left: "40px"
+            }}
+            onClick={() => {
+              if(this.state.current < 0){
+                this.setState({
+                  current: 0,
+                })
+              }
+
+              if(this.state.current >= 0){
+                this.setState({
+                  current: this.state.current-1
+                })
+              }else{
+                this.setState({
+                  current: 0
+                })
+              }
+            }}
+          >
+              <img className='Icono-Flecha-Retroceder-Carousel-Promocion' src={IconoFlecha} />
+          </div>
+          :<div 
+            className='Flecha-Retroceder-Carousel-Promocion'
+            onClick={() => {
+              if(this.state.current < 0){
+                this.setState({
+                  current: 0,
+                })
+              }
+
+              if(this.state.current >= 0){
+                this.setState({
+                  current: this.state.current-1
+                })
+              }else{
+                this.setState({
+                  current: 0
+                })
+              }
+            }}
+          >
+              <img className='Icono-Flecha-Retroceder-Carousel-Promocion' src={IconoFlecha} />
+          </div>
+        }
+        
+
+        {
+          seleccionoPromocion == true
+          ?<div 
+            className='Flecha-Avanzar-Carousel-Promocion'
+            style={{
+              top: "70px",
+              // left: "40px"
+            }}
+            onClick={() => {
+              if(seleccionoPromocion == true){
+                if(this.state.current <= 1.5){
+                  this.setState({
+                    current: this.state.current+1
+                  })
+                }
+              }else{
+                if(this.state.current <= 3.1){
+                  this.setState({
+                    current: this.state.current+1
+                  })
+                }
+              }
+            }}
+          >
+            <img className='Icono-Flecha-Retroceder-Carousel-Promocion' src={IconoFlecha} />
+          </div>
+          :<div 
+            className='Flecha-Avanzar-Carousel-Promocion'
+            onClick={() => {
+              if(seleccionoPromocion == true){
+                if(this.state.current <= 1.5){
+                  this.setState({
+                    current: this.state.current+1
+                  })
+                }
+              }else{
+                if(this.state.current <= 3.1){
+                  this.setState({
+                    current: this.state.current+1
+                  })
+                }
+              }
+            }}
+          >
+            <img className='Icono-Flecha-Retroceder-Carousel-Promocion' src={IconoFlecha} />
+          </div>
+        }
       </div>
     )
   }

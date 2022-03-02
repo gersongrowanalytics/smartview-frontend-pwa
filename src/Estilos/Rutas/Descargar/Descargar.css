@@ -1,0 +1,117 @@
+.Btn-Modulo-Seleccionado-Descargar{
+    background: #3646C4;
+    border-radius: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.Btn-Modulo-Descargar{
+    background: transparent;
+    border-radius: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-right: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.Btn-Opciones-Descargar{
+    background: #E5E5E5 !important;
+    border-radius: 8px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    margin-right: 20px !important;
+    cursor: pointer;
+}
+
+.Btn-Opciones-Seleccionada-Descargar{
+    background: #558CFF !important;
+    border-radius: 8px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    margin-right: 20px !important;
+    cursor: pointer;
+}
+
+.Modal-Mostrar-Filtros-Columnas-Descargar > .ant-modal-content{
+    border-radius: 8px;
+}
+
+.Columna-Filtro-Columnas-Descargar{
+    width: 100%;
+    height: 285px;
+    background: #FFFFFF;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+
+.Contenedor-Cabecera-Columna-Filtro-Columnas-Descargar{
+    border-bottom: 1px solid black;
+    padding-left: 12px;
+    padding-top: 7px;
+    padding-bottom: 9px;
+}
+
+.Caja-Flecha-Columnas-Descargar{
+    width: 17px;
+    height: 17px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.Fila-Columna-Filtro-Descargar-Seleccionados{
+    padding-left: 25px; 
+    margin-top: 5px; 
+    /* background: red; */
+    position: relative;
+}
+
+.Btn-Opciones-Modal-Filtros-Columnas-Descargar{
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 14px;
+    padding: 5px 15px 5px 15px;
+    cursor: pointer;
+}
+
+.Btn-Opciones-Modal-Filtros-Columnas-Descargar:hover{
+
+}
+
+.Btn-Radio-Descargar{
+    width: 11px;
+    height: 11px;
+    border: 1px solid #558CFF;
+    box-sizing: border-box;
+    border-radius: 8px;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    cursor: pointer;
+}
+
+.Btn-Circulo-Radio-Descargar{
+    width: 7px;
+    height: 7px;
+    background: #558CFF;
+    border-radius: 8px;
+
+    position: absolute;
+    top: 1pt;
+    left: 1px;
+}

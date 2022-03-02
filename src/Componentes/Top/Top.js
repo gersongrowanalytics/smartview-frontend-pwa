@@ -7,10 +7,16 @@ import FiltroDepartamentosTop from './FiltroDepartamentosTop';
 import FiltroSoporteTop from './FiltroSoporteTop';
 import {cerrarSesionReducer} from '../../Redux/Acciones/Auth'
 import {useDispatch, useSelector} from "react-redux"
+import IconoCerrar from '../../Assets/Img/Top/cerrarsession.png'
+import IconoPersonaBlanco from '../../Assets/Img/Top/personablanco.png'
 
 const Top = () => {
 
     const dispatch = useDispatch();
+    const {
+        authUser
+    } = useSelector(({auth}) => auth);
+
 
     const newDate = new Date()
     const dia = newDate.getDate();
@@ -59,7 +65,7 @@ const Top = () => {
 
                 <FiltroSoporteTop />
 
-                <div className='Wbold-S14-H19-C1E1E1E Contenedor-Items-Mi-Cuenta-Top' onClick={() => setMostrarCuerpoMiCuenta(!mostrarCuerpoMiCuenta)}>
+                <div className='Wbold-S14-H19-CFFFFFF Contenedor-Items-Mi-Cuenta-Top' onClick={() => setMostrarCuerpoMiCuenta(!mostrarCuerpoMiCuenta)}>
                     <img src={IconoUsuario} className='Img-Icon-Usuario' />
                     Mi cuenta
                 </div>
@@ -68,11 +74,15 @@ const Top = () => {
                     ?<div className='Contenedor-Expandible-Mi-Cuenta'>
                         <div className='Contenedor-Expandible-Primera-Parte-Mi-Cuenta' >
 
-                            <div style={{width:'25%'}}>
-
+                            <div style={{width:'25%'}} className="Contenedor-Persona-Blanco" >
+                                <img src={IconoPersonaBlanco} className="Icono-Persona-Blanco-Top" />
                             </div>
-                            <div style={{width:'75%', alignSelf: "center"}}>
-                                <div className='Wbold-S14-H19-C1E1E1E'>Alejandro Palomino </div>
+                            <div style={{width:'75%', alignSelf: "center", paddingLeft:'10px'}}>
+                                <div className='Wbold-S14-H19-C1E1E1E'>
+                                    {
+                                        localStorage.getItem('pernombrecompleto')
+                                    }
+                                </div>
                                 <div 
                                     className='Wnormal-S12-H16-C1EC0ED'
                                     style={{cursor:'pointer'}}
@@ -84,6 +94,9 @@ const Top = () => {
                         <div style={{marginTop:'6px', border: "1px solid #D7E8FF"}}></div>
 
                         <div className='Contenedor-Expandible-Segunda-Parte-Mi-Cuenta Wbold-S13-H17-C1E1E1E' >
+                            <div className='Contenedor-Cerrar-Sesion-Top'>
+                                <img src={IconoCerrar} className="Cerrar-Sesion-Top" />
+                            </div>
                             <div 
                                 style={{cursor:'pointer'}}
                                 onClick={() => dispatch(cerrarSesionReducer())}

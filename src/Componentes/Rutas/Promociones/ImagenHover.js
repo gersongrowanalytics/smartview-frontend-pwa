@@ -3,10 +3,11 @@ import React, {useState} from 'react'
 import './ImagenHover.css'
 import {Col, Row} from "antd";
 import { useSelector} from "react-redux";
-
+import IconoFlecha from '../../../Assets/Img/Promociones/iconoVerMas.png'
 const ImagenHover = (props) => {
     // const {seleccionarFiltroZona} = useSelector(({zonas}) => zonas);
-    const seleccionarFiltroZona = false
+    const {aplicandoFiltroAcumulado} = useSelector(({sucursales}) => sucursales);
+    // const seleccionarFiltroZona = false
 
     const {
         seleccionado, 
@@ -172,15 +173,15 @@ const ImagenHover = (props) => {
                                 {nombre}<br/>
                             </span>
                             {
-                                seleccionarFiltroZona == true
+                                aplicandoFiltroAcumulado == true
                                 ?null
                                 :<span 
                                     id="textoPromocionHover"
                                     className='Wnormal-S16-H21-CFFFFFF'
-                                >Promoción:{seleccionarFiltroZona} {cantidadPromociones}<br/></span>
+                                >Promoción: {cantidadPromociones}<br/></span>
                             }
                             {
-                                seleccionarFiltroZona == true
+                                aplicandoFiltroAcumulado == true
                                 // ?<span id="textoPromocionHover">Código de Promociones: {cantidadCodigosPromocion}<br/></span>
                                 ?<span 
                                     id="textoPromocionHover"
@@ -189,11 +190,12 @@ const ImagenHover = (props) => {
                                 :null
                             }
                             {
-                                seleccionarFiltroZona == true
-                                ?<span 
+                                aplicandoFiltroAcumulado == true
+                                ?<div 
+                                    style={{marginTop:'-5px'}}
                                     id="textoPromocionHover"
                                     className='Wnormal-S16-H21-CFFFFFF'
-                                >Canales: {cantidadCanales}</span>
+                                >Canales: {cantidadCanales}</div>
                                 :null
                             }
                         </h2>
@@ -202,7 +204,7 @@ const ImagenHover = (props) => {
                             style={{color:'white'}} id="saberMasHover"
                             className='Wbold-S16-H21-CFFFFFF'
                         >
-                            Para saber más<img alt="" src={require("../../../Assets/Img/Promociones/iconoVerMas.png")} width="22px" height="18px" className="iconoFlecha"/>
+                            Para saber más<img alt="" src={IconoFlecha} width="22px" height="18px" className="iconoFlecha"/>
                             {/* <i className="icon icon-arrow-right gx-fs-l gx-ml-1 gx-d-inline-flex gx-vertical-align-middle"/> */}
                             
                         </span>

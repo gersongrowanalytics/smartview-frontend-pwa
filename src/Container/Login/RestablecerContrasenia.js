@@ -2,18 +2,28 @@ import React, {useState}  from 'react'
 import {Form, Input, Select, Button } from "antd";
 import '../../Estilos/Rutas/Login/Login.css';
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
+import GrowLogoColor from '../../Assets/Logo/colorlogoCompletoKim.png';
 import {Link} from "react-router-dom";
+import {
+    RecuperarContraseniaReducer
+} from '../../Redux/Acciones/Auth'
+import {useDispatch, useSelector} from "react-redux";
 
 const RestablecerContrasenia = () => {
 
-    const [correoIngresado, setcorreoIngresado] = useState("0");
+    const dispatch = useDispatch();
+    const {
+        cargandoLogin
+    } = useSelector(({auth}) => auth);
+
+    const [correoIngresado, setcorreoIngresado] = useState("");
 
     const obtenerCorreo = (e) => {
         setcorreoIngresado(e.target.value);
     }
 
     const onFinish = (e) =>  {
-        console.log(e)
+        dispatch(RecuperarContraseniaReducer(e))
     };
   return (
     <div id="Login-Contenedor-Formulario">
@@ -41,7 +51,7 @@ const RestablecerContrasenia = () => {
             <div id='Login-Formulario'>
             <img
                 id="Icono" 
-                src={GrowIcono} />
+                src={GrowLogoColor} />
             
             <span id="Login-Formulario-Titulo">
                 Restablecer Contraseña
@@ -95,8 +105,9 @@ const RestablecerContrasenia = () => {
                         (correoIngresado == "0" || correoIngresado == "" ) ? true : false
                     }
                     id={
-                        (correoIngresado == "0" || correoIngresado == "" ) ? "Login-Formulario-Boton-Desactivado" : "Login-Formulario-Boton"
+                        (correoIngresado == "0" || correoIngresado == "" ) ? "Login-Formulario-Boton" : "Login-Formulario-Boton"
                     }
+                    loading={cargandoLogin}
                 >
                     Solicitar
                 </Button>

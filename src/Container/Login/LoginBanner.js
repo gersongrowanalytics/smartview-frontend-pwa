@@ -1,5 +1,7 @@
 import React from 'react'
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
+import GrowText from '../../Assets/Img/Login/Grow_tex.png';
+import GrowLion from '../../Assets/Img/Login/Grow_lion.png';
 import '../../Estilos/Rutas/Login/Login.css';
 
 class LoginBanner extends React.Component {
@@ -19,17 +21,33 @@ class LoginBanner extends React.Component {
     componentDidMount(){
         setTimeout(() => {
             this.animacionBanner()
-        }, 500);
+        }, 1000);
     }
     render(){
         return (
       
             <div id={this.state.cssAnimacion}>
                 <div id='Banner-Fondo'>
-                    <img
+                    {/* <img
                         id="Banner-Icono" 
                         src={GrowIcono} 
-                    />
+                    /> */}
+                    <div
+                        style={{
+                            width: "200px",
+                            height: "200px",
+                            position: "relative",
+                        }}
+                    >
+                        <img
+                            className="Banner-Icono-Grow-Text" 
+                            src={GrowText} 
+                        />
+                        <img
+                            className="Banner-Icono-Grow-Lion" 
+                            src={GrowLion} 
+                        />
+                    </div>
                 </div>
                 
             </div>

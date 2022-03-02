@@ -1,11 +1,18 @@
 import {
     SIGNIN_USER_SUCCESS,
+    CARGANDO_BTN_LOGIN,
+    DATA_RECUPERAR
 } from "../../Constantes/ActionTypes";
 import config from '../../config'
 import { estadoRequestReducer } from "./EstadoRequest"
 import { message } from "antd";
 
 export const loginReducer = (usuario) => async ( dispatch, getState) => {
+
+    dispatch({
+        type: CARGANDO_BTN_LOGIN,
+        payload: true
+    })
 
     await fetch(config.api+'login',
         {
@@ -39,7 +46,7 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
                 localStorage.setItem('tpuprivilegio', data.datos.tpuprivilegio)
 
                 dispatch(loginCorrecto(data.datos))
-                message.success(data.mensaje);
+                // message.success(data.mensaje);
             }else{
                 message.error(data.mensaje);
             }
@@ -47,6 +54,13 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
     }).catch((error)=> {
         
     });
+
+    dispatch({
+        type: CARGANDO_BTN_LOGIN,
+        payload: false
+    })
+
+    return true
 }
 
 export const loginCorrecto = (user) => {
@@ -61,3 +75,113 @@ export const cerrarSesionReducer = () => async (dispatch) => {
     localStorage.clear();
     window.location.href = window.location.href;
 };
+
+export const RecuperarContraseniaReducer = (data, actualizar = true) => async (dispatch, getState) => {
+
+    dispatch({
+        type: CARGANDO_BTN_LOGIN,
+        payload: true
+    })
+
+    dispatch({
+        type: DATA_RECUPERAR,
+        payload: data
+    })
+
+    localStorage.setItem('emailEnviarRecuperar', data.correo)
+
+    await fetch(config.api+'recuperar/contrasena/nuevo',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json'
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then(data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                message.success(data.mensaje);
+                if(actualizar == true){
+                    window.location.href = "/solicitud-enviada"
+                }else{
+
+                }
+
+            }else{
+                message.error(data.mensaje);
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
+    dispatch({
+        type: CARGANDO_BTN_LOGIN,
+        payload: false
+    })
+}
+
+export const CambiarContraseniaReducer = (dataenviada) => async (dispatch, getState) => {
+
+    let rpta = false
+
+    dispatch({
+        type: CARGANDO_BTN_LOGIN,
+        payload: true
+    })
+
+    await fetch(config.api+'cambiar/contrasenia/nuevo',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify(dataenviada),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json'
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then(data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                message.success(data.mensaje);
+                rpta = true
+
+                let nuevaData = {
+                    "logintoken" : true,
+                    "token"      : data.nuevoToken,
+                    "usuario"    : "",
+                    "contrasena" : dataenviada.nuevaContrasenia
+                }
+
+                dispatch(loginReducer(nuevaData))
+
+
+            }else{
+                message.error(data.mensaje);
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
+    dispatch({
+        type: CARGANDO_BTN_LOGIN,
+        payload: false
+    })
+
+}

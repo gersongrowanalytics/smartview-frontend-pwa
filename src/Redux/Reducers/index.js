@@ -7,6 +7,15 @@ import Sucursales from './Sucursales'
 import Promociones from './Promociones/Promociones'
 import Ventas from './Ventas/Ventas'
 import BancoImagen from './BancoImagen/BancoImagen'
+import Descargas from './Descargas/Descargas'
+import DescargasSellIn from './Descargas/DescargasSellIn'
+import DescargarSellOut from './Descargas/DescargarSellOut'
+import DescargarRerportePagos from './Descargas/DescargarRerportePagos'
+import DescargarPromocionesLiquidadas from './Descargas/DescargarPromocionesLiquidadas'
+import DescargarPdf from './Descargas/DescargarPdf'
+import ListaPrecios from './ListaPrecios/ListaPrecios'
+import CargaArchivos from './CargaArchivos/CargaArchivos'
+import Contraprestaciones from './Contraprestaciones/Contraprestaciones'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -17,6 +26,15 @@ const createRootReducer = (history) => combineReducers({
     promociones   : Promociones,
     ventas        : Ventas,
     bancoImagen   : BancoImagen,
+    descargas   : Descargas,
+    descargasSellIn   : DescargasSellIn,
+    descargarSellOut   : DescargarSellOut,
+    descargarRerportePagos   : DescargarRerportePagos,
+    descargarPromocionesLiquidadas   : DescargarPromocionesLiquidadas,
+    descargarPdf   : DescargarPdf,
+    listaPrecios   : ListaPrecios,
+    cargaArchivos  : CargaArchivos,
+    contraprestaciones : Contraprestaciones,
 });
 
 export default createRootReducer

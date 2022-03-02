@@ -4,7 +4,15 @@ import {
     FILTRO_SELECCIONAR_SUCURSAL_USUARIO,
     REINICIAR_SUCURSALES_USUARIO,
     OBTENER_SUCURSALES_USUARIO,
-    SELECCIONAR_SUCURSAL
+    SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
+    SELECCIONAR_UNA_ZONA_DESCARGAR,
+    SELECCIONAR_UN_GRUPO_DESCARGAR,
+    SELECCIONAR_UN_GSUID,
+    SELECCIONAR_CASS,
+    SELECCIONAR_GRUPOS,
+    SELECCIONAR_SUCURSALES,
+    APLICANDO_FILTROS_CORRESPONDIENTES,
+    CAMBIAR_APLICANDO_FILTRO_ACUMULADO
 } from "../../Constantes/Sucursales";
 
 const INIT_STATE = {
@@ -14,6 +22,13 @@ const INIT_STATE = {
     zonas                   : [],
     cass                    : [],
     gsus                    : [],
+    gsuidSeleccionado       : 0,
+
+    aplicandoFiltroCanal : false,
+    aplicandoFiltroZona  : false,
+    aplicandoFiltroGrupo : false,
+    aplicandoFiltroDt    : false,
+    aplicandoFiltroAcumulado : false
 };
 
 export default (state = INIT_STATE, action) => {
@@ -58,6 +73,51 @@ export default (state = INIT_STATE, action) => {
                 ...state,
                 sucursalesUsuario : action.payload.sucursalesUsuario,
                 zonas : action.payload.zonas,
+            }
+        }
+        case SELECCIONAR_UNA_SUCURSAL_DESCARGAR : {
+            return {
+                ...state,
+                sucursalesUsuario : action.payload,
+            }
+        }
+        case SELECCIONAR_UNA_ZONA_DESCARGAR : {
+            return {
+                ...state,
+                zonas : action.payload,
+            }
+        }
+        case SELECCIONAR_UN_GRUPO_DESCARGAR : {
+            return {
+                ...state,
+                gsus : action.payload
+            }
+        }
+        case SELECCIONAR_UN_GSUID: {
+            return {
+                ...state,
+                gsuidSeleccionado : action.payload
+            }
+        }
+        case SELECCIONAR_CASS: {
+            return {
+                ...state,
+                cass : action.payload
+            }
+        }
+        case APLICANDO_FILTROS_CORRESPONDIENTES: {
+            return {
+                ...state,
+                aplicandoFiltroCanal : action.payload.aplicandoCanal,
+                aplicandoFiltroZona  : action.payload.aplicandoZona,
+                aplicandoFiltroGrupo : action.payload.aplicandoGrupo,
+                aplicandoFiltroDt    : action.payload.aplicandoDt,
+            }
+        }
+        case CAMBIAR_APLICANDO_FILTRO_ACUMULADO: {
+            return {
+                ...state,
+                aplicandoFiltroAcumulado : action.payload
             }
         }
         default:

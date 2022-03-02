@@ -4,6 +4,7 @@
     align-items: center;
     display: flex;
     padding-left: 40px;
+    position: relative;
 }
 
 .Contenedor-Cuerpo-Filtro{
@@ -64,12 +65,13 @@
     left: -55px;
     padding-top: 10px;
     padding-bottom: 10px;
+    z-index: 2;
 }
 
 .Contenedor-Btn-Descargar-Ventas{
     width: 84px;
     height: 36px;
-    background: #000000;
+    background: #3946AB;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -141,13 +143,18 @@
 }
 
 .Tarjeta-Categorias-Avance-Ventas{
-    width: 18%;
-    height: 286px;
+    /* width: 18%; */
+    height: 332px;
     /* background: blue; */
     box-shadow: 0px 4px 4px #E5E5E5;
     border-radius: 8px;
-    margin-right: 2%;
-    margin-left: 5px;
+    /* margin-right: 2%; */
+    /* margin-left: 5px; */
+
+    width: 31%;
+    margin-right: 3%;
+    margin-left: 4px;
+    margin-bottom: 30px;
 }
 
 .Contenedor-Tajeta-Avance-Rebate-Ventas{
@@ -158,7 +165,7 @@
 }
 
 .Primera-Tarjeta-Categorias-Avance-Ventas{
-    height: 65%;
+    height: 70%;
     width: 100%;
     
     background-size: 100% 100%;
@@ -171,7 +178,7 @@
 }
 
 .Segunda-Tarjeta-Categorias-Avance-Ventas{
-    height: 35%;
+    height: 30%;
     width: 100%;
     /* background: red; */
 }
@@ -211,7 +218,7 @@
 }
 
 .Item-Filtro-Mes-Ventas:hover{
-    background: #FFFF00;
+    background: #E6F1FC;
     font-weight: bold;
 }
 
@@ -225,6 +232,10 @@
     bottom: 25px;
     width: 100%;
     text-align-last: center;
+}
+
+.Switch-Avance-Ventas{
+    display: flex;
 }
 
 .Switch-Avance-Ventas > .ant-switch-checked{
@@ -252,4 +263,10 @@
 
 .Switch-Avance-Ventas > .ant-switch > .ant-switch-handle {
     margin-top: -1px;
+}
+
+.Icono-Actualizar-Filtro{
+    width: 35px;
+    margin-right: 33px;
+    cursor: pointer;
 }

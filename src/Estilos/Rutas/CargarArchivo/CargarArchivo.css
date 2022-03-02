@@ -1,0 +1,272 @@
+.Contenedor-Tarjeta-Carga-Archivo{
+    width: 209px;
+    height: 286px;
+    background: white;
+    box-shadow: 0px 2px 9px #E5E5E5;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+
+.Primera-Contenedor-Tarjeta-Carga-Archivo{
+    width: 100%;
+    height: 60%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Segunda-Contenedor-Tarjeta-Carga-Archivo{
+
+}
+
+.Contenedor-Notificaciones{
+    width: 304px;
+    height: 100vh;
+    background: #FFFFFF;
+    box-shadow: -8px 4px 15px -5px #E5E5E5;
+    margin-top: -25px;
+    position: fixed;
+    /* z-index: -1; */
+}
+
+.Contenedor-Notificaciones-Encima{
+    width: 304px;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: -8px 4px 15px -5px #E5E5E5;
+    margin-top: -25px;
+    position: fixed;
+    right: 0;
+    /* z-index: 1; */
+    top: 120px;
+}
+
+.Contenedor-Notificaciones-Encima-Animacion{
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: -8px 4px 15px -5px #E5E5E5;
+    margin-top: -25px;
+    position: fixed;
+    right: 0;
+    top: 120px;
+
+    animation-duration: 2s;
+    animation-name: animacion-notificacion;
+}
+
+@keyframes animacion-notificacion {
+    from {
+        width: 304px;
+    }
+  
+    to {
+        width: 100%;
+    }
+}
+
+
+
+.Contenedor-Notificaciones-Cerrar-Animacion{
+    width: 304px;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: -8px 4px 15px -5px #E5E5E5;
+    margin-top: -25px;
+    position: fixed;
+    right: 0;
+    top: 120px;
+
+    animation-duration: 2s;
+    animation-name: animacion-cerrar-notificacion;
+}
+
+@keyframes animacion-cerrar-notificacion {
+    from {
+        width: 100%;
+    }
+  
+    to {
+        width: 304px;
+    }
+}
+
+
+
+
+.Titulo-Notificacion-CargaArchivos{
+    border-bottom: 1px solid #E5E5E5;
+    width: 304px;
+    display: flex;
+    place-content: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.Cuerpo-Notificacion-CargaArchivos{
+    /* background-color: black; */
+    text-align: -webkit-center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Contenedor-Icono-Btn-Plus-Svg{
+    width: 32px;
+    background-color: #fff;
+    border-radius: 100px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.Gif-PrimeraParte-TarjetaCargaArchivo{
+    border-radius: 100px;
+    /* width: 200px; */
+    width: 118px;
+    height: 118px;
+}
+
+.Gif-Cargando-TarjetaCargaArchivo{
+    border-radius: 100px;
+    width: 200px;
+    margin-top: -70px;
+}
+
+.Gif-Exito-TarjetaCargaArchivo{
+    border-radius: 100px;
+    width: 130px;
+    height: 130px;
+    margin-top: -70px;
+}
+
+.Cargando-Contenedor-Tarjeta-Carga-Archivo{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.Titulo-Tarjeta-CargaArchivo{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    height: 100%;
+    text-align: -webkit-left;
+}
+
+.Btn-Enviar-CargaArchivos{
+    width: 78px !important;
+    height: 24px !important;
+    border: 1px solid #000000 !important;
+    box-sizing: border-box !important;
+    border-radius: 14px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    cursor: pointer !important;
+}
+
+.Btn-Enviar-Seleccionado-CargaArchivos{
+    width: 78px !important;
+    height: 24px !important;
+    box-sizing: border-box !important;
+    border-radius: 14px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    cursor: pointer !important;
+    background-color: #3646C3 !important;
+}
+
+
+.Titulo-Archivo-Subido-CargaArchivo{
+    display: flex;
+    justify-content: center;
+}
+
+.Icon-Cerrar-Tarjeta-CargaArchivo{
+    font-size: 10px;
+    margin-left: 10px;
+    margin-top: 1px;
+    cursor: pointer;
+}
+
+.Icono-Error-TarjetaCargaArchivo{
+    width: 130px;
+    height: 130px;
+    /* background-color: red; */
+    border-radius: 250px;
+    border:1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+
+.Icono-Interno-Error-TarjetaCargaArchivo{
+    width: 110px;
+    height: 110px;
+    background-color: red;
+    border-radius: 250px;
+    border:1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Btn-Subir-Otro-CargaArchivos{
+    width: 78px;
+    height: 24px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+.Icono-Flecha-Noti-CargaArchivos{
+    cursor: pointer;
+}
+
+.Icono-Flecha-Noti-CargaArchivos:hover{
+    border-radius: 100px;
+    background: #C4C4C4;
+    background-blend-mode: multiply;
+}
+
+.Fila-Notificacion-CargaArchivos{
+    border-bottom: 1px solid #E5E5E5;
+    margin-top: 10px;
+    margin-left: 25px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 25px;
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.Primera-Parte-Fila-Notificacion-CargaArchivos{
+    width: 80%;
+}
+
+.Segunda-Parte-Fila-Notificacion-CargaArchivos{
+    width: 20%;
+    font-size: 17px;
+    padding-left: 20px;
+}

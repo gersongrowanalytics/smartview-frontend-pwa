@@ -1,5 +1,5 @@
 import {
-    OBTENER_VENTAS
+    OBTENER_VENTAS,
 } from '../../../Constantes/Ventas/Ventas'
 
 const INIT_STATE = {
@@ -15,6 +15,7 @@ export default (state = INIT_STATE, action) => {
                 data_ventas : action.payload
             }
         }
+        
         default:
             return state;
     }

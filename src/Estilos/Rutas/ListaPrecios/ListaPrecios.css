@@ -1,0 +1,180 @@
+.Fila-Btns-Lista-Precios{
+    display: flex;
+    margin-left: 40px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.Btn-Lista-Precios{
+    border: 1px solid #1E1E1E !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    margin-right: 15px !important;
+    padding-top: 4px !important;
+    padding-bottom: 3px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+}
+
+.Btn-Lista-Precios:focus{
+    color: white !important;
+}
+
+.Btn-Lista-Precios-Seleccionado:focus{
+    color: white !important;
+}
+
+.Btn-Lista-Precios-Seleccionado:hover{
+    color: white !important;
+}
+
+
+.Btn-Lista-Precios-Seleccionado{
+    border: 1px solid #1E1E1E !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    margin-right: 15px !important;
+    padding-top: 4px !important;
+    padding-bottom: 3px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    background-color: #3646C3 !important;
+}
+
+.Btn-Todos-Filtros-Lista-Precios{
+    border: 1px solid #1E1E1E !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    margin-right: 15px !important;
+    padding-top: 6px !important;
+    padding-bottom: 5px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+}
+
+.Btn-Descargar-Lista-Precios{
+    background: #3646C3 !important;
+    border-radius: 8px !important;
+    width: 102px !important;
+    height: 36px !important;
+    cursor: pointer !important;
+    float: right !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 40px !important;
+}
+
+.Btn-Descargar-Lista-Precios:focus{
+    color: white !important;
+}
+
+.Btn-Descargar-Lista-Precios:hover{
+    color: white !important;
+}
+
+.Btn-Descargar-Lista-Precios-Desactivado{
+    border: 1px solid #1E1E1E !important;
+    border-radius: 8px !important;
+    width: 102px !important;
+    height: 36px !important;
+    cursor: not-allowed !important;
+    float: right !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 40px !important;
+}
+
+#Contenedor-Tabla-Lista-Precios{
+    box-shadow: 0px 0px 15px #D8DFE9;
+    height: 500px;
+    background-color: white;
+    position: relative;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 80px;
+    overflow: auto;
+    border-radius: 8px;
+}
+
+/*  */
+
+.Tabla-Principal{
+    overflow:scroll;
+    white-space: nowrap;
+    position: relative;
+}
+
+.Tabla-Principal thead th {
+    background: #1EC0ED;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    z-index: 2;
+    text-align: -webkit-center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.Tabla-Principal thead{
+    border-top: 1px solid #C4C4C4;
+    border-bottom: 1px solid #C4C4C4;   
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
+}
+
+.Tabla-Principal tbody tr td{
+    text-align: -webkit-center;
+    padding: 0px;
+}
+
+
+
+
+/* STATIC */
+.Tabla-Principal thead th:first-child {
+    /* position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: #1EC0ED; */
+}
+
+.Tabla-Principal tbody td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+    top: 69px;
+}
+
+
+/* FIN STATIC */
+
+.Contenedor-Cabecera-Tabla{
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.Icono-Flecha-Tabla{
+    width: 40px;
+    position: absolute;
+    left: -15px;
+    top: -14px;
+}
+
+.Contenedor-Icono-Flecha-Tabla{
+    width: 10px;
+    height: 10px;
+    /* background: green; */
+    margin-top: 2px;
+    margin-left: 10px;
+    position: relative;
+    cursor: pointer;
+}

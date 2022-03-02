@@ -2,24 +2,44 @@ import React, {useState} from 'react'
 import {Form, Input, Select, Button } from "antd";
 import '../../Estilos/Rutas/Login/Login.css';
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
-import {Link} from "react-router-dom";
+import GrowLogoColor from '../../Assets/Logo/colorlogoCompletoKim.png';
+import {Link, useParams} from "react-router-dom";
+import {
+    CambiarContraseniaReducer
+} from '../../Redux/Acciones/Auth'
+import {useSelector, useDispatch} from "react-redux";
 
 const FormularioCambiarContrasenia = () => {
 
-  const [contraseniaIngresada, setcontraseniaIngresada] = useState("0")
+    const {token} = useParams()
+    const dispatch = useDispatch()
 
-  const obtenerContrasenia = (e) =>{
-    setcontraseniaIngresada(e.target.value);
-    console.log(e.target.value)
-  }
+    const [contraseniaIngresada, setcontraseniaIngresada] = useState("")
 
-  const onFinish = (e) =>  {
-    console.log(e)
-  };
+    const obtenerContrasenia = (e) =>{
+        setcontraseniaIngresada(e.target.value);
+    }
 
-  return (
-    <div id="Login-Contenedor-Formulario">
-             <div className='Login-Banner banner' style={{top: "0"}}>
+    const {
+        cargandoLogin
+    } = useSelector(({auth}) => auth);
+
+    const onFinish = async (e) => {
+        let contrasenia = e.contrasenia
+
+        let data = {
+            "token" : token,
+            "nuevaContrasenia" : contrasenia
+        }
+
+        dispatch(CambiarContraseniaReducer(data))
+
+
+    };
+
+    return (
+        <div id="Login-Contenedor-Formulario">
+            <div className='Login-Banner banner' style={{top: "0"}}>
                 <p>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
@@ -30,20 +50,20 @@ const FormularioCambiarContrasenia = () => {
                 </p>
             </div>
             <div className='Login-Banner banner banner2' style={{top:"0"}}>
-               <p>
+                <p>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
-               </p>
+                </p>
             </div>
 
             <div id='Login-Formulario'>
             <img
                 id="Icono" 
-                src={GrowIcono} />
+                src={GrowLogoColor} />
             
             <span id="Login-Formulario-Titulo">
                 Recuperar Contraseña
@@ -73,7 +93,7 @@ const FormularioCambiarContrasenia = () => {
                             marginBottom: "10px"
                         }}
                         placeholder="Nueva Contraseña"
-                      />
+                        />
                 </Form.Item>
 
                 <Form.Item
@@ -84,12 +104,12 @@ const FormularioCambiarContrasenia = () => {
                             message:"Ingrese una contraseña"
                         },
                         ({ getFieldValue }) => ({
-                          validator(_, value) {
+                            validator(_, value) {
                             if (!value || getFieldValue('contrasenia') === value) {
-                              return Promise.resolve();
+                                return Promise.resolve();
                             }
                             return Promise.reject(new Error('¡Las dos contraseñas que ingresaste no coinciden!'));
-                          },
+                            },
                         }),
                     ]}
                     name="confirm-contrasenia"
@@ -113,11 +133,12 @@ const FormularioCambiarContrasenia = () => {
                 <Button 
                     htmlType="submit"
                     disabled={
-                      (contraseniaIngresada == "0" || contraseniaIngresada == "") ? true :false
+                        (contraseniaIngresada == "0" || contraseniaIngresada == "") ? true :false
                     }
                     id={
-                      (contraseniaIngresada == "0" || contraseniaIngresada == "") ? "Login-Formulario-Boton-Desactivado" : "Login-Formulario-Boton"
+                        (contraseniaIngresada == "0" || contraseniaIngresada == "") ? "Login-Formulario-Boton" : "Login-Formulario-Boton"
                     }
+                    loading={cargandoLogin}
                 >
                     Guardar
                 </Button>
@@ -134,14 +155,14 @@ const FormularioCambiarContrasenia = () => {
                 </p>
             </div>
             <div className='Login-Banner banner banner2'style={{bottom:"0"}}>
-               <p>                
+                <p>                
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
-               </p>
+                </p>
             </div>
             {/* <button
                 onClick={() => EnviarLogin()}
@@ -149,7 +170,7 @@ const FormularioCambiarContrasenia = () => {
                 Login
             </button> */}
         </div>
-  )
+    )
 }
 
 export default FormularioCambiarContrasenia;

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import FiltrosPromociones from '../../Componentes/Filtros/FiltrosPromociones';
 import BannerPromociones from '../../Assets/Img/Promociones/bannerPromociones.png'
 import CarouselPromociones from '../../Componentes/Rutas/Promociones/CarouselPromociones';
@@ -6,20 +6,45 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     obtenerPromocionesReducer,
     seleccionarPromocionReducer,
-    seleccionarCategoriaReducer
+    seleccionarCategoriaReducer,
+    ObtenerPromocionesAcumuladasReducer,
+    SeleccionarCategoriaXZonaAcumuladaReducer
 } from '../../Redux/Acciones/Promociones/Promociones'
 import { wait } from '@testing-library/dom'
 import IconoCalendarioPromocion from '../../Assets/Img/Promociones/calendario.png'
+import { Modal } from 'antd';
 import IconoNoPromocion from '../../Assets/Img/Promociones/nopromocion.png'
+import IconoNoPromocionAzul from '../../Assets/Img/Promociones/nopromocionazul.png'
+import IconoNoPromocionRojo from '../../Assets/Img/Promociones/nopromocionrojo.png'
+import IconoNoPromocionMorado from '../../Assets/Img/Promociones/nopromocionmorado.png'
+import IconoNoPromocionVerde from '../../Assets/Img/Promociones/nopromocionverde.png'
+import IconoNoPromocionRosado from '../../Assets/Img/Promociones/nopromocionrosado.png'
+import IconoNoPromocionCeleste from '../../Assets/Img/Promociones/nopromocionceleste.png'
+
 import NumberFormat from 'react-number-format';
 import funFomratoDecimal from '../../Funciones/funFormatoDecimal'
 import '../../Estilos/Rutas/Promociones/index.css'
 import '../../Estilos/Rutas/Promociones/nuevocanalpromociones.css'
 import CanalPromociones from '../../Componentes/Rutas/Promociones/CanalPromociones';
 
+import ImgNoticiaPromocion from '../../Assets/Img/Promociones/noticiapromocion.png'
+import '../../Estilos/Rutas/Promociones/Promociones.css'
+
 const Promociones = () => {
 
     const dispatch = useDispatch();
+
+    const {
+        idSucursalUsuarioSelec,
+        aplicandoFiltroAcumulado
+    } = useSelector(({sucursales}) => sucursales);
+
+    const {
+        aplicandoFiltroFechas,
+        anioSeleccionadoFiltro,
+        mesSeleccionadoFiltro
+    } = useSelector(({fechas}) => fechas);
+
     const {
         categoriasPromociones, 
         seleccionoPromocion, 
@@ -33,15 +58,19 @@ const Promociones = () => {
     // const {seleccionarFiltroZona} = useSelector(({zonas}) => zonas);
 
     const seleccionarCategoria = async (scaid, posicion, catid) =>  {
-        // console.log(seleccionarFiltroZona)
+
+        setCategoriaSeleccionada(catid)
 
         // if(seleccionarFiltroZona == true){
-            // await dispatch(seleccionarPromocionReducer(true))
+        if(aplicandoFiltroAcumulado == true){
+            await dispatch(seleccionarPromocionReducer(true))
             // await dispatch(seleccionarCategoriaXZonaReducer(scaid, true, catid))
-        // }else{
+            await dispatch(SeleccionarCategoriaXZonaAcumuladaReducer(scaid, true, catid))
+
+        }else{
             await dispatch(seleccionarPromocionReducer(true))
             await dispatch(seleccionarCategoriaReducer(scaid, true, posicion))
-        // }
+        }
     }
 
     const deseleccionarCategoria = async () => {
@@ -50,13 +79,93 @@ const Promociones = () => {
 
     useEffect(() => {
 
-        dispatch(obtenerPromocionesReducer())
+        if(idSucursalUsuarioSelec != 0){
+            dispatch(obtenerPromocionesReducer())
+        }
 
-    }, [])
+    }, [idSucursalUsuarioSelec])
 
+    useEffect(() => {
+
+        if(aplicandoFiltroFechas == true){
+
+            if(aplicandoFiltroAcumulado == true){
+                dispatch(ObtenerPromocionesAcumuladasReducer())
+            }else{
+                if(idSucursalUsuarioSelec != 0){
+                    dispatch(obtenerPromocionesReducer())
+                }
+            }
+        }
+
+    }, [mesSeleccionadoFiltro, anioSeleccionadoFiltro])
+
+    useEffect(() => {
+
+        if(aplicandoFiltroAcumulado == true){
+            dispatch(ObtenerPromocionesAcumuladasReducer())
+        }
+
+    }, [aplicandoFiltroAcumulado])
+
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("0")
+    const [mostrarNoticia, setMostrarNoticia] = useState(true)
     
     return (
-        <div>
+        <div className='Cont-Promociones'>
+
+            <Modal
+                title={null}
+                footer={null}
+                centered
+                // visible={mostrarNoticia}
+                visible={false}
+                closeIcon={<div></div>}
+                width={"823px"}
+                height={"436px"}
+                style={{
+                    background:'transparent',
+                    borderRadius:'20px'
+                }}
+            >
+                <div>
+                    <img src={ImgNoticiaPromocion} className="Banner-Noticias-Promociones" />
+                    <div className='Cont-Modal-Txt-Promociones'>
+                        <div>
+                            <div 
+                                className='Wbold-S27-H36-C000000'
+                                style={{textAlignLast: "center", marginBottom:'30px'}}
+                            >
+                                Noticia Importante
+                            </div>
+                            <div className='W600-S11-H15-C1E1E1E'>
+                                Por el presente correo, cumplo con informarle las tácticas promocionales para este mes con el número de combos/soles a reconocer por actividad y monto máximo de reconocimiento en valor por actividad respectivos por cada mecánica. Dichos montos no podrán excederse de no recibir una aprobación formal del área de Trade copiando al buzón _KC, Cuida tu negocio (Cuidatunegocio.kc@kcc.com), dejando claro que yo como ejecutivo no podré aprobar acciones adicionales sin antes pasar por las aprobaciones respectivas.<br/><br/>
+
+                                Recordar que estos pagos serán vía notas de crédito, una vez compartido su cierre de ventas hasta el día 5 hábil del siguiente mes y se pagarán vía Notas de Crédito en el mismo siguiente mes. Si no envía el cierre dentro del plazo establecido, no se le pagará las tácticas promocionales dentro del próximo mes, sino un mes después de esto.<br/><br/>
+
+                                De acuerdo a la nueva política de KC pongo en copia al correo interno _KC, Cuida tu negocio (Cuidatunegocio.kc@kcc.com), y estas acciones entran en validez desde la fecha 01 de Septiembre hasta fin de mes.
+
+                            </div>
+
+                            <div
+                                style={{
+                                    float: "right",
+                                    marginTop: "20px"
+                                }}
+                            >
+                                <div 
+                                    className='Btn-Entendido-Modal-Promociones Wbold-S14-H19-L0015-CFFFFFF'
+                                    onClick={() => setMostrarNoticia(false)}
+                                >
+                                    Entiendo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </Modal>
+
             <FiltrosPromociones />
             
             <div className='Contenedor-Img-Banner-Ventas'>
@@ -66,12 +175,13 @@ const Promociones = () => {
             <div style={{marginTop:'20px'}}></div>
 
             <CarouselPromociones 
-                heading                 = "Example Slider"   
-                slides                  = {categoriasPromociones} 
-                seleccionarCategoria    = {seleccionarCategoria}
-                seleccionoPromocion     = {seleccionoPromocion}
-                deseleccionarCategoria  = {deseleccionarCategoria}
-                seleccionarFiltroZona   = {false}
+                heading                  = "Example Slider"   
+                slides                   = {categoriasPromociones} 
+                seleccionarCategoria     = {seleccionarCategoria}
+                seleccionoPromocion      = {seleccionoPromocion}
+                deseleccionarCategoria   = {deseleccionarCategoria}
+                seleccionarFiltroZona    = {false}
+                aplicandoFiltroAcumulado = {aplicandoFiltroAcumulado}
             />
 
 
@@ -103,91 +213,103 @@ const Promociones = () => {
             {
                 mostrarDisenioPromocionesPrincipal == true
                 ?null
-                :<div id="Contenedor-Canales-Promociones">
-                    <div className="scenes">
-                        
-                        {
-                            canalesPromociones.map((canal) => {
-
-                                // let subiendo = false
-
-                                // while(subiendo == true){
-                                //     document.getElementById('Contenedor-Canales-Promociones').scrollTop = document.getElementById('Contenedor-Canales-Promociones').scrollTop - 10
-                                // }
-
-                                return (
-                                    <div className="Fila-Canal-Promocion">
-                                        <div
-                                            // onClick={() => console.log(colorSeleciconadoPromo)} 
-                                            className="Cabecera-Canal-Promocion Wbold-S16-H21-CFFFFFF"
-                                            style={{
-                                                background:colorSeleciconadoPromo
-                                            }}
-                                            onClick={() => {
-                                                
-                                            }}
-                                            onMouseEnter={() => {
-                                                
-                                                while(document.getElementById('Contenedor-Canales-Promociones').scrollTop = 0){
-                                                    document.getElementById('Contenedor-Canales-Promociones').scrollTop = document.getElementById('Contenedor-Canales-Promociones').scrollTop - 10
-                                                    wait(1000)
-                                                }
-
-                                            }}
-                                            onMouseLeave={() => {
-                                                // subiendo = false
-                                            }}
-                                        >
-                                            {canal.cannombre}
-                                        </div>
-
-                                        <div>
-                                        {
-                                            canal.promocionesOrdenadas.map((promocion, posicionPromocion) => {
-                                                return(
-                                                    posicionPromocion+1 == canal.promocionesOrdenadas.length
-                                                    ?promocion.cspid == 0
-                                                        // ?null
-                                                        ?<CardPromocionClass 
-                                                            promocion = {promocion}
-                                                            posicionPromocion = {posicionPromocion}
-                                                            colorSeleciconadoPromo = {
-                                                                promocion.cspid == 0 || promocion.prmmecanica == ""
-                                                                ?"red"
-                                                                :colorSeleciconadoPromo
-                                                            }
-                                                        />
-                                                        :<CardPromocionClass 
-                                                            promocion = {promocion}
-                                                            posicionPromocion = {posicionPromocion}
-                                                            colorSeleciconadoPromo = {
-                                                                promocion.cspid == 0 || promocion.prmmecanica == ""
-                                                                ?"red"
-                                                                :colorSeleciconadoPromo
-                                                            }
-                                                        />
-                                                    :<CardPromocionClass 
-                                                        promocion = {promocion}
-                                                        posicionPromocion = {posicionPromocion}
-                                                        colorSeleciconadoPromo = {
-                                                            promocion.cspid == 0 || promocion.prmmecanica == ""
-                                                            ?"red"
-                                                            :colorSeleciconadoPromo
+                :<>
+                    {
+                        canalesPromociones.length > 0
+                        ?<div id="Contenedor-Canales-Promociones" style={{marginBottom:'50px'}}>
+                            <div className="scenes">
+                                
+                                {
+                                    canalesPromociones.map((canal) => {
+        
+                                        // let subiendo = false
+        
+                                        // while(subiendo == true){
+                                        //     document.getElementById('Contenedor-Canales-Promociones').scrollTop = document.getElementById('Contenedor-Canales-Promociones').scrollTop - 10
+                                        // }
+        
+                                        return (
+                                            <div className="Fila-Canal-Promocion">
+                                                <div
+                                                    // onClick={() => console.log(colorSeleciconadoPromo)} 
+                                                    className="Cabecera-Canal-Promocion Wbold-S16-H21-CFFFFFF"
+                                                    style={{
+                                                        background:colorSeleciconadoPromo
+                                                    }}
+                                                    onClick={() => {
+                                                        
+                                                    }}
+                                                    onMouseEnter={() => {
+                                                        
+                                                        while(document.getElementById('Contenedor-Canales-Promociones').scrollTop = 0){
+                                                            document.getElementById('Contenedor-Canales-Promociones').scrollTop = document.getElementById('Contenedor-Canales-Promociones').scrollTop - 10
+                                                            wait(1000)
                                                         }
-                                                    />
-                                                )
-                                            })
-                                        }
-                                        </div>
-                                        
-                                    </div>
-                                )
-                            })
-                        }
-
-                        
-                    </div>
-                </div>
+        
+                                                    }}
+                                                    onMouseLeave={() => {
+                                                        // subiendo = false
+                                                    }}
+                                                >
+                                                    {canal.cannombre}
+                                                </div>
+        
+                                                <div>
+                                                {
+                                                    canal.promocionesOrdenadas.map((promocion, posicionPromocion) => {
+                                                        return(
+                                                            posicionPromocion+1 == canal.promocionesOrdenadas.length
+                                                            ?promocion.cspid == 0
+                                                                // ?null
+                                                                ?<CardPromocionClass 
+                                                                    promocion = {promocion}
+                                                                    posicionPromocion = {posicionPromocion}
+                                                                    colorSeleciconadoPromo = {
+                                                                        promocion.cspid == 0 || promocion.prmmecanica == ""
+                                                                        // ?"red"
+                                                                        ?colorSeleciconadoPromo
+                                                                        :colorSeleciconadoPromo
+                                                                    }
+                                                                    categoriaSeleccionada = {categoriaSeleccionada}
+                                                                />
+                                                                :<CardPromocionClass 
+                                                                    promocion = {promocion}
+                                                                    posicionPromocion = {posicionPromocion}
+                                                                    colorSeleciconadoPromo = {
+                                                                        promocion.cspid == 0 || promocion.prmmecanica == ""
+                                                                        // ?"red"
+                                                                        ?colorSeleciconadoPromo
+                                                                        :colorSeleciconadoPromo
+                                                                    }
+                                                                    categoriaSeleccionada = {categoriaSeleccionada}
+                                                                />
+                                                            :<CardPromocionClass 
+                                                                promocion = {promocion}
+                                                                posicionPromocion = {posicionPromocion}
+                                                                colorSeleciconadoPromo = {
+                                                                    promocion.cspid == 0 || promocion.prmmecanica == ""
+                                                                    // ?"red"
+                                                                    ?colorSeleciconadoPromo
+                                                                    :colorSeleciconadoPromo
+                                                                }
+                                                                categoriaSeleccionada = {categoriaSeleccionada}
+                                                            />
+                                                        )
+                                                    })
+                                                }
+                                                </div>
+                                                
+                                            </div>
+                                        )
+                                    })
+                                }
+        
+                                
+                            </div>
+                        </div>
+                        :null
+                    }
+                </>
             }
 
 
@@ -209,6 +331,7 @@ class CardPromocionClass extends React.Component {
             txtValorizado : this.props.promocion.cspvalorizado,
             editando : false,
             inputPlanchas : this.props.promocion.cspplanchas,
+            categoriaSeleccionada : this.props.categoriaSeleccionada,
         }
         this.obtenerValorizado = this.obtenerValorizado.bind(this)
     }
@@ -252,6 +375,7 @@ class CardPromocionClass extends React.Component {
         const colorSeleciconadoPromo = this.props.colorSeleciconadoPromo
         // const cspidPromocionSelec = promocion.cspid == 0
         const cspidPromocionSelec = promocion.cspid
+        const categoriaSeleccionada = this.props.categoriaSeleccionada
 
         return (
             <div 
@@ -260,20 +384,26 @@ class CardPromocionClass extends React.Component {
                     border: "1px solid "+colorSeleciconadoPromo
                 }}
             >
-                <div 
-                    style={{
-                        background:colorSeleciconadoPromo
-                    }}
-                    className="Card-Fecha-Vigencia-Promocion"
-                >
-                    <div className="Primera-Parte-Fecha-Vigencia-Promocion">
-                        <img src={IconoCalendarioPromocion} className="Icono-Calendario-Promocion" />
-                    </div>
-                    <div className="Segunda-Parte-Fecha-Vigencia-Promocion">
-                        <div className="Fecha-Inicio-Vigencia-Promocion">Ini {promocion.fechainicio ?promocion.fechainicio :"01/10"}</div>
-                        <div className="Fecha-Final-Vigencia-Promocion">Fin {promocion.fechafinal ?promocion.fechafinal :"30/10"}</div>
-                    </div>
-                </div>
+                {
+                    promocion.cspid == 0 || promocion.prmmecanica == ""
+                    ?null
+                    :<>
+                        <div 
+                            style={{
+                                background:colorSeleciconadoPromo
+                            }}
+                            className="Card-Fecha-Vigencia-Promocion"
+                        >
+                            <div className="Primera-Parte-Fecha-Vigencia-Promocion">
+                                <img src={IconoCalendarioPromocion} className="Icono-Calendario-Promocion" />
+                            </div>
+                            <div className="Segunda-Parte-Fecha-Vigencia-Promocion">
+                                <div className="Fecha-Inicio-Vigencia-Promocion">Ini {promocion.fechainicio ?promocion.fechainicio :"01/10"}</div>
+                                <div className="Fecha-Final-Vigencia-Promocion">Fin {promocion.fechafinal ?promocion.fechafinal :"30/10"}</div>
+                            </div>
+                        </div>
+                    </>
+                }
                 {
                     promocion.cspid == 0 || promocion.prmmecanica == ""
                     ?<div
@@ -287,13 +417,51 @@ class CardPromocionClass extends React.Component {
                         }}
                     >
                         <div>
-                            <img 
+
+                            {
+                                categoriaSeleccionada == 1
+                                ?<img 
+                                    src={IconoNoPromocionAzul}  
+                                    width= {"63px"}
+                                    height={"63px"}
+                                /> 
+                                :categoriaSeleccionada == 2
+                                    ?<img 
+                                        src={IconoNoPromocionRojo}  
+                                        width= {"63px"}
+                                        height={"63px"}
+                                    /> 
+                                    :categoriaSeleccionada == 3
+                                        ?<img 
+                                            src={IconoNoPromocionMorado}  
+                                            width= {"63px"}
+                                            height={"63px"}
+                                        /> 
+                                        :categoriaSeleccionada == 4
+                                            ?<img 
+                                                src={IconoNoPromocionVerde}  
+                                                width= {"63px"}
+                                                height={"63px"}
+                                            /> 
+                                            :categoriaSeleccionada == 5
+                                                ?<img 
+                                                    src={IconoNoPromocionRosado}  
+                                                    width= {"63px"}
+                                                    height={"63px"}
+                                                /> 
+                                                :<img 
+                                                    src={IconoNoPromocionCeleste}  
+                                                    width= {"63px"}
+                                                    height={"63px"}
+                                                /> 
+                            }
+                            {/* <img 
                                 src={IconoNoPromocion}  
                                 width= {"63px"}
                                 height={"63px"}
-                            /> 
+                            />  */}
                             <div
-                                style={{color:'red'}}
+                                style={{color:colorSeleciconadoPromo}}
                             > No hay promoción </div>
                         </div>
                         
@@ -370,8 +538,8 @@ class CardPromocionClass extends React.Component {
                                         {
                                             promocion.cspgratis == 1
                                             ?<div className="Contenedor-Descripcion-Gratis-Card-Promocion">
-                                                <img src={require('../../Assets/Img/Promociones/regalo.png')} alt='' className="Icono-Gratis-Card-Promocion"/>
-                                                <div className="Descripcion-Gratis-Card-Promocion">Gratis</div>
+                                                {/* <img src={require('../../Assets/Img/Promociones/regalo.png')} alt='' className="Icono-Gratis-Card-Promocion"/> */}
+                                                <div className="Descripcion-Gratis-Card-Promocion Wbold-S9-H12-CE41A37">Gratis</div>
                                             </div>
                                             :null
                                         }

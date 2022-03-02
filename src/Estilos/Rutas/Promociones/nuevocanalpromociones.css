@@ -28,7 +28,7 @@
     width: 339px;
     height: 48px;
     /* background: #E41A37; */
-    border-radius: 11px;
+    border-radius: 21px;
 
     font-family: Roboto;
     font-style: normal;
@@ -294,7 +294,7 @@
     font-weight: 900;
     font-size: 9px;
     line-height: 11px;
-    color: white;
+    color: #F93258;
 
     /* position: absolute; */
     top: 0;
@@ -335,7 +335,7 @@
 
 .Contenedor-Descripcion-Gratis-Card-Promocion{
     position: absolute;
-    background-color: #F93258;
+    /* background-color: #F93258; */
     border-radius: 15px;
     width: 50px;
     height: 15px;

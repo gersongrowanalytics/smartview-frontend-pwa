@@ -13,13 +13,13 @@ const FiltroSoporteTop = () => {
             style={{position:'relative'}}
         >
             <div 
-                className='Wbold-S14-H19-C1E1E1E Contenedor-Items-Top'
+                className='Wbold-S14-H19-CFFFFFF Contenedor-Items-Top'
                 // onClick={() => setMostrarContenido(!mostrarContenido)}
                 style={
                     mostrarContenido == true
                     ?{
-                        background: "#000000",
-                        color: "#FFFF00",
+                        background: "#3646C3",
+                        color: "white",
                     }
                     :{}
                 }
@@ -28,9 +28,9 @@ const FiltroSoporteTop = () => {
             >
                 {
                     mostrarContenido == true
-                    ?<img className='Img-Icono-Top' src={IconoSoporteSelect} />
+                    ?<img className='Img-Icono-Top' src={IconoSoporte} />
                     :pasoMouse == true
-                    ?<img className='Img-Icono-Top' src={IconoSoporteSelect} />
+                    ?<img className='Img-Icono-Top' src={IconoSoporte} />
                     :<img className='Img-Icono-Top' src={IconoSoporte} />
                 }
                 Soporte

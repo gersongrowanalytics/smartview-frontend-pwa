@@ -1,13 +1,12 @@
-table {
+/* table {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
   border-collapse: collapse !important;
-  /* border-spacing: 0 5px !important; */
 }
 
 table tbody tr{
   text-align: center;
-  height: 75px !important;
+  height: 45px !important;
   border: 1px  solid #E5E5E5 !important;
 }
 
@@ -19,12 +18,10 @@ table tbody td{
   font-size: 15px;
   line-height: 20px;
   color: #323233;
-  /* background-color: white !important; */
 }
 
 table thead {
   background: #1EC0ED;
-  /* border-radius: 8px 8px 0px 0px !important; */
   height: 71px;
   align-items: center;
 }
@@ -141,4 +138,4 @@ table tbody tr td {
 #previsualizacion img{
   height: 65px;
 }
-
+ */

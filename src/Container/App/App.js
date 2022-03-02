@@ -8,8 +8,6 @@ import RestablecerContrasenia from '../Login/RestablecerContrasenia';
 import FormularioCambiarContrasenia from '../Login/FormularioCambiarContrasenia';
 import SolicitudEnviada from '../Login/SolicitudEnviada';
 
-
-
 function App() {
 
     const {authUser} = useSelector(({auth}) => auth);
@@ -27,7 +25,7 @@ function App() {
                 ?<Routes>
                     <Route exact path='/login' element={<Login/>}/>
                     <Route exact path='/restablecer' element={<RestablecerContrasenia/>}/>
-                    <Route exact path='/cambiar-contrasenia' element={<FormularioCambiarContrasenia/>}/>
+                    <Route exact path='/cambiar-contrasenia/:token' element={<FormularioCambiarContrasenia/>}/>
                     <Route exact path='/solicitud-enviada' element={<SolicitudEnviada/>}/>
                     <Route path="*" element={<Navigate replace to="/login" />} />
                 </Routes>

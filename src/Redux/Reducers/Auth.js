@@ -9,7 +9,9 @@ import {
   SIGNUP_USER_SUCCESS,
   MOSTRAR_FORMULARIO_LOGIN,
   OBTENER_PERMISOS_USUARIO,
-  OBTENER_DATOS_USUARIO_LOGIN
+  OBTENER_DATOS_USUARIO_LOGIN,
+  CARGANDO_BTN_LOGIN,
+  DATA_RECUPERAR
 } from "../../Constantes/ActionTypes";
 import {
   OBTENER_PAISES_SISTEMA,
@@ -27,7 +29,8 @@ const INIT_STATE = {
   listaPaises  : [],
   paisSeleccionado : {},
   datosUsuarioLogeado : {},
-  cargandoLogin : false
+  cargandoLogin : false,
+  data_recupear : {}
 };
 
 
@@ -120,10 +123,16 @@ export default (state = INIT_STATE, action) => {
         datosUsuarioLogeado : action.payload
       }
     }
-    case "CARGANDO_BTN_LOGIN": {
+    case CARGANDO_BTN_LOGIN: {
       return {
         ...state,
         cargandoLogin : action.payload
+      }
+    }
+    case DATA_RECUPERAR: {
+      return {
+        ...state,
+        data_recupear : action.payload
       }
     }
     default:

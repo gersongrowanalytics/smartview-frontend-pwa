@@ -176,7 +176,7 @@
 }
 
 .Login-Banner{
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100px;
     display: flex;
@@ -205,10 +205,37 @@
 
 @keyframes banner { 
     100% {
+        visibility: hidden;
         transform: translate(-100%, 0);
     }
 }
 
+.banner0{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+}
+
+.banner0 p{
+    display: inline-block;
+    padding-left: 12%;
+    animation: banner0 14.5s linear ;
+    animation-delay: 0s;
+}
+
+@keyframes banner0 { 
+   100% { 
+        visibility: hidden;
+        transform: translate(-100%, 0); 
+    }
+}
+
+.ocultar{
+    display: none;
+}
 
 .ant-form-item-control-input-content {
     height: 47px !important;
@@ -245,7 +272,7 @@
     line-height: 21px;
     text-align: center;
     letter-spacing: 0.105em;
-    margin: 0px 30px;
+    margin: 0px 23px;
 }
 
 .Login-Banner-Letras-ConRelleno{
@@ -258,7 +285,7 @@
     line-height: 22px;
     letter-spacing: 0.105em;
     color: #3946AB;
-    margin: 0px 30px;
+    margin: 0px 23px;
 }
 
 #Login-Formulario-Subtitulo{
@@ -356,7 +383,7 @@
 
 
 
-div.Login-Banner span {
+/* div.Login-Banner span {
     -moz-animation: 10s Login-Banner;
     -webkit-animation: 10s Login-Banner;
     -o-animation: 10s Login-Banner;
@@ -385,7 +412,7 @@ div.Login-Banner-left span {
   @-o-keyframes Login-Banner-left { from {margin-left: 0%;}
    to {margin-left: -100%;} }
   @keyframes Login-Banner-left { from {margin-left: 0%;}
-   to {margin-left: -100%;} }
+   to {margin-left: -100%;} } */
 
 
 .Banner-Icono-Grow-Text{

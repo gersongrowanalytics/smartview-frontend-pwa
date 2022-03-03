@@ -15,13 +15,14 @@ class LoginBanner extends React.Component {
 
     animacionBanner(){
         this.setState({cssAnimacion: 'Banner-Animacion'})
-        this.props.setMostrarFormulario()
+        // this.props.setMostrarFormulario()
     }
-
+    
     componentDidMount(){
+        this.props.setMostrarFormulario()
         setTimeout(() => {
             this.animacionBanner()
-        }, 5000);
+        }, 1000);
     }
     render(){
         return (

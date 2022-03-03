@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Form, Input, Select, Button } from "antd";
 import '../../Estilos/Rutas/Login/Login.css';
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
@@ -15,6 +15,7 @@ const FormularioCambiarContrasenia = () => {
     const dispatch = useDispatch()
 
     const [contraseniaIngresada, setcontraseniaIngresada] = useState("")
+    const [animacionInicial, setanimacionInicial] = useState(true)
 
     const obtenerContrasenia = (e) =>{
         setcontraseniaIngresada(e.target.value);
@@ -33,13 +34,26 @@ const FormularioCambiarContrasenia = () => {
         }
 
         dispatch(CambiarContraseniaReducer(data))
-
-
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setanimacionInicial(false)
+        }, 14500);
+    }, [])
 
     return (
         <div id="Login-Contenedor-Formulario">
-            <div className='Login-Banner banner' style={{top: "0"}}>
+            <div className={ animacionInicial == true ? 'Login-Banner banner0' : 'Login-Banner ocultar'} style={{top:"0"}}>
+                <p>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                </p>
+            </div>
+            <div className='Login-Banner banner' style={{top:"0"}}>
                 <p>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
@@ -49,15 +63,15 @@ const FormularioCambiarContrasenia = () => {
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                 </p>
             </div>
-            <div className='Login-Banner banner banner2' style={{top:"0"}}>
-                <p>
+            <div className='Login-Banner banner banner2' style={{top:"0", marginRight:"7px"}}>
+               <p>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
-                </p>
+               </p>
             </div>
 
             <div id='Login-Formulario'>
@@ -144,6 +158,15 @@ const FormularioCambiarContrasenia = () => {
                 </Button>
             </Form>
             </div>
+            <div className={ animacionInicial == true ? 'Login-Banner banner0' : 'Login-Banner ocultar'} style={{bottom:"0"}}>
+                <p>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                </p>
+            </div>
             <div className='Login-Banner banner' style={{bottom:"0"}}>
                 <p>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
@@ -155,14 +178,14 @@ const FormularioCambiarContrasenia = () => {
                 </p>
             </div>
             <div className='Login-Banner banner banner2'style={{bottom:"0"}}>
-                <p>     
+               <p>                
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
-                </p>
+               </p>
             </div>
             {/* <button
                 onClick={() => EnviarLogin()}

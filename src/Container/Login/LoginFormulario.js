@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {
     loginReducer
@@ -13,10 +13,10 @@ import {Link} from "react-router-dom";
 const LoginFormulario = () => {
     
     const [txtPaisSeleccionado, setTxtPaisSeleccionado] = useState("0");
+    const [animacionInicial, setanimacionInicial] = useState(true)
 
     const dispatch = useDispatch()
 
-    
     const {
         cargandoLogin
     } = useSelector(({auth}) => auth);
@@ -48,10 +48,25 @@ const LoginFormulario = () => {
         dispatch(loginReducer(valores))
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setanimacionInicial(false)
+        }, 14500);
+    }, [])
+    
 
     return (
         <div id="Login-Contenedor-Formulario">
-            <div className='Login-Banner banner' style={{top: "0"}}>
+             <div className={ animacionInicial == true ? 'Login-Banner banner0' : 'Login-Banner ocultar'} style={{top:"0"}}>
+                <p>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                </p>
+            </div>
+            <div className='Login-Banner banner' style={{top:"0"}}>
                 <p>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
@@ -61,7 +76,7 @@ const LoginFormulario = () => {
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                 </p>
             </div>
-            <div className='Login-Banner banner banner2' style={{top:"0"}}>
+            <div className='Login-Banner banner banner2' style={{top:"0", marginRight:"7px"}}>
                <p>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
@@ -173,6 +188,15 @@ const LoginFormulario = () => {
                     Iniciar Sesión
                 </Button>
             </Form>
+            </div>
+            <div className={ animacionInicial == true ? 'Login-Banner banner0' : 'Login-Banner ocultar'} style={{bottom:"0"}}>
+                <p>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
+                    <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
+                </p>
             </div>
             <div className='Login-Banner banner' style={{bottom:"0"}}>
                 <p>

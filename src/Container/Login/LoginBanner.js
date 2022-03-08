@@ -15,7 +15,6 @@ class LoginBanner extends React.Component {
 
     animacionBanner(){
         this.setState({cssAnimacion: 'Banner-Animacion'})
-        // this.props.setMostrarFormulario()
     }
     
     componentDidMount(){

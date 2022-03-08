@@ -1,7 +1,8 @@
 import {
     SIGNIN_USER_SUCCESS,
     CARGANDO_BTN_LOGIN,
-    DATA_RECUPERAR
+    DATA_RECUPERAR,
+    OBTENER_DATOS_USUARIO_LOGIN
 } from "../../Constantes/ActionTypes";
 import config from '../../config'
 import { estadoRequestReducer } from "./EstadoRequest"
@@ -29,10 +30,11 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
         await dispatch(estadoRequestReducer(res.status))
         return res.json()
     })
-    .then(data => {
+    .then(async data => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
             if(data.respuesta == true){
+                console.log(data.datos)
                 localStorage.setItem('contrasena', usuario.contrasena)
                 localStorage.setItem('usuario', usuario.usuario)
                 localStorage.setItem('user_id', data.datos.usuid)
@@ -44,8 +46,12 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
                 localStorage.setItem('ejecutivo', data.datos.ejecutivo)          
                 localStorage.setItem('distribuidora', data.datos.pernombrecompleto)
                 localStorage.setItem('tpuprivilegio', data.datos.tpuprivilegio)
+                localStorage.setItem('percelular', data.datos.percelular)
+                localStorage.setItem('perdireccion', data.datos.perdireccion)
+                localStorage.setItem('usucorreo', data.datos.usucorreo)
 
-                dispatch(loginCorrecto(data.datos))
+                await dispatch(loginCorrecto(data.datos))
+                await dispatch(obtenerDatosUsuarioLogin(data.datos))
                 // message.success(data.mensaje);
             }else{
                 message.error(data.mensaje);
@@ -69,6 +75,13 @@ export const loginCorrecto = (user) => {
         payload: user
     };
 };
+
+export const obtenerDatosUsuarioLogin = (user) => {
+    return {
+        type: OBTENER_DATOS_USUARIO_LOGIN,
+        payload: user
+    }
+}
 
 export const cerrarSesionReducer = () => async (dispatch) => {
     

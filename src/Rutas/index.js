@@ -12,6 +12,8 @@ import ListaPrecios from '../Rutas/ListaPrecios/ListaPrecios'
 import CargarArchivo from '../Rutas/CargarArchivo/CargarArchivo'
 import Contraprestaciones from '../Rutas/Contraprestaciones/Contraprestaciones'
 import Bottom from '../Componentes/Bottom/Bottom';
+import MiPerfil from './MiPerfil/MiPerfil';
+import ElementosEnviados from './ElementosEnviados/ElementosEnviados';
 
 const Rutas = () => {
 
@@ -36,6 +38,8 @@ const Rutas = () => {
                     <Route exact path='/banco-imagen' element={<BancoImagen/>}/>
                     <Route exact path='/carga-archivo' element={<CargarArchivo/>}/>
                     <Route exact path='/contraprestaciones' element={<Contraprestaciones/>}/>
+                    <Route exact path='/mi-perfil' element={<MiPerfil/>}/>
+                    <Route exact path='/elementos-enviados' element={<ElementosEnviados/>}/>
                     <Route path="*" element={<Navigate replace to="/ventas" />} />
                 </Routes>
             </div>

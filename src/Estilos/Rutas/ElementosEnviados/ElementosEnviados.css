@@ -1,0 +1,31 @@
+.Titulo-Elementos{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 35px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    padding-left: 40px;
+    padding-top: 19px;
+}
+
+.Paginacion-Elementos{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 69px;
+    padding-top: 34px;
+}
+
+.Responsive-Tabla table{
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 69px;
+}

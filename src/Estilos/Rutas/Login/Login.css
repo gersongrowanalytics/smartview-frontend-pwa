@@ -220,6 +220,10 @@
 }
 
 .banner0 p{
+    margin-left: 50px;
+}
+
+.banner0 p{
     display: inline-block;
     padding-left: 12%;
     animation: banner0 14.5s linear ;

@@ -16,6 +16,7 @@ import Bottom from '../Componentes/Bottom/Bottom';
 import MiPerfil from './MiPerfil/MiPerfil';
 import ElementosEnviados from './ElementosEnviados/ElementosEnviados';
 import Terminos from './Terminos/Terminos';
+import ReenviarElemento from './ElementosEnviados/ReenviarElemento';
 
 const Rutas = () => {
 
@@ -127,6 +128,7 @@ const Rutas = () => {
                     <Route exact path='/mi-perfil' element={<MiPerfil/>}/>
                     <Route exact path='/elementos-enviados' element={<ElementosEnviados/>}/>
                     <Route exact path='/terminos-condiciones' element={<Terminos/>}/>
+                    <Route exact path='/reenviar-elemento' element={<ReenviarElemento/>}/>
                     
                     {
                         datosUsuarioLogeado.usuaceptoterminos

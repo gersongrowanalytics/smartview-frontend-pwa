@@ -14,7 +14,7 @@
     font-family: Segoe UI;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 16px;
     letter-spacing: -0.015em;
     color: #1E1E1E;
@@ -26,6 +26,152 @@
 
 .Responsive-Tabla table{
     width: 100%;
+}
+
+.Responsive-Tabla {
     padding-left: 40px;
     padding-right: 69px;
 }
+
+.Contenedor-Elementos-Enviados{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.Responsive-Tabla table tbody tr {
+    height: 38px;
+    border-bottom: 1px solid #C4C4C4;
+    
+}
+
+.Responsive-Tabla table tbody tr td:first-child{
+    text-align: center;
+}
+
+.Responsive-Tabla table tbody tr td:nth-child(2){
+    display: flex;
+    padding-top: 10px;
+    align-content: center;
+    padding-left: 180px;
+}
+
+.Primera-Columna {
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+}
+
+.Caja-Segunda-Columna{
+    width: 73px;
+    height: 18px;
+    background: #FF3742;
+    border-radius: 3px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.Texto-Segunda-Columna{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    margin-left: 17px;
+}
+
+.Texto-Paginacion{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Flecha-Derecha {
+    width: 11px;
+    cursor: pointer;
+}
+
+.Flecha-Izquierda {
+    width: 11px;
+    transform: rotate(-180deg);
+    margin-right: 17px;
+    cursor: pointer;
+}
+
+.Icono-Reenviar{
+    height: 18px;
+    width: 21px;
+    cursor: pointer;
+    margin-right: 19px;
+}
+
+.Icono-Eliminar{
+    height: 20px;
+    width: 17px;
+    cursor: pointer;
+}
+
+.Texto-Asunto{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    /* padding-left: 40px; */
+    margin-top: 9px;
+}
+
+.Icono-Persona{
+    width: 32px;
+}
+
+.Caja-Asunto{
+    border-bottom: 1px solid #C4C4C4;
+    margin-left: 40px;
+    margin-right: 69px;
+}
+
+.Caja2-Asunto{
+    margin-top: 11px;
+    margin-left: 40px;
+    margin-right: 69px;
+}
+
+.De-Para-Texto{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+/* .De-Para-Texto:hover{
+    cursor: pointer;
+} */
+
+.Zona-Icono{
+    display: flex;
+    justify-content: center;
+}
+
+/* .Zona-Icono:hover{
+    cursor: pointer;
+} */

@@ -247,7 +247,7 @@ const MiPerfil = () => {
                 </Row>
                 <Row style={{marginTop:'50px', marginBottom: '58px'}}>
                     <Col xs={2} xl={6}></Col>
-                    <Col xs={10} xl={3} className='Primera-Columna-Perfil'>
+                    <Col xs={10} xl={3} className='Primera-Columna-Perfil Posicion'>
                         <button
                             type='submit'  
                             className='Boton-Guardar-Perfil'
@@ -255,13 +255,21 @@ const MiPerfil = () => {
                             Guardar Cambios
                         </button>
                     </Col>
-                    <Col xs={9} xl={9} offset={1} className='Segunda-Columna-Perfil'>
+                    <Col xl={9}>
+                        <button  
+                            className='Boton-Cancelar-Perfil'
+                        >
+                            Cancelar Cambios
+                        </button>
+                    </Col>
+                    {/* <Col xs={0} xl={0} offset={1} className='Segunda-Columna-Perfil'>
                         <button 
                             className='Boton-Baja-Perfil'
+                            style={{ display:'none'}}
                         >
                             Solicitar Baja
                         </button>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Form>
         </div>

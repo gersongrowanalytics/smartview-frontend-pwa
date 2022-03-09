@@ -56,8 +56,8 @@
     cursor: pointer;
 }
 
-.Boton-Baja-Perfil{
-    width: 95px;
+.Boton-Cancelar-Perfil{
+    width: 138px;
     height: 28px;
     border: 1px solid #000000;
     box-sizing: border-box;
@@ -88,4 +88,12 @@
 
 #file-input{
     display: none;
+}
+
+.Select-Perfil .ant-select-item .ant-select-item-option-content{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
 }

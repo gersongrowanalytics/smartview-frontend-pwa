@@ -58,12 +58,27 @@ const Top = () => {
     return (
         <div>
             <div className='Contenedor-Top'>
-                <Link to="/ventas">
-                    <img 
+
+                {
+                    datosUsuarioLogeado.usuaceptoterminos   
+                    ?mostrar_terminos_condiciones_login == true
+                        ?<img 
+                            src={LogoKCCreciendoJuntos} 
+                            className='Logo-KC-Creciendo-Juntos'
+                            style={{cursor:'not-allowed'}}
+                        />
+                        :<Link to="/ventas">
+                            <img 
+                                src={LogoKCCreciendoJuntos} 
+                                className='Logo-KC-Creciendo-Juntos'
+                            />
+                        </Link>
+                    :<img 
                         src={LogoKCCreciendoJuntos} 
                         className='Logo-KC-Creciendo-Juntos'
+                        style={{cursor:'not-allowed'}}
                     />
-                </Link>
+                }
 
                 <FiltroCanalTop />
 

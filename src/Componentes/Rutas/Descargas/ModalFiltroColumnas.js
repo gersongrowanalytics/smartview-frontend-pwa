@@ -291,16 +291,18 @@ const ModalFiltroColumnas = (props) => {
                         </Col>
                     </Row>
 
-                    <div style={{display:'flex', justifyContent: "right", marginTop:'20px'}}>
+                    <div style={{display:'flex', justifyContent: "right", marginTop:'20px',}}>
                         <Button
                             style={
                                 columnas_seleccionadas_filtro_descarga.length > 0
-                                ?{marginRight:'10px', background:'#3646C3', borderRadius:'14px'}
-                                :{marginRight:'10px', cursor:'not-allowed', borderRadius:'14px', border: "1px solid #1E1E1E"}
+                                // ?{marginRight:'10px', background:'#3646C3', borderRadius:'14px'}
+                                // :{marginRight:'10px', cursor:'not-allowed', borderRadius:'14px', border: "1px solid #1E1E1E"}
+                                ?{marginRight:'10px', borderRadius:'14px'}
+                                :{marginRight:'10px', cursor:'not-allowed', borderRadius:'14px'}
                             } 
                             className={
                                 columnas_seleccionadas_filtro_descarga.length > 0
-                                ?'Btn-Opciones-Modal-Filtros-Columnas-Descargar Wbold-S12-H16-CFFFFFF'
+                                ?'Btn-Opciones-Modal-Filtros-Columnas-Descargar W600-S12-H16-C1E1E1E'
                                 :'Btn-Opciones-Modal-Filtros-Columnas-Descargar W600-S12-H16-C1E1E1E'
                             }
                             onClick={async () => {

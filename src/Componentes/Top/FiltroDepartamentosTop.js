@@ -169,12 +169,17 @@ const FiltroDepartamentosTop = () => {
             {
                 mostrarContenido == true
                 ?<div 
-                    style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'1', opacity:'0.3'}}
+                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'1'}}
                     onClick={() => {
                         setMostrarContenido(!mostrarContenido)
                     }}
                     onMouseEnter={() => setMostrarContenido(false)}
                 >
+                    <div
+                        style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'5', opacity:'0.3', top:'750px'}}
+                    >
+
+                    </div>
 
                 </div>
                 :null

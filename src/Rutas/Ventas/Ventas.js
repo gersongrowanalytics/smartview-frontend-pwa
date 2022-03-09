@@ -21,6 +21,7 @@ import IconoCumplimientoVerde from '../../Assets/Img/Ventas/sellout/iconoCumplim
 import IconoObjetivoVerde from '../../Assets/Img/Ventas/sellout/iconoObjetivoVerde.png'
 import IconoPorFacturarVerde from '../../Assets/Img/Ventas/sellout/iconoPorFacturarVerde.png'
 import IconoRealVerde from '../../Assets/Img/Ventas/sellout/iconoRealVerde.png'
+import IconoEstrella from '../../Assets/Img/Ventas/iconoEstrella.png'
 
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -220,9 +221,21 @@ const Ventas = () => {
                                                 </Col>
                                                 <Col xl={12} style={{textAlignLast: "right"}}>
                                                     <div className='Wbold-S14-L0015-CFFBB37'>
-                                                        <NumberFormat 
-                                                            value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadoreal) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
-                                                            displayType={'text'} thousandSeparator={true} />%
+                                                        <div  style={{position:'relative'}}>
+                                                            <img 
+                                                                src={IconoEstrella}
+                                                                style={{
+                                                                    // position:'absolute',
+                                                                    width:'13px',
+                                                                    marginTop:'-9px'
+                                                                }}
+                                                            />
+                                                            <NumberFormat 
+                                                                value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadoreal) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
+                                                                displayType={'text'} thousandSeparator={true} />%
+
+                                                        </div>
+
                                                     </div>
                                                 </Col>
                                             </Row>
@@ -488,6 +501,14 @@ const Ventas = () => {
                                                     </Col>
                                                     <Col xl={12} style={{textAlignLast: "right"}}>
                                                         <div className='Wbold-S14-L0015-CFFBB37'>
+                                                            <img 
+                                                                src={IconoEstrella}
+                                                                style={{
+                                                                    // position:'absolute',
+                                                                    width:'13px',
+                                                                    marginTop:'-9px'
+                                                                }}
+                                                            />
                                                             <NumberFormat value={funFormatoDecimal(data_venta.tsucumplimientotrimestral, 0)} displayType={'text'} thousandSeparator={true} />%
                                                         </div>
                                                     </Col>
@@ -558,7 +579,15 @@ const Ventas = () => {
                                                                 <div 
                                                                     className='Total-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-CFFBB37'
                                                                 >
-                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} /> %
+                                                                    <img 
+                                                                        src={IconoEstrella}
+                                                                        style={{
+                                                                            // position:'absolute',
+                                                                            width:'13px',
+                                                                            marginTop:'-8px'
+                                                                        }}
+                                                                    />
+                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} />%
                                                                 </div>
                                                             </div>
                                                             <div className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
@@ -627,7 +656,7 @@ const Ventas = () => {
 
                         </div>
                         :data_venta.tprnombre == "Sell Out"
-                            ?<div style={{marginLeft:'-20px', marginRight:'-20px', marginTop:'95px'}}>
+                            ?<div style={{marginLeft:'-20px', marginRight:'-20px', marginTop:'-20px'}}>
 
                                 <div className='Wbold-S26-H35-C1E1E1E Titulo-Ventas'>
                                     Sell Out
@@ -774,6 +803,14 @@ const Ventas = () => {
                                                     </Col>
                                                     <Col xl={12} style={{textAlignLast: "right"}}>
                                                         <div className='Wbold-S14-L0015-CFFBB37'>
+                                                            <img 
+                                                                src={IconoEstrella}
+                                                                style={{
+                                                                    // position:'absolute',
+                                                                    width:'13px',
+                                                                    marginTop:'-9px'
+                                                                }}
+                                                            />
                                                             {
                                                                 mostrarReal == true
                                                                 ?<>
@@ -1060,7 +1097,15 @@ const Ventas = () => {
                                                                 <div 
                                                                     className='Total-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-CFFBB37'
                                                                 >
-                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} /> %
+                                                                    <img 
+                                                                        src={IconoEstrella}
+                                                                        style={{
+                                                                            // position:'absolute',
+                                                                            width:'13px',
+                                                                            marginTop:'-9px'
+                                                                        }}
+                                                                    />
+                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} />%
                                                                 </div>
                                                             </div>
                                                             <div className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>

@@ -4,6 +4,7 @@ import GifCohete from '../../../Assets/Gif/cohete.gif'
 import GifSaltando from '../../../Assets/Gif/saltando.gif'
 import GifError from '../../../Assets/Gif/error.gif'
 import GifCargando from '../../../Assets/Gif/cargandoCaminata.gif'
+import GifAlerta from '../../../Assets/Gif/alertaGif.gif'
 import config from '../../../config'
 import {
     CloseOutlined,
@@ -184,14 +185,24 @@ class TarjetaCargaArchivo extends Component {
                                                 >
 
                                                     <div className="Icono-Error-TarjetaCargaArchivo">
-                                                        <div className="Icono-Interno-Error-TarjetaCargaArchivo">
-                                                            <ExclamationOutlined 
+                                                        {/* <div className="Icono-Interno-Error-TarjetaCargaArchivo"> */}
+                                                            {/* <ExclamationOutlined 
                                                                 style={{
                                                                     color: "white",
                                                                     fontSize: "100px"
                                                                 }}
+                                                            /> */}
+
+                                                            <img 
+                                                                src={
+                                                                    GifAlerta
+                                                                }
+                                                                style={{
+                                                                    color: "white",
+                                                                    width: "180px"
+                                                                }}
                                                             />
-                                                        </div>
+                                                        {/* </div> */}
                                                     </div>
                                                 </div>
 
@@ -287,8 +298,15 @@ class TarjetaCargaArchivo extends Component {
                                             <Col xl={24} style={{}}>
                                                 {
                                                     this.state.subioArchivo == true
-                                                    ?<div className='Wnormal-S12-H16-C1876F2 Titulo-Archivo-Subido-CargaArchivo'>
-                                                        {this.state.nombreArchivo}
+                                                    ?<div 
+                                                        className='Wnormal-S12-H16-C1876F2 Titulo-Archivo-Subido-CargaArchivo'
+                                                        title={this.state.nombreArchivo}
+                                                    >
+                                                        {
+                                                            this.state.nombreArchivo.length < 18
+                                                            ?this.state.nombreArchivo
+                                                            :this.state.nombreArchivo.substr(0,16)+" ... "+this.state.nombreArchivo.substr(this.state.nombreArchivo.length-5,this.state.nombreArchivo.length)
+                                                        }
                                                         <div 
                                                             className='Icon-Cerrar-Tarjeta-CargaArchivo'
                                                             onClick={() => this.eliminarArchivo() }

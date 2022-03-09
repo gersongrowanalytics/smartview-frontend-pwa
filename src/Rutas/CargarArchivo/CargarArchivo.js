@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Row, Col } from 'antd';
+import { Row, Col, Modal } from 'antd';
 import '../../Estilos/Rutas/CargarArchivo/CargarArchivo.css'
 import TarjetaCargaArchivo from '../../Componentes/Rutas/CargarArchivo/TarjetaCargaArchivo'
 import {useDispatch, useSelector} from "react-redux";
@@ -13,6 +13,8 @@ import {
     CloseCircleTwoTone,
     PlusCircleTwoTone
 } from '@ant-design/icons';
+import IconoPlusAzul from '../../Assets/Img/CargaArchivos/masazul.png'
+import IconoEquisRojo from '../../Assets/Img/CargaArchivos/equisrojo.png'
 
 const CargarArchivo = () => {
 
@@ -24,6 +26,8 @@ const CargarArchivo = () => {
 
     const [notificacionesAbiertas, setNotificacionesAbiertas] = useState(false)
     const [regresarNotificacionAbierta, setRegresarNotificacionAbierta] = useState(false)
+
+    const [mostrarModalEliminarNoti, setMostrarModalEliminarNoti] = useState(false)
 
     return (
         <div style={{marginLeft:'40px', marginRight:'40px', position:'relative', marginTop:'110px'}}>
@@ -216,7 +220,7 @@ const CargarArchivo = () => {
                             :<img src={IconoFlecha} style={{width:'30px', transform: "rotate(90deg)"}} />
                         }
                     </div>
-                    <div style={{position:'absolute', left:'55px', top:'10px'}}>
+                    <div style={{position:'absolute', left:'60px', top:'10px'}}>
                         <img src={IconoCampana} style={{width:'30px'}} />
                     </div>
                     Notificaciones
@@ -235,23 +239,47 @@ const CargarArchivo = () => {
                                 Notificación 1
                             </div>
                             <div className='Wnormal-S14-H19-CFF3742' style={{marginTop:'5px'}}>
-                                El archivo Subsidios pesa más del límite permitido 25MB
+                                El archivo Sell In pesa más del límite permitido 25MB
                             </div>
                         </div>
                         <div
                             className='Segunda-Parte-Fila-Notificacion-CargaArchivos'
                         >
-                            <div style={{cursor:'pointer'}}>
-                                <CloseCircleTwoTone 
-                                    twoToneColor="#FF3742" 
-                                    style={{color:'white'}}
-                                />
-                            </div>
+                            <div className='Contenedor-Iconos-Notificacion-CargaArchivos'>
+                                <div 
+                                    style={{cursor:'pointer'}}
+                                    onClick={() => setMostrarModalEliminarNoti(true)}
+                                >
+                                    {/* <CloseCircleTwoTone 
+                                        twoToneColor="#FF3742" 
+                                        style={{color:'white'}}
+                                    /> */}
 
-                            <div style={{marginTop:'-5px', cursor:'pointer'}}>
-                                <PlusCircleTwoTone 
-                                    
-                                />
+                                    <img 
+                                        src={IconoEquisRojo}
+                                        style={{
+                                            width:'15px'
+                                        }}
+                                    />
+                                </div>
+
+                                <div 
+                                    style={{marginTop:'-10px', cursor:'pointer'}}
+                                    onClick={() => {
+                                        setNotificacionesAbiertas(true)
+                                        setRegresarNotificacionAbierta(false)
+                                    }}
+                                >
+                                    {/* <PlusCircleTwoTone 
+                                        
+                                    /> */}
+                                    <img 
+                                        src={IconoPlusAzul}
+                                        style={{
+                                            width:'15px'
+                                        }}
+                                    />
+                                </div>
                             </div>
 
                         </div>
@@ -271,6 +299,46 @@ const CargarArchivo = () => {
 
                 </div> */}
             </div>
+
+            <Modal
+                centered
+                title={null}
+                visible={mostrarModalEliminarNoti}
+                footer={null}
+                closeIcon={<div></div>}
+                width="280px"
+                height="193px"
+                className='Modal-Eliminar-Noti-CargaArchivos'
+                onCancel={() => setMostrarModalEliminarNoti(false)}
+            >
+
+                <div>
+                    <div 
+                        className='W600-S14-H19-C1E1E1E' 
+                        style={{
+                            textAlignLast: "center",
+                            marginBottom:'30px'
+                        }}
+                    >
+                        ¿Está seguro que desea eliminar la notificación?
+                    </div>
+                    <div className='Contenedor-Btns-Modal-Eliminar-Notificacion-CargaArchivos Wbold-S14-H19-C1E1E1E'>
+                        <div className='Btn-Aceptar-Modal-Eliminar-Notificacion-CargaArchivos'>
+                            Aceptar
+                        </div>
+                        <div 
+                            className='Btn-Cancelar-Modal-Eliminar-Notificacion-CargaArchivos'
+                            onClick={() => {
+                                setMostrarModalEliminarNoti(false)
+                            }}
+                        >
+                            Cancelar
+                        </div>
+                    </div>
+
+                </div>
+
+            </Modal>
 
         </div>
     )

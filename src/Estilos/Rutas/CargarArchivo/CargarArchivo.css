@@ -191,6 +191,7 @@
 
     cursor: pointer !important;
     background-color: #3646C3 !important;
+    border: none !important;
 }
 
 
@@ -211,7 +212,7 @@
     height: 130px;
     /* background-color: red; */
     border-radius: 250px;
-    border:1px solid red;
+    /* border:1px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -249,29 +250,39 @@
 
 .Icono-Flecha-Noti-CargaArchivos:hover{
     border-radius: 100px;
-    background: #C4C4C4;
+    background: #EDF0FA;
     background-blend-mode: multiply;
 }
 
 .Fila-Notificacion-CargaArchivos{
     border-bottom: 1px solid #E5E5E5;
     margin-top: 10px;
-    margin-left: 25px;
+    
     padding-left: 8px;
-    padding-right: 8px;
+    padding-right: 0px;
+    margin-left: 30px;
     margin-right: 25px;
     padding-bottom: 10px;
     display: flex;
+    /* background-color: black; */
 }
 
 .Primera-Parte-Fila-Notificacion-CargaArchivos{
     width: 80%;
+    /* background-color: black; */
 }
 
 .Segunda-Parte-Fila-Notificacion-CargaArchivos{
     width: 20%;
     font-size: 17px;
-    padding-left: 20px;
+    padding-left: 22px;
+    /* background-color: #000000; */
+    position: relative;
+}
+
+.Contenedor-Iconos-Notificacion-CargaArchivos{
+    position: absolute;
+    right: 9px;
 }
 
 .Titulo-Modulo-Carga-Archivos{
@@ -282,4 +293,38 @@
     padding-left: 40px;
     padding-top: 2px;
     padding-bottom: 2px;
+}
+
+.Contenedor-Btns-Modal-Eliminar-Notificacion-CargaArchivos{
+    display: flex;
+    justify-content: center;
+}
+
+.Btn-Aceptar-Modal-Eliminar-Notificacion-CargaArchivos{
+    width: 96px;
+    height: 35px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.Btn-Cancelar-Modal-Eliminar-Notificacion-CargaArchivos{
+    width: 96px;
+    height: 35px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Modal-Eliminar-Noti-CargaArchivos .ant-modal-content{
+    border-radius: 8px;
 }

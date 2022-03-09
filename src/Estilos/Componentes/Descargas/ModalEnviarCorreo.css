@@ -11,21 +11,27 @@
 .Btn-Enviar-Correo-Descargar{
     width: 116px !important;
     height: 28px !important;
-    background: #558CFF !important;
+    background: #3646C3 !important;
     border-radius: 20px !important;
     display: flex !important;
     align-items: center !important;
     cursor: pointer !important;
     justify-content: center !important;
-    border: 1px solid #558CFF !important;
+    border: 1px solid #3646C3 !important;
+    
 }
 
 .Btn-Enviar-Correo-Descargar:hover{
     color: white !important;
+    border: 1px solid #558CFF !important;
+    background: #558CFF !important;
 }
 
 .Btn-Enviar-Correo-Descargar:focus{
     color: white !important;
+    color: white !important;
+    border: 1px solid #558CFF !important;
+    background: #558CFF !important;
 }
 
 .Contenedor-Archivo-Subido-Descarga{

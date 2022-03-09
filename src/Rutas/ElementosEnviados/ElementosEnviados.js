@@ -19,8 +19,8 @@ const ElementosEnviados = () => {
                 <Col lg={6} xl={6}>
                     <div className='Paginacion-Elementos'>
                         <span style={{marginRight: '9px', paddingTop: '2px'}}>1 - 20 de 40</span>
-                        <img src={Flecha} className='Flecha-Izquierda'></img> 
-                        <img src={Flecha} className='Flecha-Derecha'></img>
+                        {/* <img src={Flecha} className='Flecha-Izquierda'></img> 
+                        <img src={Flecha} className='Flecha-Derecha'></img> */}
                     </div>
                 </Col>
             </Row>

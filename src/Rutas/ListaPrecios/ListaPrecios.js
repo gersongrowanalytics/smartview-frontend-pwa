@@ -76,6 +76,14 @@ const ListaPrecios = () => {
 
     return (
         <div>
+
+            <div 
+                className='Wbold-S20-H35-C3646C4' 
+                style={{paddingLeft:'40px', marginBottom:'20px', marginTop: "100px", background:'#EDF0FA', paddingTop:'5px', paddingBottom:'5px'}}
+            >
+                Lista de Precios
+            </div>
+
             <div className='Fila-Btns-Lista-Precios'>
                 {
                     grupos_disponibles_lista_precios.map((grupo, pos) => {
@@ -137,10 +145,6 @@ const ListaPrecios = () => {
                         Descargar
                     </Button>
                 </div>
-            </div>
-
-            <div className='Wbold-S26-H35-C1E1E1E' style={{marginLeft:'40px', marginBottom:'20px'}}>
-                Lista de Precios
             </div>
 
             <div>

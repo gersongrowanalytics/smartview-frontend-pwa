@@ -95,14 +95,20 @@
     border-radius: 14px;
     padding: 5px 15px 5px 15px;
     cursor: pointer;
+
+    border: 1px solid #1E1E1E !important;
+    color: #1E1E1E;
 }
 
 .Btn-Opciones-Modal-Filtros-Columnas-Descargar:focus{
     color: white !important;
+    background: #3646C3 !important;
+    border: 1px solid #3646C3 !important;
 }
 
 .Btn-Opciones-Modal-Filtros-Columnas-Descargar:hover{
-
+    background: #3646C3 !important;
+    color: white !important
 }
 
 .Btn-Radio-Descargar{
@@ -135,6 +141,10 @@
 
 .Etiqueta-Modulo-Link-Descargas:hover{
     color: #558CFF !important;
+}
+
+.Btn-Listo-Modal-Envio-Correo-Correcto-Descargas:hover{
+    background: #558CFF;
 }
 
 .Btn-Listo-Modal-Envio-Correo-Correcto-Descargas{

@@ -138,7 +138,7 @@ const FiltroSoporteTop = () => {
                             <div className='Wnormal-S14-H19-C1E1E1E'>Enviar SMS Wsp</div>
                         </div>
                         
-                        <Link to="/archivos-subidos">
+                        <Link to="/elementos-enviados">
                             <div className='Fila-Cuerpo-Item-Filtro-Top'>
                                 <div>
                                     <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAvion} />
@@ -153,12 +153,18 @@ const FiltroSoporteTop = () => {
             {
                 mostrarContenido == true
                 ?<div 
-                    style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'1', opacity:'0.3'}}
+                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'1'}}
                     onClick={() => {
                         setMostrarContenido(!mostrarContenido)
                     }}
                     onMouseEnter={() => setMostrarContenido(false)}
                 >
+
+                    <div
+                        style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'5', opacity:'0.3', top:'750px'}}
+                    >
+
+                    </div>
 
                 </div>
                 :null

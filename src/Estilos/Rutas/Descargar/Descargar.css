@@ -43,6 +43,14 @@
     cursor: pointer;
 }
 
+.Btn-Opciones-Seleccionada-Descargar:hover{
+    color: white !important;
+}
+
+.Btn-Opciones-Seleccionada-Descargar:focus{
+    color: white !important;
+}
+
 .Modal-Mostrar-Filtros-Columnas-Descargar > .ant-modal-content{
     border-radius: 8px;
 }
@@ -89,6 +97,10 @@
     cursor: pointer;
 }
 
+.Btn-Opciones-Modal-Filtros-Columnas-Descargar:focus{
+    color: white !important;
+}
+
 .Btn-Opciones-Modal-Filtros-Columnas-Descargar:hover{
 
 }
@@ -114,4 +126,39 @@
     position: absolute;
     top: 1pt;
     left: 1px;
+}
+
+
+.Etiqueta-Modulo-Link-Descargas{
+    color: #C4C4C4 !important;
+}
+
+.Etiqueta-Modulo-Link-Descargas:hover{
+    color: #558CFF !important;
+}
+
+.Btn-Listo-Modal-Envio-Correo-Correcto-Descargas{
+    width: 96px;
+    height: 33px;
+    background: #3646C3;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.Icon-Modal-Envio-Correo-Correcto-Descargas{
+    font-size: 46px;
+}
+
+.Titulo-Modal-Envio-Correo-Correcto-Descargas{
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.Modal-Envio-Correo-Correcto-Descargas .ant-modal-content{
+    border-radius: 8px;
 }

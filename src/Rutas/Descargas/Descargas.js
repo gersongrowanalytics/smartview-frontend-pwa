@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
-import { Checkbox, Row, Col, Button } from 'antd';
+import { Checkbox, Row, Col, Button, Modal } from 'antd';
 import { CaretDownOutlined, CaretRightOutlined, CaretLeftOutlined, CaretUpOutlined } from '@ant-design/icons';
 import '../../Estilos/Rutas/Descargar/Descargar.css'
 import {useDispatch, useSelector} from "react-redux";
@@ -79,6 +79,14 @@ import {
 import ModalFiltroColumnas from '../../Componentes/Rutas/Descargas/ModalFiltroColumnas';
 
 import config from '../../config'
+import ModalEnviarCorreo from '../../Componentes/Rutas/Descargas/ModalEnviarCorreo';
+import {
+    CambiarNombreArchivoAdjuntoEnvioCorreoReducer
+} from '../../Redux/Acciones/Descargas/DescargarEnviarCorreo'
+import {Link} from "react-router-dom";
+import {
+    CheckCircleOutlined
+} from '@ant-design/icons';
 
 const Descargas = () => {
 
@@ -167,16 +175,72 @@ const Descargas = () => {
 
     },[modulo_descarga_seleccionado])
 
+
+    // DATOS PARA ENVIAR CORREO
+
+    const [mostrarModalEnviarCorreo, setMostrarModalEnviarCorreo] = useState(false)
+    const [infoDataCorreo, setInfoDataCorreo] = useState("")
+    const [nombreArchivoCorreoExcel, setNombreArchivoCorreoExcel] = useState("")
+    const [tituloArchivoCorreoExcel, setTituloArchivoCorreoExcel] = useState("")
+    
+
+    const [mostrarModalCorreoEnviadoCorrecto, setMostrarModalCorreoEnviadoCorrecto] = useState(false)
+
     return (
         <div
             style={{
                 paddingLeft:'40px',
-                paddingTop:'10px'
+                paddingTop:'10px',
+                marginTop:'105px'
             }}
         >
             <div style={{display:'flex', paddingBottom:'10px'}} className='W600-S14-H19-CC4C4C4-L0015'>
-                <div>Filtro  aplicado: </div>
-                <div>{"Lima >Ventas > Descargar"} </div>
+                <div style={{marginRight:'8px'}}>{"Filtro  aplicado: "}</div>
+                {
+                    modulo_descarga_seleccionado == "Sell In"
+                    ?<div>
+                        {" Tradicional > "}
+                            <Link className='Etiqueta-Modulo-Link-Descargas' to="/ventas"> Ventas </Link> 
+                        {" > Descargar"} 
+                    </div>
+                    :modulo_descarga_seleccionado == "Sell Out"
+                        ?<div>
+                            {" Tradicional > "}
+                                <Link className='Etiqueta-Modulo-Link-Descargas' to="/ventas"> Ventas </Link> 
+                            {" > Descargar"} 
+                        </div>
+                        :modulo_descarga_seleccionado == "Rebate"
+                            ?<div>
+                                {" Tradicional > "}
+                                    <Link className='Etiqueta-Modulo-Link-Descargas' to="/ventas"> Ventas </Link> 
+                                {" > Descargar"} 
+                            </div>
+                            :modulo_descarga_seleccionado == "Promociones"
+                                ?<div>
+                                    {" Tradicional > "}
+                                        <Link className='Etiqueta-Modulo-Link-Descargas' to="/promociones"> Promociones </Link> 
+                                    {" > Descargar"} 
+                                </div>
+                                :modulo_descarga_seleccionado == "Reporte de pagos"
+                                    ?<div>
+                                        {" Tradicional > "}
+                                            <Link className='Etiqueta-Modulo-Link-Descargas' to="/promociones"> Promociones </Link> 
+                                        {" > Descargar"} 
+                                    </div>
+                                    :modulo_descarga_seleccionado == "Promociones Liquidadas"
+                                        ?<div>
+                                            {" Tradicional > "}
+                                                <Link className='Etiqueta-Modulo-Link-Descargas' to="/promociones"> Promociones </Link> 
+                                            {" > Descargar"} 
+                                        </div>
+                                        :modulo_descarga_seleccionado == "Catalogo"
+                                            ?<div>
+                                                {" Tradicional > "}
+                                                    <Link className='Etiqueta-Modulo-Link-Descargas' to="/promociones"> Promociones </Link> 
+                                                {" > Descargar"} 
+                                            </div>
+                                            :null
+                }
             </div>
             <div className='Wbold-S26-H35-C1E1E1E' style={{paddingBottom:'25px'}}>Descargar</div>
             <div style={{position:'relative', marginBottom:'30px'}}>
@@ -280,14 +344,33 @@ const Descargas = () => {
                     }}
                 >
                     {
-                        seleccionoEnvioCorreo == true
-                        ?<div className='W600-S14-H19-L0015-CFFFFFF Btn-Opciones-Seleccionada-Descargar'>Enviar Correo</div>
+                        modulo_descarga_seleccionado == "Catalogo"
+                        ?<div 
+                            className='W600-S14-H19-L0015-CFFFFFF Btn-Opciones-Seleccionada-Descargar'
+                            onClick={async() => {
+                                await dispatch(DescargarPdfSucursalReducer(refBtnPdf, true))
+                                dispatch(CambiarNombreArchivoAdjuntoEnvioCorreoReducer("Catálogo de Promociones.pdf"))
+                                setNombreArchivoCorreoExcel("Catálogo de Promociones")
+                                setMostrarModalEnviarCorreo(true)
+                                
+                            }}
+                        >
+                            Enviar Correo
+                        </div>
+                        :seleccionoEnvioCorreo == true
+                        ?<div 
+                            className='W600-S14-H19-L0015-CFFFFFF Btn-Opciones-Seleccionada-Descargar'
+                        >
+                            Enviar Correo
+                        </div>
                         :<div 
                             className='W600-S14-H19-C1E1E1E Btn-Opciones-Descargar'
                             onClick={() => {
                                 setSeleccionoEnvioCorreo(true)
                                 setMostrarModalFiltroColumnas(true)
+                                // setMostrarModalEnviarCorreo(true)
                             }}
+
                         >Enviar Correo</div>
                     }
                     
@@ -483,6 +566,56 @@ const Descargas = () => {
                 </Row>
                 
             </div>
+
+
+
+
+            {
+                mostrarModalEnviarCorreo == true
+                ?<ModalEnviarCorreo 
+                    mostrarModal = {mostrarModalEnviarCorreo}
+                    setMostrarModalEnviarCorreo = {setMostrarModalEnviarCorreo}
+                    setSelecciono = {setSeleccionoEnvioCorreo}
+                    infoDataCorreo = {infoDataCorreo}
+                    nombreArchivoCorreoExcel = {nombreArchivoCorreoExcel}
+                    tituloArchivoCorreoExcel = {tituloArchivoCorreoExcel}
+                    modulo_descarga_seleccionado = {modulo_descarga_seleccionado}
+                    setMostrarModalCorreoEnviadoCorrecto = {setMostrarModalCorreoEnviadoCorrecto}
+                />
+                :null
+            }
+
+            <Modal
+                visible={mostrarModalCorreoEnviadoCorrecto}
+                centered
+                footer={null}
+                title={null}
+                closeIcon={<div></div>}
+                width="307px"
+                height="193px"
+                className='Modal-Envio-Correo-Correcto-Descargas'
+            >
+                <div style={{textAlignLast: "center", marginTop:'-10px'}}>
+                    <div className='Icon-Modal-Envio-Correo-Correcto-Descargas'>
+                        <CheckCircleOutlined />
+                    </div>
+                    <div className='Titulo-Modal-Envio-Correo-Correcto-Descargas W600-S14-H19-C1E1E1E'>
+                        Su correo fue enviado con éxito
+                    </div>
+                    <div style={{textAlign: "-webkit-center"}} >
+                        <div 
+                            className='Btn-Listo-Modal-Envio-Correo-Correcto-Descargas Wbold-S14-H19-CFFFFFF'
+                            onClick={() => {
+                                setMostrarModalCorreoEnviadoCorrecto(false)
+                            }}
+                        >
+                            Listo
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
+
             {
                 modulo_descarga_seleccionado == "Promociones"
                 ?<ModalFiltroColumnas 
@@ -506,6 +639,12 @@ const Descargas = () => {
                     nombreExcelHojaDescargar                        = {"Promociones "+" "+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro}
                     nombreExcelDescargar                            = {"Promociones Kimberly ("+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro+")"}
 
+                    enviarCorreo = {seleccionoEnvioCorreo}
+                    setMostrarModalEnviarCorreo = {setMostrarModalEnviarCorreo}
+                    setInfoDataCorreo = {setInfoDataCorreo}
+                    setNombreArchivoCorreoExcel = {setNombreArchivoCorreoExcel}
+                    setTituloArchivoCorreoExcel = {setTituloArchivoCorreoExcel}
+
                 />
                 :modulo_descarga_seleccionado == "Sell In"
                     ?<ModalFiltroColumnas 
@@ -528,6 +667,12 @@ const Descargas = () => {
                         cargando_btn_excel_descargar                    = {cargando_btn_excel_descargar}
                         nombreExcelHojaDescargar                        = {"Ventas SI "+" "+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro}
                         nombreExcelDescargar                            = {"Ventas SI Kimberly ("+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro+")"}
+
+                        enviarCorreo = {seleccionoEnvioCorreo}
+                        setMostrarModalEnviarCorreo = {setMostrarModalEnviarCorreo}
+                        setInfoDataCorreo = {setInfoDataCorreo}
+                        setNombreArchivoCorreoExcel = {setNombreArchivoCorreoExcel}
+                        setTituloArchivoCorreoExcel = {setTituloArchivoCorreoExcel}
         
                     />
                     :modulo_descarga_seleccionado == "Sell Out"
@@ -551,6 +696,12 @@ const Descargas = () => {
                             cargando_btn_excel_descargar                    = {cargando_btn_excel_descargar}
                             nombreExcelHojaDescargar                        = {"Ventas SO "+" "+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro}
                             nombreExcelDescargar                            = {"Ventas SO Kimberly ("+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro+")"}
+
+                            enviarCorreo = {seleccionoEnvioCorreo}
+                            setMostrarModalEnviarCorreo = {setMostrarModalEnviarCorreo}
+                            setInfoDataCorreo = {setInfoDataCorreo}
+                            setNombreArchivoCorreoExcel = {setNombreArchivoCorreoExcel}
+                            setTituloArchivoCorreoExcel = {setTituloArchivoCorreoExcel}
             
                         />
                         :modulo_descarga_seleccionado == "Reporte de pagos"
@@ -574,6 +725,12 @@ const Descargas = () => {
                                 cargando_btn_excel_descargar                    = {cargando_btn_excel_descargar}
                                 nombreExcelHojaDescargar                        = {"Reporte de Pagos "+" "+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro}
                                 nombreExcelDescargar                            = {"Reporte de Pagos Kimberly ("+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro+")"}
+
+                                enviarCorreo = {seleccionoEnvioCorreo}
+                                setMostrarModalEnviarCorreo = {setMostrarModalEnviarCorreo}
+                                setInfoDataCorreo = {setInfoDataCorreo}
+                                setNombreArchivoCorreoExcel = {setNombreArchivoCorreoExcel}
+                                setTituloArchivoCorreoExcel = {setTituloArchivoCorreoExcel}
                 
                             />
                             :modulo_descarga_seleccionado == "Promociones Liquidadas"
@@ -597,6 +754,12 @@ const Descargas = () => {
                                     cargando_btn_excel_descargar                    = {cargando_btn_excel_descargar}
                                     nombreExcelHojaDescargar                        = {"Promociones Liquidadas "+" "+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro}
                                     nombreExcelDescargar                            = {"Promociones Liquidadas Kimberly ("+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro+")"}
+
+                                    enviarCorreo = {seleccionoEnvioCorreo}
+                                    setMostrarModalEnviarCorreo = {setMostrarModalEnviarCorreo}
+                                    setInfoDataCorreo = {setInfoDataCorreo}
+                                    setNombreArchivoCorreoExcel = {setNombreArchivoCorreoExcel}
+                                    setTituloArchivoCorreoExcel = {setTituloArchivoCorreoExcel}
                     
                                 />
                                 :null

@@ -118,8 +118,8 @@ const Promociones = () => {
                 title={null}
                 footer={null}
                 centered
-                // visible={mostrarNoticia}
-                visible={false}
+                visible={mostrarNoticia}
+                // visible={false}
                 closeIcon={<div></div>}
                 width={"823px"}
                 height={"436px"}
@@ -172,7 +172,7 @@ const Promociones = () => {
                 <img className='Contenedor-Img-Banner-Ventas' src={BannerPromociones} />
             </div>
 
-            <div style={{marginTop:'20px'}}></div>
+            <div style={{marginTop:'100px'}}></div>
 
             <CarouselPromociones 
                 heading                  = "Example Slider"   

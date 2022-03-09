@@ -28,11 +28,17 @@ const FiltroMesVentasPromociones = () => {
                 <div 
                     className='Contenedor-Filtro-Fecha-Ventas W600-S14-H19-C1E1E1E'
                     onClick={() => setMostrarMeses(!mostrarMeses)}
+                    onMouseEnter={() => setMostrarMeses(!mostrarMeses)}
                 >
                     <div>
                         {mesSeleccionadoFiltro}
                     </div>
                 </div>
+                {
+                    mostrarMeses == true
+                    ?<div className='Linea-Filtro-Zona-Venta-Promociones'></div>
+                    :null
+                }
 
                 {
                     mostrarMeses == true
@@ -295,9 +301,10 @@ const FiltroMesVentasPromociones = () => {
                         top:'0px',
                         left:'0',
                         zIndex:'1',
-                        opacity:'0.0'
+                        opacity:'0'
                     }}
                     onClick={() => setMostrarMeses(!mostrarMeses)}
+                    onMouseEnter={() => setMostrarMeses(!mostrarMeses)}
                 >
 
                 </div>

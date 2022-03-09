@@ -45,7 +45,17 @@ const FiltrosPromociones = () => {
     };
 
     return (
-        <div className='Contenedor-Filtro-Ventas'>
+        <div 
+            className='Contenedor-Filtro-Ventas'
+            style={{
+                position:'fixed',
+                width: "100%",
+                height: "60px",
+                background:'white',
+                zIndex:'1',
+                top:'90px'
+            }}
+        >
 
             {/* <FiltroCanalVentasPromociones 
                 titulo = "Channel"

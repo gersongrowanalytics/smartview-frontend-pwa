@@ -17,6 +17,7 @@ import {
 import {
     EliminarFiltroAplicadoReducer
 } from '../../Redux/Acciones/FiltrosVentasPromociones'
+import { Tooltip } from 'antd';
 
 const FiltrosVentas = () => {
 
@@ -42,102 +43,68 @@ const FiltrosVentas = () => {
     };
 
     return (
-        <div className='Contenedor-Filtro-Ventas'>
+        <>
+            <div
+                style={{
+                    position:'fixed',
+                    width: "100%",
+                    height: "60px",
+                    background:'white',
+                    zIndex:'1',
+                    top:'90px'
+                }}
+            >
+                <div className='Contenedor-Filtro-Ventas'>
 
-            {/* <FiltroCanalVentasPromociones 
-                titulo = "Channel"
-            /> */}
+                    {/* <FiltroCanalVentasPromociones 
+                        titulo = "Channel"
+                    /> */}
 
-            <FiltroZonaVentasPromociones 
-                titulo = "Zona"
-                filtro = "VENTAS"
-            />  
+                    <FiltroZonaVentasPromociones 
+                        titulo = "Zona"
+                        filtro = "VENTAS"
+                    />  
 
-            <FiltroMesVentasPromociones />
+                    <FiltroMesVentasPromociones />
 
-            <FiltroAnioVentasPromociones />
-            <Link to="/descargas" onClick={() => dispatch(SeleccionarModuloDescargaReducer("Sell In"))}>
-                <div className='Contenedor-Btn-Descargar-Ventas'>
-                    <div className='Wbold-S14-H19-CFFFFFF'>Descargar</div>
-                </div>
-            </Link>
+                    <FiltroAnioVentasPromociones />
+                    <Link to="/descargas" onClick={() => dispatch(SeleccionarModuloDescargaReducer("Sell In"))}>
+                        <div className='Contenedor-Btn-Descargar-Ventas'>
+                            <div className='Wbold-S14-H19-CFFFFFF'>Descargar</div>
+                        </div>
+                    </Link>
 
-            <div className='W600-S14-H19-C1E1E1E' style={{marginLeft:'20px', marginRight:'20px', whiteSpace:'nowrap', position:'relative'}}>
-                Filtro  aplicado:
-                {
-                    aplicandoFiltroCanal == true || aplicandoFiltroZona == true || aplicandoFiltroGrupo == true || aplicandoFiltroDt == true
-                    ?<div 
-                        className='Flecha-Retroceder-Scroll-Filtro-Aplicados'
-                        onClick={() => {
-                            scroll(-60)
-                        }}
-                    >
-                        <LeftOutlined />
-                    </div>
-                    :null
-                }
-            </div>
-            <div className='Contenedor-Botones-Filtro-Aplicados' ref={refFiltrosAplicados}>
-                {
-
-                    aplicandoFiltroCanal == true
-                    ?<>
+                    <div className='W600-S14-H19-C1E1E1E' style={{marginLeft:'20px', marginRight:'20px', whiteSpace:'nowrap', position:'relative'}}>
+                        Filtro  aplicado:
                         {
-                            cass.map((cas, pos) => {
-                                return (
-                                    cas.check == true
-                                    ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
-                                        {cas.casnombre}
-                                        <div 
-                                            style={{
-                                                position:'absolute',
-                                                right: "12px",
-                                                fontSize: "12px",
-                                                color: "#1E1E1E"
-                                            }}
-                                            onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
-                                        >
-                                            <CloseOutlined />
-                                        </div>
-                                    </div>
-                                    :null
-                                )
-                            })
+                            aplicandoFiltroCanal == true || aplicandoFiltroZona == true || aplicandoFiltroGrupo == true || aplicandoFiltroDt == true
+                            ?<Tooltip
+                                placement="bottom" 
+                                title={"Retroceder"}
+                            >
+                                <div 
+                                    className='Flecha-Retroceder-Scroll-Filtro-Aplicados'
+                                    onClick={() => {
+                                        scroll(-60)
+                                    }}
+                                >
+                                    <LeftOutlined />
+                                </div>
+                            </Tooltip>
+                            :null
                         }
-                    </>
-                    :aplicandoFiltroZona == true
-                        ?<>
-                            {
-                                zonas.map((zona, pos) => {
-                                    return (
-                                        zona.check == true
-                                        ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
-                                            {zona.zonnombre}
-                                            <div 
-                                                style={{
-                                                    position:'absolute',
-                                                    right: "12px",
-                                                    fontSize: "12px",
-                                                    color: "#1E1E1E"
-                                                }}
-                                                onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
-                                            >
-                                                <CloseOutlined />
-                                            </div>
-                                        </div>
-                                        :null
-                                    )
-                                })
-                            }
-                        </>
-                        :aplicandoFiltroGrupo == true
+                    </div>
+                    <div className='Contenedor-Botones-Filtro-Aplicados' ref={refFiltrosAplicados}>
+                        {
+
+                            aplicandoFiltroCanal == true
                             ?<>
                                 {
-                                    gsus.map((gsu, pos) => {
+                                    cass.map((cas, pos) => {
                                         return (
-                                            gsu.check == true
+                                            cas.check == true
                                             ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
-                                                {gsu.gsunombre}
+                                                {cas.casnombre}
                                                 <div 
                                                     style={{
                                                         position:'absolute',
@@ -155,14 +122,14 @@ const FiltrosVentas = () => {
                                     })
                                 }
                             </>
-                            :aplicandoFiltroDt == true
+                            :aplicandoFiltroZona == true
                                 ?<>
                                     {
-                                        sucursalesUsuario.map((sucursal, pos) => {
+                                        zonas.map((zona, pos) => {
                                             return (
-                                                sucursal.check == true
+                                                zona.check == true
                                                 ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
-                                                    {sucursal.sucnombre}
+                                                    {zona.zonnombre}
                                                     <div 
                                                         style={{
                                                             position:'absolute',
@@ -180,45 +147,105 @@ const FiltrosVentas = () => {
                                         })
                                     }
                                 </>
-                                :<>
-                                    {
-                                        sucursalesUsuario.map((sucursal) => {
-                                            return(
-                                                sucursal.sucid == idSucursalUsuarioSelec
-                                                ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
-                                                    {sucursal.sucnombre}
-                                                    <div 
-                                                        style={{
-                                                            position:'absolute',
-                                                            right: "12px",
-                                                            fontSize: "12px",
-                                                            color: "#1E1E1E"
-                                                        }}
-                                                    >
-                                                        <CloseOutlined />
+                                :aplicandoFiltroGrupo == true
+                                    ?<>
+                                        {
+                                            gsus.map((gsu, pos) => {
+                                                return (
+                                                    gsu.check == true
+                                                    ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                                        {gsu.gsunombre}
+                                                        <div 
+                                                            style={{
+                                                                position:'absolute',
+                                                                right: "12px",
+                                                                fontSize: "12px",
+                                                                color: "#1E1E1E"
+                                                            }}
+                                                            onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                        >
+                                                            <CloseOutlined />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                :null
-                                            )
-                                        })
-                                    }
-                                </>
-                }
+                                                    :null
+                                                )
+                                            })
+                                        }
+                                    </>
+                                    :aplicandoFiltroDt == true
+                                        ?<>
+                                            {
+                                                sucursalesUsuario.map((sucursal, pos) => {
+                                                    return (
+                                                        sucursal.check == true
+                                                        ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                                            {sucursal.sucnombre}
+                                                            <div 
+                                                                style={{
+                                                                    position:'absolute',
+                                                                    right: "12px",
+                                                                    fontSize: "12px",
+                                                                    color: "#1E1E1E"
+                                                                }}
+                                                                onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                            >
+                                                                <CloseOutlined />
+                                                            </div>
+                                                        </div>
+                                                        :null
+                                                    )
+                                                })
+                                            }
+                                        </>
+                                        :<>
+                                            {
+                                                sucursalesUsuario.map((sucursal) => {
+                                                    return(
+                                                        sucursal.sucid == idSucursalUsuarioSelec
+                                                        ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                                            {sucursal.sucnombre}
+                                                            <div 
+                                                                style={{
+                                                                    position:'absolute',
+                                                                    right: "12px",
+                                                                    fontSize: "12px",
+                                                                    color: "#1E1E1E"
+                                                                }}
+                                                            >
+                                                                <CloseOutlined />
+                                                            </div>
+                                                        </div>
+                                                        :null
+                                                    )
+                                                })
+                                            }
+                                        </>
+                        }
+                    </div>
+
+
+                    <Tooltip
+                        placement="bottom" 
+                        title={"Avanzar"}
+                    >
+                        <div 
+                            className='Flecha-Avanzar-Scroll-Filtro-Aplicados'
+                            onClick={() => {
+                                scroll(60)
+                            }}
+                        >
+                            <RightOutlined />
+                        </div>
+                    </Tooltip>
+
+                    {/* <div style={{    marginLeft: "auto"}}>
+                        <img src={IconoActualizar} className='Icono-Actualizar-Filtro' /> 
+                    </div> */}
+                </div>
             </div>
 
-            <div 
-                className='Flecha-Avanzar-Scroll-Filtro-Aplicados'
-                onClick={() => {
-                    scroll(60)
-                }}
-            >
-                <RightOutlined />
-            </div>
 
-            {/* <div style={{    marginLeft: "auto"}}>
-                <img src={IconoActualizar} className='Icono-Actualizar-Filtro' /> 
-            </div> */}
-        </div>
+        </>
     )
 };
 

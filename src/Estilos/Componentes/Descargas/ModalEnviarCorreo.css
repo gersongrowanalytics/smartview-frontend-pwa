@@ -1,0 +1,98 @@
+.Cabecera-Modal-Enviar-Correo-Descargar{
+    background-color: #000000;
+    display: flex;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.Btn-Enviar-Correo-Descargar{
+    width: 116px !important;
+    height: 28px !important;
+    background: #558CFF !important;
+    border-radius: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    justify-content: center !important;
+    border: 1px solid #558CFF !important;
+}
+
+.Btn-Enviar-Correo-Descargar:hover{
+    color: white !important;
+}
+
+.Btn-Enviar-Correo-Descargar:focus{
+    color: white !important;
+}
+
+.Contenedor-Archivo-Subido-Descarga{
+    background: #F1F1F1;
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    margin-top: 15px;
+    /* margin-bottom: 15px; */
+    border-bottom: 1px solid #E5E5E5;
+    cursor: pointer;
+}
+
+.Modal-Enviar-Correo-Descarga .ant-modal-body{
+    padding: 0 !important;
+    border-radius: 25px !important;
+}
+
+.Modal-Enviar-Correo-Descarga .ant-modal-content{
+    border-radius: 15px;
+}
+
+.Cuerpo-Enviar-Correo-Descargar{
+    padding-left: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+}
+
+.Fila-Datos-Enviar-Correo-Descargar{
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.Titulo-Datos-Enviar-Correo-Descargar{
+    width: 70px;
+}
+
+.Input-Datos-Enviar-Correo-Descargar{
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.Input-Datos-Enviar-Correo-Descargar:focus{
+    width: 100%;
+    outline: none;
+}
+
+.Icon-Cerar-Modal-Enviar-Correo-Descargar{
+    color: white;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+.TextArea-Enviar-Correo-Descargar{
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+
+.TextArea-Enviar-Correo-Descargar:focus{
+    border: none;
+    outline: none;
+}

@@ -16,6 +16,7 @@ import ImagenDefault  from '../../Assets/Img/BancoImagen/SinImagen.png';
 import Editar from '../../Assets/Img/BancoImagen/Editar.png';
 import { CheckCircleTwoTone,CloseCircleTwoTone,PlusCircleOutlined } from '@ant-design/icons';
 import Fechas from '../../Componentes/Rutas/BancoImagen/Fechas';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const BancoImagen = () => {
 
@@ -108,7 +109,7 @@ const BancoImagen = () => {
                                                     <>
                                                         <div className='imagen-upload'>
                                                             <label htmlFor="file-input">
-                                                                <img id='editarImagen' src={Editar} style={{height: "65px", cursor: 'pointer'}}></img>
+                                                                <img id='editarImagen' src={Editar} style={{height: "40px", cursor: 'pointer'}}></img>
                                                             </label>
                                                             <div id="previsualizacion"></div>
                                                             <input 
@@ -132,7 +133,7 @@ const BancoImagen = () => {
                                                                 }}  
                                                             />
                                                         </div>    
-                                                        <PlusCircleOutlined style={{fontSize: '40px', cursor: 'pointer'}}></PlusCircleOutlined>                      
+                                                        <PlusCircleOutlined style={{fontSize: '20px', cursor: 'pointer'}}></PlusCircleOutlined>                      
                                                     </>
                                                 ) : (
                                                     <>
@@ -208,7 +209,7 @@ const BancoImagen = () => {
       })
 
     return (
-        <div>
+        <div style={{marginBottom:'60px', marginTop:'95px'}}>
             <Row>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{marginTop: "19px", marginBottom: "11px"}}>
                     <span className='Titulo'>Banco de Imagen</span>
@@ -256,6 +257,7 @@ const BancoImagen = () => {
                     <Spin
                         size='large'
                         spinning={cargandoTablaBancoImagen}
+                        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
                     >
                         <div className='Contenedor-Tabla Tabla-Responsive'>
                             <table {...getTableProps()}>
@@ -290,6 +292,7 @@ const BancoImagen = () => {
                                                                                         size='large'
                                                                                         spinning={cargandoRegistroEditar}
                                                                                         className='OcultarSpin'
+                                                                                        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
                                                                                     >
                                                                                         {cell.render('Cell')} 
                                                                                     </Spin>

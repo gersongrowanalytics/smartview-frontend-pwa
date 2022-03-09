@@ -14,3 +14,4 @@ export * from './FiltrosVentasPromociones';
 export * from './ListaPrecios/ListaPrecios';
 export * from './CargaArchivos/CargaArchivos';
 export * from './Contraprestaciones/Contraprestaciones';
+export * from './Setting';

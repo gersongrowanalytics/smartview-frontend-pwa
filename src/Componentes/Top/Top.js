@@ -9,14 +9,18 @@ import {cerrarSesionReducer} from '../../Redux/Acciones/Auth'
 import {useDispatch, useSelector} from "react-redux"
 import IconoCerrar from '../../Assets/Img/Top/cerrarsession.png'
 import IconoPersonaBlanco from '../../Assets/Img/Top/personablanco.png'
+import IconoActualizar from '../../Assets/Img/Filtros/actualizar.png'
+import { Tooltip } from 'antd';
+import {Link} from "react-router-dom";
 
 const Top = () => {
 
     const dispatch = useDispatch();
     const {
-        authUser
+        authUser,
+        datosUsuarioLogeado,
+        mostrar_terminos_condiciones_login
     } = useSelector(({auth}) => auth);
-
 
     const newDate = new Date()
     const dia = newDate.getDate();
@@ -54,10 +58,12 @@ const Top = () => {
     return (
         <div>
             <div className='Contenedor-Top'>
-                <img 
-                    src={LogoKCCreciendoJuntos} 
-                    className='Logo-KC-Creciendo-Juntos'
-                />
+                <Link to="/ventas">
+                    <img 
+                        src={LogoKCCreciendoJuntos} 
+                        className='Logo-KC-Creciendo-Juntos'
+                    />
+                </Link>
 
                 <FiltroCanalTop />
 
@@ -83,10 +89,25 @@ const Top = () => {
                                         localStorage.getItem('pernombrecompleto')
                                     }
                                 </div>
-                                <div 
-                                    className='Wnormal-S12-H16-C1EC0ED'
-                                    style={{cursor:'pointer'}}
-                                >Ver Perfil</div>
+
+                                {
+                                    datosUsuarioLogeado.usuaceptoterminos
+                                    ?mostrar_terminos_condiciones_login == true
+                                        ?null
+                                        :<Link 
+                                            to="/mi-perfil"
+                                            onClick={() => {
+                                                setMostrarCuerpoMiCuenta(false)
+                                            }}
+                                        >
+                                            <div 
+                                                className='Wnormal-S12-H16-C1EC0ED'
+                                                style={{cursor:'pointer'}}
+                                            >Ver Perfil</div>
+                                        </Link>
+                                    :null
+                                }
+                                
                             </div>
 
                         </div>
@@ -106,9 +127,35 @@ const Top = () => {
                     :null
                 }
             </div>
-            <div className='Contenedor-Fecha-Actualizacion-Top'>
-                <div className='W600-S14-H19-C1E1E1E'>
-                    Actualización {dia} de {mes} del {anio}
+
+            <div 
+                style={{
+                    position:'fixed',
+                    width: "100%",
+                    height: "34px",
+                    top:'0',
+                    zIndex:'1'
+                }}
+            >
+                <div 
+                    className='Contenedor-Fecha-Actualizacion-Top'
+                >
+                    <div className='W600-S14-H19-C1E1E1E'>
+                        Actualización {dia} de {mes} del {anio}
+                    </div>
+                    
+                    <div
+                        onClick={() => {
+                            window.location.reload();
+                        }}
+                    >
+                        <Tooltip
+                            placement="bottom" 
+                            title={"Actualizar"}
+                        >
+                            <img src={IconoActualizar} className="Icono-Actualizar" />
+                        </Tooltip>
+                    </div>
                 </div>
             </div>
         </div>

@@ -16,6 +16,8 @@ import DescargarPdf from './Descargas/DescargarPdf'
 import ListaPrecios from './ListaPrecios/ListaPrecios'
 import CargaArchivos from './CargaArchivos/CargaArchivos'
 import Contraprestaciones from './Contraprestaciones/Contraprestaciones'
+import DescargarEnviarCorreo from './Descargas/DescargarEnviarCorreo'
+import Setting from './Setting'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -35,6 +37,8 @@ const createRootReducer = (history) => combineReducers({
     listaPrecios   : ListaPrecios,
     cargaArchivos  : CargaArchivos,
     contraprestaciones : Contraprestaciones,
+    descargarEnviarCorreo : DescargarEnviarCorreo,
+    setting : Setting,
 });
 
 export default createRootReducer

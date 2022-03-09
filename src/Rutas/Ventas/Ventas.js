@@ -51,6 +51,10 @@ const Ventas = () => {
         data_ventas,
     } = useSelector(({ventas}) => ventas);
 
+    const {
+        canal_seleccionado,
+    } = useSelector(({auth}) => auth);
+
     useEffect(() => {
 
         if(idSucursalUsuarioSelec != 0){
@@ -89,7 +93,8 @@ const Ventas = () => {
             
             <FiltrosVentas />
 
-            <div className='Contenedor-Img-Banner-Ventas'>
+            {/* <div className='Contenedor-Img-Banner-Ventas' style={{paddingTop:'100px'}}> */}
+            <div className='Contenedor-Img-Banner-Ventas' >
                 <img className='Contenedor-Img-Banner-Ventas' src={BannerVentas} />
             </div>
 
@@ -109,7 +114,8 @@ const Ventas = () => {
 
                     return(
                         data_venta.tprnombre == "Sell In"
-                        ?<div style={{marginLeft:'-20px', marginRight:'-20px'}}>
+                        // ?<div style={{marginLeft:'-20px', marginRight:'-20px', paddingTop:'100px'}}>
+                        ?<div style={{marginLeft:'-20px', marginRight:'-20px', marginTop:'95px'}}>
                             <div className='Wbold-S26-H35-C1E1E1E Titulo-Ventas' onClick={() => console.log(data_ventas)}>
                                 Sell In
                             </div>
@@ -222,279 +228,288 @@ const Ventas = () => {
                                             </Row>
                                         </div>
                                     </div>
-                                    
-                                    <div className='Contenedor-Tajeta-Avance-Rebate-Ventas' >
-                                        <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
-                                            Rebate Sell In Mensual
-                                        </div>
 
-                                        <div className='Contenedor-Tarjeta-Avance-Ventas' >
-                                            <Row style={{marginBottom:'0px'}}>
-                                                <Col xl={24}>
-                                                </Col>
-                                            </Row>
-                                            {
-                                                data_venta.trrs.map((trr, posTrr) => {
+                                    {
+                                        canal_seleccionado == "Tradicional"
+                                        ?<div className='Contenedor-Tajeta-Avance-Rebate-Ventas' >
+                                            <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
+                                                Rebate Sell In Mensual
+                                            </div>
 
-                                                    let rebateCalculado = 0
+                                            <div className='Contenedor-Tarjeta-Avance-Ventas' >
+                                                <Row style={{marginBottom:'0px'}}>
+                                                    <Col xl={24}>
+                                                    </Col>
+                                                </Row>
+                                                {
+                                                    data_venta.trrs.map((trr, posTrr) => {
 
-                                                    if(trr.rtpporcentajehasta == 10000){
+                                                        let rebateCalculado = 0
 
-                                                        let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajedesde))
-                                                        rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+                                                        if(trr.rtpporcentajehasta == 10000){
 
-                                                    }else{
-                                                        let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajehasta))
-                                                        rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
-                                                    }
+                                                            let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajedesde))
+                                                            rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
 
-                                                    return (
-                                                        <Row style={{marginBottom:'5px'}}>
-                                                            <Col xl={12}>
-                                                                <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                                    <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                        <img 
-                                                                            src={
-                                                                                posTrr == 0
-                                                                                ?IconoRebateUno
-                                                                                :posTrr == 1
-                                                                                    ?IconoRebateDos
-                                                                                    :posTrr == 2
-                                                                                        ?IconoRebateTres
-                                                                                        :IconoRebateTres
-                                                                            } 
-                                                                            className='Iconos-Tarjeta-Avance-Ventas'
-                                                                        />
+                                                        }else{
+                                                            let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajehasta))
+                                                            rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+                                                        }
+
+                                                        return (
+                                                            <Row style={{marginBottom:'5px'}}>
+                                                                <Col xl={12}>
+                                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                            <img 
+                                                                                src={
+                                                                                    posTrr == 0
+                                                                                    ?IconoRebateUno
+                                                                                    :posTrr == 1
+                                                                                        ?IconoRebateDos
+                                                                                        :posTrr == 2
+                                                                                            ?IconoRebateTres
+                                                                                            :IconoRebateTres
+                                                                                } 
+                                                                                className='Iconos-Tarjeta-Avance-Ventas'
+                                                                            />
+                                                                        </div>
+                                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                            {
+                                                                                trr.rtpporcentajehasta == 10000
+                                                                                ?<>
+                                                                                    Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
+                                                                                </>
+                                                                                :<>
+                                                                                    Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
+                                                                                </>
+                                                                            }
+                                                                            
+                                                                        </div>
                                                                     </div>
+                                                                </Col>
+                                                                <Col xl={12} style={{textAlignLast: "right"}}>
                                                                     <div className='W600-S14-H19-L0015-C1E1E1E'>
                                                                         {
-                                                                            trr.rtpporcentajehasta == 10000
+                                                                            trr.realTotal
                                                                             ?<>
-                                                                                Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
+                                                                                S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
                                                                             </>
                                                                             :<>
-                                                                                Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
+                                                                                S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
                                                                             </>
                                                                         }
                                                                         
                                                                     </div>
-                                                                </div>
-                                                            </Col>
-                                                            <Col xl={12} style={{textAlignLast: "right"}}>
-                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                    {
-                                                                        trr.realTotal
-                                                                        ?<>
-                                                                            S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                        </>
-                                                                        :<>
-                                                                            S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                        </>
-                                                                    }
-                                                                    
-                                                                </div>
-                                                            </Col>
-                                                        </Row>            
-                                                    )
-                                                })
-                                            }
-                                            {/* <Row style={{marginTop:'0px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoRebateUno} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
+                                                                </Col>
+                                                            </Row>            
+                                                        )
+                                                    })
+                                                }
+                                                {/* <Row style={{marginTop:'0px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoRebateUno} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Escala 1 95% -99%
+                                                            </div>
                                                         </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
                                                         <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Escala 1 95% -99%
+                                                            S/2,599
                                                         </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                        S/2,599
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoRebateDos} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoRebateDos} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Escala 2 100% -104%
+                                                            </div>
                                                         </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
                                                         <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Escala 2 100% -104%
+                                                            S/1,084,614
                                                         </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                        S/1,084,614
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoRebateTres} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoRebateTres} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Escala 3 105% - +%
+                                                            </div>
                                                         </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
                                                         <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Escala 3 105% - +%
+                                                            S/1,084,614
                                                         </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                        S/1,084,614
-                                                    </div>
-                                                </Col>
-                                            </Row> */}
-                                            <Row style={{marginTop:'10px'}}>
-                                                <Col xl={12}>
-                                                    <div className='Wbold-S16-H21-C1E1E1E'>
-                                                        Rebate Real
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='Wbold-S16-H21-C1E1E1E'>
-                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
-                                                    </div>
-                                                </Col>
-                                            </Row>
+                                                    </Col>
+                                                </Row> */}
+                                                <Row style={{marginTop:'10px'}}>
+                                                    <Col xl={12}>
+                                                        <div className='Wbold-S16-H21-C1E1E1E'>
+                                                            Rebate Real
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='Wbold-S16-H21-C1E1E1E'>
+                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </div>
                                         </div>
-                                    </div>
+                                        :null
+                                    }
                                     
-                                    <div 
-                                        className='Contenedor-Tajeta-Avance-Rebate-Ventas' 
-                                        style={{
-                                            marginRight: "0"
-                                        }}
-                                    >
-                                        <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
-                                            Rabate Trimestral - {data_venta.nombreTrimestre}
-                                        </div>
 
-                                        <div className='Contenedor-Tarjeta-Avance-Ventas' >
-                                            <Row style={{marginBottom:'0px'}}>
-                                                <Col xl={24}>
-                                                    {/* <div className='Wbold-S16-H21-C1E1E1E'>
-                                                        Avance de venta Sell In
-                                                    </div> */}
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'0px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoObjetivoNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
-                                                        </div>
-                                                        <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            Objetivo
-                                                        </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='Wbold-S16-H21-C1E1E1E'>
-                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuobjetivotrimestral, 0)} displayType={'text'} thousandSeparator={true} />
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoRealNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
-                                                        </div>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Real
-                                                        </div>
-                                                    </div>
+                                    {
+                                        canal_seleccionado == "Tradicional"
+                                        ?<div 
+                                            className='Contenedor-Tajeta-Avance-Rebate-Ventas' 
+                                            style={{
+                                                marginRight: "0"
+                                            }}
+                                        >
+                                            <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
+                                                Rabate Trimestral - {data_venta.nombreTrimestre}
+                                            </div>
 
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsurealtrimestral, 0)} displayType={'text'} thousandSeparator={true} />
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoPorFacturarNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
+                                            <div className='Contenedor-Tarjeta-Avance-Ventas' >
+                                                <Row style={{marginBottom:'0px'}}>
+                                                    <Col xl={24}>
+                                                        {/* <div className='Wbold-S16-H21-C1E1E1E'>
+                                                            Avance de venta Sell In
+                                                        </div> */}
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'0px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoObjetivoNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                Objetivo
+                                                            </div>
                                                         </div>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Por Facturar
-                                                        </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                        
-                                                        {
-                                                            togotrimestral <= 0 
-                                                            ? "S/"+0 
-                                                            : <>
-                                                                S/<NumberFormat value={funFormatoDecimal(togotrimestral, 0)} displayType={'text'} thousandSeparator={true} />
-                                                            </>
-                                                        }
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoCumpliminetoNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
-                                                        </div>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Cumplimiento
-                                                        </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='Wbold-S14-L0015-CFFBB37'>
-                                                        <NumberFormat value={funFormatoDecimal(data_venta.tsucumplimientotrimestral, 0)} displayType={'text'} thousandSeparator={true} />%
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative'}}>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
                                                         <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            Rebate {data_venta.nombreTrimestre}
+                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsuobjetivotrimestral, 0)} displayType={'text'} thousandSeparator={true} />
                                                         </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='Wbold-S16-H21-C1E1E1E'>
-                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsurebatetrimestral, 0)} displayType={'text'} thousandSeparator={true} />
-                                                    </div>
-                                                </Col>
-                                            </Row>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoRealNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Real
+                                                            </div>
+                                                        </div>
+
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsurealtrimestral, 0)} displayType={'text'} thousandSeparator={true} />
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoPorFacturarNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Por Facturar
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                            
+                                                            {
+                                                                togotrimestral <= 0 
+                                                                ? "S/"+0 
+                                                                : <>
+                                                                    S/<NumberFormat value={funFormatoDecimal(togotrimestral, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                </>
+                                                            }
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoCumpliminetoNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Cumplimiento
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='Wbold-S14-L0015-CFFBB37'>
+                                                            <NumberFormat value={funFormatoDecimal(data_venta.tsucumplimientotrimestral, 0)} displayType={'text'} thousandSeparator={true} />%
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative'}}>
+                                                            <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                Rebate {data_venta.nombreTrimestre}
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='Wbold-S16-H21-C1E1E1E'>
+                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsurebatetrimestral, 0)} displayType={'text'} thousandSeparator={true} />
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </div>
                                         </div>
-                                    </div>
+                                        :null
+                                    }
                                 </Row>
 
                             </div>
@@ -612,7 +627,7 @@ const Ventas = () => {
 
                         </div>
                         :data_venta.tprnombre == "Sell Out"
-                            ?<div style={{marginLeft:'-20px', marginRight:'-20px'}}>
+                            ?<div style={{marginLeft:'-20px', marginRight:'-20px', marginTop:'95px'}}>
 
                                 <div className='Wbold-S26-H35-C1E1E1E Titulo-Ventas'>
                                     Sell Out
@@ -780,211 +795,219 @@ const Ventas = () => {
                                             </div>
                                         </div>
                                         
-                                        <div className='Contenedor-Tajeta-Avance-Rebate-Ventas' >
-                                            <div 
-                                                className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'
-                                                style={{
-                                                    background:'#79E2C1'
-                                                }}
-                                            >
-                                                Rebate Sell Out Mensual
-                                            </div>
+                                        {
+                                            canal_seleccionado == "Tradicional"
+                                            ?<div className='Contenedor-Tajeta-Avance-Rebate-Ventas' >
+                                                <div 
+                                                    className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'
+                                                    style={{
+                                                        background:'#79E2C1'
+                                                    }}
+                                                >
+                                                    Rebate Sell Out Mensual
+                                                </div>
 
-                                            <div 
-                                                className='Contenedor-Tarjeta-Avance-Ventas' 
-                                                style={{
-                                                    border: "1px solid #79E2C1"
-                                                }}
-                                            >
-                                                <Row style={{marginBottom:'0px'}}>
-                                                    <Col xl={24}>
-                                                        {/* <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            Avance de venta Sell In
-                                                        </div> */}
-                                                    </Col>
-                                                </Row>
-                                                {
-                                                    data_venta.trrs.map((trr, posTrr) => {
+                                                <div 
+                                                    className='Contenedor-Tarjeta-Avance-Ventas' 
+                                                    style={{
+                                                        border: "1px solid #79E2C1"
+                                                    }}
+                                                >
+                                                    <Row style={{marginBottom:'0px'}}>
+                                                        <Col xl={24}>
+                                                            {/* <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                Avance de venta Sell In
+                                                            </div> */}
+                                                        </Col>
+                                                    </Row>
+                                                    {
+                                                        data_venta.trrs.map((trr, posTrr) => {
 
-                                                        let objetivoSellIn
+                                                            let objetivoSellIn
 
-                                                        if(data_ventas[0]['tsuvalorizadoobjetivo']){
-                                                            objetivoSellIn = data_ventas[0]['tsuvalorizadoobjetivo']
-                                                        }else{
-                                                            objetivoSellIn = 0
-                                                        }
-                                                        
+                                                            if(data_ventas[0]['tsuvalorizadoobjetivo']){
+                                                                objetivoSellIn = data_ventas[0]['tsuvalorizadoobjetivo']
+                                                            }else{
+                                                                objetivoSellIn = 0
+                                                            }
+                                                            
 
-                                                        let rebateCalculado = 0
+                                                            let rebateCalculado = 0
 
-                                                        if(trr.rtpporcentajehasta == 10000){
+                                                            if(trr.rtpporcentajehasta == 10000){
 
-                                                            let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajedesde))
-                                                            rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+                                                                let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajedesde))
+                                                                rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
 
-                                                        }else{
-                                                            let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajehasta))
-                                                            rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
-                                                        }
+                                                            }else{
+                                                                let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajehasta))
+                                                                rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+                                                            }
 
-                                                        return (
-                                                            <Row style={{marginBottom:'5px'}}>
-                                                                <Col xl={12}>
-                                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                            <img 
-                                                                                src={
-                                                                                    posTrr == 0
-                                                                                    ?IconoRebateUno
-                                                                                    :posTrr == 1
-                                                                                        ?IconoRebateDos
-                                                                                        :posTrr == 2
-                                                                                            ?IconoRebateTres
-                                                                                            :IconoRebateTres
-                                                                                } 
-                                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                                            />
+                                                            return (
+                                                                <Row style={{marginBottom:'5px'}}>
+                                                                    <Col xl={12}>
+                                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                                <img 
+                                                                                    src={
+                                                                                        posTrr == 0
+                                                                                        ?IconoRebateUno
+                                                                                        :posTrr == 1
+                                                                                            ?IconoRebateDos
+                                                                                            :posTrr == 2
+                                                                                                ?IconoRebateTres
+                                                                                                :IconoRebateTres
+                                                                                    } 
+                                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                                />
+                                                                            </div>
+                                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                                {
+                                                                                    trr.rtpporcentajehasta == 10000
+                                                                                    ?<>
+                                                                                        Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
+                                                                                    </>
+                                                                                    :<>
+                                                                                        Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
+                                                                                    </>
+                                                                                }
+                                                                                
+                                                                            </div>
                                                                         </div>
+                                                                    </Col>
+                                                                    <Col xl={12} style={{textAlignLast: "right"}}>
                                                                         <div className='W600-S14-H19-L0015-C1E1E1E'>
                                                                             {
-                                                                                trr.rtpporcentajehasta == 10000
+                                                                                trr.realTotal
                                                                                 ?<>
-                                                                                    Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
+                                                                                    S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
                                                                                 </>
                                                                                 :<>
-                                                                                    Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
+                                                                                    S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
                                                                                 </>
                                                                             }
-                                                                            
                                                                         </div>
-                                                                    </div>
-                                                                </Col>
-                                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                        {
-                                                                            trr.realTotal
-                                                                            ?<>
-                                                                                S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                            </>
-                                                                            :<>
-                                                                                S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                            </>
-                                                                        }
-                                                                    </div>
-                                                                </Col>
-                                                            </Row>            
-                                                        )
-                                                    })
-                                                }
-                                                {/* <Row style={{marginTop:'0px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoRebateUno} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
+                                                                    </Col>
+                                                                </Row>            
+                                                            )
+                                                        })
+                                                    }
+                                                    {/* <Row style={{marginTop:'0px'}}>
+                                                        <Col xl={12}>
+                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                    <img 
+                                                                        src={IconoRebateUno} 
+                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                    />
+                                                                </div>
+                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                    Escala 1 95% -99%
+                                                                </div>
                                                             </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
                                                             <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Escala 1 95% -99%
+                                                                S/2,599
                                                             </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            S/2,599
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'5px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoRebateDos} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
+                                                        </Col>
+                                                    </Row>
+                                                    <Row style={{marginTop:'5px'}}>
+                                                        <Col xl={12}>
+                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                    <img 
+                                                                        src={IconoRebateDos} 
+                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                    />
+                                                                </div>
+                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                    Escala 2 100% -104%
+                                                                </div>
                                                             </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
                                                             <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Escala 2 100% -104%
+                                                                S/1,084,614
                                                             </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            S/1,084,614
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'5px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoRebateTres} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
+                                                        </Col>
+                                                    </Row>
+                                                    <Row style={{marginTop:'5px'}}>
+                                                        <Col xl={12}>
+                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                    <img 
+                                                                        src={IconoRebateTres} 
+                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                    />
+                                                                </div>
+                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                    Escala 3 105% - +%
+                                                                </div>
                                                             </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
                                                             <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Escala 3 105% - +%
+                                                                S/1,084,614
                                                             </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            S/1,084,614
-                                                        </div>
-                                                    </Col>
-                                                </Row> */}
-                                                <Row style={{marginTop:'10px'}}>
-                                                    <Col xl={12}>
-                                                        <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            Rebate Real
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            {
-                                                                mostrarReal == true
-                                                                ?<>
-                                                                    S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                </>
-                                                                :<>
-                                                                    S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebateniv, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                </>
-                                                            }
-                                                        </div>
-                                                    </Col>
-                                                </Row>
+                                                        </Col>
+                                                    </Row> */}
+                                                    <Row style={{marginTop:'10px'}}>
+                                                        <Col xl={12}>
+                                                            <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                Rebate Real
+                                                            </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
+                                                            <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                {
+                                                                    mostrarReal == true
+                                                                    ?<>
+                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                    </>
+                                                                    :<>
+                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebateniv, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                    </>
+                                                                }
+                                                            </div>
+                                                        </Col>
+                                                    </Row>
+                                                </div>
                                             </div>
-                                        </div>
+                                            :null
+                                        }
                                         
-                                        <div 
-                                            className='Contenedor-Tajeta-Avance-Rebate-Ventas' 
-                                            style={{
-                                                marginRight: "0"
-                                            }}
-                                        >
-                                            <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas' style={{background:'white'}}>
-                                                {/* Rabate Trimestral - {data_venta.nombreTrimestre} */}
-                                            </div>
-
-                                            <div 
-                                                className='Contenedor-Tarjeta-Avance-Ventas' 
+                                        {
+                                            canal_seleccionado == "Tradicional"
+                                            ?<div 
+                                                className='Contenedor-Tajeta-Avance-Rebate-Ventas' 
                                                 style={{
-                                                    border: "1px solid #79E2C1",
-                                                    display: "flex",
-                                                    alignItems: "center"
+                                                    marginRight: "0"
                                                 }}
                                             >
-                                                
-                                                <div className='Wbold-S14-H19-L0015-C1E1E1E'>
-                                                    NOTA DE REBATE SELL OUT: <br/>
-                                                    El pago de este rebate se calculará en base al monto neto facturado (sell in)
+                                                <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas' style={{background:'white'}}>
+                                                    {/* Rabate Trimestral - {data_venta.nombreTrimestre} */}
                                                 </div>
-                                                
+
+                                                <div 
+                                                    className='Contenedor-Tarjeta-Avance-Ventas' 
+                                                    style={{
+                                                        border: "1px solid #79E2C1",
+                                                        display: "flex",
+                                                        alignItems: "center"
+                                                    }}
+                                                >
+                                                    
+                                                    <div className='Wbold-S14-H19-L0015-C1E1E1E'>
+                                                        NOTA DE REBATE SELL OUT: <br/>
+                                                        El pago de este rebate se calculará en base al monto neto facturado (sell in)
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
-                                        </div>
+                                            :null
+                                        }
                                         
                                     </Row>
 
@@ -1117,7 +1140,12 @@ const Ventas = () => {
                 })
             }
 
-            <Contraprestaciones />
+
+            {
+                canal_seleccionado == "Tradicional"
+                ?null
+                :<Contraprestaciones />
+            }
 
 
         </div>

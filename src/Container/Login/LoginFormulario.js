@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {
-    loginReducer
+    loginReducer,
+    MostrarCargandoLogin
 } from '../../Redux/Acciones/Auth'
 import {Form, Input, Select, Button } from "antd";
 import '../../Estilos/Rutas/Login/Login.css';
@@ -35,6 +36,7 @@ const LoginFormulario = () => {
         }
 
         dispatch(loginReducer(valores));
+        dispatch(MostrarCargandoLogin());
     };
 
     const EnviarLogin = () => {

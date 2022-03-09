@@ -7,13 +7,14 @@
     /* position: relative; */
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
 .Logo-KC-Creciendo-Juntos{
     width: 60px;
     margin-right: 20px;
     margin-left: 40px;
+    cursor: pointer;
 }
 
 .Contenedor-Items-Top{
@@ -51,6 +52,8 @@
     align-items: center;
     margin-top: 60px;
     margin-bottom: -25px;
+    position: relative;
+    box-shadow: 0 4px 4px rgb(216 223 233 / 92%);
 }
 
 .Cuerpo-Item-Filtro-Top{
@@ -98,7 +101,7 @@
 
 .Contenedor-Expandible-Mi-Cuenta{
     width: 240px;
-    height: 131px;
+    height: 135px;
     right: 20px;
     top: 60px;
 
@@ -126,6 +129,7 @@
     display: flex;
     align-items: center;
     margin-top: 8px;
+    padding-bottom: 8px;
 }
 
 .Contenedor-Cerrar-Sesion-Top{
@@ -153,4 +157,12 @@
 
 .Icono-Persona-Blanco-Top{
     width: 50px;
+}
+
+.Icono-Actualizar{
+    width: 25px;
+    position: absolute;
+    right: 30px;
+    top: 5px;
+    cursor: pointer;
 }

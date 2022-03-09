@@ -20,7 +20,11 @@ const Contraprestaciones = () => {
         <div
             className='Contenedor-Contraprestaciones'
         >
-            <div className='Wbold-S26-H35-C1E1E1E'>
+            <div 
+                className='Wbold-S20-H35-C3646C4' 
+                style={{background:'#EDF0FA', marginLeft:'-40px', marginRight:'-70px', paddingTop:'3px', paddingBottom:'3px', paddingLeft:'40px'}}
+
+            >
                 Contraprestaciones
             </div>
 

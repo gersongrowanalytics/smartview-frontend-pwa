@@ -29,6 +29,12 @@ const ModalFiltroColumnas = (props) => {
 
     let nombreExcelHojaDescargar = props.nombreExcelHojaDescargar
     let nombreExcelDescargar     = props.nombreExcelDescargar
+
+    let enviarCorreo     = props.enviarCorreo
+    let setMostrarModalEnviarCorreo     = props.setMostrarModalEnviarCorreo
+    let setInfoDataCorreo = props.setInfoDataCorreo
+    let setNombreArchivoCorreoExcel = props.setNombreArchivoCorreoExcel
+    let setTituloArchivoCorreoExcel = props.setTituloArchivoCorreoExcel
     
     const dispatch = useDispatch()
 
@@ -300,7 +306,18 @@ const ModalFiltroColumnas = (props) => {
                             onClick={async () => {
                                 if(columnas_seleccionadas_filtro_descarga.length > 0){
                                     await dispatch(ObtenerDataDescargarExcelReducer())
-                                    refBtnDescarga.current.click()
+
+                                    if(enviarCorreo == true){
+                                        setInfoDataCorreo(data_descargar_excel_promociones)
+                                        setNombreArchivoCorreoExcel(nombreExcelDescargar)
+                                        setTituloArchivoCorreoExcel(nombreExcelHojaDescargar)
+                                        setSeleccionoDescargar(false)
+                                        setMostrarModalFiltroColumnas(false)
+                                        setMostrarModalEnviarCorreo(true)
+
+                                    }else{
+                                        refBtnDescarga.current.click()
+                                    }
                                 }
                             }}
                             loading={cargando_btn_excel_descargar}

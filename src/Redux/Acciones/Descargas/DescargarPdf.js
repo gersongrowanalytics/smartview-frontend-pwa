@@ -8,12 +8,14 @@ import {
     CARGANDO_BTN_EXCEL_DESCARGAR_PDF
 } from '../../../Constantes/Descargas/Descargas'
 
-export const DescargarPdfSucursalReducer = (refBtnPdf) => async (dispatch, getState) => {
+export const DescargarPdfSucursalReducer = (refBtnPdf, envioCorreo = false) => async (dispatch, getState) => {
 
-    dispatch({
-        type: CARGANDO_BTN_EXCEL_DESCARGAR_PDF,
-        payload : true
-    })
+    if(envioCorreo == false){
+        dispatch({
+            type: CARGANDO_BTN_EXCEL_DESCARGAR_PDF,
+            payload : true
+        })
+    }
 
     await dispatch(obtenerPromocionesReducer())
 
@@ -69,16 +71,22 @@ export const DescargarPdfSucursalReducer = (refBtnPdf) => async (dispatch, getSt
 
     }, 1000);
 
-    setTimeout(async function () {
-        dispatch({
-            type: CARGANDO_BTN_EXCEL_DESCARGAR_PDF,
-            payload : false
-        })
-    }, 1000)
+    if(envioCorreo == false){
+        setTimeout(async function () {
+            dispatch({
+                type: CARGANDO_BTN_EXCEL_DESCARGAR_PDF,
+                payload : false
+            })
+        }, 1000)
+    }
 
-    setTimeout(async function () {
-        refBtnPdf.current.click()
-    }, 3000)
+    if(envioCorreo == true){
+
+    }else{
+        setTimeout(async function () {
+            refBtnPdf.current.click()
+        }, 3000)
+    }
 
 
     return config.api+"/Sistema/Pdf/"+localStorage.getItem('usutoken')+".pdf"

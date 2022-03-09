@@ -261,7 +261,7 @@ class TarjetaCargaArchivo extends Component {
                                         />
                                     </div>
                                     <div className='Segunda-Contenedor-Tarjeta-Carga-Archivo'>
-                                        <Row>
+                                        <Row style={{height:'100%'}}>
                                             <Col 
                                                 xl={8} style={{marginLeft:'-10px', textAlign: "-webkit-right"}} 
                                                 onClick={this.seleccionarFile}
@@ -271,12 +271,20 @@ class TarjetaCargaArchivo extends Component {
                                                 </div>
                                             </Col>
                                             <Col xl={16}>
-                                                <div className='Wbold-S12-H16-C1E1E1E Titulo-Tarjeta-CargaArchivo'>
-                                                    {this.props.titulo}<br/>
-                                                    {this.props.subtitulo}
+                                                <div 
+                                                    className='Titulo-Tarjeta-CargaArchivo'
+                                                >
+                                                    <div>
+                                                        <div className='Wbold-S12-H16-C004FB8'>
+                                                            {this.props.titulo}
+                                                        </div>
+                                                        <div className='Wnormal-S12-H16-C004FB8'>
+                                                            {this.props.subtitulo}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </Col>
-                                            <Col xl={24} style={{marginTop:'10px'}}>
+                                            <Col xl={24} style={{}}>
                                                 {
                                                     this.state.subioArchivo == true
                                                     ?<div className='Wnormal-S12-H16-C1876F2 Titulo-Archivo-Subido-CargaArchivo'>
@@ -297,7 +305,7 @@ class TarjetaCargaArchivo extends Component {
                                                 style={{
                                                     display: "flex",
                                                     justifyContent: "center",
-                                                    marginTop:'15px',
+                                                    marginTop:'0px',
                                                     animationDelay: "2s"
                                                 }}
                                             >

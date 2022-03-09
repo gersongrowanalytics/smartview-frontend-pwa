@@ -40,7 +40,9 @@ const MiPerfil = () => {
 
 
     return (
-        <div>
+        <div
+            style={{marginTop:'115px'}}
+        >
             <Form
                 onFinish={onFinish}
                 initialValues={{

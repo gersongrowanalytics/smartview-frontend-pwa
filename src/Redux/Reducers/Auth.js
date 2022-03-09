@@ -11,7 +11,9 @@ import {
   OBTENER_PERMISOS_USUARIO,
   OBTENER_DATOS_USUARIO_LOGIN,
   CARGANDO_BTN_LOGIN,
-  DATA_RECUPERAR
+  DATA_RECUPERAR,
+  SELECCIONAR_OTRO_CANAL_SISTEMA,
+  MOSTRAR_TERMINOS_CONDICIONES_DATA_LOGIN
 } from "../../Constantes/ActionTypes";
 import {
   OBTENER_PAISES_SISTEMA,
@@ -30,7 +32,14 @@ const INIT_STATE = {
   paisSeleccionado : {},
   datosUsuarioLogeado : {},
   cargandoLogin : false,
-  data_recupear : {}
+  data_recupear : {},
+  canal_seleccionado : "Tradicional",
+
+  mostrar_terminos_condiciones_login : false,
+
+  cargando_vista_inicio_sistema: true,
+
+  mostrar_cargando_preload_sistema : true
 };
 
 
@@ -135,6 +144,34 @@ export default (state = INIT_STATE, action) => {
         data_recupear : action.payload
       }
     }
+
+    case SELECCIONAR_OTRO_CANAL_SISTEMA: {
+      return {
+        ...state,
+        canal_seleccionado : action.payload
+      }
+    }
+    case MOSTRAR_TERMINOS_CONDICIONES_DATA_LOGIN: {
+      return {
+        ...state,
+        mostrar_terminos_condiciones_login : action.payload
+      }
+    }
+
+    case "CARGANDO_VISTA_INICIO_SISTEMA": {
+      return {
+        ...state,
+        cargando_vista_inicio_sistema : action.payload
+      }
+    }
+
+    case "MOSTRAR_CARGANDO_PRELOAD_SISTEMA": {
+      return {
+        ...state,
+        mostrar_cargando_preload_sistema : action.payload
+      }
+    }
+    
     default:
       return state;
   }

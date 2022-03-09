@@ -1,7 +1,7 @@
 .Contenedor-Contraprestaciones{
     margin-left: 40px;
     margin-right: 70px;
-    margin-top: 40px;
+    margin-top: 93px;
     margin-bottom: 40px;
 }
 
@@ -68,13 +68,14 @@
     box-sizing: border-box;
     /* transform: matrix(1, 0, 0, -1, 0, 0); */
     border-radius: 8px 8px 0px 0px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .Tabla-Contraprestaciones{
     top: 0;
     position: absolute;
     left: -1750px;
+    width: 100%;
 }
 
 .Tabla-Contraprestaciones-Ocultar{
@@ -134,10 +135,10 @@
 
 .Tabla-Contraprestaciones thead th{
     background: #3646C4;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    /* padding-left: 60px;
+    padding-right: 60px; */
+    padding-top: 3px;
+    padding-bottom: 3px;
     white-space: nowrap;
 
     /* position: absolute; */

@@ -26,25 +26,51 @@ const CargarArchivo = () => {
     const [regresarNotificacionAbierta, setRegresarNotificacionAbierta] = useState(false)
 
     return (
-        <div style={{marginLeft:'40px', marginRight:'40px', position:'relative'}}>
-            <div className='Wbold-S26-H35-C1E1E1E'>File Upload</div>
+        <div style={{marginLeft:'40px', marginRight:'40px', position:'relative', marginTop:'110px'}}>
+            <div 
+                className='Wbold-S20-H35-C3646C4 Titulo-Modulo-Carga-Archivos'
+            >
+                File Upload
+            </div>
             <div>
-                <Row>
-                    <Col xl={20} style={{marginTop:'20px'}}>
+                <Row
+                    style={{
+                        display: "flex",
+                        textAlign: "-webkit-center",
+                        marginLeft:'-20px'
+                    }}
+                >
+                    <Col xl={19} style={{marginTop:'20px'}}>
                         <Row>
-                            <Col xl={8} style={{textAlign: "-webkit-right"}}>
+                            <Col xl={6}>
                                 <TarjetaCargaArchivo
-                                    titulo        = {'Añadir Sell In'}
-                                    subtitulo     = {""}
+                                    titulo        = {'Sell In'}
+                                    // titulo        = {'(Efectivo)'}
+                                    subtitulo     = {"(Efectivo)"}
                                     url           = {'cargarArchivo/ventas/sellin'}
+                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
+                                    // envcambios = {true}
+                                />
+                                {/* <TarjetaCargaArchivo
+                                    titulo        = {'Sell Out'}
+                                    subtitulo     = {"(Efectivo)"}
+                                    url           = {'cargarArchivo/ventas/sellin'}
+                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
+                                /> */}
+                            </Col>
+                            <Col xl={6}>
+                                <TarjetaCargaArchivo
+                                    titulo        = {'Sell Out'}
+                                    subtitulo     = {"(Efectivo)"}
+                                    url           = {'cargarArchivo/ventas/sellout'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
                                     envcambios = {true}
                                 />
                             </Col>
-                            <Col xl={8} style={{textAlign: "-webkit-center"}}>
+                            <Col xl={6} >
                                 <TarjetaCargaArchivo
-                                    titulo        = {'Añadir Objetivos'}
-                                    subtitulo     = {"Sell In"}
+                                    titulo        = {'Sell In'}
+                                    subtitulo     = {"(Objetivo)"}
                                     // url           = {'modulo/cargaArchivos/prueba-tarjeta'}
                                     url           = {'cargarArchivo/ventas/obejtivos'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
@@ -52,10 +78,10 @@ const CargarArchivo = () => {
                                     archivoExito = {true}
                                 />
                             </Col>
-                            <Col xl={8} style={{textAlign: "-webkit-left"}}>
+                            <Col xl={6}>
                                 <TarjetaCargaArchivo
-                                    titulo        = {'Añadir Objetivos'}
-                                    subtitulo     = {"Sell Out"}
+                                    titulo        = {'Sell Out'}
+                                    subtitulo     = {"(Objetivos)"}
                                     url           = {'cargarArchivo/ventas/obejtivossellout'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
                                     cargando = {true}
@@ -64,25 +90,53 @@ const CargarArchivo = () => {
 
                             {/*  */}
 
-                            <Col xl={8} style={{textAlign: "-webkit-right"}}>
+                            <Col xl={6}>
                                 <TarjetaCargaArchivo
-                                    titulo        = {'Añadir Mecánica Promocional (excel)'}
-                                    subtitulo     = {""}
+                                    titulo        = {'Mecánica Promocional'}
+                                    subtitulo     = {"(Plantilla)"}
                                     url           = {'cargarArchivo/promociones/nuevaspromociones'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
                                 />
                             </Col>
-                            <Col xl={8} style={{textAlign: "-webkit-center"}}>
+                            <Col xl={6} >
                                 <TarjetaCargaArchivo
-                                    titulo        = {'Añadir Rebate'}
-                                    subtitulo     = {""}
+                                    titulo        = {'Rebate DT'}
+                                    subtitulo     = {"(Plantilla)"}
                                     url           = {'cargarArchivo/ventas/rebate'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
                                 />
                             </Col>
-                            <Col xl={8} style={{textAlign: "-webkit-left"}}>
+                            
+                            <Col xl={6}>
                                 <TarjetaCargaArchivo
-                                    titulo        = {'Actualizar Productos'}
+                                    titulo        = {'Promociones Liquidadas DT'} // UNA SOLA LINEA
+                                    subtitulo     = {"(Efectivo)"}
+                                    url           = {'cargarArchivo/promociones-liquidadas'}
+                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
+                                />
+                            </Col>
+
+                            <Col xl={6}>
+                                <TarjetaCargaArchivo
+                                    titulo        = {'Reconocimiento Pagos DT'}
+                                    subtitulo     = {"(Efectivo)"}
+                                    url           = {'cargarArchivo/reconocimiento-pagos'}
+                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
+                                />
+                            </Col>
+
+                            <Col xl={6} >
+                                <TarjetaCargaArchivo
+                                    titulo        = {'Lista de Precios'}
+                                    subtitulo     = {"(Plantilla)"}
+                                    url           = {'cargarArchivo/lista-precios'}
+                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
+                                />
+                            </Col>
+
+                            <Col xl={6}>
+                                <TarjetaCargaArchivo
+                                    titulo        = {'Master de Productos'}
                                     subtitulo     = {""}
                                     url           = {'cargarArchivo/productos'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
@@ -92,50 +146,18 @@ const CargarArchivo = () => {
                             {/*  */}
 
 
-                            <Col xl={8} style={{textAlign: "-webkit-right"}}>
+                            <Col xl={6} >
                                 <TarjetaCargaArchivo
-                                    titulo        = {'Actualizar Distribuidoras'}
+                                    titulo        = {'Master de Clientes'}
                                     subtitulo     = {""}
                                     url           = {'cargarArchivo/clientes'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
                                 />
                             </Col>
-                            <Col xl={8} style={{textAlign: "-webkit-center"}}>
-                                <TarjetaCargaArchivo
-                                    titulo        = {'Reconocimiento Pagos'}
-                                    subtitulo     = {""}
-                                    url           = {'cargarArchivo/reconocimiento-pagos'}
-                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
-                                />
-                            </Col>
-                            <Col xl={8} style={{textAlign: "-webkit-left"}}>
-                                <TarjetaCargaArchivo
-                                    titulo        = {'Promociones Liquidadas'}
-                                    subtitulo     = {""}
-                                    url           = {'cargarArchivo/promociones-liquidadas'}
-                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
-                                />
-                            </Col>
-
-
-
-                            {/*  */}
-
-                            <Col xl={8} style={{textAlign: "-webkit-right"}}>
-                                <TarjetaCargaArchivo
-                                    titulo        = {'Lista de Precios'}
-                                    subtitulo     = {""}
-                                    url           = {'cargarArchivo/lista-precios'}
-                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
-                                />
-                            </Col>
                             
-
-                            {/*  */}
-
                         </Row>
                     </Col>
-                    <Col xl={4}>
+                    <Col xl={5}>
                         {/* <div className='Contenedor-Notificaciones'>
                             <div className='Titulo-Notificacion-CargaArchivos Wbold-S14-H19-C1E1E1E'>
                                 <div 

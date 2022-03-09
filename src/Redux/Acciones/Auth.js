@@ -2,16 +2,35 @@ import {
     SIGNIN_USER_SUCCESS,
     CARGANDO_BTN_LOGIN,
     DATA_RECUPERAR,
-    OBTENER_DATOS_USUARIO_LOGIN
+    OBTENER_DATOS_USUARIO_LOGIN,
+    SELECCIONAR_OTRO_CANAL_SISTEMA,
+    MOSTRAR_TERMINOS_CONDICIONES_DATA_LOGIN,
+    ADMINISTRAR_TARJETAS_HOME_DATA_LOGIN
 } from "../../Constantes/ActionTypes";
 import config from '../../config'
 import { estadoRequestReducer } from "./EstadoRequest"
 import { message } from "antd";
 
+export const MostrarCargandoLogin = () => (dispatch, getState) => {
+
+    dispatch({
+        type: "MOSTRAR_CARGANDO_PRELOAD_SISTEMA",
+        payload : false
+    })
+
+}
+
 export const loginReducer = (usuario) => async ( dispatch, getState) => {
+
+    let redireccionar = false
 
     dispatch({
         type: CARGANDO_BTN_LOGIN,
+        payload: true
+    })
+
+    dispatch({
+        type: "CARGANDO_VISTA_INICIO_SISTEMA",
         payload: true
     })
 
@@ -34,7 +53,7 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
             if(data.respuesta == true){
-                console.log(data.datos)
+                // console.log(data.datos)
                 localStorage.setItem('contrasena', usuario.contrasena)
                 localStorage.setItem('usuario', usuario.usuario)
                 localStorage.setItem('user_id', data.datos.usuid)
@@ -52,9 +71,25 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
 
                 await dispatch(loginCorrecto(data.datos))
                 await dispatch(obtenerDatosUsuarioLogin(data.datos))
+
+                dispatch({
+                    type: MOSTRAR_TERMINOS_CONDICIONES_DATA_LOGIN,
+                    payload: data.mostrarterminos
+                })
+
+                redireccionar = data.mostrarterminos
+
                 // message.success(data.mensaje);
             }else{
                 message.error(data.mensaje);
+                if(localStorage.getItem('user_id') > 0){
+                    // message.error(data.mensaje);
+                    // console.log('ya existe una sesion y ahora esta equivocado')
+                    dispatch(cerrarSesionReducer())
+                }else{
+                    // console.log('No existe nada')
+                    message.error(data.mensaje);
+                }
             }
         }
     }).catch((error)=> {
@@ -62,11 +97,18 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
     });
 
     dispatch({
+        type: "CARGANDO_VISTA_INICIO_SISTEMA",
+        payload: false
+    })
+
+    dispatch({
         type: CARGANDO_BTN_LOGIN,
         payload: false
     })
 
-    return true
+    return {
+        "redirigirterminos" : redireccionar
+    }
 }
 
 export const loginCorrecto = (user) => {
@@ -83,9 +125,41 @@ export const obtenerDatosUsuarioLogin = (user) => {
     }
 }
 
-export const cerrarSesionReducer = () => async (dispatch) => {
-    
+export const cerrarSesionReducer = () => async (dispatch, getState) => {
+
+    await fetch(config.api+'cerrar-session',
+        {
+            mode:'cors',
+            method: 'POST',
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api-token'	   : localStorage.getItem('usutoken'),
+                'api_token'	   : localStorage.getItem('usutoken')
+            }
+        }
+    )
+    .then( async res => {
+            await dispatch(estadoRequestReducer(res.status))
+            return res.json()
+    })
+    .then(data => {
+            const estadoRequest = getState().estadoRequest.init_request
+            if(estadoRequest == true){
+                if(data.respuesta == true){
+
+                    
+
+                }else{
+                    
+                }
+            }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
     localStorage.clear();
+
     window.location.href = window.location.href;
 };
 
@@ -197,4 +271,11 @@ export const CambiarContraseniaReducer = (dataenviada) => async (dispatch, getSt
         payload: false
     })
 
+}
+
+export const CambiarCanalSeleccionadoReducer = (canal) => (dispatch, getState) => {
+    dispatch({
+        type: SELECCIONAR_OTRO_CANAL_SISTEMA,
+        payload : canal
+    })
 }

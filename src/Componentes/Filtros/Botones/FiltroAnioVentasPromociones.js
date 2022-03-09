@@ -23,11 +23,18 @@ const FiltroAnioVentasPromociones = () => {
                 <div 
                     className='Contenedor-Filtro-Fecha-Ventas W600-S14-H19-C1E1E1E'
                     onClick={() => setMostrarAnio(!mostrarAnio)}
+                    onMouseEnter={() => setMostrarAnio(!mostrarAnio)}
                 >
                     <div>
                         {anioSeleccionadoFiltro}
                     </div>
                 </div>
+
+                {
+                    mostrarAnio == true
+                    ?<div className='Linea-Filtro-Zona-Venta-Promociones'></div>
+                    :null
+                }
 
                 {
                     mostrarAnio == true
@@ -291,6 +298,7 @@ const FiltroAnioVentasPromociones = () => {
                         opacity:'0.0'
                     }}
                     onClick={() => setMostrarAnio(!mostrarAnio)}
+                    onMouseEnter={() => setMostrarAnio(!mostrarAnio)}
                 >
 
                 </div>

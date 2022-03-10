@@ -115,16 +115,62 @@
 }
 
 .Icono-Reenviar{
-    height: 12px;
+    height: 13px;
     width: 15px;
     cursor: pointer;
-    margin-right: 19px;
 }
 
 .Icono-Eliminar{
-    height: 15px;
-    width: 12px;
+    height: 17px;
+    width: 15px;
     cursor: pointer;
+}
+
+.Fondo-Hover-Icono1{
+    background: white;
+    width: 36px;
+    border-radius: 21px;
+    display: flex;
+    height: 36px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.Fondo-Hover-Icono1:hover{
+    background: #558CFF;
+}
+
+.Fondo-Hover-Icono1:hover .Icono-Reenviar{ 
+    content:url(../../../Assets/Img/ElementosEnviados/Reenviar-white.png);
+}
+
+.Fondo-Hover-Icono2{
+    background: white;
+    width: 36px;
+    border-radius: 21px;
+    display: flex;
+    height: 36px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Fondo-Hover-Icono2:hover{
+    background: #558CFF;
+}
+
+.Fondo-Hover-Icono2:hover .Icono-Eliminar{ 
+    content:url(../../../Assets/Img/ElementosEnviados/Eliminar-white.png);
+}
+
+.Campo-Opciones{
+    display: flex;
+    justify-content: center;
+    padding-top: 7px;
 }
 
 .Texto-Asunto{
@@ -177,3 +223,81 @@
 /* .Zona-Icono:hover{
     cursor: pointer;
 } */
+
+.Caja-Modal-ReenviarElemento .ant-modal-content{
+    border-radius: 8px;
+}
+
+.Contenedor-Botones-Modal{
+    display: flex;
+    justify-content: center;
+}
+
+.Boton-Cancelar-Eliminar-Modal{
+    width: 67px;
+    height: 24px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    background: white;
+}
+
+.Boton-Aceptar-Eliminar-Modal{
+    width: 66px;
+    height: 24px;
+    border: 1px solid #3646C3;
+    box-sizing: border-box;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 7px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    background: #3646C4;
+    cursor: pointer;
+}
+
+.Titulo-Modal-Reenviar-Elemento{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.Texto-Modal-Reenviar-Elemento{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}

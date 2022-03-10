@@ -53,9 +53,8 @@ const ElementosEnviados = () => {
                                                 </td>
                                                 <td>
                                                     <Link to="/reenviar-elemento">
-                                                        <img src={Reenviar} className='Icono-Reenviar'></img>
+                                                        <img src={Reenviar} className='Icono-Reenviar' style={{marginRight:'19px'}}></img>
                                                     </Link>
-                                                   
                                                     <img src={Eliminar} className='Icono-Eliminar'></img>
                                                 </td>
                                             </tr>

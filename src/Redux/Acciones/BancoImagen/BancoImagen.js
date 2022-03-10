@@ -324,7 +324,131 @@ export const CargandoEditarFilaBancoImagenReducer = (accion, posicion, urlImagen
         payload: accion
     })
 }
+
+export const EditandoImagenNuevoBancoImagenesReducer = (tipo, posicion) => async (dispatch, getState) => {
+
+    let prosConImagenes = getState().bancoImagen.prosConImagenes
+    let prosSinImagenes = getState().bancoImagen.prosSinImagenes
+
+    if(tipo == "PENDIENTES"){
+        prosSinImagenes[posicion]['editando'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_SINIMAGENES,
+            payload: {
+                SinImagenes: JSON.stringify(prosSinImagenes) 
+            }
+        })
+    }else if(tipo == "ACTIVOS"){
+
+        prosConImagenes[posicion]['editando'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
+            payload: {
+                ConImagenes: JSON.stringify(prosConImagenes) 
+            }
+        })
+
+    }
+
+}
+
+
+export const EditarImagenNuevoBancoImagenReducer = (tipo, imagen, prosku, posicion) => async (dispatch, getState) => {
     
+    let prosConImagenes = getState().bancoImagen.prosConImagenes
+    let prosSinImagenes = getState().bancoImagen.prosSinImagenes
+
+    if(tipo == "PENDIENTES"){
+
+        prosSinImagenes[posicion]['cargandoEdicion'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_SINIMAGENES,
+            payload: {
+                SinImagenes: JSON.stringify(prosSinImagenes) 
+            }
+        })
+
+    }else if(tipo == "ACTIVOS"){
+
+        prosConImagenes[posicion]['cargandoEdicion'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
+            payload: {
+                ConImagenes: JSON.stringify(prosConImagenes) 
+            }
+        })
+
+    }
+
+    await fetch(config.api+'control-promociones/asignar-imagen-producto',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                usutoken    : localStorage.getItem('usutoken'),
+                req_imagen  : imagen,
+                req_prosku  : prosku
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken'),
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then( async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                
+                
+
+            }else{
+
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
+
+
+    if(tipo == "PENDIENTES"){
+
+        prosSinImagenes.splice(posicion,1)
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_SINIMAGENES,
+            payload: {
+                SinImagenes: JSON.stringify(prosSinImagenes) 
+            }
+        })
+
+    }else if(tipo == "ACTIVOS"){
+
+        prosConImagenes[posicion]['cargandoEdicion'] = false
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
+            payload: {
+                ConImagenes: JSON.stringify(prosConImagenes) 
+            }
+        })
+
+    }
+    
+    return true
+    
+}
 
 
 

@@ -24,7 +24,7 @@ const TablaLP = (props) => {
                             style={{
                                 position: "sticky",
                                 left: "0",
-                                zIndex: "2",
+                                zIndex: "5",
                                 backgroundColor: "#1EC0ED"
                             }}
                         >
@@ -38,10 +38,13 @@ const TablaLP = (props) => {
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
                                 </div>
 
-                                {/* <div className='Contenedor-Filtro-Tabla-LP'>
+                                
 
-                                </div> */}
-
+                            </div>
+                            <div className='Contenedor-Filtro-Tabla-LP'>
+                                <div>
+                                    
+                                </div>
                             </div>
                         </th>
 

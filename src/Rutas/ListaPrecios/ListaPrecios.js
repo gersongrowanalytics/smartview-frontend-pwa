@@ -79,7 +79,7 @@ const ListaPrecios = () => {
 
             <div 
                 className='Wbold-S20-H35-C3646C4' 
-                style={{paddingLeft:'40px', marginBottom:'20px', marginTop: "100px", background:'#EDF0FA', paddingTop:'5px', paddingBottom:'5px'}}
+                style={{paddingLeft:'40px', marginBottom:'20px', marginTop: "95px", background:'#EDF0FA', paddingTop:'5px', paddingBottom:'5px'}}
             >
                 Lista de Precios
             </div>
@@ -147,7 +147,7 @@ const ListaPrecios = () => {
                 </div>
             </div>
 
-            <div>
+            <div style={{zIndex:'-2'}}>
                 <div id="Contenedor-Tabla-Lista-Precios">
                     <Spin spinning={cargando_datos_tabla_lista_precios}>
                         <TablaLP 

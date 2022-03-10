@@ -7,9 +7,12 @@ import IconoWsp from '../../Assets/Img/Top/wsp.png'
 import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const FiltroSoporteTop = () => {
+const FiltroSoporteTop = (props) => {
 
-    const [mostrarContenido, setMostrarContenido] = useState(false)
+    // const [mostrarContenido, setMostrarContenido] = useState(false)
+    const mostrarContenido = props.mostrarContenido
+    const setMostrarContenido = props.setMostrarContenido
+
     const [pasoMouse, setPasoMouse] = useState(false)
 
     const refWsp = useRef(null)
@@ -22,7 +25,7 @@ const FiltroSoporteTop = () => {
     return (
         <>
             <div
-                style={{position:'relative'}}
+                style={{position:'relative', zIndex:'2'}}
             >
 
                     <a 
@@ -122,7 +125,7 @@ const FiltroSoporteTop = () => {
                         className='Cuerpo-Item-Filtro-Top'
                         style={{
                             left: "0px",
-                            zIndex:'4',
+                            zIndex:'6',
                             width:'170px'
                         }}
                     >
@@ -153,7 +156,7 @@ const FiltroSoporteTop = () => {
             {
                 mostrarContenido == true
                 ?<div 
-                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'1'}}
+                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'1', top:'0'}}
                     onClick={() => {
                         setMostrarContenido(!mostrarContenido)
                     }}
@@ -161,7 +164,7 @@ const FiltroSoporteTop = () => {
                 >
 
                     <div
-                        style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'5', opacity:'0.3', top:'750px'}}
+                        style={{position:'relative', width:'100%', height:'100%', background:'black', zIndex:'5', opacity:'0.3', top:'60px'}}
                     >
 
                     </div>

@@ -1,0 +1,169 @@
+.Contenedor-Btns-Banco-Imagenes{
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin-top: 12px;
+    /* background-color: red; */
+}
+
+.Btn-Principal-Activado-Banco-Imagenes{
+    background: #3646C4;
+    border-radius: 8px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.Btn-Principal-Desactivado-Banco-Imagenes{
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+
+.Barra-Busqueda-Banco-Imagenes{
+    width: 632px;
+    height: 36px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 27px;
+    position: absolute;
+    right: 0px;
+}
+
+
+/* TABLA ----------> */
+
+.Contenedor-Tabla-Banco-Imagenes{
+    margin-top: 30px;
+
+    box-shadow: 0px 0px 15px #D8DFE9;
+    height: 500px;
+    background-color: white;
+    position: relative;
+    overflow: auto;
+    border-radius: 8px;
+}
+
+.Tabla-Principal-Nuevo-Banco-Imagenes{
+    overflow:scroll;
+    white-space: nowrap;
+    position: relative;
+    z-index: 0;
+}
+
+.Tabla-Principal-Nuevo-Banco-Imagenes thead th {
+    background: #1EC0ED;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 2;
+    text-align: -webkit-center;
+}
+
+.Tabla-Principal-Nuevo-Banco-Imagenes thead{  
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
+    z-index: 1;
+}
+
+.Tabla-Principal-Nuevo-Banco-Imagenes tbody tr td{
+    text-align: -webkit-center;
+    /* padding-top: 3px; */
+    /* padding-bottom: 3px; */
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.Tabla-Principal-Nuevo-Banco-Imagenes tbody tr{
+    animation-delay: 3s;
+}
+
+.Tabla-Principal-Nuevo-Banco-Imagenes tbody tr:hover{
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px #E5E5E5;
+}
+
+
+.Tabla-Principal-Nuevo-Banco-Imagenes tbody tr:hover .Contenedor-Img-Nuevo-Banco-Imagenes{
+    display: none;
+}
+
+.Tabla-Principal-Nuevo-Banco-Imagenes tbody tr:hover .Contenedor-Icons-Nuevo-Banco-Imagenes{
+    display: flex;
+}
+
+.Contenedor-Icons-Nuevo-Banco-Imagenes{
+    display: none;
+    place-content: center;
+}
+
+.Contenedor-Icons-Editando-Nuevo-Banco-Imagenes{
+    display: flex;
+    place-content: center;
+}
+
+.Img-Nuevo-Banco-Imagenes{
+    width: 58px;
+    height: 45px;
+}
+
+.Icon-Editar-Nuevo-Banco-Imagenes{
+    width: 30px;
+    cursor: pointer;
+}
+
+.Icon-Editar-Nuevo-Banco-Imagenes:hover{
+    
+    /* width: 44px;
+    height: 44px; */
+    border-radius: 50px;
+    background: #558CFF;
+
+}
+
+.Img-Preload-Nuevo-Banco-Imagenes{
+    width: 121px;
+    height: 68px;
+}
+
+.Contenedor-Check-Icon-Preload-Nuevo-Banco-Imagen{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    background: #558CFF;
+    position: relative;
+    margin-left: 10px;
+    margin-top: 13px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.Check-Icon-Preload-Nuevo-Banco-Imagen{
+    font-size: 20px;
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    color: white !important;
+}
+
+.Fila-Desaparecer-Nuevo-Banco-Imagenes{
+    
+    display: none
+}
+
+/* .Check-Icon-Preload-Nuevo-Banco-Imagen:{
+    border-radius: 50px;
+    background: #558CFF;
+} */

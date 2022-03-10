@@ -64,6 +64,26 @@
     color: #1E1E1E;
 }
 
+.W600-S14-H19-C1E1E1E-L0015{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: #1E1E1E;
+    letter-spacing: -0.015em;
+}
+
+.W600-S14-H19-CFFFFFF-L0015{
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: #FFFFFF;
+    letter-spacing: -0.015em;
+}
+
 .W600-S14-H19-C1876F2-L0015{
     font-family: Segoe UI;
     font-style: normal;
@@ -99,6 +119,16 @@
     font-size: 12px !important;
     line-height: 16px !important;
     color: #FFFFFF !important;
+}
+
+.W600-S12-H16-C1E1E1E-L0015{
+    font-family: Segoe UI !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    color: #1E1E1E;
+    letter-spacing: -0.015em;
 }
 
 .W600-S12-H16-C1E1E1E{
@@ -528,3 +558,24 @@
     letter-spacing: -0.015em;
     color: #A4A3A3;  
 }
+
+.W700-S26-H35-C1E1E1E-L0015{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 35px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.W700-S14-H19-CFFFFFF-L0015{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+

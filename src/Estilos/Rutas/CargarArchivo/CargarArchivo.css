@@ -12,14 +12,17 @@
 
 .Primera-Contenedor-Tarjeta-Carga-Archivo{
     width: 100%;
-    height: 65%;
+    height: 55%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .Segunda-Contenedor-Tarjeta-Carga-Archivo{
-    height: 35%;
+    height: 45%;
+    padding-top: 20px;
+    position: relative;
 }
 
 .Contenedor-Notificaciones{
@@ -132,6 +135,8 @@
     /* width: 200px; */
     width: 118px;
     height: 118px;
+    position: absolute;
+    top: 20px;
 }
 
 .Gif-Cargando-TarjetaCargaArchivo{
@@ -154,6 +159,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 
@@ -218,6 +224,8 @@
     align-items: center;
     margin-bottom: 40px;
     margin-top: 10px;
+    position: absolute;
+    top: 20px;
 }
 
 .Icono-Interno-Error-TarjetaCargaArchivo{

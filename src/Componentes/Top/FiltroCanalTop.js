@@ -8,11 +8,15 @@ import {
 } from '../../Redux/Acciones/Auth'
 import { useDispatch, useSelector } from "react-redux";
 
-const FiltroCanalTop = () => {
+const FiltroCanalTop = (props) => {
 
     const dispatch = useDispatch()
 
-    const [mostrarContenido, setMostrarContenido] = useState(false)
+    // const [mostrarContenido, setMostrarContenido] = useState(false)
+
+    const mostrarContenido = props.mostrarContenido
+    const setMostrarContenido = props.setMostrarContenido
+
     const [pasoMouse, setPasoMouse] = useState(false)
 
     const {
@@ -23,7 +27,7 @@ const FiltroCanalTop = () => {
     return (
         <>
             <div
-                style={{position:'relative'}}
+                style={{position:'relative', zIndex:'2'}}
             >
                 
                 
@@ -144,14 +148,14 @@ const FiltroCanalTop = () => {
             {
                 mostrarContenido == true
                 ?<div 
-                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'4',}}
+                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'1', top:'0'}}
                     onClick={() => {
                         setMostrarContenido(!mostrarContenido)
                     }}
                     onMouseEnter={() => setMostrarContenido(false)}
                 >
                     <div
-                        style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'5', opacity:'0.3', top:'750px'}}
+                        style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'5', opacity:'0.3', top:'60px'}}
                     >
 
                     </div>

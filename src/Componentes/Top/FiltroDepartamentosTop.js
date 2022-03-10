@@ -11,9 +11,12 @@ import IconoFileUpload from '../../Assets/Img/Top/iconoFileUpload.png'
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
 
-const FiltroDepartamentosTop = () => {
+const FiltroDepartamentosTop = (props) => {
     
-    const [mostrarContenido, setMostrarContenido] = useState(false)
+    // const [mostrarContenido, setMostrarContenido] = useState(false)
+    const mostrarContenido = props.mostrarContenido
+    const setMostrarContenido = props.setMostrarContenido
+
     const [pasoMouse, setPasoMouse] = useState(false)
     
     const {
@@ -24,7 +27,7 @@ const FiltroDepartamentosTop = () => {
     return (
         <>
             <div
-                style={{position:'relative'}}
+                style={{position:'relative', zIndex:'2'}}
             >
                 <div 
                     className='Wbold-S14-H19-CFFFFFF Contenedor-Items-Top'
@@ -169,14 +172,14 @@ const FiltroDepartamentosTop = () => {
             {
                 mostrarContenido == true
                 ?<div 
-                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'1'}}
+                    style={{position:'absolute', width:'100%', height:'200vh', zIndex:'1', top:'0',}}
                     onClick={() => {
                         setMostrarContenido(!mostrarContenido)
                     }}
                     onMouseEnter={() => setMostrarContenido(false)}
                 >
                     <div
-                        style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'5', opacity:'0.3', top:'750px'}}
+                        style={{position:'absolute', width:'100%', height:'200vh', background:'black', zIndex:'5', opacity:'0.3', top:'60px'}}
                     >
 
                     </div>

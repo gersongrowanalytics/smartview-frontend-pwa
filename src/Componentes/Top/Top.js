@@ -55,6 +55,10 @@ const Top = () => {
 
     const [mostrarCuerpoMiCuenta, setMostrarCuerpoMiCuenta] = useState(false)
 
+    const [mostrarContenidoCanal, setMostrarContenidoCanal] = useState(false)
+    const [mostrarContenidoOpcio, setMostrarContenidoOpcio] = useState(false)
+    const [mostrarContenidoSopor, setMostrarContenidoSopor] = useState(false)
+
     return (
         <div>
             <div className='Contenedor-Top'>
@@ -80,11 +84,32 @@ const Top = () => {
                     />
                 }
 
-                <FiltroCanalTop />
+                <FiltroCanalTop 
+                    mostrarContenido = {mostrarContenidoCanal}
+                    setMostrarContenido = {(mostrar) => {
+                        setMostrarContenidoCanal(mostrar)
+                        setMostrarContenidoOpcio(false)
+                        setMostrarContenidoSopor(false)
+                    }}
+                />
 
-                <FiltroDepartamentosTop />
+                <FiltroDepartamentosTop 
+                    mostrarContenido = {mostrarContenidoOpcio}
+                    setMostrarContenido = {(mostrar) => {
+                        setMostrarContenidoOpcio(mostrar)
+                        setMostrarContenidoCanal(false)
+                        setMostrarContenidoSopor(false)
+                    }}
+                />
 
-                <FiltroSoporteTop />
+                <FiltroSoporteTop 
+                    mostrarContenido = {mostrarContenidoSopor}
+                    setMostrarContenido = {(mostrar) => {
+                        setMostrarContenidoOpcio(false)
+                        setMostrarContenidoCanal(false)
+                        setMostrarContenidoSopor(mostrar)
+                    }}
+                />
 
                 <div className='Wbold-S14-H19-CFFFFFF Contenedor-Items-Mi-Cuenta-Top' onClick={() => setMostrarCuerpoMiCuenta(!mostrarCuerpoMiCuenta)}>
                     <img src={IconoUsuario} className='Img-Icon-Usuario' />

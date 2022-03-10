@@ -9,6 +9,7 @@ import {obtenerSucursalesReducer} from '../Redux/Acciones/Sucursales'
 import {loginReducer} from '../Redux/Acciones/Auth'
 import {useDispatch, useSelector} from "react-redux";
 import BancoImagen from './BancoImagen/BancoImagen';
+import NuevoBancoImagen from './BancoImagen/NuevoBancoImagenes';
 import ListaPrecios from '../Rutas/ListaPrecios/ListaPrecios'
 import CargarArchivo from '../Rutas/CargarArchivo/CargarArchivo'
 import Contraprestaciones from '../Rutas/Contraprestaciones/Contraprestaciones'
@@ -122,7 +123,8 @@ const Rutas = () => {
                     <Route exact path='/promociones' element={<Promociones/>}/>
                     <Route exact path='/descargas' element={<Descargas/>}/>
                     <Route exact path='/lista-precios' element={<ListaPrecios/>}/>
-                    <Route exact path='/banco-imagen' element={<BancoImagen/>}/>
+                    {/* <Route exact path='/banco-imagen' element={<BancoImagen/>}/> */}
+                    <Route exact path='/banco-imagen' element={<NuevoBancoImagen/>}/>
                     <Route exact path='/carga-archivo' element={<CargarArchivo/>}/>
                     <Route exact path='/contraprestaciones' element={<Contraprestaciones/>}/>
                     <Route exact path='/mi-perfil' element={<MiPerfil/>}/>

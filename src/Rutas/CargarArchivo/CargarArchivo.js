@@ -30,7 +30,7 @@ const CargarArchivo = () => {
     const [mostrarModalEliminarNoti, setMostrarModalEliminarNoti] = useState(false)
 
     return (
-        <div style={{marginLeft:'40px', marginRight:'40px', position:'relative', marginTop:'110px'}}>
+        <div style={{marginLeft:'40px', marginRight:'40px', position:'relative', marginTop:'105px'}}>
             <div 
                 className='Wbold-S20-H35-C3646C4 Titulo-Modulo-Carga-Archivos'
             >

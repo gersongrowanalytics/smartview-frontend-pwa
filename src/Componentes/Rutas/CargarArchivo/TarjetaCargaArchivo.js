@@ -138,7 +138,11 @@ class TarjetaCargaArchivo extends Component {
                                                         display: "flex",
                                                         justifyContent: "center",
                                                         marginBottom: "23px",
-                                                        marginTop: "66px"
+                                                        marginTop: "66px",
+                                                        position: "absolute",
+                                                        top: "20px",
+                                                        width: "100%",
+                                                        left: "0"
                                                     }}
                                                 >
                                                     <img 
@@ -147,7 +151,7 @@ class TarjetaCargaArchivo extends Component {
                                                     />
                                                 </div>
 
-                                                <div className='Wbold-S12-H16-C1E1E1E'>
+                                                <div className='Wbold-S12-H16-C1E1E1E' style={{paddingLeft:'60px', paddingRight:'60px', paddingTop:'90px'}}>
                                                     ¡Archivo subido con éxito!
                                                 </div>
 
@@ -155,7 +159,11 @@ class TarjetaCargaArchivo extends Component {
                                                     style={{
                                                         display: "flex",
                                                         justifyContent: "center",
-                                                        marginTop: "35px"
+                                                        marginTop: "35px",
+                                                        position: "absolute",
+                                                        bottom: "20px",
+                                                        width: "100%",
+                                                        left: "0"
                                                     }}
                                                 >
                                                     <div 
@@ -212,15 +220,16 @@ class TarjetaCargaArchivo extends Component {
                                                         justifyContent: "center",
                                                         textAlign: "center",
                                                         marginTop:'-25px',
-                                                        paddingLeft:'10px',
-                                                        paddingRight:'10px'
+                                                        paddingLeft:'65px',
+                                                        paddingRight:'65px',
+                                                        marginTop:'125px'
                                                     }}
                                                 >
                                                     <div>
                                                         <div className='Wbold-S14-H19-CFF3742'>
                                                             ¡Algo salió mal!
                                                         </div>
-                                                        <div className='W600-S12-H16-CFF3742'>
+                                                        <div className='W600-S12-H16-CFF3742' style={{marginTop:'5px'}}> 
                                                             Encontramos un error en el archivo
                                                         </div>
                                                     </div>
@@ -230,7 +239,11 @@ class TarjetaCargaArchivo extends Component {
                                                     style={{
                                                         display: "flex",
                                                         justifyContent: "center",
-                                                        marginTop: "15px"
+                                                        marginTop: "15px",
+                                                        position: "absolute",
+                                                        bottom: "20px",
+                                                        width: "100%",
+                                                        left: "0"
                                                     }}
                                                 >
                                                     <div 
@@ -295,7 +308,7 @@ class TarjetaCargaArchivo extends Component {
                                                     </div>
                                                 </div>
                                             </Col>
-                                            <Col xl={24} style={{}}>
+                                            <Col xl={24} style={{marginTop:'-30px'}}>
                                                 {
                                                     this.state.subioArchivo == true
                                                     ?<div 
@@ -324,9 +337,15 @@ class TarjetaCargaArchivo extends Component {
                                                     display: "flex",
                                                     justifyContent: "center",
                                                     marginTop:'0px',
-                                                    animationDelay: "2s"
+                                                    animationDelay: "2s",
+                                                    position:'absolute',
+                                                    bottom:'20px',
+                                                    width:'100%',
                                                 }}
                                             >
+                                                <div>
+
+                                                </div>
                                                 {
                                                     this.state.subioArchivo == true
                                                     ?<Button 

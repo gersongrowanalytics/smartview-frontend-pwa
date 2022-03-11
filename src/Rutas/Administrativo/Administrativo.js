@@ -2,7 +2,12 @@ import React, {useState} from 'react'
 import { Row, Col } from 'antd'
 import { Link } from "react-router-dom"
 import '../../Estilos/Rutas/Administrativo/Administrativo.css'
-import Perfil from '../../Assets/Img/Administrativo/adm.png'
+import Adm from '../../Assets/Img/Administrativo/Administrador.png'
+import Cliente from '../../Assets/Img/Administrativo/Cliente.png'
+import Ejecutivo from '../../Assets/Img/Administrativo/Ejecutivo.png'
+import Gerente from '../../Assets/Img/Administrativo/Grente.png'
+import Otro from '../../Assets/Img/Administrativo/Otro-two.png'
+import Otro2 from '../../Assets/Img/Administrativo/Otro.png'
 import Agregar from '../../Assets/Img/Administrativo/agregar.png'
 const Administrativo = () => {
 
@@ -70,7 +75,7 @@ const Administrativo = () => {
                     <div className='flip-card'>
                         <div className='flip-card-inner'>
                             <div className='flip-card-front'>
-                                <img src={Perfil} className='Imagen-Perfil'></img>
+                                <img src={Adm} className='Imagen-Perfil'></img>
                                 <div className='Texto-Card-Perfil'>Administrador</div>
                                 <div className='Texto2-Card-Perfil'>Ver Perfil</div>
                             </div>
@@ -86,8 +91,8 @@ const Administrativo = () => {
                     <div className='flip-card'>
                         <div className='flip-card-inner'>
                             <div className='flip-card-front'>
-                                <img src={Perfil} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Administrador</div>
+                                <img src={Cliente} className='Imagen-Perfil'></img>
+                                <div className='Texto-Card-Perfil'>Cliente</div>
                                 <div className='Texto2-Card-Perfil'>Ver Perfil</div>
                             </div>
                             <div className='flip-card-back'>
@@ -102,8 +107,8 @@ const Administrativo = () => {
                     <div className='flip-card'>
                         <div className='flip-card-inner'>
                             <div className='flip-card-front'>
-                                <img src={Perfil} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Administrador</div>
+                                <img src={Ejecutivo} className='Imagen-Perfil'></img>
+                                <div className='Texto-Card-Perfil'>Ejecutivo</div>
                                 <div className='Texto2-Card-Perfil'>Ver Perfil</div>
                             </div>
                             <div className='flip-card-back'>
@@ -118,8 +123,8 @@ const Administrativo = () => {
                     <div className='flip-card'>
                         <div className='flip-card-inner'>
                             <div className='flip-card-front'>
-                                <img src={Perfil} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Administrador</div>
+                                <img src={Gerente} className='Imagen-Perfil'></img>
+                                <div className='Texto-Card-Perfil'>Gerente</div>
                                 <div className='Texto2-Card-Perfil'>Ver Perfil</div>
                             </div>
                             <div className='flip-card-back'>
@@ -134,8 +139,8 @@ const Administrativo = () => {
                     <div className='flip-card'>
                         <div className='flip-card-inner'>
                             <div className='flip-card-front'>
-                                <img src={Perfil} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Administrador</div>
+                                <img src={Otro} className='Imagen-Perfil'></img>
+                                <div className='Texto-Card-Perfil'>Otro</div>
                                 <div className='Texto2-Card-Perfil'>Ver Perfil</div>
                             </div>
                             <div className='flip-card-back'>
@@ -150,8 +155,8 @@ const Administrativo = () => {
                     <div className='flip-card'>
                         <div className='flip-card-inner'>
                             <div className='flip-card-front'>
-                                <img src={Perfil} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Administrador</div>
+                                <img src={Otro2} className='Imagen-Perfil'></img>
+                                <div className='Texto-Card-Perfil'>Otro</div>
                                 <div className='Texto2-Card-Perfil'>Ver Perfil</div>
                             </div>
                             <div className='flip-card-back'>

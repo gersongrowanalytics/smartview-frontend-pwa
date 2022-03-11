@@ -51,7 +51,7 @@
 #Login-Formulario-Texto{
     font-family: Segoe UI;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 400;
     font-size: 16px;
     line-height: 21px;
     color: #1E1E1E;
@@ -60,6 +60,10 @@
     position: relative;
     margin-top: -13px;
     text-decoration: underline;
+}
+
+#Login-Formulario-Texto:hover{
+    font-weight: bold;
 }
 
 #Login-Formulario-Boton{
@@ -78,6 +82,9 @@
     border-radius: 20px;
     border: none;
     outline: none;
+}
+#Login-Formulario-Boton:hover{
+    background: #558CFF;
 }
 
 #Login-Formulario-Boton-Desactivado{
@@ -137,7 +144,7 @@
     font-family: Segoe UI;
     font-style: normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 40px;
     text-align: center;
     color: #1E1E1E;
@@ -172,7 +179,10 @@
     border-radius: 8px !important;
     height: 46px !important;
     padding: 3px 11px !important;
+}
 
+.seleccionar .ant-select-arrow{
+    color: #1E1E1E;
 }
 
 .Login-Banner{
@@ -280,8 +290,6 @@
 }
 
 .Login-Banner-Letras-ConRelleno{
-    -webkit-text-stroke: 0.7px black;
-    color: transparent; 
     font-style: normal;
     font-family: Segoe UI;
     font-weight: 900;

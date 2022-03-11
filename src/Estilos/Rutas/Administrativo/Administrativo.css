@@ -130,6 +130,8 @@
 .Imagen-Perfil{
     margin-top: 19px;
     margin-bottom: 10px;
+    width: 99px;
+    height: 99px;
 }
 
 .Texto-Card-Perfil{
@@ -160,6 +162,8 @@
 }
 
 .Imagen2-Perfil{
-    width: 110px;
-    margin-top: 15px;
+    width: 58px;
+    height: 58px;
+    margin-top: 44px;
+    margin-bottom: 10px;
 }

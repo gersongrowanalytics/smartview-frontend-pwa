@@ -191,6 +191,7 @@
     height: 100px;
     display: flex;
     align-items: center;
+    /* justify-content: space-evenly; */
 }
 
 .banner{
@@ -218,6 +219,11 @@
         visibility: hidden;
         transform: translate(-100%, 0);
     }
+    /* to {
+        -moz-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-100%);
+    } */
 }
 
 .banner0{
@@ -228,16 +234,16 @@
     overflow: hidden;
     position: absolute;
 }
-
+/* 
 .banner0 p{
-    margin-left: 50px;
-}
+} */
 
 .banner0 p{
     display: inline-block;
     padding-left: 12%;
     animation: banner0 14.5s linear ;
     animation-delay: 0s;
+    margin-left: 50px;
 }
 
 @keyframes banner0 { 
@@ -264,7 +270,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .Login-Banner{
         display: none;
     }
@@ -298,6 +304,78 @@
     letter-spacing: 0.105em;
     color: #3946AB;
     margin: 0px 23px;
+}
+
+@media screen and (min-width: 1500px) and (max-width: 1600px){
+    .Login-Banner-Letras-ConRelleno{
+        margin: 0px 35px;
+    }
+    .Login-Banner-Letras-SinRelleno{
+        margin: 0px 35px;
+    }
+    .banner0 p{
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 1601px) and (max-width: 1700px){
+    .Login-Banner-Letras-ConRelleno{
+        margin: 0px 42px;
+    }
+    .Login-Banner-Letras-SinRelleno{
+        margin: 0px 42px;
+    }
+    .banner0 p{
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 1701px) and (max-width: 1800px){
+    .Login-Banner-Letras-ConRelleno{
+        margin: 0px 52px;
+    }
+    .Login-Banner-Letras-SinRelleno{
+        margin: 0px 52px;
+    }
+    .banner0 p{
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 1801px) and (max-width: 1900px){
+    .Login-Banner-Letras-ConRelleno{
+        margin: 0px 57px;
+    }
+    .Login-Banner-Letras-SinRelleno{
+        margin: 0px 57px;
+    }
+    .banner0 p{
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 1901px) and (max-width: 2000px){
+    .Login-Banner-Letras-ConRelleno{
+        margin: 0px 67px;
+    }
+    .Login-Banner-Letras-SinRelleno{
+        margin: 0px 67px;
+    }
+    .banner0 p{
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 2001px) and (max-width: 2200px){
+    .Login-Banner-Letras-ConRelleno{
+        margin: 0px 72px;
+    }
+    .Login-Banner-Letras-SinRelleno{
+        margin: 0px 72px;
+    }
+    .banner0 p{
+        margin-left: 5%;
+    }
 }
 
 #Login-Formulario-Subtitulo{
@@ -377,54 +455,6 @@
     from{ top   : 0; }
     to { top   : -100%; }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* div.Login-Banner span {
-    -moz-animation: 10s Login-Banner;
-    -webkit-animation: 10s Login-Banner;
-    -o-animation: 10s Login-Banner;
-    animation: 10s Login-Banner;
-}
-
-div.Login-Banner-left span {
-    -moz-animation: 10s Login-Banner-left;
-    -webkit-animation: 10s Login-Banner-left;
-    -o-animation: 10s Login-Banner-left;
-    animation: 10s Login-Banner-left;
-  }
-  @-webkit-keyframes Login-Banner { from { margin-left: 100% }
-    to {margin-left: 0%;width: 100%;} }
-  @-moz-keyframes Login-Banner { from { margin-left: 100%; }
-    to {margin-left: 0%;width: 100%;} }
-   @-o-keyframes Login-Banner { from { margin-left: 100%; }
-    to {margin-left: 0%;width: 100%;} }
-  @keyframes Login-Banner { from { margin-left: 100%; }
-    to {margin-left: 0%;width: 100%;} }
-  
-  @-webkit-keyframes Login-Banner-left { from {margin-left: 0%;}
-   to {margin-left: -100%} }
-  @-moz-keyframes Login-Banner-left { from {margin-left: 0%;}
-   to {margin-left: -100%} }
-  @-o-keyframes Login-Banner-left { from {margin-left: 0%;}
-   to {margin-left: -100%;} }
-  @keyframes Login-Banner-left { from {margin-left: 0%;}
-   to {margin-left: -100%;} } */
 
 
 .Banner-Icono-Grow-Text{

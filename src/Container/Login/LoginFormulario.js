@@ -59,7 +59,7 @@ const LoginFormulario = () => {
 
     return (
         <div id="Login-Contenedor-Formulario">
-             <div className={ animacionInicial == true ? 'Login-Banner banner0' : 'Login-Banner ocultar'} style={{top:"0"}}>
+            <div className={ animacionInicial == true ? 'Login-Banner banner0' : 'Login-Banner ocultar'} style={{top:"0"}}>
                 <p>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
@@ -79,14 +79,14 @@ const LoginFormulario = () => {
                 </p>
             </div>
             <div className='Login-Banner banner banner2' style={{top:"0", marginRight:"7px"}}>
-               <p>
+                <p>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span> 
                     <span className='Login-Banner-Letras-ConRelleno'>CRECIENDO JUNTOS</span>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
-               </p>
+                </p>
             </div>
             <div id='Login-Formulario'>
                 <img

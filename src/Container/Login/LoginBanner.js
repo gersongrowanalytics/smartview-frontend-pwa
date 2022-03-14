@@ -21,7 +21,7 @@ class LoginBanner extends React.Component {
         this.props.setMostrarFormulario()
         setTimeout(() => {
             this.animacionBanner()
-        }, 1000);
+        }, 1500);
     }
     render(){
         return (

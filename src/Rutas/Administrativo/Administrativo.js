@@ -80,7 +80,13 @@ const Administrativo = () => {
                                 <div className='Texto2-Card-Perfil'>Ver Perfil</div>
                             </div>
                             <div className='flip-card-back'>
-                                <img src={Agregar} className='Imagen2-Perfil'/>
+                                <Link 
+                                    to={{
+                                        pathname: '/administrativo-perfil',
+                                    }}
+                                >
+                                    <img src={Agregar} className='Imagen2-Perfil'/>
+                                </Link>
                                 <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
                                 <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
                             </div>

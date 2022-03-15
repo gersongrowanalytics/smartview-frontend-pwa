@@ -1,0 +1,234 @@
+
+.Contenedor-Perfil{
+    padding-left: 40px;
+    padding-top: 48px;
+}
+
+.Titulo-Perfil{
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Select-Anio-Perfil{
+    width: 93px;
+    height: 26px;
+    background: #E5E5E5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.Texto-Select-Anio-Perfil{
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Select-Mes-Perfil{
+    width: 93px;
+    height: 26px;
+    background: #E5E5E5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 9px;
+}
+
+.Texto-Select-Mes-Perfil{
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Select-Canal-Perfil{
+    width: 529px;
+    height: 26px;
+    background: #E5E5E5;
+    margin-top: 9px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 15px;
+}
+
+.Texto-Select-Canal-Perfil{
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Btn-Guardar-Perfil{
+    width: 66px;
+    height: 24px;
+    background: #3646C4;
+    border: 1px solid #3646C3;
+    box-sizing: border-box;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 26px;
+    margin-left: 73%;
+}
+
+.Contenedor-Imagen-Perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Contenedor-Informacion-Perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 25%;
+}
+
+.Circulo-Editar-Perfil {
+    width: 36px;
+    height: 36px;
+    background: #558CFF;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 9px;
+}
+
+.Contenido-Select-Anio{
+    width: 93px;
+    height: 84px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 103px;
+}
+
+.Opciones-Select-Anio{
+    width: 93px;
+    height: 27px;
+    background: #FFFFFF;
+    text-align: center;
+    padding-right: 30px;
+    font-weight: 400;
+    font-size: 12px;
+    padding-top: 5px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Opciones-Select-Anio:hover{
+    background: #E6F1FC;
+}
+
+.Contenido-Select-Anio-Oculto{
+    display: none;
+}
+
+.Fila-Select-Anio-Mes-Perfil {
+    display: flex;
+    align-items: center;
+}
+
+.Anio-Mes-Seleccionado{
+    /* width: 83px; */
+    height: 26px;
+    background: #E6F1FC;
+    border-radius: 18px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 15px;
+    margin-top: 9px;
+    margin-left: 19px;
+}
+
+.Texto-Anio-Mes-Seleccionado {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    margin-right: 23px;
+}
+
+.Contenido-Select-Mes{
+    top: 137px;
+    width: 93px;
+    height: 84px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+}
+
+.Contenido-Select-Mes-Oculto{
+    display: none;
+}
+
+.Contenido-Select-Canal{
+
+}
+
+.Contenido-Select-Canal-Oculto{
+    display: none;
+}
+
+.Opciones-Select-Canal-Perfil{
+    width: 529px;
+    height: 22px;
+    border-bottom: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+    border-left: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 21px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    padding-left: 33px;
+}
+
+.Select-Canal-Perfil .ant-switch-checked{
+    background-color: #a4a3a3;
+}
+
+.Select-Canal-Perfil .ant-switch .ant-switch-handle::before {
+    background-color: #1BF785;
+}
+
+.Switch-Canal-Perfil{
+    position: relative;
+    left: 83%;
+}
+
+.Campo-Switch-Abrir-Cerrar{
+    cursor: pointer;
+    width: 92%;
+}
+

@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import { Row, Col } from 'antd'
 import { Link } from "react-router-dom"
 import '../../Estilos/Rutas/Administrativo/Administrativo.css'
-import Adm from '../../Assets/Img/Administrativo/Administrador.png'
-import Cliente from '../../Assets/Img/Administrativo/Cliente.png'
-import Ejecutivo from '../../Assets/Img/Administrativo/Ejecutivo.png'
-import Gerente from '../../Assets/Img/Administrativo/Grente.png'
-import Otro from '../../Assets/Img/Administrativo/Otro-two.png'
-import Otro2 from '../../Assets/Img/Administrativo/Otro.png'
-import Agregar from '../../Assets/Img/Administrativo/agregar.png'
+import Adm from '../../Assets/Img/Administrativo/TiposUsuarios/Administrador.png'
+import Cliente from '../../Assets/Img/Administrativo/TiposUsuarios/Cliente.png'
+import Ejecutivo from '../../Assets/Img/Administrativo/TiposUsuarios/Ejecutivo.png'
+import Gerente from '../../Assets/Img/Administrativo/TiposUsuarios/Grente.png'
+import Otro from '../../Assets/Img/Administrativo/TiposUsuarios/Otro-two.png'
+import Otro2 from '../../Assets/Img/Administrativo/TiposUsuarios/Otro.png'
+import Agregar from '../../Assets/Img/Administrativo/TiposUsuarios/agregar.png'
 const Administrativo = () => {
 
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
@@ -32,15 +32,17 @@ const Administrativo = () => {
                         >
                             Tipos Usuarios
                         </div>
-                        <div 
-                            className={btnSeleccionado == 'USUARIOS' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'149px'}}
-                            onClick={() => {setBtnSeleccionado("USUARIOS")}}
-                        >
-                            Usuarios
-                        </div>
+                        <Link to='/administrativo/usuarios'>
+                            <div 
+                                className={btnSeleccionado == 'USUARIOS' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'149px'}}
+                                onClick={() => {setBtnSeleccionado("USUARIOS")}}
+                            >
+                                Usuarios
+                            </div>
+                        </Link>
                         <div 
                             className={btnSeleccionado == 'PERMISOS' 
                                 ? 'Btn-Seleccionado-Administrativo' 

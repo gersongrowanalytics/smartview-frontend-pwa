@@ -1,0 +1,30 @@
+.Btn-Crear-Administrativo-Usuario{
+    width: 82px;
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #558CFF;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Texto-Btn-Adm-Usuarios {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #558CFF;
+    margin-right: 6px;
+}
+
+.Contenedor-Btn-Adm-Usuarios {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 11px;
+    padding-right: 58px;
+}

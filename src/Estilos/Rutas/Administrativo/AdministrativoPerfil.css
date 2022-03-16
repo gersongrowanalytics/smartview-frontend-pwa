@@ -49,7 +49,7 @@
 
 .Select-Canal-Perfil{
     width: 529px;
-    height: 26px;
+    height: 28px;
     background: #E5E5E5;
     margin-top: 9px;
     display: flex;
@@ -201,7 +201,7 @@
 
 .Opciones-Select-Canal-Perfil{
     width: 529px;
-    height: 22px;
+    height: 26px;
     border-bottom: 1px solid #E5E5E5;
     border-right: 1px solid #E5E5E5;
     border-left: 1px solid #E5E5E5;
@@ -212,6 +212,9 @@
     letter-spacing: -0.015em;
     color: #1E1E1E;
     padding-left: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .Select-Canal-Perfil .ant-switch-checked{
@@ -229,6 +232,95 @@
 
 .Campo-Switch-Abrir-Cerrar{
     cursor: pointer;
-    width: 92%;
+    width: 91.5%;
 }
 
+.Opciones-Select-Canal-Perfil .ant-switch-checked{
+    background-color: #FFFFFF;
+}
+
+.Opciones-Select-Canal-Perfil .ant-switch .ant-switch-handle::before {
+    background-color: #1BF785;
+}
+
+.Opciones-Select-Canal-Perfil .ant-switch-small{
+    border: 1px solid #A4A3A3;
+    height: 18px !important;
+    min-width: 30px !important;
+}
+
+.Switch-Estilos .ant-switch-small{
+    border: 1px solid #A4A3A3;
+    height: 19px !important;
+    min-width: 32px !important;
+}
+
+.Opciones-Select-Descarga-Perfil{
+    width: 529px;
+    height: 26px;
+    border-bottom: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+    border-left: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 21px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    padding-left: 33px;
+    display: flex;
+    align-items: center;
+}
+
+.Campo-Switch-Abrir-Cerrar-SubModulo-Descarga{
+    position: relative;
+    width: 91%;
+    cursor: pointer;
+}
+
+.Switch-Descarga .ant-switch-checked{
+    background-color: #FFFFFF;
+}
+
+.Switch-Descarga .ant-switch .ant-switch-handle::before {
+    background-color: #1BF785;
+}
+
+.Switch-Estilos .ant-switch-small{
+    border: 1px solid #A4A3A3;
+    height: 19px !important;
+    min-width: 32px !important;
+}
+
+.Input-Administrativo-Perfil{
+    text-align: center;
+    width: 204px;
+    height: 25px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    margin-bottom: 5px;
+}   
+.Circulo-Editar-Check-Perfil{
+    background: #3646C3;
+    width: 36px;
+    height: 36px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 9px;
+}
+
+.Submodulo-Descarga .ant-switch-small{
+    border: 1px solid #A4A3A3;
+    height: 19px !important;
+    min-width: 32px !important;
+}

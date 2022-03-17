@@ -28,3 +28,240 @@
     padding-top: 11px;
     padding-right: 58px;
 }
+
+.Contenedor-Tabla-Adm-Usuarios{
+    margin-left: 40px;
+    width: 417px;
+    height: 352px;  
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 8px;
+}
+
+.Tabla-Adm-Usuarios{
+    width: 402px;
+    text-align : center;
+    overflow:scroll;
+    white-space: nowrap;
+    position: relative;
+    z-index: 0;
+}
+
+.Tabla-Adm-Usuarios thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.Tabla-Adm-Usuarios thead tr{
+    width: 402px;
+    height: 56px;
+    left: 60px;
+    top: 244px;
+    background: #1EC0ED;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 172.51%;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.Tabla-Adm-Usuarios tbody tr{
+    height: 37px;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Tabla-Adm-Usuarios tbody tr:hover{
+    background: #E6F1FC;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px #E5E5E5;
+    cursor: pointer;
+}
+
+.Cabecera-Crear-Adm-Usuario{
+    /* width: 773px; */
+    height: 56px;
+    background: #1EC0ED;
+    border-radius: 8px 8px 0px 0px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    padding-left: 49px;
+}
+
+.Cuerpo-Crear-Adm-Usuario{
+    /* width: 773px; */
+    height: 297px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+}
+
+.Campo1-Crear-Adm-Usuario{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 55px;
+    padding-right: 24px;
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    align-items: center;
+}
+.Campo2-Crear-Adm-Usuario{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 51px;
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.Campo1-Crear-Adm-Usuario input{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 0px 19px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Campo2-Crear-Adm-Usuario input{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 0px 19px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Btn-Crear-Adm-Usuario{
+    width: 66px;
+    height: 24px;
+    background: #3646C4;
+    border: 1px solid #3646C3;
+    box-sizing: border-box;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Posicion-Btn-Crear-Adm-Usuario {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+    padding-right: 51px;
+}
+
+.Contenedor-Estado-Adm-Usuario{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+}
+
+.Switch-Adm .ant-switch{
+    background-color: #E5E5E5
+}
+.Switch-Adm .ant-switch-checked{
+    background-color: #E5E5E5
+}
+
+.Switch-Adm .ant-switch .ant-switch-handle::before {
+    background-color: #FF3742;  
+}
+
+.Switch-Adm .ant-switch-checked .ant-switch-handle::before{
+    background-color: #1BF785;
+}
+
+.Select-Adm-Usuario{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 19px;
+    align-items: center;
+}
+
+.Contenedor-Opciones-Select-Adm-Usuario{
+    width: 208px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    position: absolute;
+}
+
+.Contenedor-Opciones-Select-Adm-Usuario-Oculto{
+    display: none;
+}
+
+.Opciones-Select-Adm-Usuario{
+    width: 208px;
+    height: 27px;
+    background: #FFFFFF;
+    cursor: pointer;
+    padding-left: 23px;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Contenedor-Opciones-Select-Adm-Usuario .Opciones-Select-Adm-Usuario:last-child{
+    border-radius: 0px 0px 8px 8px;
+}
+
+.Opciones-Select-Adm-Usuario:hover{
+    background: #EDF0FA;
+    text-decoration-line: underline;
+}

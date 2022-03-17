@@ -3,9 +3,43 @@ import { Row, Col, Switch } from 'antd'
 import { Link } from "react-router-dom"
 import '../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
 import Agregar from '../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
-
+import FlechaAbajo from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
+import Persona from '../../Assets/Img/Administrativo/Usuarios/Persona-white.png'
+import FlechaAbajoNegro from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
 const AdministrativoUsuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
+    const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(true)
+    const [estadoUsuario, setestadoUsuario] = useState("Activado")
+    const [tipoUsuario, settipoUsuario] = useState("")
+    const [tipoUsuarioAbierto, settipoUsuarioAbierto] = useState(false)
+
+    const tiposUsuarios = ['Administrador','Gerente de Negocio','Cliente']
+
+
+    const cambiarEstado = (valor) => {
+        if (valor == true) {
+            setestadoBooleanUsuario(true)
+            setestadoUsuario("Activado")
+        }else if (valor == false) {
+            setestadoBooleanUsuario(false)
+            setestadoUsuario("Desactivado")
+        }
+    }
+
+    const seleccionarTipoUsuario = (posicion) => {
+        if (posicion == '0') {
+            settipoUsuarioAbierto(false)
+            settipoUsuario('Administrador')
+        }else if(posicion == '1'){
+            settipoUsuarioAbierto(false)
+            settipoUsuario('Gerente de Negocio')
+        }else if(posicion == '2'){
+            settipoUsuarioAbierto(false)
+            settipoUsuario('Cliente')
+        }
+    }
+
+    const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14']
 
     return (
         <div className='Contenedor-Administrativo'>
@@ -68,8 +102,151 @@ const AdministrativoUsuarios = () => {
                     </div>
                 </Col>
             </Row>
-            <Row>
-
+            <Row style={{marginTop: '33px'}}>
+                <Col xl={9}>
+                    <div className='Contenedor-Tabla-Adm-Usuarios'>
+                        <table 
+                            className='Tabla-Adm-Usuarios'
+                        >
+                            <thead> 
+                                <tr>
+                                    <th style={{width: '19%'}}>
+                                        <div>
+                                            <span>Item</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Nombre y Apellido</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '6px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Tipo de usuario</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    a.map((elemento) => {
+                                        return (
+                                            <tr>
+                                                <td>
+                                                    1
+                                                </td>
+                                                <td>
+                                                    Nombre de Persona Apellido
+                                                </td>
+                                                <td>
+                                                    Administrador
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </Col>
+                <Col xl={15}>
+                    <div style={{marginLeft: '15px', marginRight: '58px'}}>
+                        <div className='Cabecera-Crear-Adm-Usuario'>
+                            <img src={Persona} style={{width:'33px', marginRight: '8px'}}></img>
+                            <span>Usuario</span>
+                        </div>
+                        <div className='Cuerpo-Crear-Adm-Usuario'>
+                            <Row>
+                                <Col xl={12}>
+                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                        <span>Nombre:</span>
+                                        <input/>
+                                    </div>
+                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                        <span>Apellidos:</span>
+                                        <input/>
+                                    </div>
+                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                        <span>Correo:</span>
+                                        <input/>
+                                    </div>
+                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                        <span>Correo personal:</span>
+                                        <input/>
+                                    </div>
+                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                        <span>Contraseña:</span>
+                                        <input type='password'/>
+                                    </div>
+                                </Col>
+                                <Col xl={12}>
+                                    <div className='Campo2-Crear-Adm-Usuario'>   
+                                        <span>Tipo de Usuario:</span>
+                                        <div>
+                                            <div 
+                                                className='Select-Adm-Usuario'
+                                                onClick={() => settipoUsuarioAbierto(!tipoUsuarioAbierto)}
+                                            >
+                                                <span>{tipoUsuario}</span>
+                                                <img src={FlechaAbajoNegro} style={{width: '28px'}}></img>
+                                            </div>
+                                            <div className={tipoUsuarioAbierto == true 
+                                                            ? 'Contenedor-Opciones-Select-Adm-Usuario'
+                                                            : 'Contenedor-Opciones-Select-Adm-Usuario-Oculto'}
+                                            >
+                                                {
+                                                    tiposUsuarios.map((tipo, posicion) => {
+                                                        return (
+                                                            <div 
+                                                                className='Opciones-Select-Adm-Usuario'
+                                                                onClick={() => seleccionarTipoUsuario(posicion)}    
+                                                            >
+                                                                {tipo}
+                                                            </div>   
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div className='Campo2-Crear-Adm-Usuario'>   
+                                        <span>Fecha Inicio:</span>
+                                        <input/>
+                                    </div>
+                                    <div className='Campo2-Crear-Adm-Usuario'>   
+                                        <span>Fecha Fin:</span>
+                                        <input/>
+                                    </div>
+                                    <div className='Campo2-Crear-Adm-Usuario'>   
+                                        <span>País:</span>
+                                        <input/>
+                                    </div>
+                                    <div className='Campo2-Crear-Adm-Usuario'>   
+                                        <span>Estado:</span>
+                                        <div className='Contenedor-Estado-Adm-Usuario Switch-Adm'>
+                                            <span>{estadoUsuario}</span>
+                                            <Switch 
+                                                size="small" 
+                                                style={{marginRight:'12px'}}
+                                                onChange={(e)=> cambiarEstado(e)}
+                                                checked={estadoBooleanUsuario}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className='Posicion-Btn-Crear-Adm-Usuario'>
+                                        <div className='Btn-Crear-Adm-Usuario'>
+                                            Guardar
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
+                </Col>
             </Row>
         </div>
     )

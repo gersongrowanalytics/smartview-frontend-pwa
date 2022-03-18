@@ -1,19 +1,41 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Switch } from 'antd'
+import { Row, Col, Switch,Input, Checkbox } from 'antd'
 import { Link } from "react-router-dom"
 import '../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
 import Agregar from '../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
 import FlechaAbajo from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
 import Persona from '../../Assets/Img/Administrativo/Usuarios/Persona-white.png'
 import FlechaAbajoNegro from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
+import { SearchOutlined } from '@ant-design/icons'
+import BanderaPeru from '../../Assets/Img/Administrativo/Usuarios/Bandera-Perú.png'
+import BanderaBolivia from '../../Assets/Img/Administrativo/Usuarios/Bancedra-Bolivia.png'
+import BanderaChile from '../../Assets/Img/Administrativo/Usuarios/Bandera-Chile.png'
+import Borrar from '../../Assets/Img/Administrativo/Usuarios/Cortar.png'
 const AdministrativoUsuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
     const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(true)
     const [estadoUsuario, setestadoUsuario] = useState("Activado")
     const [tipoUsuario, settipoUsuario] = useState("")
     const [tipoUsuarioAbierto, settipoUsuarioAbierto] = useState(false)
+    const [busquedaAbierto, setbusquedaAbierto] = useState(false)
+    const [paisesAbierto, setpaisesAbierto] = useState(false)
+    const [paisesSeleccionados, setpaisesSeleccionados] = useState([])
 
     const tiposUsuarios = ['Administrador','Gerente de Negocio','Cliente']
+    const paises = [
+        {
+            bandera: BanderaPeru,
+            nombre: 'Perú'
+        },
+        {
+            bandera: BanderaBolivia,
+            nombre: 'Bolivia'
+        },
+        {
+            bandera: BanderaChile,
+            nombre: 'Chile'
+        }
+    ]
 
 
     const cambiarEstado = (valor) => {
@@ -39,6 +61,26 @@ const AdministrativoUsuarios = () => {
         }
     }
 
+    const SeleccionarPais = (valor, posicion) => {
+        let paisEliminar = paises[posicion]['nombre']
+        let paisPosicion
+        if (valor == true) {
+            setpaisesSeleccionados([...paisesSeleccionados, paises[posicion]]);          
+        }else if(valor == false){
+            paisesSeleccionados.filter((pais,pos) => {
+                if(pais.nombre == paisEliminar){
+                    return paisPosicion = pos
+                }
+            })
+            paisesSeleccionados.splice(paisPosicion,1)
+            setpaisesSeleccionados([...paisesSeleccionados])
+        }
+    }
+
+    useEffect(() => {
+        setpaisesSeleccionados(paisesSeleccionados)
+    }, [paisesSeleccionados])
+    
     const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14']
 
     return (
@@ -117,9 +159,42 @@ const AdministrativoUsuarios = () => {
                                         </div>
                                     </th>
                                     <th>
-                                        <div>
+                                        <div
+                                            style={{cursor:'pointer'}}
+                                            onClick={() => setbusquedaAbierto(!busquedaAbierto)}    
+                                        >
                                             <span>Nombre y Apellido</span>
                                             <img src={FlechaAbajo} style={{width:'7px', marginLeft: '6px'}}></img>
+                                        </div>
+                                        <div 
+                                            className={ busquedaAbierto == true 
+                                                ? 'Contenedor-Busqueda-Adm-Usuario'
+                                                : 'Contenedor-Busqueda-Adm-Usuario-Ocultar'}
+                                        >
+                                            <div className='Cabecera-Buscar-Adm-Usuario'>
+                                                <Input placeholder="Buscar" suffix={<SearchOutlined />} className='Buscar-Tabla-Adm-Usuario'/>
+                                            </div>
+                                            {
+                                                a.map((e) => {
+                                                    return (
+                                                        <div className='Opcion-Busqueda-Adm-Usuario'>
+                                                            <Checkbox className='Checkbox-Opcion-Adm-Usuario'/>
+                                                            <span className='Txt-Opcion-Busqueda-Adm-Usuario'>
+                                                                Nombre de Persona Apellido
+                                                            </span>
+                                                            
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                            <div className='Footer-Buscar-Adm-Usuario'>
+                                                <div className='Btn-Opcion-Busqueda-Adm-Usuario' style={{marginRight:'5px'}}>
+                                                    Aceptar
+                                                </div>
+                                                <div className='Btn-Opcion-Busqueda-Adm-Usuario'>
+                                                    Cancelar
+                                                </div>
+                                            </div>
                                         </div>
                                     </th>
                                     <th>
@@ -223,7 +298,48 @@ const AdministrativoUsuarios = () => {
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>País:</span>
-                                        <input/>
+                                        <div>
+                                            <div 
+                                                className='Select-Adm-Usuario'
+                                                onClick={() => setpaisesAbierto(!paisesAbierto)}
+                                            >
+                                                {
+                                                    paisesSeleccionados.map((pais) => {
+                                                        return (
+                                                            <div className='Contenedor-PreImagen-Pais-Seleccionado'>
+                                                                <span>{pais.nombre}</span>
+                                                                <img src={pais.bandera} style={{width:'32px'}}></img>
+                                                                <img src={Borrar} style={{width:'11px'}}></img>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                                <img src={FlechaAbajoNegro} style={{width: '28px'}}></img>
+                                            </div>
+                                            <div className={paisesAbierto == true 
+                                                            ? 'Contenedor-Opciones-Select-Adm-Usuario'
+                                                            : 'Contenedor-Opciones-Select-Adm-Usuario-Oculto'}
+                                            >
+                                                {
+                                                    paises.map((pais, posicion) => {
+                                                        return (
+                                                            <div 
+                                                                className='Opciones-Select-Adm-Usuario'
+                                                                style={{height:'29px'}}  
+                                                            >
+                                                                <Checkbox className='Checkbox-Opcion-Adm-Usuario'
+                                                                    onChange={(e) => {SeleccionarPais(e.target.checked, posicion)}}
+                                                                />
+                                                                <div className='Contenedor-Nombre-Img'>
+                                                                    <span style={{marginLeft:'10px'}}>{pais.nombre}</span>
+                                                                    <img src={pais.bandera} style={{width:'32px'}}></img>
+                                                                </div>
+                                                            </div>   
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Estado:</span>

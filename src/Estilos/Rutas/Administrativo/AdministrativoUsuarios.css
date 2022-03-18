@@ -236,6 +236,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     border-radius: 0px 0px 8px 8px;
     position: absolute;
+    z-index: 1;
 }
 
 .Contenedor-Opciones-Select-Adm-Usuario-Oculto{
@@ -264,4 +265,116 @@
 .Opciones-Select-Adm-Usuario:hover{
     background: #EDF0FA;
     text-decoration-line: underline;
+}
+
+.Buscar-Tabla-Adm-Usuario{
+    height: 29px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    padding: 0px 24px 0px 5px;
+    margin: 10px 0px;
+}
+
+.Contenedor-Busqueda-Adm-Usuario{
+    position: absolute;
+    width: 208px;
+    height: 214px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    margin-top: 16px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.Contenedor-Busqueda-Adm-Usuario-Ocultar{
+    display: none;
+}
+
+.Opcion-Busqueda-Adm-Usuario{
+    width: 208px;
+    height: 27px;
+    background: #FFFFFF;
+    cursor: pointer;
+    text-align: start;
+    padding-left: 12px;
+}
+
+.Opcion-Busqueda-Adm-Usuario:hover{
+    background: #E6F1FC;
+}
+
+.Txt-Opcion-Busqueda-Adm-Usuario{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    margin-left: 7px;
+}
+
+.Cabecera-Buscar-Adm-Usuario{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #FFFFFF;
+    padding: 0px 12px;
+}
+
+.Cabecera-Buscar-Adm-Usuario .ant-input-affix-wrapper{
+    border: 1px solid #1E1E1E;
+    border-radius: 8px;
+}
+
+.Checkbox-Opcion-Adm-Usuario .ant-checkbox-inner{
+    border: 1px solid #558CFF;
+}
+
+.Btn-Opcion-Busqueda-Adm-Usuario{
+    width: 66px;
+    height: 24px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Footer-Buscar-Adm-Usuario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background: #FFFFFF;
+}
+
+.Contenedor-Nombre-Img{
+    display: flex;
+    justify-content: space-between;
+    width: 90px;
+    align-items: center;
+}
+
+.Contenedor-PreImagen-Pais-Seleccionado{
+    width: 98px;
+    height: 22px;
+    background: #EDF0FA;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }

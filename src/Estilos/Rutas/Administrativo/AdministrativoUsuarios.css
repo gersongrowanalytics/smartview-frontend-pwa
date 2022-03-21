@@ -34,7 +34,7 @@
     width: 417px;
     height: 352px;  
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
     border-radius: 8px;
 }
 
@@ -51,6 +51,10 @@
     position: sticky;
     top: 0;
     z-index: 1;
+}
+
+.Tabla-Adm-Usuarios thead tr th{
+    padding: 0px 12px;
 }
 
 .Tabla-Adm-Usuarios thead tr{
@@ -230,6 +234,19 @@
     align-items: center;
 }
 
+.Select-Pais-Adm-Usuario{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+    align-items: center;
+}
+
 .Contenedor-Opciones-Select-Adm-Usuario{
     width: 208px;
     background: #FFFFFF;
@@ -370,11 +387,34 @@
 }
 
 .Contenedor-PreImagen-Pais-Seleccionado{
-    width: 98px;
+    width: 86px;
     height: 22px;
     background: #EDF0FA;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    padding: 0px 5px;
+    margin: 0px 2px;
+}
+
+.Espaciado-Preseleccionar-Pais{
+    margin-left: 86%;
+}
+
+.Contenedor-Cantidad-PreImagen-Pais-Seleccionado{
+    width: 50px;
+    height: 22px;
+    background: #EDF0FA;
+    border-radius: 20px;
+    padding: 0px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
 }

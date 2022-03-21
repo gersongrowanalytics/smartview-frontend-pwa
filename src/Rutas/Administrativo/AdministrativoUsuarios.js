@@ -65,7 +65,7 @@ const AdministrativoUsuarios = () => {
         let paisEliminar = paises[posicion]['nombre']
         let paisPosicion
         if (valor == true) {
-            setpaisesSeleccionados([...paisesSeleccionados, paises[posicion]]);          
+            setpaisesSeleccionados([...paisesSeleccionados, paises[posicion]]);
         }else if(valor == false){
             paisesSeleccionados.filter((pais,pos) => {
                 if(pais.nombre == paisEliminar){
@@ -75,6 +75,18 @@ const AdministrativoUsuarios = () => {
             paisesSeleccionados.splice(paisPosicion,1)
             setpaisesSeleccionados([...paisesSeleccionados])
         }
+    }
+
+    const EliminarPaisSeleccionado = (posicion) => {
+        let paisEliminar = paisesSeleccionados[posicion]['nombre']
+        let paisPosicion
+        paisesSeleccionados.filter((pais,pos) => {
+            if(pais.nombre == paisEliminar){
+                return paisPosicion = pos
+            }
+        })
+        paisesSeleccionados.splice(paisPosicion,1)
+        setpaisesSeleccionados([...paisesSeleccionados])
     }
 
     useEffect(() => {
@@ -203,6 +215,24 @@ const AdministrativoUsuarios = () => {
                                             <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                         </div>
                                     </th>
+                                    <th>
+                                        <div>
+                                            <span>Tipo de usuario2</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Tipo de usuario3</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Tipo de usuario4</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -218,6 +248,15 @@ const AdministrativoUsuarios = () => {
                                                 </td>
                                                 <td>
                                                     Administrador
+                                                </td>
+                                                <td>
+                                                    Administrador2
+                                                </td>
+                                                <td>
+                                                    Administrador3
+                                                </td>
+                                                <td>
+                                                    Administrador4
                                                 </td>
                                             </tr>
                                         )
@@ -300,21 +339,39 @@ const AdministrativoUsuarios = () => {
                                         <span>País:</span>
                                         <div>
                                             <div 
-                                                className='Select-Adm-Usuario'
+                                                className='Select-Pais-Adm-Usuario'
                                                 onClick={() => setpaisesAbierto(!paisesAbierto)}
                                             >
                                                 {
-                                                    paisesSeleccionados.map((pais) => {
-                                                        return (
+                                                    paisesSeleccionados.length <= '2' ? (
+                                                        paisesSeleccionados.map((pais, pos) => {
+                                                            return (
+                                                                <div className='Contenedor-PreImagen-Pais-Seleccionado'>
+                                                                    <span>{pais.nombre}</span>
+                                                                    <img src={pais.bandera} style={{width:'32px'}}></img>
+                                                                    <img src={Borrar} style={{width:'11px'}} 
+                                                                    onClick={() => EliminarPaisSeleccionado(pos)}></img>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    ) : (
+                                                        <div style={{display: 'flex'}}>
                                                             <div className='Contenedor-PreImagen-Pais-Seleccionado'>
-                                                                <span>{pais.nombre}</span>
-                                                                <img src={pais.bandera} style={{width:'32px'}}></img>
+                                                                <span>{paisesSeleccionados[0]['nombre']}</span>
+                                                                <img src={paisesSeleccionados[0]['bandera']} style={{width:'32px'}}></img>
                                                                 <img src={Borrar} style={{width:'11px'}}></img>
                                                             </div>
-                                                        )
-                                                    })
+                                                            <div className='Contenedor-Cantidad-PreImagen-Pais-Seleccionado'>
+                                                               + { (paisesSeleccionados.length - 2)  } ...
+                                                            </div>
+                                                        </div>
+                                                    )
                                                 }
-                                                <img src={FlechaAbajoNegro} style={{width: '28px'}}></img>
+                                                <img 
+                                                    src={FlechaAbajoNegro} 
+                                                    style={{width: '28px'}}
+                                                    className={paisesSeleccionados.length == '0' ? 'Espaciado-Preseleccionar-Pais':''}
+                                                ></img>
                                             </div>
                                             <div className={paisesAbierto == true 
                                                             ? 'Contenedor-Opciones-Select-Adm-Usuario'

@@ -256,7 +256,7 @@ const AdministrativoPerfil = () => {
                                 }
                                 <span className='Texto-Select-Canal-Perfil' >Canal</span>
                             </div>
-                            <div className='Switch-Estilos'>
+                            <div className='Switch-Estilos Switch-Modulo'>
                                 <Switch 
                                     size="small" 
                                     onChange={(e) => SeleccionarCanales(e)} 
@@ -273,7 +273,7 @@ const AdministrativoPerfil = () => {
                                 canales.map((canal, posicion)=>{
                                     return (
                                         <>
-                                            <div className='Opciones-Select-Canal-Perfil'>
+                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
                                                 <div>
                                                     {canal}
                                                 </div>
@@ -301,7 +301,7 @@ const AdministrativoPerfil = () => {
                                 }
                                 <span className='Texto-Select-Canal-Perfil' >Opciones</span>
                             </div>
-                            <div className='Switch-Estilos'>
+                            <div className='Switch-Estilos Switch-Modulo'>
                                 <Switch size="small"/>
                             </div>
                         </div>
@@ -314,7 +314,7 @@ const AdministrativoPerfil = () => {
                                 opciones.map((opcion)=>{
                                     return (
                                         <>
-                                            <div className='Opciones-Select-Canal-Perfil'>
+                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
                                                 <div>
                                                     {opcion}
                                                 </div>
@@ -340,7 +340,7 @@ const AdministrativoPerfil = () => {
                                 }
                                 <span className='Texto-Select-Canal-Perfil' >Soporte</span>
                             </div>
-                            <div className='Switch-Estilos'>
+                            <div className='Switch-Estilos Switch-Modulo'>
                                 <Switch size="small"/>
                             </div>
                         </div>
@@ -353,7 +353,7 @@ const AdministrativoPerfil = () => {
                                 soportes.map((soporte)=>{
                                     return (
                                         <>
-                                            <div className='Opciones-Select-Canal-Perfil'>
+                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
                                                 <div>
                                                     {soporte}
                                                 </div>
@@ -379,7 +379,7 @@ const AdministrativoPerfil = () => {
                                 }
                                 <span className='Texto-Select-Canal-Perfil' >Descarga</span>
                             </div>
-                            <div className='Switch-Estilos'>
+                            <div className='Switch-Estilos Switch-Modulo'>
                                 <Switch size="small"/>
                             </div>
                         </div>
@@ -393,7 +393,7 @@ const AdministrativoPerfil = () => {
                                     
                                     return (
                                         <>
-                                            <div className='Opciones-Select-Descarga-Perfil Switch-Descarga'>
+                                            <div className='Opciones-Select-Descarga-Perfil'>
                                                 <div 
                                                     className='Campo-Switch-Abrir-Cerrar-SubModulo-Descarga'
                                                     onClick={() => AbrirSubmoduloDescarga(posicion)}
@@ -409,7 +409,7 @@ const AdministrativoPerfil = () => {
                                                         {descarga}
                                                     </span>
                                                 </div>
-                                                <div className='Switch-Estilos'>
+                                                <div className='Switch-Estilos Switch-Submodulo'>
                                                     <Switch size="small" style={{marginRight:'12px'}}/>
                                                 </div>
                                             </div>
@@ -422,7 +422,7 @@ const AdministrativoPerfil = () => {
                                                     tradicionales.map((tradicional) => {
                                                         return (
                                                             <>
-                                                                <div className='Opciones-Select-Canal-Perfil Submodulo-Descarga'>
+                                                                <div className='Opciones-Select-Canal-Perfil Submodulo-Descarga Switch-Submodulo'>
                                                                     <div style={{marginLeft: '20px'}}>
                                                                         {tradicional}
                                                                     </div>
@@ -442,7 +442,7 @@ const AdministrativoPerfil = () => {
                                                     modernos.map((moderno) => {
                                                         return (
                                                             <>
-                                                                <div className='Opciones-Select-Canal-Perfil'>
+                                                                <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
                                                                     <div style={{marginLeft: '20px'}}>
                                                                         {moderno}
                                                                     </div>
@@ -474,7 +474,7 @@ const AdministrativoPerfil = () => {
                                 }
                                 <span className='Texto-Select-Canal-Perfil' >Upload</span>
                             </div>
-                            <div className='Switch-Estilos'>
+                            <div className='Switch-Estilos Switch-Modulo'>
                                 <Switch size="small"/>
                             </div>
                         </div>
@@ -487,7 +487,7 @@ const AdministrativoPerfil = () => {
                                 uploads.map((upload)=>{
                                     return (
                                         <>
-                                            <div className='Opciones-Select-Canal-Perfil'>
+                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
                                                 <div>
                                                     {upload}
                                                 </div>

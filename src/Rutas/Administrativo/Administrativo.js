@@ -89,7 +89,7 @@ const Administrativo = () => {
                             <div className='flip-card-back'>
                                 <Link 
                                     to={{
-                                        pathname: '/administrativo-perfil',
+                                        pathname: '/administrativo/perfil',
                                     }}
                                 >
                                     <img src={Agregar} className='Imagen2-Perfil'/>

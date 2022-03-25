@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col, Switch,Input, Checkbox } from 'antd'
 import { Link } from "react-router-dom"
-import '../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
-import Agregar from '../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
-import FlechaAbajo from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
-import Persona from '../../Assets/Img/Administrativo/Usuarios/Persona-white.png'
-import FlechaAbajoNegro from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
+import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
+import Agregar from '../../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
+import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
+import Persona from '../../../Assets/Img/Administrativo/Usuarios/Persona-white.png'
+import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
 import { SearchOutlined } from '@ant-design/icons'
-import BanderaPeru from '../../Assets/Img/Administrativo/Usuarios/Bandera-Perú.png'
-import BanderaBolivia from '../../Assets/Img/Administrativo/Usuarios/Bancedra-Bolivia.png'
-import BanderaChile from '../../Assets/Img/Administrativo/Usuarios/Bandera-Chile.png'
-import Borrar from '../../Assets/Img/Administrativo/Usuarios/Cortar.png'
+import BanderaPeru from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Perú.png'
+import BanderaBolivia from '../../../Assets/Img/Administrativo/Usuarios/Bancedra-Bolivia.png'
+import BanderaChile from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Chile.png'
+import Borrar from '../../../Assets/Img/Administrativo/Usuarios/Cortar.png'
 
-const AdministrativoUsuarios = () => {
+const Usuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
     const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(true)
     const [estadoUsuario, setestadoUsuario] = useState("Activado")
@@ -139,15 +139,17 @@ const AdministrativoUsuarios = () => {
                                 Permisos
                             </div>
                         </Link>
-                        <div 
-                            className={btnSeleccionado == 'CONTROL' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'135px'}}
-                            onClick={() => {setBtnSeleccionado("CONTROL")}}
-                        >
-                            Control de archivo
-                        </div>
+                        <Link to='/administrativo/control-archivo'>
+                            <div 
+                                className={btnSeleccionado == 'CONTROL' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'135px'}}
+                                onClick={() => {setBtnSeleccionado("CONTROL")}}
+                            >
+                                Control de archivo
+                            </div>
+                        </Link>
                     </div>
                 </Col>
                 <Col lg={12} xl={12}>
@@ -428,4 +430,4 @@ const AdministrativoUsuarios = () => {
     )
 }
 
-export default AdministrativoUsuarios
+export default Usuarios

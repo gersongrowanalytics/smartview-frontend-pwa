@@ -19,9 +19,10 @@ import ElementosEnviados from './ElementosEnviados/ElementosEnviados';
 import Terminos from './Terminos/Terminos';
 import ReenviarElemento from './ElementosEnviados/ReenviarElemento';
 import Administrativo from './Administrativo/Administrativo';
-import AdministrativoPerfil from './Administrativo/AdministrativoPerfil';
-import AdministrativoUsuarios from './Administrativo/AdministrativoUsuarios';
-import AdministrativoPermisos from './Administrativo/AdministrativoPermisos';
+import Usuarios from './Administrativo/Usuarios/Usuarios';
+import Permisos from './Administrativo/Permisos/Permisos';
+import TiposUsuarios from './Administrativo/TiposUsuarios/TiposUsuarios';
+import ControlArchivo from './Administrativo/ControlArchivo/ControlArchivo';
 
 const Rutas = () => {
 
@@ -136,9 +137,10 @@ const Rutas = () => {
                     <Route exact path='/terminos-condiciones' element={<Terminos/>}/>
                     <Route exact path='/reenviar-elemento' element={<ReenviarElemento/>}/>
                     <Route exact path='/administrativo' element={<Administrativo/>}/>
-                    <Route exact path='/administrativo/perfil' element={<AdministrativoPerfil/>}/>
-                    <Route exact path='/administrativo/usuarios' element={<AdministrativoUsuarios/>}/>
-                    <Route exact path='/administrativo/permisos' element={<AdministrativoPermisos/>}/>
+                    <Route exact path='/administrativo/perfil' element={<TiposUsuarios/>}/>
+                    <Route exact path='/administrativo/usuarios' element={<Usuarios/>}/>
+                    <Route exact path='/administrativo/permisos' element={<Permisos/>}/>
+                    <Route exact path='/administrativo/control-archivo' element={<ControlArchivo/>}/>
                     {
                         datosUsuarioLogeado.usuaceptoterminos
                         ?mostrar_terminos_condiciones_login == true

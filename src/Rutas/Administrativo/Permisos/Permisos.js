@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col, Modal } from 'antd'
 import { Link } from "react-router-dom"
-import '../../Estilos/Rutas/Administrativo/AdministrativoPermisos.css'
-import Agregar from '../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
-import FlechaAbajo from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
-import FlechaAbajoNegro from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
+import '../../../Estilos/Rutas/Administrativo/AdministrativoPermisos.css'
+import Agregar from '../../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
+import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
+import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
 
-const AdministrativoPermisos = () => {
+const Permisos = () => {
 
     const [btnSeleccionado, setBtnSeleccionado] = useState("PERMISOS")
     const [mostrarModalCrear, setmostrarModalCrear] = useState(false)
@@ -62,15 +62,17 @@ const AdministrativoPermisos = () => {
                                 Permisos
                             </div>
                         </Link>
-                        <div 
-                            className={btnSeleccionado == 'CONTROL' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'135px'}}
-                            onClick={() => {setBtnSeleccionado("CONTROL")}}
-                        >
-                            Control de archivo
-                        </div>
+                        <Link to='/administrativo/control-archivo'>
+                            <div 
+                                className={btnSeleccionado == 'CONTROL' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'135px'}}
+                                onClick={() => {setBtnSeleccionado("CONTROL")}}
+                            >
+                                Control de archivo
+                            </div>
+                        </Link>
                     </div>
                 </Col>
                 <Col lg={12} xl={12}>
@@ -261,4 +263,4 @@ const AdministrativoPermisos = () => {
     )
 }
 
-export default AdministrativoPermisos
+export default Permisos

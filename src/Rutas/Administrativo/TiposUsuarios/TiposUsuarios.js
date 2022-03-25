@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col, Switch } from 'antd'
 import { Link } from "react-router-dom"
-import '../../Estilos/Rutas/Administrativo/AdministrativoPerfil.css'
-import FlechaAbajo from '../../Assets/Img/Administrativo/Perfil/caret-down-black.png'
-import FlechaDerecha from '../../Assets/Img/Administrativo/Perfil/caret-right-black.png'
-import ImagenPerfil from '../../Assets/Img/Administrativo/Perfil/Completo-Administrador.png'
-import Editar from '../../Assets/Img/Administrativo/Perfil/Editar-white.png'
-import Cerrar from '../../Assets/Img/Administrativo/Perfil/Cortar.png'
-import Check from  '../../Assets/Img/Administrativo/Perfil/Palomita-white.png'
+import '../../../Estilos/Rutas/Administrativo/AdministrativoPerfil.css'
+import FlechaAbajo from '../../../Assets/Img/Administrativo/Perfil/caret-down-black.png'
+import FlechaDerecha from '../../../Assets/Img/Administrativo/Perfil/caret-right-black.png'
+import ImagenPerfil from '../../../Assets/Img/Administrativo/Perfil/Completo-Administrador.png'
+import Editar from '../../../Assets/Img/Administrativo/Perfil/Editar-white.png'
+import Cerrar from '../../../Assets/Img/Administrativo/Perfil/Cortar.png'
+import Check from  '../../../Assets/Img/Administrativo/Perfil/Palomita-white.png'
 
-const AdministrativoPerfil = () => {
+const TiposUsuarios = () => {
 
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
     const [anioSeleccionado, setanioSeleccionado] = useState("0")
@@ -113,16 +113,17 @@ const AdministrativoPerfil = () => {
                                 Permisos
                             </div>
                         </Link>
-                        
-                        <div 
-                            className={btnSeleccionado == 'CONTROL' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'135px'}}
-                            onClick={() => {setBtnSeleccionado("CONTROL")}}
-                        >
-                            Control de archivo
-                        </div>
+                        <Link to='/administrativo/control-archivo'>
+                            <div 
+                                className={btnSeleccionado == 'CONTROL' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'135px'}}
+                                onClick={() => {setBtnSeleccionado("CONTROL")}}
+                            >
+                                Control de archivo
+                            </div>
+                        </Link>
                     </div>
                 </Col>
                 <Col lg={12} xl={12}>
@@ -563,4 +564,4 @@ const AdministrativoPerfil = () => {
     )
 }
 
-export default AdministrativoPerfil
+export default TiposUsuarios

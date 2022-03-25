@@ -11,6 +11,7 @@ import BanderaPeru from '../../Assets/Img/Administrativo/Usuarios/Bandera-Perú.
 import BanderaBolivia from '../../Assets/Img/Administrativo/Usuarios/Bancedra-Bolivia.png'
 import BanderaChile from '../../Assets/Img/Administrativo/Usuarios/Bandera-Chile.png'
 import Borrar from '../../Assets/Img/Administrativo/Usuarios/Cortar.png'
+
 const AdministrativoUsuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
     const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(true)
@@ -127,15 +128,17 @@ const AdministrativoUsuarios = () => {
                                 Usuarios
                             </div>
                         </Link>
-                        <div 
-                            className={btnSeleccionado == 'PERMISOS' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'135px'}}
-                            onClick={() => {setBtnSeleccionado("PERMISOS")}}
-                        >
-                            Permisos
-                        </div>
+                        <Link to='/administrativo/permisos'>
+                            <div 
+                                className={btnSeleccionado == 'PERMISOS' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'135px'}}
+                                onClick={() => {setBtnSeleccionado("PERMISOS")}}
+                            >
+                                Permisos
+                            </div>
+                        </Link>
                         <div 
                             className={btnSeleccionado == 'CONTROL' 
                                 ? 'Btn-Seleccionado-Administrativo' 

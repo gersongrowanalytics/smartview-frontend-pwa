@@ -21,6 +21,7 @@ import ReenviarElemento from './ElementosEnviados/ReenviarElemento';
 import Administrativo from './Administrativo/Administrativo';
 import AdministrativoPerfil from './Administrativo/AdministrativoPerfil';
 import AdministrativoUsuarios from './Administrativo/AdministrativoUsuarios';
+import AdministrativoPermisos from './Administrativo/AdministrativoPermisos';
 
 const Rutas = () => {
 
@@ -135,8 +136,9 @@ const Rutas = () => {
                     <Route exact path='/terminos-condiciones' element={<Terminos/>}/>
                     <Route exact path='/reenviar-elemento' element={<ReenviarElemento/>}/>
                     <Route exact path='/administrativo' element={<Administrativo/>}/>
-                    <Route exact path='/administrativo-perfil' element={<AdministrativoPerfil/>}/>
+                    <Route exact path='/administrativo/perfil' element={<AdministrativoPerfil/>}/>
                     <Route exact path='/administrativo/usuarios' element={<AdministrativoUsuarios/>}/>
+                    <Route exact path='/administrativo/permisos' element={<AdministrativoPermisos/>}/>
                     {
                         datosUsuarioLogeado.usuaceptoterminos
                         ?mostrar_terminos_condiciones_login == true

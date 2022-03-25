@@ -1,0 +1,161 @@
+.Contenedor-Tabla-Permisos{
+    margin-top: 33px;
+    margin-left: 116px;
+    width: 1133px;
+    height: 352px;  
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 8px;
+}
+
+.Tabla-Adm-Permisos{
+    width: 100%;
+    text-align : center;
+    overflow:scroll;
+    white-space: nowrap;
+    position: relative;
+    z-index: 0;
+}
+
+.Tabla-Adm-Permisos thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.Tabla-Adm-Permisos thead tr th{
+    padding: 0px 12px;
+}
+
+.Tabla-Adm-Permisos thead tr{
+    width: 402px;
+    height: 56px;
+    left: 60px;
+    top: 244px;
+    background: #1EC0ED;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 172.51%;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.Tabla-Adm-Permisos tbody tr{
+    height: 26px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Caja-Modal-CrearPermiso .ant-modal-content{
+    border-radius: 8px;
+}
+
+.Modal-Input-Crear-Permiso{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 0px 10px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+}
+
+.Modal-Select-Crear-Permiso{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Campo-Texto-Modal-Crear-Permiso{
+    padding-left: 9px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Titulo-Modal-Crear-Permiso{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.Modal-Input-Select-Crear-Permiso{
+    border: 0px;
+    outline: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+}
+
+.Contenedor-Select-Categoria-Modal{
+    width: 208px;
+    height: 148px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    z-index: 1;
+}
+
+.Contenedor-Select-Categoria-Modal-Ocultar{
+    display: none;
+}
+
+.Opciones-Select-Categoria-Modal{
+    width: 201px;
+    height: 27px;
+    background: #FFFFFF;
+    cursor: pointer;
+    padding-left: 15px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    display: flex;
+    align-items: center;
+}
+
+.Opciones-Select-Categoria-Modal:hover{
+    background: #E6F1FC;
+}
+
+.Texto-Categoria-Seleccionada-Modal{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    width: 147px;
+}

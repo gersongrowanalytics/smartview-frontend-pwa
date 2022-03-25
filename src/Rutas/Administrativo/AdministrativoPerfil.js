@@ -80,15 +80,17 @@ const AdministrativoPerfil = () => {
             <Row>
                 <Col lg={12} xl={12}>
                     <div className='Caja-Botones-Administrativo'>
-                        <div 
-                            className={btnSeleccionado == 'TIPOS' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'159px'}}
-                            onClick={() => {setBtnSeleccionado("TIPOS")}}
-                        >
-                            Tipos Usuarios
-                        </div>
+                        <Link to='/administrativo'>
+                            <div 
+                                className={btnSeleccionado == 'TIPOS' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'159px'}}
+                                onClick={() => {setBtnSeleccionado("TIPOS")}}
+                            >
+                                Tipos Usuarios
+                            </div>
+                        </Link>
                         <Link to='/administrativo/usuarios'>
                             <div 
                                 className={btnSeleccionado == 'USUARIOS' 
@@ -100,15 +102,18 @@ const AdministrativoPerfil = () => {
                                 Usuarios
                             </div>
                         </Link>
-                        <div 
-                            className={btnSeleccionado == 'PERMISOS' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'135px'}}
-                            onClick={() => {setBtnSeleccionado("PERMISOS")}}
-                        >
-                            Permisos
-                        </div>
+                        <Link to='/administrativo/permisos'>
+                            <div 
+                                className={btnSeleccionado == 'PERMISOS' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'135px'}}
+                                onClick={() => {setBtnSeleccionado("PERMISOS")}}
+                            >
+                                Permisos
+                            </div>
+                        </Link>
+                        
                         <div 
                             className={btnSeleccionado == 'CONTROL' 
                                 ? 'Btn-Seleccionado-Administrativo' 

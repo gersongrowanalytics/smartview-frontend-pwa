@@ -9,6 +9,7 @@ import Gerente from '../../Assets/Img/Administrativo/TiposUsuarios/Grente.png'
 import Otro from '../../Assets/Img/Administrativo/TiposUsuarios/Otro-two.png'
 import Otro2 from '../../Assets/Img/Administrativo/TiposUsuarios/Otro.png'
 import Agregar from '../../Assets/Img/Administrativo/TiposUsuarios/agregar.png'
+
 const Administrativo = () => {
 
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
@@ -23,15 +24,17 @@ const Administrativo = () => {
             <Row>
                 <Col lg={12} xl={12}>
                     <div className='Caja-Botones-Administrativo'>
-                        <div 
-                            className={btnSeleccionado == 'TIPOS' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'159px'}}
-                            onClick={() => {setBtnSeleccionado("TIPOS")}}
-                        >
-                            Tipos Usuarios
-                        </div>
+                        <Link to='/administrativo'>
+                            <div 
+                                className={btnSeleccionado == 'TIPOS' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'159px'}}
+                                onClick={() => {setBtnSeleccionado("TIPOS")}}
+                            >
+                                Tipos Usuarios
+                            </div>
+                        </Link>
                         <Link to='/administrativo/usuarios'>
                             <div 
                                 className={btnSeleccionado == 'USUARIOS' 
@@ -43,15 +46,17 @@ const Administrativo = () => {
                                 Usuarios
                             </div>
                         </Link>
-                        <div 
-                            className={btnSeleccionado == 'PERMISOS' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'135px'}}
-                            onClick={() => {setBtnSeleccionado("PERMISOS")}}
-                        >
-                            Permisos
-                        </div>
+                        <Link to='/administrativo/permisos'>
+                            <div 
+                                className={btnSeleccionado == 'PERMISOS' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'135px'}}
+                                onClick={() => {setBtnSeleccionado("PERMISOS")}}
+                            >
+                                Permisos
+                            </div>
+                        </Link>
                         <div 
                             className={btnSeleccionado == 'CONTROL' 
                                 ? 'Btn-Seleccionado-Administrativo' 

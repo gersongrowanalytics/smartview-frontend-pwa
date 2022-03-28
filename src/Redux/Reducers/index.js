@@ -18,6 +18,7 @@ import CargaArchivos from './CargaArchivos/CargaArchivos'
 import Contraprestaciones from './Contraprestaciones/Contraprestaciones'
 import DescargarEnviarCorreo from './Descargas/DescargarEnviarCorreo'
 import Setting from './Setting'
+import ControlArchivos from './ControlArchivos/ControlArchivos'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -39,6 +40,7 @@ const createRootReducer = (history) => combineReducers({
     contraprestaciones : Contraprestaciones,
     descargarEnviarCorreo : DescargarEnviarCorreo,
     setting : Setting,
+    controlArchivos : ControlArchivos
 });
 
 export default createRootReducer

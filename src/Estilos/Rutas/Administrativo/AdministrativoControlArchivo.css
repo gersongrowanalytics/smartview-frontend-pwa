@@ -2,7 +2,6 @@
     margin-top: 33px;
     margin-left: 96px;
     width: 1148px;
-    height: 349px;  
     border-radius: 8px;
 }
 
@@ -49,7 +48,7 @@
 }
 
 .Paginacion-Control-Archivo{
-    padding-right: 109px;
+    padding-right: 44px;
     display: flex;
     justify-content: flex-end;
     padding-top: 19px;
@@ -58,4 +57,9 @@
     font-size: 14px;
     line-height: 19px;  
     color: #1E1E1E;
+    align-items: center;
+}
+
+.Tabla-Adm-Control tbody tr td:nth-child(2){
+    text-align: start !important;
 }

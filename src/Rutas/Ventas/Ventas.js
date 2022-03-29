@@ -130,286 +130,19 @@ const Ventas = () => {
                                             Avance de venta Sell In
                                         </div>
 
-                                        <div className='Contenedor-Tarjeta-Avance-Ventas' >
-                                            <Row style={{marginBottom:'0px'}}>
-                                                <Col xl={24}>
-                                                    {/* <div className='Wbold-S16-H21-C1E1E1E'>
-                                                        Avance de venta Sell In
-                                                    </div> */}
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'0px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoObjetivoNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
-                                                        </div>
-                                                        <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            Objetivo
-                                                        </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='Wbold-S16-H21-C1E1E1E'>
-                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoobjetivo, 0)} displayType={'text'} thousandSeparator={true} />
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoRealNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
-                                                        </div>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Real
-                                                        </div>
-                                                    </div>
-
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoreal, 0)} displayType={'text'} thousandSeparator={true} />
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoPorFacturarNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
-                                                        </div>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Por Facturar
-                                                        </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                    {
-                                                        togo <= 0 
-                                                        ? "S/"+0 
-                                                        : <>
-                                                            S/<NumberFormat value={funFormatoDecimal(togo, 0)} displayType={'text'} thousandSeparator={true} />
-                                                        </>
-                                                    }
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row style={{marginTop:'5px'}}>
-                                                <Col xl={12}>
-                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                            <img 
-                                                                src={IconoCumpliminetoNaranja} 
-                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                            />
-                                                        </div>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            Cumplimiento
-                                                        </div>
-                                                    </div>
-                                                </Col>
-                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                    <div className='Wbold-S14-L0015-CFFBB37'>
-                                                        <div  style={{position:'relative'}}>
-                                                            <img 
-                                                                src={IconoEstrella}
-                                                                style={{
-                                                                    // position:'absolute',
-                                                                    width:'13px',
-                                                                    marginTop:'-9px'
-                                                                }}
-                                                            />
-                                                            <NumberFormat 
-                                                                value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadoreal) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
-                                                                displayType={'text'} thousandSeparator={true} />%
-
-                                                        </div>
-
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                    </div>
-
-                                    {
-                                        canal_seleccionado == "Tradicional"
-                                        ?<div className='Contenedor-Tajeta-Avance-Rebate-Ventas' >
-                                            <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
-                                                Rebate Sell In Mensual
-                                            </div>
-
-                                            <div className='Contenedor-Tarjeta-Avance-Ventas' >
-                                                <Row style={{marginBottom:'0px'}}>
-                                                    <Col xl={24}>
-                                                    </Col>
-                                                </Row>
-                                                {
-                                                    data_venta.trrs.map((trr, posTrr) => {
-
-                                                        let rebateCalculado = 0
-
-                                                        if(trr.rtpporcentajehasta == 10000){
-
-                                                            let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajedesde))
-                                                            rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
-
-                                                        }else{
-                                                            let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajehasta))
-                                                            rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
-                                                        }
-
-                                                        return (
-                                                            <Row style={{marginBottom:'5px'}}>
-                                                                <Col xl={12}>
-                                                                    <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                                        <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                            <img 
-                                                                                src={
-                                                                                    posTrr == 0
-                                                                                    ?IconoRebateUno
-                                                                                    :posTrr == 1
-                                                                                        ?IconoRebateDos
-                                                                                        :posTrr == 2
-                                                                                            ?IconoRebateTres
-                                                                                            :IconoRebateTres
-                                                                                } 
-                                                                                className='Iconos-Tarjeta-Avance-Ventas'
-                                                                            />
-                                                                        </div>
-                                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                            {
-                                                                                trr.rtpporcentajehasta == 10000
-                                                                                ?<>
-                                                                                    Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
-                                                                                </>
-                                                                                :<>
-                                                                                    Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
-                                                                                </>
-                                                                            }
-                                                                            
-                                                                        </div>
-                                                                    </div>
-                                                                </Col>
-                                                                <Col xl={12} style={{textAlignLast: "right"}}>
-                                                                    <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                        {
-                                                                            trr.realTotal
-                                                                            ?<>
-                                                                                S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                            </>
-                                                                            :<>
-                                                                                S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                            </>
-                                                                        }
-                                                                        
-                                                                    </div>
-                                                                </Col>
-                                                            </Row>            
-                                                        )
-                                                    })
-                                                }
-                                                {/* <Row style={{marginTop:'0px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoRebateUno} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
-                                                            </div>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Escala 1 95% -99%
-                                                            </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            S/2,599
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'5px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoRebateDos} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
-                                                            </div>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Escala 2 100% -104%
-                                                            </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            S/1,084,614
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'5px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoRebateTres} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
-                                                            </div>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Escala 3 105% - +%
-                                                            </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            S/1,084,614
-                                                        </div>
-                                                    </Col>
-                                                </Row> */}
-                                                <Row style={{marginTop:'10px'}}>
-                                                    <Col xl={12}>
-                                                        <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            Rebate Real
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                            </div>
-                                        </div>
-                                        :null
-                                    }
-                                    
-
-                                    {
-                                        canal_seleccionado == "Tradicional"
-                                        ?<div 
-                                            className='Contenedor-Tajeta-Avance-Rebate-Ventas' 
+                                        <div 
+                                            className='Contenedor-Tarjeta-Avance-Ventas' 
                                             style={{
-                                                marginRight: "0"
+                                                display:'flex'
                                             }}
                                         >
-                                            <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
-                                                Rabate Trimestral - {data_venta.nombreTrimestre}
-                                            </div>
-
-                                            <div className='Contenedor-Tarjeta-Avance-Ventas' >
+                                            <div
+                                                style={{
+                                                    width: "100%",
+                                                    alignSelf: "center",
+                                                    marginTop: "-10px"
+                                                }}
+                                            >
                                                 <Row style={{marginBottom:'0px'}}>
                                                     <Col xl={24}>
                                                         {/* <div className='Wbold-S16-H21-C1E1E1E'>
@@ -433,6 +166,239 @@ const Ventas = () => {
                                                     </Col>
                                                     <Col xl={12} style={{textAlignLast: "right"}}>
                                                         <div className='Wbold-S16-H21-C1E1E1E'>
+                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoobjetivo, 0)} displayType={'text'} thousandSeparator={true} />
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoRealNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Real
+                                                            </div>
+                                                        </div>
+
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoreal, 0)} displayType={'text'} thousandSeparator={true} />
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoPorFacturarNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Por Facturar
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                        {
+                                                            togo <= 0 
+                                                            ? "S/"+0 
+                                                            : <>
+                                                                S/<NumberFormat value={funFormatoDecimal(togo, 0)} displayType={'text'} thousandSeparator={true} />
+                                                            </>
+                                                        }
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'5px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoCumpliminetoNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Cumplimiento
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='Wbold-S14-L0015-CFFBB37'>
+                                                            <div  style={{position:'relative'}}>
+                                                                <img 
+                                                                    src={IconoEstrella}
+                                                                    style={{
+                                                                        // position:'absolute',
+                                                                        width:'13px',
+                                                                        marginTop:'-9px'
+                                                                    }}
+                                                                />
+                                                                <NumberFormat 
+                                                                    value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadoreal) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
+                                                                    displayType={'text'} thousandSeparator={true} />%
+
+                                                            </div>
+
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {
+                                        canal_seleccionado == "Tradicional"
+                                        ?<div className='Contenedor-Tajeta-Avance-Rebate-Ventas' >
+                                            <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
+                                                Rebate Sell In Mensual
+                                            </div>
+
+                                            <div 
+                                                className='Contenedor-Tarjeta-Avance-Ventas' 
+                                                style={{
+                                                    display:'flex'
+                                                }}
+                                            >
+                                                <div
+                                                    style={{
+                                                        width: "100%",
+                                                        alignSelf: "center",
+                                                        marginTop: "-10px"
+                                                    }}
+                                                >
+                                                    <Row style={{marginBottom:'0px'}}>
+                                                        <Col xl={24}>
+                                                        </Col>
+                                                    </Row>
+                                                    {
+                                                        data_venta.trrs.map((trr, posTrr) => {
+
+                                                            let rebateCalculado = 0
+
+                                                            if(trr.rtpporcentajehasta == 10000){
+
+                                                                let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajedesde))
+                                                                rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+
+                                                            }else{
+                                                                let realCalculado = ((parseFloat(data_venta.tsuvalorizadoobjetivo) / 100) * parseFloat(trr.rtpporcentajehasta))
+                                                                rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+                                                            }
+
+                                                            return (
+                                                                <Row style={{marginBottom:'5px'}}>
+                                                                    <Col xl={12}>
+                                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                                <img 
+                                                                                    src={
+                                                                                        posTrr == 0
+                                                                                        ?IconoRebateUno
+                                                                                        :posTrr == 1
+                                                                                            ?IconoRebateDos
+                                                                                            :posTrr == 2
+                                                                                                ?IconoRebateTres
+                                                                                                :IconoRebateTres
+                                                                                    } 
+                                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                                />
+                                                                            </div>
+                                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                                {
+                                                                                    trr.rtpporcentajehasta == 10000
+                                                                                    ?<>
+                                                                                        Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
+                                                                                    </>
+                                                                                    :<>
+                                                                                        Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
+                                                                                    </>
+                                                                                }
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </Col>
+                                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                            {
+                                                                                trr.realTotal
+                                                                                ?<>
+                                                                                    S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                                </>
+                                                                                :<>
+                                                                                    S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                                </>
+                                                                            }
+                                                                            
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>            
+                                                            )
+                                                        })
+                                                    }
+                                                    <Row style={{marginTop:'10px', marginLeft: "-7px"}}>
+                                                        <Col xl={12}>
+                                                            <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                Rebate Real
+                                                            </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
+                                                            <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
+                                                            </div>
+                                                        </Col>
+                                                    </Row>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        :null
+                                    }
+                                    
+
+                                    {
+                                        canal_seleccionado == "Tradicional"
+                                        ?<div 
+                                            className='Contenedor-Tajeta-Avance-Rebate-Ventas' 
+                                            style={{
+                                                marginRight: "0"
+                                            }}
+                                        >
+                                            <div className='Wbold-S16-H21-C1E1E1E Titulo-Tarjeta-Avance-Ventas'>
+                                                Rebate Trimestral - {data_venta.nombreTrimestre}
+                                            </div>
+
+                                            <div className='Contenedor-Tarjeta-Avance-Ventas' >
+                                                <Row style={{marginBottom:'0px'}}>
+                                                    <Col xl={24}>
+                                                        {/* <div className='Wbold-S16-H21-C1E1E1E'>
+                                                            Avance de venta Sell In
+                                                        </div> */}
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{marginTop:'0px'}}>
+                                                    <Col xl={12}>
+                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                <img 
+                                                                    src={IconoObjetivoNaranja} 
+                                                                    className='Iconos-Tarjeta-Avance-Ventas'
+                                                                />
+                                                            </div>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                Objetivo
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={12} style={{textAlignLast: "right"}}>
+                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
                                                             S/<NumberFormat value={funFormatoDecimal(data_venta.tsuobjetivotrimestral, 0)} displayType={'text'} thousandSeparator={true} />
                                                         </div>
                                                     </Col>
@@ -513,7 +479,7 @@ const Ventas = () => {
                                                         </div>
                                                     </Col>
                                                 </Row>
-                                                <Row style={{marginTop:'5px'}}>
+                                                <Row style={{marginTop:'5px', marginLeft: "-7px"}}>
                                                     <Col xl={12}>
                                                         <div style={{position:'relative'}}>
                                                             <div className='Wbold-S16-H21-C1E1E1E'>
@@ -528,6 +494,7 @@ const Ventas = () => {
                                                     </Col>
                                                 </Row>
                                             </div>
+                                            
                                         </div>
                                         :null
                                     }
@@ -548,7 +515,7 @@ const Ventas = () => {
                                                 // <Col xl={8} style={{paddingRight:'35px', marginRight:'14px'}}>
                                                     <div 
                                                         className='Tarjeta-Categorias-Avance-Ventas'
-                                                        style={pos == 2?{marginRight:'0'}:{}}
+                                                        style={pos == 2 || pos== 5?{marginRight:'0'}:{}}
                                                     >
                                                         <div 
                                                             className='Primera-Tarjeta-Categorias-Avance-Ventas'
@@ -562,35 +529,13 @@ const Ventas = () => {
                                                             {/* <img src={dat.catimagenfondo} className='Tarjeta-Categoria-Ventas-Img' /> */}
                                                         </div>
                                                         <div className='Segunda-Tarjeta-Categorias-Avance-Ventas'>
+                                                            
                                                             <div 
                                                                 className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'
                                                                 style={{
-                                                                    marginTop:'-4px'
+                                                                    marginTop:'-1px'
                                                                 }}
                                                             >
-                                                                <div className='Icono-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
-                                                                    <img  className='Iconos-Tarjeta-Avance-Ventas' src={IconoCumplimientoAmarillo} />
-                                                                </div>
-                                                                <div 
-                                                                    className='Texto-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-C1E1E1E'
-                                                                >
-                                                                    Cumplimiento
-                                                                </div>
-                                                                <div 
-                                                                    className='Total-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-CFFBB37'
-                                                                >
-                                                                    <img 
-                                                                        src={IconoEstrella}
-                                                                        style={{
-                                                                            // position:'absolute',
-                                                                            width:'13px',
-                                                                            marginTop:'-8px'
-                                                                        }}
-                                                                    />
-                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} />%
-                                                                </div>
-                                                            </div>
-                                                            <div className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
                                                                 <div className='Icono-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
                                                                     <img  className='Iconos-Tarjeta-Avance-Ventas' src={IconoObjetivoAmarillo} />
                                                                 </div>
@@ -644,6 +589,31 @@ const Ventas = () => {
                                                                     }
                                                                 </div>
                                                             </div>
+                                                            <div 
+                                                                className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'
+                                                            >
+                                                                <div className='Icono-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
+                                                                    <img  className='Iconos-Tarjeta-Avance-Ventas' src={IconoCumplimientoAmarillo} />
+                                                                </div>
+                                                                <div 
+                                                                    className='Texto-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-C1E1E1E'
+                                                                >
+                                                                    Cumplimiento
+                                                                </div>
+                                                                <div 
+                                                                    className='Total-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-CFFBB37'
+                                                                >
+                                                                    <img 
+                                                                        src={IconoEstrella}
+                                                                        style={{
+                                                                            // position:'absolute',
+                                                                            width:'13px',
+                                                                            marginTop:'-8px'
+                                                                        }}
+                                                                    />
+                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} />%
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                     </div>
@@ -679,156 +649,166 @@ const Ventas = () => {
                                             <div 
                                                 className='Contenedor-Tarjeta-Avance-Ventas' 
                                                 style={{
-                                                    border: "1px solid #79E2C1"
+                                                    display:'flex'
                                                 }}
                                             >
-                                                <Row style={{marginBottom:'0px'}}>
-                                                    <Col xl={24}>
-                                                        {/* <div className='Wbold-S16-H21-C1E1E1E'>
-                                                            Avance de venta Sell In
-                                                        </div> */}
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'0px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoObjetivoVerde} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
+                                                <div
+                                                    style={{
+                                                        width: "100%",
+                                                        alignSelf: "center",
+                                                        marginTop: "-10px"
+                                                    }}
+                                                >
+
+                                                    <Row style={{marginBottom:'0px'}}>
+                                                        <Col xl={24}>
+                                                            {/* <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                Avance de venta Sell In
+                                                            </div> */}
+                                                        </Col>
+                                                    </Row>
+                                                    <Row style={{marginTop:'0px'}}>
+                                                        <Col xl={12}>
+                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                    <img 
+                                                                        src={IconoObjetivoVerde} 
+                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                    />
+                                                                </div>
+                                                                <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                    Objetivo
+                                                                </div>
                                                             </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
                                                             <div className='Wbold-S16-H21-C1E1E1E'>
-                                                                Objetivo
+                                                                {
+                                                                    mostrarReal == true
+                                                                    ?<>
+                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoobjetivo, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                    </>
+                                                                    :<>
+                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoobjetivo, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                    </>
+                                                                }
                                                             </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='Wbold-S16-H21-C1E1E1E'>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row style={{marginTop:'5px'}}>
+                                                        <Col xl={12}>
+                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                    <img 
+                                                                        src={IconoRealVerde} 
+                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                    />
+                                                                </div>
+                                                                <div className='W600-S14-H19-L0015-C1E1E1E Switch-Avance-Ventas'>
+                                                                    <div style={{marginRight:'5px'}}>
+                                                                        {
+                                                                            mostrarReal == true
+                                                                            ?"Real"
+                                                                            :"NIV"
+                                                                        }
+                                                                    </div> 
+                                                                    <Switch 
+                                                                        size="small" 
+                                                                        checked={mostrarReal}
+                                                                        onChange={() => setMostrarReal(!mostrarReal)}
+                                                                        style={{
+                                                                            marginTop: "3px"
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                {
+                                                                    mostrarReal == true
+                                                                    ?<>
+                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoreal, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                    </>
+                                                                    :<>
+                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorealniv, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                    </>
+                                                                }
+                                                                
+                                                            </div>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row style={{marginTop:'5px'}}>
+                                                        <Col xl={12}>
+                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                    <img 
+                                                                        src={IconoPorFacturarVerde} 
+                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                    />
+                                                                </div>
+                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                    Por Facturar
+                                                                </div>
+                                                            </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
+                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
                                                             {
-                                                                mostrarReal == true
-                                                                ?<>
-                                                                    S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoobjetivo, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                </>
-                                                                :<>
-                                                                    S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoobjetivo, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                togo <= 0 
+                                                                ? "S/"+0 
+                                                                : <>
+                                                                    S/<NumberFormat value={funFormatoDecimal(togo, 0)} displayType={'text'} thousandSeparator={true} />
                                                                 </>
                                                             }
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'5px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoRealVerde} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
                                                             </div>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E Switch-Avance-Ventas'>
-                                                                <div style={{marginRight:'5px'}}>
-                                                                    {
-                                                                        mostrarReal == true
-                                                                        ?"Real"
-                                                                        :"NIV"
-                                                                    }
-                                                                </div> 
-                                                                <Switch 
-                                                                    size="small" 
-                                                                    checked={mostrarReal}
-                                                                    onChange={() => setMostrarReal(!mostrarReal)}
+                                                        </Col>
+                                                    </Row>
+                                                    <Row style={{marginTop:'5px'}}>
+                                                        <Col xl={12}>
+                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                    <img 
+                                                                        src={IconoCumplimientoVerde} 
+                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                    />
+                                                                </div>
+                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                    Cumplimiento
+                                                                </div>
+                                                            </div>
+                                                        </Col>
+                                                        <Col xl={12} style={{textAlignLast: "right"}}>
+                                                            <div className='Wbold-S14-L0015-CFFBB37'>
+                                                                <img 
+                                                                    src={IconoEstrella}
                                                                     style={{
-                                                                        marginTop: "3px"
+                                                                        // position:'absolute',
+                                                                        width:'13px',
+                                                                        marginTop:'-9px'
                                                                     }}
                                                                 />
+                                                                {
+                                                                    mostrarReal == true
+                                                                    ?<>
+                                                                        <NumberFormat 
+                                                                            value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadoreal) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
+                                                                            displayType={'text'} thousandSeparator={true} />%
+                                                                    </>
+                                                                    :<>
+                                                                        {/* <NumberFormat value={funFormatoDecimal(data_venta.tsuporcentajecumplimientoniv, 0)} displayType={'text'} thousandSeparator={true} />% */}
+                                                                        <NumberFormat 
+                                                                            value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadorealniv) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
+                                                                            displayType={'text'} thousandSeparator={true} />%
+                                                                    </>
+                                                                }
+                                                                
                                                             </div>
-                                                        </div>
+                                                        </Col>
+                                                    </Row>
 
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                            {
-                                                                mostrarReal == true
-                                                                ?<>
-                                                                    S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadoreal, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                </>
-                                                                :<>
-                                                                    S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorealniv, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                </>
-                                                            }
-                                                            
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'5px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoPorFacturarVerde} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
-                                                            </div>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Por Facturar
-                                                            </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                        {
-                                                            togo <= 0 
-                                                            ? "S/"+0 
-                                                            : <>
-                                                                S/<NumberFormat value={funFormatoDecimal(togo, 0)} displayType={'text'} thousandSeparator={true} />
-                                                            </>
-                                                        }
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{marginTop:'5px'}}>
-                                                    <Col xl={12}>
-                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                <img 
-                                                                    src={IconoCumplimientoVerde} 
-                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                />
-                                                            </div>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                Cumplimiento
-                                                            </div>
-                                                        </div>
-                                                    </Col>
-                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                        <div className='Wbold-S14-L0015-CFFBB37'>
-                                                            <img 
-                                                                src={IconoEstrella}
-                                                                style={{
-                                                                    // position:'absolute',
-                                                                    width:'13px',
-                                                                    marginTop:'-9px'
-                                                                }}
-                                                            />
-                                                            {
-                                                                mostrarReal == true
-                                                                ?<>
-                                                                    <NumberFormat 
-                                                                        value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadoreal) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
-                                                                        displayType={'text'} thousandSeparator={true} />%
-                                                                </>
-                                                                :<>
-                                                                    {/* <NumberFormat value={funFormatoDecimal(data_venta.tsuporcentajecumplimientoniv, 0)} displayType={'text'} thousandSeparator={true} />% */}
-                                                                    <NumberFormat 
-                                                                        value={funFormatoDecimal( (parseFloat(data_venta.tsuvalorizadorealniv) * 100) / parseFloat(data_venta.tsuvalorizadoobjetivo)  , 0)} 
-                                                                        displayType={'text'} thousandSeparator={true} />%
-                                                                </>
-                                                            }
-                                                            
-                                                        </div>
-                                                    </Col>
-                                                </Row>
+                                                </div>
                                             </div>
                                         </div>
                                         
@@ -847,169 +827,117 @@ const Ventas = () => {
                                                 <div 
                                                     className='Contenedor-Tarjeta-Avance-Ventas' 
                                                     style={{
-                                                        border: "1px solid #79E2C1"
+                                                        display:'flex'
                                                     }}
                                                 >
-                                                    <Row style={{marginBottom:'0px'}}>
-                                                        <Col xl={24}>
-                                                            {/* <div className='Wbold-S16-H21-C1E1E1E'>
-                                                                Avance de venta Sell In
-                                                            </div> */}
-                                                        </Col>
-                                                    </Row>
-                                                    {
-                                                        data_venta.trrs.map((trr, posTrr) => {
+                                                    <div
+                                                        style={{
+                                                            width: "100%",
+                                                            alignSelf: "center",
+                                                            marginTop: "-10px"
+                                                        }}
+                                                    >
+                                                        <Row style={{marginBottom:'0px'}}>
+                                                            <Col xl={24}>
+                                                                {/* <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                    Avance de venta Sell In
+                                                                </div> */}
+                                                            </Col>
+                                                        </Row>
+                                                        {
+                                                            data_venta.trrs.map((trr, posTrr) => {
 
-                                                            let objetivoSellIn
+                                                                let objetivoSellIn
 
-                                                            if(data_ventas[0]['tsuvalorizadoobjetivo']){
-                                                                objetivoSellIn = data_ventas[0]['tsuvalorizadoobjetivo']
-                                                            }else{
-                                                                objetivoSellIn = 0
-                                                            }
-                                                            
+                                                                if(data_ventas[0]['tsuvalorizadoobjetivo']){
+                                                                    objetivoSellIn = data_ventas[0]['tsuvalorizadoobjetivo']
+                                                                }else{
+                                                                    objetivoSellIn = 0
+                                                                }
+                                                                
 
-                                                            let rebateCalculado = 0
+                                                                let rebateCalculado = 0
 
-                                                            if(trr.rtpporcentajehasta == 10000){
+                                                                if(trr.rtpporcentajehasta == 10000){
 
-                                                                let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajedesde))
-                                                                rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+                                                                    let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajedesde))
+                                                                    rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
 
-                                                            }else{
-                                                                let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajehasta))
-                                                                rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
-                                                            }
+                                                                }else{
+                                                                    let realCalculado = ((parseFloat(objetivoSellIn) / 100) * parseFloat(trr.rtpporcentajehasta))
+                                                                    rebateCalculado = ((parseFloat(realCalculado) / 100) * parseFloat(trr.rtpporcentajerebate))
+                                                                }
 
-                                                            return (
-                                                                <Row style={{marginBottom:'5px'}}>
-                                                                    <Col xl={12}>
-                                                                        <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                                            <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                                <img 
-                                                                                    src={
-                                                                                        posTrr == 0
-                                                                                        ?IconoRebateUno
-                                                                                        :posTrr == 1
-                                                                                            ?IconoRebateDos
-                                                                                            :posTrr == 2
-                                                                                                ?IconoRebateTres
-                                                                                                :IconoRebateTres
-                                                                                    } 
-                                                                                    className='Iconos-Tarjeta-Avance-Ventas'
-                                                                                />
+                                                                return (
+                                                                    <Row style={{marginBottom:'5px'}}>
+                                                                        <Col xl={12}>
+                                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
+                                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
+                                                                                    <img 
+                                                                                        src={
+                                                                                            posTrr == 0
+                                                                                            ?IconoRebateUno
+                                                                                            :posTrr == 1
+                                                                                                ?IconoRebateDos
+                                                                                                :posTrr == 2
+                                                                                                    ?IconoRebateTres
+                                                                                                    :IconoRebateTres
+                                                                                        } 
+                                                                                        className='Iconos-Tarjeta-Avance-Ventas'
+                                                                                    />
+                                                                                </div>
+                                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
+                                                                                    {
+                                                                                        trr.rtpporcentajehasta == 10000
+                                                                                        ?<>
+                                                                                            Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
+                                                                                        </>
+                                                                                        :<>
+                                                                                            Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
+                                                                                        </>
+                                                                                    }
+                                                                                    
+                                                                                </div>
                                                                             </div>
+                                                                        </Col>
+                                                                        <Col xl={12} style={{textAlignLast: "right"}}>
                                                                             <div className='W600-S14-H19-L0015-C1E1E1E'>
                                                                                 {
-                                                                                    trr.rtpporcentajehasta == 10000
+                                                                                    trr.realTotal
                                                                                     ?<>
-                                                                                        Escala {posTrr+1} {trr.rtpporcentajedesde}% - +%
+                                                                                        S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
                                                                                     </>
                                                                                     :<>
-                                                                                        Escala {posTrr+1} {trr.rtpporcentajedesde}% - {trr.rtpporcentajehasta}%
+                                                                                        S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
                                                                                     </>
                                                                                 }
-                                                                                
                                                                             </div>
-                                                                        </div>
-                                                                    </Col>
-                                                                    <Col xl={12} style={{textAlignLast: "right"}}>
-                                                                        <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                            {
-                                                                                trr.realTotal
-                                                                                ?<>
-                                                                                    S/<NumberFormat value={funFormatoDecimal(trr.realTotal, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                                </>
-                                                                                :<>
-                                                                                    S/<NumberFormat value={funFormatoDecimal(rebateCalculado, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                                </>
-                                                                            }
-                                                                        </div>
-                                                                    </Col>
-                                                                </Row>            
-                                                            )
-                                                        })
-                                                    }
-                                                    {/* <Row style={{marginTop:'0px'}}>
-                                                        <Col xl={12}>
-                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                    <img 
-                                                                        src={IconoRebateUno} 
-                                                                        className='Iconos-Tarjeta-Avance-Ventas'
-                                                                    />
+                                                                        </Col>
+                                                                    </Row>            
+                                                                )
+                                                            })
+                                                        }
+                                                        <Row style={{marginTop:'10px', marginLeft: "-7px"}}>
+                                                            <Col xl={12}>
+                                                                <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                    Rebate Real
                                                                 </div>
-                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                    Escala 1 95% -99%
+                                                            </Col>
+                                                            <Col xl={12} style={{textAlignLast: "right"}}>
+                                                                <div className='Wbold-S16-H21-C1E1E1E'>
+                                                                    {
+                                                                        mostrarReal == true
+                                                                        ?<>
+                                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                        </>
+                                                                        :<>
+                                                                            S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebateniv, 0)} displayType={'text'} thousandSeparator={true} />
+                                                                        </>
+                                                                    }
                                                                 </div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col xl={12} style={{textAlignLast: "right"}}>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                S/2,599
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row style={{marginTop:'5px'}}>
-                                                        <Col xl={12}>
-                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                    <img 
-                                                                        src={IconoRebateDos} 
-                                                                        className='Iconos-Tarjeta-Avance-Ventas'
-                                                                    />
-                                                                </div>
-                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                    Escala 2 100% -104%
-                                                                </div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col xl={12} style={{textAlignLast: "right"}}>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                S/1,084,614
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row style={{marginTop:'5px'}}>
-                                                        <Col xl={12}>
-                                                            <div style={{position:'relative', paddingLeft:'12px'}}>
-                                                                <div style={{position:'absolute', left:'-12px', top:'-3px'}}>
-                                                                    <img 
-                                                                        src={IconoRebateTres} 
-                                                                        className='Iconos-Tarjeta-Avance-Ventas'
-                                                                    />
-                                                                </div>
-                                                                <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                    Escala 3 105% - +%
-                                                                </div>
-                                                            </div>
-                                                        </Col>
-                                                        <Col xl={12} style={{textAlignLast: "right"}}>
-                                                            <div className='W600-S14-H19-L0015-C1E1E1E'>
-                                                                S/1,084,614
-                                                            </div>
-                                                        </Col>
-                                                    </Row> */}
-                                                    <Row style={{marginTop:'10px'}}>
-                                                        <Col xl={12}>
-                                                            <div className='Wbold-S16-H21-C1E1E1E'>
-                                                                Rebate Real
-                                                            </div>
-                                                        </Col>
-                                                        <Col xl={12} style={{textAlignLast: "right"}}>
-                                                            <div className='Wbold-S16-H21-C1E1E1E'>
-                                                                {
-                                                                    mostrarReal == true
-                                                                    ?<>
-                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebate, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                    </>
-                                                                    :<>
-                                                                        S/<NumberFormat value={funFormatoDecimal(data_venta.tsuvalorizadorebateniv, 0)} displayType={'text'} thousandSeparator={true} />
-                                                                    </>
-                                                                }
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
                                                 </div>
                                             </div>
                                             :null
@@ -1030,7 +958,7 @@ const Ventas = () => {
                                                 <div 
                                                     className='Contenedor-Tarjeta-Avance-Ventas' 
                                                     style={{
-                                                        border: "1px solid #79E2C1",
+                                                        // border: "1px solid #79E2C1",
                                                         display: "flex",
                                                         alignItems: "center"
                                                     }}
@@ -1066,7 +994,7 @@ const Ventas = () => {
                                                 return(
                                                     <div 
                                                         className='Tarjeta-Categorias-Avance-Ventas'
-                                                        style={pos == 2?{marginRight:'0'}:{}}
+                                                        style={pos == 2 || pos == 5?{marginRight:'0'}:{}}
                                                     >
                                                         <div 
                                                             className='Primera-Tarjeta-Categorias-Avance-Ventas'
@@ -1080,35 +1008,13 @@ const Ventas = () => {
                                                             {/* <img src={dat.catimagenfondo} className='Tarjeta-Categoria-Ventas-Img' /> */}
                                                         </div>
                                                         <div className='Segunda-Tarjeta-Categorias-Avance-Ventas'>
+                                                            
                                                             <div 
                                                                 className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'
                                                                 style={{
-                                                                    marginTop:'-4px'
+                                                                    marginTop:'-1px'
                                                                 }}
                                                             >
-                                                                <div className='Icono-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
-                                                                    <img  className='Iconos-Tarjeta-Avance-Ventas' src={IconoCumplimientoAmarillo} />
-                                                                </div>
-                                                                <div 
-                                                                    className='Texto-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-C1E1E1E'
-                                                                >
-                                                                    Cumplimiento
-                                                                </div>
-                                                                <div 
-                                                                    className='Total-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-CFFBB37'
-                                                                >
-                                                                    <img 
-                                                                        src={IconoEstrella}
-                                                                        style={{
-                                                                            // position:'absolute',
-                                                                            width:'13px',
-                                                                            marginTop:'-9px'
-                                                                        }}
-                                                                    />
-                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} />%
-                                                                </div>
-                                                            </div>
-                                                            <div className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
                                                                 <div className='Icono-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
                                                                     <img  className='Iconos-Tarjeta-Avance-Ventas' src={IconoObjetivoAmarillo} />
                                                                 </div>
@@ -1168,6 +1074,32 @@ const Ventas = () => {
                                                                             S/<NumberFormat value={funFormatoDecimal(dat.scavalorizadotogo, 0)} displayType={'text'} thousandSeparator={true} />   
                                                                         </>
                                                                     }
+                                                                </div>
+                                                            </div>
+
+                                                            <div 
+                                                                className='Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'
+                                                            >
+                                                                <div className='Icono-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas'>
+                                                                    <img  className='Iconos-Tarjeta-Avance-Ventas' src={IconoCumplimientoAmarillo} />
+                                                                </div>
+                                                                <div 
+                                                                    className='Texto-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-C1E1E1E'
+                                                                >
+                                                                    Cumplimiento
+                                                                </div>
+                                                                <div 
+                                                                    className='Total-Filta-Segunda-Tarjeta-Categorias-Avance-Ventas W600-S14-H19-L0015-CFFBB37'
+                                                                >
+                                                                    <img 
+                                                                        src={IconoEstrella}
+                                                                        style={{
+                                                                            // position:'absolute',
+                                                                            width:'13px',
+                                                                            marginTop:'-8px'
+                                                                        }}
+                                                                    />
+                                                                    <NumberFormat value={funFormatoDecimal(cummplimientoCalculado, 0)} displayType={'text'} thousandSeparator={true} />%
                                                                 </div>
                                                             </div>
                                                         </div>

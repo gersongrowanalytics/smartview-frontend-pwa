@@ -15,3 +15,5 @@ export * from './ListaPrecios/ListaPrecios';
 export * from './CargaArchivos/CargaArchivos';
 export * from './Contraprestaciones/Contraprestaciones';
 export * from './Setting';
+export * from './Rebate/Rebate';
+export * from './ListaPrecios/ArmarFiltrosLp';

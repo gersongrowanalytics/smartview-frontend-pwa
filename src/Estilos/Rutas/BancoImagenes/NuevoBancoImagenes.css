@@ -31,6 +31,10 @@
     cursor: pointer;
 }
 
+.Btn-Principal-Desactivado-Banco-Imagenes:hover{
+    border: 1px solid #558CFF;
+    color: #558CFF !important;
+}
 
 .Barra-Busqueda-Banco-Imagenes{
     width: 632px;
@@ -40,6 +44,20 @@
     border-radius: 27px;
     position: absolute;
     right: 0px;
+}
+
+.Input-Buscar-Nuevo-Banco-Imagen{
+    width: 90%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 4px;
+    border: 0;
+    outline: none;
+}
+
+.Input-Buscar-Nuevo-Banco-Imagen:focus{
+    border: 0;
+    outline: none;
 }
 
 
@@ -65,8 +83,8 @@
 
 .Tabla-Principal-Nuevo-Banco-Imagenes thead th {
     background: #1EC0ED;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     z-index: 2;
     text-align: -webkit-center;
 }
@@ -115,22 +133,51 @@
 }
 
 .Img-Nuevo-Banco-Imagenes{
-    width: 58px;
-    height: 45px;
+    /* width: 58px;
+    height: 45px; */
+    width: 38px;
+    height: 35px;
 }
 
 .Icon-Editar-Nuevo-Banco-Imagenes{
-    width: 30px;
+    width: 17px;
     cursor: pointer;
+    /* margin-left: 5px; */
+    position: absolute;
+    left: 7px;
+    top: 7px;
 }
 
-.Icon-Editar-Nuevo-Banco-Imagenes:hover{
-    
-    /* width: 44px;
-    height: 44px; */
-    border-radius: 50px;
-    background: #558CFF;
+.Icon-Editar-Blanco-Nuevo-Banco-Imagenes{
+    width: 17px;
+    cursor: pointer;
+    /* margin-left: 5px; */
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    display: none;
+}
 
+.Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes:hover{
+    background: #558CFF;
+}
+
+.Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes:hover .Icon-Editar-Blanco-Nuevo-Banco-Imagenes{
+    display: flex;
+}
+
+.Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes:hover .Icon-Editar-Nuevo-Banco-Imagenes{
+    display: none;
+}
+
+.Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes{
+    /* background-color: red; */
+    border-radius: 50px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin-left: 5px;
 }
 
 .Img-Preload-Nuevo-Banco-Imagenes{
@@ -167,3 +214,10 @@
     border-radius: 50px;
     background: #558CFF;
 } */
+
+.Icono-Lupa-Buscar-Banco-Imagenes{
+    width: 12px;
+    position: absolute;
+    top: 11px;
+    right: 12px;
+}

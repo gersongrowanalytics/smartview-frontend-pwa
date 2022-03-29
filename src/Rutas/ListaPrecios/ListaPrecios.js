@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react'
-import { Row, Col, Button, Spin } from 'antd';
+import { Row, Col, Button, Spin, Checkbox  } from 'antd';
 import '../../Estilos/Rutas/ListaPrecios/ListaPrecios.css'
 import ReactExport from 'react-data-export';
 import {useDispatch, useSelector} from "react-redux";
@@ -19,6 +19,13 @@ import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/Filtro
 import ModalFiltroColumnas from '../../Componentes/Rutas/Descargas/ModalFiltroColumnas';
 import ModalEnviarCorreo from '../../Componentes/Rutas/Descargas/ModalEnviarCorreo';
 import TablaLP from '../../Componentes/Rutas/ListaPrecios/TablaLP/TablaLP';
+import IconoFlechaAbajoNegro from '../../Assets/Img/Tabla/flechaabajonegro.png'
+import FiltroLp from '../../Componentes/Rutas/ListaPrecios/FiltroLp';
+import {
+    RealizarFiltroReducer,
+    SeleccionarCheckFiltrosReducer,
+    TerminarFiltrosReducer
+} from '../../Redux/Acciones/ListaPrecios/ArmarFiltrosLp'
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -43,7 +50,13 @@ const ListaPrecios = () => {
         columnas_filtro_descargar_listaprecios,
         columnas_seleccionadas_filtro_descarga_listaprecios,
         data_descargar_excel_listaprecios,
-        cargando_btn_excel_listaprecios
+        cargando_btn_excel_listaprecios,
+
+        fil_dat_categorias,
+        fil_dat_subcategorias,
+        fil_dat_formato,
+        fil_dat_codsap,
+        fil_dat_material
     } = useSelector(({listaPrecios}) => listaPrecios);
 
     let refBtnDescargaListaPrecios = useRef(null)
@@ -84,8 +97,33 @@ const ListaPrecios = () => {
                 Lista de Precios
             </div>
 
+            <div>
+                <div style={{width:'100%'}}>
+                    <Button 
+                        className={
+                            data_excel_lista_precios.length > 0
+                            ?data_excel_lista_precios[0]['data'].length > 0
+                                ?'Btn-Descargar-Lista-Precios Wbold-S14-H19-CFFFFFF'
+                                :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
+                            :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
+                        }
+                        // onClick={() => {
+                        //     if(data_excel_lista_precios[0]['data'].length > 0){
+                        //         refBtnDescargaListaPrecios.current.click()
+                        //     }
+                        // }}
+                        onClick={() => {
+                            setSeleccionoDescargar(true)
+                            setMostrarModalFiltroColumnas(true)
+                        }}
+                    >
+                        Descargar
+                    </Button>
+                </div>
+            </div>
+
             <div className='Fila-Btns-Lista-Precios'>
-                {
+                {/* {
                     grupos_disponibles_lista_precios.map((grupo, pos) => {
                         return (
                             <Button 
@@ -113,39 +151,91 @@ const ListaPrecios = () => {
                             </Button>              
                         )
                     })
-                }
+                } */}
 
-                <FiltroMesVentasPromociones />
-                <div style={{marginRight:'20px'}}>
+                <div
+                    style={{marginLeft:'-20px'}}
+                >
                     <FiltroAnioVentasPromociones />
                 </div>
+                <div style={{marginRight:'20px', marginLeft:'20px'}}>
+                    <FiltroMesVentasPromociones />                    
+                </div>
+                
+                <FiltroLp 
+                    titulo = {"Customer Group"}
+                    fil_data = {grupos_disponibles_lista_precios}
+                    tamanio = "0"
+                />
+
+                <FiltroLp 
+                    titulo = {"Categoría"}
+                    fil_data = {fil_dat_categorias}
+                    tamanio = "160"
+                    aceptarFiltro = {() => {
+                        dispatch(RealizarFiltroReducer(""))
+                        // dispatch(TerminarFiltrosReducer())
+                    }}
+                    seleccionarLista = {(posicion, valor) => {
+                        dispatch(SeleccionarCheckFiltrosReducer("categoria", posicion, valor))
+                    }}
+                />
+
+                <FiltroLp 
+                    titulo = {"Subcategoría"}
+                    fil_data = {fil_dat_subcategorias}
+                    tamanio = "160"
+                    aceptarFiltro = {() => {
+                        dispatch(RealizarFiltroReducer(""))
+                    }}
+                    seleccionarLista = {(posicion, valor) => {
+                        dispatch(SeleccionarCheckFiltrosReducer("subcategoria", posicion, valor))
+                    }}
+                />
+
+                <FiltroLp 
+                    titulo = {"Formato"}
+                    fil_data = {fil_dat_formato}
+                    tamanio = "160"
+                    aceptarFiltro = {() => {
+                        dispatch(RealizarFiltroReducer(""))
+                    }}
+                    seleccionarLista = {(posicion, valor) => {
+                        dispatch(SeleccionarCheckFiltrosReducer("formato", posicion, valor))
+                    }}
+                />
+
+                <FiltroLp 
+                    titulo = {"Cod SAP"}
+                    fil_data = {fil_dat_codsap}
+                    tamanio = "160"
+                    aceptarFiltro = {() => {
+                        dispatch(RealizarFiltroReducer(""))
+                    }}
+                    seleccionarLista = {(posicion, valor) => {
+                        dispatch(SeleccionarCheckFiltrosReducer("codsap", posicion, valor))
+                    }}
+                />
+
+                <FiltroLp 
+                    titulo = {"Nombre Material"}
+                    fil_data = {fil_dat_material}
+                    tamanio = "280"
+                    aceptarFiltro = {() => {
+                        dispatch(RealizarFiltroReducer(""))
+                    }}
+                    seleccionarLista = {(posicion, valor) => {
+                        dispatch(SeleccionarCheckFiltrosReducer("material", posicion, valor))
+                    }}
+                />
+
+
 
                 {/* <div className='Btn-Todos-Filtros-Lista-Precios W600-S14-H19-C1E1E1E'>
                     Todos los filtros
                 </div> */}
-                <div style={{width:'100%'}}>
-                    <Button 
-                        className={
-                            data_excel_lista_precios.length > 0
-                            ?data_excel_lista_precios[0]['data'].length > 0
-                                ?'Btn-Descargar-Lista-Precios Wbold-S14-H19-CFFFFFF'
-                                :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
-                            :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
-                        }
-                        // onClick={() => {
-                        //     if(data_excel_lista_precios[0]['data'].length > 0){
-                        //         refBtnDescargaListaPrecios.current.click()
-                        //     }
-                        // }}
-                        onClick={() => {
-                            setSeleccionoDescargar(true)
-                            setMostrarModalFiltroColumnas(true)
-                        }}
-                    >
-                        Descargar
-                    </Button>
-                </div>
             </div>
+            
 
             <div style={{zIndex:'-2'}}>
                 <div id="Contenedor-Tabla-Lista-Precios">

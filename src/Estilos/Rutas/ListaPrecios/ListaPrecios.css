@@ -17,6 +17,12 @@
     white-space: nowrap !important;
 }
 
+.Btn-Lista-Precios:hover{
+    border: 1px solid #3646C3 !important;
+    background-color: #3646C3 !important;
+    color: white !important;
+}
+
 .Btn-Lista-Precios:focus{
     color: white !important;
 }
@@ -59,7 +65,7 @@
 }
 
 .Btn-Descargar-Lista-Precios{
-    background: #3646C3 !important;
+    /* background: #3646C3 !important; */
     border-radius: 8px !important;
     width: 102px !important;
     height: 36px !important;
@@ -69,7 +75,13 @@
     align-items: center !important;
     justify-content: center !important;
     margin-right: 40px !important;
-    border: 1px solid #3646C3 !important;
+    /* border: 1px solid #3646C3 !important; */
+
+    /*  */
+
+    background: #558CFF !important;
+    color: white !important;
+    border: 1px solid #558CFF !important
 }
 
 .Btn-Descargar-Lista-Precios:focus{
@@ -77,6 +89,8 @@
 }
 
 .Btn-Descargar-Lista-Precios:hover{
+    background: #3646C3 !important;
+    border: 1px solid #3646C3 !important;
     color: white !important;
 }
 
@@ -91,6 +105,17 @@
     align-items: center !important;
     justify-content: center !important;
     margin-right: 40px !important;
+
+    /*  */
+    background: #558CFF !important;
+    color: white !important;
+    border: 1px solid #558CFF !important;
+}
+
+
+.Btn-Descargar-Lista-Precios-Desactivado:hover{
+    background: #3646C3 !important;
+    border: 1px solid #3646C3 !important;
 }
 
 #Contenedor-Tabla-Lista-Precios{
@@ -120,8 +145,8 @@
     padding-bottom: 0px;
     z-index: 2;
     text-align: -webkit-center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .Tabla-Principal thead{
@@ -150,7 +175,105 @@
     left: 0;
     z-index: 0;
     background-color: white;
-    top: 57px;
+    top: 48px;
 }
 
 /* FIN STATIC */
+
+.Contenedor-Btn-Filtro-Lista-Precios{
+    position: relative;
+    height: 100%;
+}
+
+.Btn-Filtro-Lista-Precio{
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    padding-right: 35px;
+    position: relative;
+
+    margin-right: 20px;
+    cursor: pointer;
+    height: 36px;
+}
+
+.Icono-Flecha-Abajo-Negrita-Lp{
+    position: absolute;
+    width: 20px;
+    right: 5px;
+    top: 8px;
+}
+
+.Contenedor-Filtro-Lp{
+
+    position: absolute;
+    width: 100%;
+    height: 180px;
+    background: #FFFFFF;
+    /* background: black; */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 8px 8px;
+    top: 36px;
+    left: 0;
+    z-index: 1;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.Titulo-Filtro-Lp{
+
+    margin-top: 7px;
+    margin-bottom: 5px;
+
+}
+
+.Cuerpo-Filtro-Lp{
+    width: 100%;
+    height: 115px;
+    /* background-color: red; */
+    overflow-y: auto;
+}
+
+.Btns-Filtro-Lp{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 6px;
+    /* margin-top: 10px; */
+}
+
+.Btn-Aceptar-Filtro-Lp{
+    background: #3646C3;
+    border: 1px solid #3646C3;
+    box-sizing: border-box;
+    border-radius: 14px;
+    width: 52.99px;
+    height: 19.27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.Btn-Cancelar-Filtro-Lp{
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 14px;
+    width: 52.99px;
+    height: 19.27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.Check-Filtro-Lp .ant-checkbox{
+    width: 12px;
+}

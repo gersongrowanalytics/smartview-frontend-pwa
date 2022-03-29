@@ -8,7 +8,72 @@ import { Row, Col } from 'antd'
 
 const ElementosEnviados = () => {
 
-    let n = ['1','2','3']
+    let n = [
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022",
+            "noenviado" : true
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022",
+            "noenviado" : true
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022",
+            "noenviado" : true
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022",
+            "noenviado" : true
+        },
+        {
+            "para" : "gerson.vilca@grow-analytics.com.pe",
+            "asunto" : "Promociones 2022 FEBRERO",
+            "correo" : "Hola aquí adjunto las promocioens de Febrero del 2022"
+        },
+    ]
 
     return (
         <div className='Contenedor-Elementos-Enviados'>
@@ -18,7 +83,7 @@ const ElementosEnviados = () => {
                 </Col>
                 <Col lg={6} xl={6}>
                     <div className='Paginacion-Elementos'>
-                        <span style={{marginRight: '9px', paddingTop: '2px'}}>1 - 20 de 40</span>
+                        {/* <span style={{marginRight: '9px', paddingTop: '2px'}}>1 - 20 de 40</span> */}
                         {/* <img src={Flecha} className='Flecha-Izquierda'></img> 
                         <img src={Flecha} className='Flecha-Derecha'></img> */}
                     </div>
@@ -41,14 +106,41 @@ const ElementosEnviados = () => {
                                         return (
                                             <tr>
                                                 <td>
-                                                    <span className='Primera-Columna'>Para: Xxxxxx.nnnnn</span>
+                                                    <span 
+                                                        className='Primera-Columna'
+                                                        style={{
+
+                                                        }}
+                                                    >
+                                                        Para: {e.para}
+                                                    </span>
                                                 </td>
                                                 <td>
-                                                    <div className='Caja-Segunda-Columna'>
-                                                        No enviado
-                                                    </div>
-                                                    <span className='Texto-Segunda-Columna'>
-                                                        Nombre de Asunto - Hola Xxxxxxx, Por favor..........................
+                                                    {
+                                                        e.noenviado == true
+                                                        ?<div className='Caja-Segunda-Columna'>
+                                                            No enviado
+                                                        </div>
+                                                        :null
+                                                    }
+                                                    <span 
+                                                        className='Texto-Segunda-Columna'
+                                                        style={
+                                                            e.noenviado == true
+                                                            ?{}
+                                                            :{marginLeft:'0'}
+                                                        }
+                                                    >
+                                                         
+                                                        <div>
+                                                            <b>{e.asunto}</b>
+                                                        </div>
+                                                        <div style={{marginLeft:'10px', marginRight:'10px'}}>
+                                                            - 
+                                                        </div>
+                                                        <div>
+                                                            {e.correo}
+                                                        </div>
                                                     </span>    
                                                 </td>
                                                 <td>

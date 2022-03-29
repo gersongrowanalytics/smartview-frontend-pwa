@@ -3,6 +3,7 @@ import IconoTradicional from '../../Assets/Img/Top/iconoTradicional.png'
 import IconoSoporte from '../../Assets/Img/Top/iconoSoporte.png'
 import IconoSoporteSelect from '../../Assets/Img/Top/iconoSoporteSelect.png'
 import IconoAvion from '../../Assets/Img/Top/avion.png'
+import IconoAdministrador from '../../Assets/Img/Top/iconoAdministrador.png'
 import IconoWsp from '../../Assets/Img/Top/wsp.png'
 import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +35,7 @@ const FiltroSoporteTop = (props) => {
                         style={{display:'none'}}
                         target="_blank"
                     >
-                            Send Message
+                            Send
                     </a>
                 <div 
                     className='Wbold-S14-H19-CFFFFFF Contenedor-Items-Top'
@@ -147,6 +148,21 @@ const FiltroSoporteTop = (props) => {
                                     <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAvion} />
                                 </div>
                                 <div className='Wnormal-S14-H19-C1E1E1E'>Elementos Enviados</div>
+                            </div>
+                        </Link>
+                        <Link to="/administrativo">
+                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                <div>
+                                    <img 
+                                        className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAdministrador} 
+                                        style={{
+                                            width: "12px",
+                                            left: "9px",
+                                            top: "8px"
+                                        }}
+                                    />
+                                </div>
+                                <div className='Wnormal-S14-H19-C1E1E1E'>Administrador</div>
                             </div>
                         </Link>
                     </div>

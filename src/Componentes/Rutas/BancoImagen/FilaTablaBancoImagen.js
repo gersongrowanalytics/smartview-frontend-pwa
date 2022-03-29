@@ -1,24 +1,37 @@
-import React, {useRef, useState} from 'react'
-import { Tooltip, Spin } from 'antd';
+import React, {useEffect, useRef, useState} from 'react'
+import { 
+    Tooltip, Spin,
+    Input,
+    DatePicker
+} from 'antd';
 import IconoAgregarAzul from '../../../Assets/Img/BancoImagen/agregaAzul.png'
 import IconoAgregar     from '../../../Assets/Img/BancoImagen/agregarNueva.png'
 import IconoEditar      from '../../../Assets/Img/BancoImagen/Editar.png'
 import IconoSinImagen   from '../../../Assets/Img/BancoImagen/SinImagen.png'
+
+import IconoEditarBlanco   from '../../../Assets/Img/BancoImagen/editarBlanco.png'
+import IconoAgregarBlanco   from '../../../Assets/Img/BancoImagen/plusBlanco.png'
+import moment from 'moment';
+
 import {
     CheckCircleOutlined,
     LoadingOutlined
 } from '@ant-design/icons';
 
+
 const FilaTablaBancoImagen = (props) => {
 
     const data = props.data
     const pos = props.pos
-    const editandoFila = props.editandoFila
-    const editarImagen = props.editarImagen
+    const editandoFila   = props.editandoFila
+    const editarImagen   = props.editarImagen
+    const txtInputBuscar = props.txtInputBuscar
 
     const refInputImagen = useRef(null)
 
     const [seleccionarImg, setSeleccionarImg] = useState("")
+    const [fechasVencimiento, setFechasVencimiento] = useState([])
+    const [errorInputDate, setErrorInputDate] = useState(false)
 
     return (
         <>
@@ -30,7 +43,7 @@ const FilaTablaBancoImagen = (props) => {
                     let reader = new FileReader()
                     reader.onload = function(){
                         
-                        console.log(reader.result)
+                        // console.log(reader.result)
                         setSeleccionarImg(reader.result)
                         // dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
                     };
@@ -47,7 +60,11 @@ const FilaTablaBancoImagen = (props) => {
 
                 style={{position:'relative'}}
             >
-                <td>
+                <td
+                    onClick={() => {
+                        
+                    }}
+                >
                     {pos+1}
                     {
                         data.cargandoEdicion == true
@@ -77,18 +94,43 @@ const FilaTablaBancoImagen = (props) => {
                 <td>
                     {data.prosku}
                 </td>
-                <td>
+                <td
+                    style={{
+                        textAlign: "left"
+                    }}
+                >
                     {data.pronombre}
                 </td>
                 <td>
                     {data.catnombre}
                 </td>
                 <td>
-                    {"-"}
+
+                <Input.Group compact>
+                    <DatePicker.RangePicker 
+                        style={
+                            errorInputDate == true
+                            ?{ width: '70%', border:'1px solid red' }
+                            :{ width: '70%' }
+                        } 
+                        format={'DD/MM/YYYY'}
+                        placeholder={['DD/MM/YYYY', 'DD/MM/YYYY']}
+                        onChange={(e, fecha) => {
+                            setFechasVencimiento(fecha)
+                        }}
+                        // defaultValue={[moment('10/02/2015', 'DD/MM/YYYY'), moment('15/03/2016', 'DD/MM/YYYY')]}
+                        defaultValue={
+                            data.profechainicio
+                            ?[moment(data.profechainicio, 'YYYY/MM/DD'), moment(data.profechafinal, 'YYYY/MM/DD')]
+                            :[]
+                        }
+                    />
+                </Input.Group>
+
                 </td>
-                <td>
+                {/* <td>
                     {"-"}
-                </td>
+                </td> */}
 
 
                 {
@@ -113,7 +155,20 @@ const FilaTablaBancoImagen = (props) => {
                                 <div 
                                     className='Contenedor-Check-Icon-Preload-Nuevo-Banco-Imagen'
                                     onClick={() => {
-                                        editarImagen(seleccionarImg, data.prosku)
+                                        
+                                        if(fechasVencimiento.length == 0){
+                                            
+                                            if(data.profechainicio){
+                                                setErrorInputDate(false)
+                                                editarImagen(seleccionarImg, data.prosku, fechasVencimiento)
+                                            }else{
+                                                setErrorInputDate(true)
+                                            }
+                                        }else{
+                                            setErrorInputDate(false)
+                                            editarImagen(seleccionarImg, data.prosku, fechasVencimiento)
+                                        }
+
                                     }}
                                 >
                                     <CheckCircleOutlined 
@@ -145,23 +200,48 @@ const FilaTablaBancoImagen = (props) => {
                                 placement="bottom" 
                                 title={"Editar"}
                             >
-                                <img 
-                                    className='Icon-Editar-Nuevo-Banco-Imagenes'
-                                    src={IconoEditar}
-                                    onClick={() => {
-                                        editandoFila()
-                                        refInputImagen.current.click()
-                                    }}
-                                />
+                                <div
+                                    className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
+                                >
+                                    <img 
+                                        className='Icon-Editar-Nuevo-Banco-Imagenes'
+                                        src={IconoEditar}
+                                        onClick={() => {
+                                            editandoFila()
+                                            refInputImagen.current.click()
+                                        }}
+                                    />
+
+                                    <img 
+                                        className='Icon-Editar-Blanco-Nuevo-Banco-Imagenes'
+                                        src={IconoEditarBlanco}
+                                        onClick={() => {
+                                            editandoFila()
+                                            refInputImagen.current.click()
+                                        }}
+                                        
+
+                                    />
+                                </div>
                             </Tooltip>
                             <Tooltip
                                 placement="bottom" 
                                 title={"Agregar nuevo SKU"}
                             >
-                                <img 
-                                    className='Icon-Editar-Nuevo-Banco-Imagenes'
-                                    src={IconoAgregar}
-                                />
+                                <div
+                                    className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
+                                >
+                                    <img 
+                                        className='Icon-Editar-Nuevo-Banco-Imagenes'
+                                        src={IconoAgregar}
+                                    />
+
+                                    <img 
+                                        className='Icon-Editar-Blanco-Nuevo-Banco-Imagenes'
+                                        src={IconoAgregarBlanco}
+                                    />
+
+                                </div>
                             </Tooltip>
                         </div>
                     </td>

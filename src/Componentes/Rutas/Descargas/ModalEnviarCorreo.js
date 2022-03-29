@@ -10,6 +10,7 @@ import {
 } from '../../../Redux/Acciones/Descargas/DescargarEnviarCorreo'
 import {useDispatch, useSelector} from "react-redux";
 import config from '../../../config'
+import IconoCerrarWhite from '../../../Assets/Img/Filtros/cerrarwhite.png'
 
 const ModalEnviarCorreo = (props) => {
 
@@ -33,6 +34,7 @@ const ModalEnviarCorreo = (props) => {
     const [txtPara, setTxtPara] = useState("")
     const [txtAsunto, setTxtAsunto] = useState("")
     const [txtMensaje, setTxtMensaje] = useState("")
+    const [txtMensajeFooter, setTxtMensajeFooter] = useState("")
 
 
     const EnviarDatos = async () => {
@@ -40,9 +42,19 @@ const ModalEnviarCorreo = (props) => {
         let rpta = true
 
         if(props.modulo_descarga_seleccionado != "Catalogo"){
-            rpta = await dispatch(EnviarCorreoDescargarFormadoReducer(txtPara, txtAsunto, txtMensaje, nombre_archivo_enviar_correo_descargar ))
+            rpta = await dispatch(
+                EnviarCorreoDescargarFormadoReducer(
+                    txtPara, txtAsunto, txtMensaje, nombre_archivo_enviar_correo_descargar, false,
+                    
+                )
+            )
         }else{
-            rpta = await dispatch(EnviarCorreoDescargarFormadoReducer(txtPara, txtAsunto, txtMensaje, localStorage.getItem('usutoken'), true ))
+            rpta = await dispatch(
+                EnviarCorreoDescargarFormadoReducer(
+                    txtPara, txtAsunto, txtMensaje, localStorage.getItem('usutoken'), true,
+                    
+                )
+            )
         }
 
         return true
@@ -85,7 +97,8 @@ const ModalEnviarCorreo = (props) => {
                             className='Icon-Cerar-Modal-Enviar-Correo-Descargar'
                             onClick={() => setMostrarModalEnviarCorreo(!mostrarModal)}
                         >
-                            <CloseOutlined />
+                            {/* <CloseOutlined /> */}
+                            <img src={IconoCerrarWhite} className="Icono-Cerrar-Modal-Enviar-Correo" />
                         </div>
                     </div>
                     <div className='Cuerpo-Enviar-Correo-Descargar'>
@@ -123,9 +136,18 @@ const ModalEnviarCorreo = (props) => {
                                 onChange={(e) => {
                                     setTxtMensaje(e.target.value)
                                 }}
+                            >   
+                                {"\n\n\n\n\n\n\nEste es un email automático, si tienes cualquier tipo de duda ponte en contacto con nosotros a través de nuestro servicio de atención al cliente al Xxxxxx@xxxx.com.pe, por favor no respondas a este mensaje."}
+                            </textarea>
+
+                            <textarea 
+                                className='W400-S11-H15-CA4A3A3-L0015-SYItalic TextArea-Enviar-Correo-Descargar'
+                                name="textarea" rows="6" cols="2"
+                                onChange={(e) => {
+                                    setTxtMensajeFooter(e.target.value)
+                                }}
                             >
-                                
-                                {"\n\n\nEste es un email automático, si tienes cualquier tipo de duda ponte en contacto con nosotros a través de nuestro servicio de atención al cliente al Xxxxxx@xxxx.com.pe, por favor no respondas a este mensaje."}
+                                {"Este mensaje es estrictamente para el uso de la persona o entidad a quien va dirigida y puede contener información privilegiada, confidencial y de acceso restringido según la legislación aplicable. Si el lector de este mensaje no es el destinatario,  el empleado o agente responsable de entregar este mensaje al destinatario indicado, queda notificado de que cualquier divulgación, distribución o copia de esta comunicación está estrictamente prohibido. Si usted ha recibido esta comunicación por error, le rogamos nos lo notifique inmediatamente a la dirección de respuesta."}   
                             </textarea>
 
                         </div>

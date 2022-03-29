@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import FiltroAnioVentasPromociones from './Botones/FiltroAnioVentasPromociones';
 import FiltroZonaVentasPromociones from './Botones//FiltroZonaVentasPromociones';
 import FiltroMesVentasPromociones from './Botones/FiltroMesVentasPromociones';
@@ -18,6 +18,10 @@ import {
     EliminarFiltroAplicadoReducer
 } from '../../Redux/Acciones/FiltrosVentasPromociones'
 import { Tooltip } from 'antd';
+import IconoFlechaSiguiente from '../../Assets/Img/Filtros/flechasiguiente.png'
+import IconoFlechaSiguienteBlanco from '../../Assets/Img/Filtros/flechablanco.png'
+import IconoCerrarNegro from '../../Assets/Img/Filtros/cerrarnegro.png'
+import IconoCerrarAzul from '../../Assets/Img/Filtros/cerrarazul.png'
 
 const FiltrosVentas = () => {
 
@@ -41,6 +45,36 @@ const FiltrosVentas = () => {
     const scroll = (scrollOffset) => {
         refFiltrosAplicados.current.scrollLeft += scrollOffset;
     };
+
+    const [avanzarAutomaticamente, setAvanzarAutomaticamente] = useState(false)
+    const [mouseenavanzar, setMouseenavanzar] = useState("0")
+
+    useEffect(() => {
+
+        if(mouseenavanzar == "1"){
+            
+            setTimeout(() => {
+                if(avanzarAutomaticamente == true){
+                    setAvanzarAutomaticamente(false)
+                }else{
+                    setAvanzarAutomaticamente(true)
+                }
+                scroll(60)
+            }, 200);
+        }else if(mouseenavanzar == "2"){
+            setTimeout(() => {
+                if(avanzarAutomaticamente == true){
+                    setAvanzarAutomaticamente(false)
+                }else{
+                    setAvanzarAutomaticamente(true)
+                }
+                scroll(-60)
+            }, 200);
+        }
+
+    }, [avanzarAutomaticamente])
+
+    
 
     return (
         <>
@@ -75,7 +109,7 @@ const FiltrosVentas = () => {
                     </Link>
 
                     <div className='W600-S14-H19-C1E1E1E' style={{marginLeft:'20px', marginRight:'20px', whiteSpace:'nowrap', position:'relative'}}>
-                        Filtro  aplicado:
+                        Filtro aplicado:
                         {
                             aplicandoFiltroCanal == true || aplicandoFiltroZona == true || aplicandoFiltroGrupo == true || aplicandoFiltroDt == true
                             ?<Tooltip
@@ -87,8 +121,18 @@ const FiltrosVentas = () => {
                                     onClick={() => {
                                         scroll(-60)
                                     }}
+                                    onMouseEnter={() => {
+                                        setMouseenavanzar("2")
+                                        setAvanzarAutomaticamente(true)
+                                    }}
+                                    onMouseLeave={() => {
+                                        setAvanzarAutomaticamente(false)
+                                        setMouseenavanzar("0")
+                                    }}
                                 >
-                                    <LeftOutlined />
+                                    {/* <LeftOutlined /> */}
+                                    <img src={IconoFlechaSiguiente} className="Icono-Retroceder-FiltroVentaPromociones" />
+                                    <img src={IconoFlechaSiguienteBlanco} className="Icono-Retroceder-FiltroVentaPromociones-Blanco" />
                                 </div>
                             </Tooltip>
                             :null
@@ -103,7 +147,7 @@ const FiltrosVentas = () => {
                                     cass.map((cas, pos) => {
                                         return (
                                             cas.check == true
-                                            ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                            ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas W600-S14-H19-C1E1E1E-L0015'>
                                                 {cas.casnombre}
                                                 <div 
                                                     style={{
@@ -113,8 +157,11 @@ const FiltrosVentas = () => {
                                                         color: "#1E1E1E"
                                                     }}
                                                     onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                    
                                                 >
-                                                    <CloseOutlined />
+                                                    <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
+                                                    <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
+                                                    {/* <CloseOutlined className="Icono-Cerrar-Casilla-FiltroVentasPromociones" /> */}
                                                 </div>
                                             </div>
                                             :null
@@ -128,7 +175,7 @@ const FiltrosVentas = () => {
                                         zonas.map((zona, pos) => {
                                             return (
                                                 zona.check == true
-                                                ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                                ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas W600-S14-H19-C1E1E1E-L0015'>
                                                     {zona.zonnombre}
                                                     <div 
                                                         style={{
@@ -139,7 +186,9 @@ const FiltrosVentas = () => {
                                                         }}
                                                         onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
                                                     >
-                                                        <CloseOutlined />
+                                                        <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
+                                                        <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
+                                                        {/* <CloseOutlined className="Icono-Cerrar-Casilla-FiltroVentasPromociones" /> */}
                                                     </div>
                                                 </div>
                                                 :null
@@ -153,7 +202,7 @@ const FiltrosVentas = () => {
                                             gsus.map((gsu, pos) => {
                                                 return (
                                                     gsu.check == true
-                                                    ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                                    ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas W600-S14-H19-C1E1E1E-L0015'>
                                                         {gsu.gsunombre}
                                                         <div 
                                                             style={{
@@ -164,7 +213,9 @@ const FiltrosVentas = () => {
                                                             }}
                                                             onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
                                                         >
-                                                            <CloseOutlined />
+                                                            <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
+                                                            <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
+                                                            {/* <CloseOutlined className="Icono-Cerrar-Casilla-FiltroVentasPromociones" /> */}
                                                         </div>
                                                     </div>
                                                     :null
@@ -178,7 +229,7 @@ const FiltrosVentas = () => {
                                                 sucursalesUsuario.map((sucursal, pos) => {
                                                     return (
                                                         sucursal.check == true
-                                                        ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                                        ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas W600-S14-H19-C1E1E1E-L0015'>
                                                             {sucursal.sucnombre}
                                                             <div 
                                                                 style={{
@@ -189,7 +240,9 @@ const FiltrosVentas = () => {
                                                                 }}
                                                                 onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
                                                             >
-                                                                <CloseOutlined />
+                                                                <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
+                                                                <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
+                                                                {/* <CloseOutlined className="Icono-Cerrar-Casilla-FiltroVentasPromociones" /> */}
                                                             </div>
                                                         </div>
                                                         :null
@@ -202,7 +255,7 @@ const FiltrosVentas = () => {
                                                 sucursalesUsuario.map((sucursal) => {
                                                     return(
                                                         sucursal.sucid == idSucursalUsuarioSelec
-                                                        ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas'>
+                                                        ?<div className='Contenedor-Btn-Filtro-Aplicado-FiltroVentas W600-S14-H19-C1E1E1E-L0015'>
                                                             {sucursal.sucnombre}
                                                             <div 
                                                                 style={{
@@ -212,7 +265,9 @@ const FiltrosVentas = () => {
                                                                     color: "#1E1E1E"
                                                                 }}
                                                             >
-                                                                <CloseOutlined />
+                                                                <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
+                                                                <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
+                                                                {/* <CloseOutlined className="Icono-Cerrar-Casilla-FiltroVentasPromociones" /> */}
                                                             </div>
                                                         </div>
                                                         :null
@@ -233,8 +288,19 @@ const FiltrosVentas = () => {
                             onClick={() => {
                                 scroll(60)
                             }}
+                            onMouseEnter={() => {
+                                // scroll(60)
+                                setMouseenavanzar("1")
+                                setAvanzarAutomaticamente(true)
+                            }}
+                            onMouseLeave={() => {
+                                setAvanzarAutomaticamente(false)
+                                setMouseenavanzar("0")
+                            }}
                         >
-                            <RightOutlined />
+                            {/* <RightOutlined /> */}
+                            <img src={IconoFlechaSiguiente} className="Icono-Avanzar-FiltroVentaPromociones" />
+                            <img src={IconoFlechaSiguienteBlanco} className="Icono-Avanzar-FiltroVentaPromociones-Blanco" />
                         </div>
                     </Tooltip>
 

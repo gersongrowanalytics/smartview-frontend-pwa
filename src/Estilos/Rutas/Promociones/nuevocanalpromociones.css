@@ -17,6 +17,7 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     margin-right: 10px;
+    padding-bottom: 50px;
 }
 
 .Fila-Canal-Promocion{

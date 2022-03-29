@@ -28,6 +28,7 @@ export const ObtenerVentasReducer = () =>async (dispatch, getState) => {
                 mes      : mesSeleccionadoFiltro,
                 sucid    : idSucursalUsuarioSelec,
                 usutoken : localStorage.getItem('usutoken'),
+                mostrarTodasCategorias : true
             }),
             headers: {
                 'Accept' : 'application/json',
@@ -156,6 +157,7 @@ export const ObtenerVentasAcumuladaReducer = () => async (dispatch, getState) =>
                 sucursalesUsuario : sucursalesUsuario,
 
                 usutoken : localStorage.getItem('usutoken'),
+                mostrarTodasCategorias : true
             }),
             headers: {
                 'Accept' : 'application/json',

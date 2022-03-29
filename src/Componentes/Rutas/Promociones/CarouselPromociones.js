@@ -208,19 +208,19 @@ class CarouselPromociones extends React.Component {
           if(seleccionoPromocion == true){
             if(this.state.current <= 1.5){
               this.setState({
-                current: this.state.current+0.1
+                current: this.state.current+0.03
               })
             }
           }else{
             if(this.state.current <= 3.1){
               this.setState({
-                current: this.state.current+0.1
+                current: this.state.current+0.03
               })
             }
           }
         }
         
-      }, 305);
+      }, 130);
     }
 
     if(this.state.activarCarouselRetroceder == true){
@@ -234,7 +234,7 @@ class CarouselPromociones extends React.Component {
         if(this.state.activarCarouselRetroceder == true){
           if(this.state.current >= 0){
             this.setState({
-              current: this.state.current-0.1
+              current: this.state.current-0.3
             })
           }else{
             this.setState({
@@ -243,7 +243,7 @@ class CarouselPromociones extends React.Component {
           }
         }
         
-      }, 305);
+      }, 130);
     }
 
     

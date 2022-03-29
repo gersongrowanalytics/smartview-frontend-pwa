@@ -99,7 +99,14 @@ export const EnviarCorreoDescargarReducer = (txtPara, txtAsunto, txtMensaje, inf
     return true
 }
 
-export const EnviarCorreoDescargarFormadoReducer = (txtPara, txtAsunto, txtMensaje, nombreExcel, espdf = false) => async (dispatch, getState) => {
+export const EnviarCorreoDescargarFormadoReducer = (
+    txtPara, txtAsunto, txtMensaje, nombreExcel, espdf = false,
+
+    titulo = "",
+    columnas = [],
+
+
+) => async (dispatch, getState) => {
 
     dispatch({
         type: CARGANDO_BTN_ENVIAR_CORREO_DESCARGA,
@@ -107,6 +114,10 @@ export const EnviarCorreoDescargarFormadoReducer = (txtPara, txtAsunto, txtMensa
     })
 
     let rpta = true
+
+    const mesSeleccionadoFiltro = getState().fechas.mesSeleccionadoFiltro
+    const anioSeleccionadoFiltro = getState().fechas.anioSeleccionadoFiltro
+    let sucursalesUsuario = getState().sucursales.sucursalesUsuario
 
     await fetch(config.api+'enviar-correo-adjunto',
         {
@@ -117,7 +128,16 @@ export const EnviarCorreoDescargarFormadoReducer = (txtPara, txtAsunto, txtMensa
                 destinatario : txtPara,
                 mensaje : txtMensaje,
                 excel : nombreExcel,
-                espdf : espdf
+                espdf : espdf,
+
+                titulo   : titulo,
+                columnas : columnas,
+                sucs     : sucursalesUsuario,
+                anio     : anioSeleccionadoFiltro,
+                mes      : mesSeleccionadoFiltro,
+                dia      : "01",
+
+
             }),
             headers: {
                 'Accept' : 'application/json',

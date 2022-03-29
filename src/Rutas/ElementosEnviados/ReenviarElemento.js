@@ -4,7 +4,7 @@ import Persona from '../../Assets/Img/ElementosEnviados/Persona_correo.png'
 import Eliminar from '../../Assets/Img/ElementosEnviados/Eliminar.png'
 import Reenviar from '../../Assets/Img/ElementosEnviados/Reenviar.png'
 import Flecha from '../../Assets/Img/ElementosEnviados/Siguiente_derecha.png'
-
+import IconoExcelTransparente from '../../Assets/Img/ElementosEnviados/excelicono.png'
 
 const ReenviarElemento = () => {
 
@@ -19,7 +19,7 @@ const ReenviarElemento = () => {
                 </Col>
                 <Col lg={6} xl={6}>
                         <div className='Paginacion-Elementos'>
-                            <span style={{marginRight: '9px', paddingTop: '2px'}}>1 - 20 de 40</span>
+                            {/* <span style={{marginRight: '9px', paddingTop: '2px'}}>1 - 20 de 40</span> */}
                             {/* <img src={Flecha} className='Flecha-Izquierda'></img> 
                             <img src={Flecha} className='Flecha-Derecha'></img> */}
                         </div>
@@ -55,14 +55,26 @@ const ReenviarElemento = () => {
                             </Col>
                         </Row>
                     </div>
-                    <div className='Caja-Asunto'>
-                        <div>
-                            ARCHIVO
+                    <div className='Caja-Asunto' style={{display:'flex'}}>
+                        <div className='Contenedor-Archivo-Excel-Elementos-Enviados'>
+                            <img src={IconoExcelTransparente} className="Icono-Excel-Transparente" />
+                            <div>
+                                <div className='Wnormal-S14-H19-C1E1E1E'>
+                                    Lista de Precios (ENE 2022) (29).xlsx
+                                </div>
+                                <div className='Wnormal-S14-H19-C1E1E1E'>
+                                    68KB
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='Caja2-Asunto'>
-                        <textarea rows="15" style={{width:'100%'}}></textarea>
-                        {/* Hola estimado Xxxxxx, <br/>Mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm mmmmmmmmmmmmmmmmmmmmmmmmmmmm mmmmmmmm mmmmmmmmmmmmm.<br/><br/> Por favor su revisión. <br/><br/>Gracias y saludos, <br/>Merly <br/><br/><br/>Este es un email automático, si tienes cualquier tipo de duda ponte en contacto con nosotros a través de nuestro servicio de atención al cliente al Xxxxxx@xxxx.com.pe, por favor no respondas a este mensaje. */}
+                        <textarea 
+                            rows="15" style={{width:'100%'}}
+                            className="TxtArea-Reenviar-Elemento W400-S12-H16-C000000-L0015"
+                        >
+                            {"Hola estimado Xxxxxx, \nMmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm mmmmmmmmmmmmmmmmmmmmmmmmmmmm mmmmmmmm mmmmmmmmmmmmm.\n\nPor favor su revisión. \n\nGracias y saludos, \nMerly \n\n\nEste es un email automático, si tienes cualquier tipo de duda ponte en contacto con nosotros a través de nuestro servicio de atención al cliente al Xxxxxx@xxxx.com.pe, por favor no respondas a este mensaje. "}
+                        </textarea>
                     </div>
                 </Col>
             </Row>

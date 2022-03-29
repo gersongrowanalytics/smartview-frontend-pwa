@@ -171,6 +171,8 @@ const Descargas = () => {
             if(localStorage.getItem('columnasfiltrodescargareportepagos') != null){
                 dispatch(ArmarColumnasSeleccionadasDescargarReportePagosReducer())
             }
+        }else if(modulo_descarga_seleccionado == "Catalogo"){
+            dispatch(SeleccionarUnaSucursalDescargaReducer(0, true))
         }
 
     },[modulo_descarga_seleccionado])

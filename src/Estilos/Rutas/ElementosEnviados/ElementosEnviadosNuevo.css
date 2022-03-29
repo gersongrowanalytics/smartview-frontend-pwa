@@ -1,0 +1,110 @@
+.Titulo-Elementos-Enviados{
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 35px;
+    letter-spacing: -0.015em;
+    color: #3646C3;
+    padding-left: 40px;
+    padding-top: 19px;
+}
+
+.Btn-Elementos-Enviados{
+    /* width: 84px; */
+    height: 36px;
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    cursor: pointer;
+    margin-right: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Contenedor-Btn-Elementos-Enviados{
+    display: flex;
+    margin-top: 33px;
+    margin-left: 40px;
+}
+
+.Paginacion-Elementos-Enviados{
+    margin-top: 33px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 69px;
+}
+
+.Contenedor-Tabla-Elementos-Enviados{
+    margin-top: 33px;
+    margin-left: 227px;
+    width: 880px;
+    border-radius: 8px;
+}
+
+.Tabla-Elementos-Enviados{
+    width: 100%;
+    text-align : center;
+    white-space: nowrap;
+    position: relative;
+    z-index: 0;
+}
+
+.Tabla-Elementos-Enviados thead tr{
+    width: 880px;
+    height: 56px;
+    left: 60px;
+    top: 244px;
+    background: #1EC0ED;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 172.51%;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.Tabla-Elementos-Enviados tbody tr{
+    width: 1148px;
+    height: 37px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
+.Tabla-Elementos-Enviados thead tr th:first-child{
+    border-top-left-radius: 8px;
+}
+
+.Tabla-Elementos-Enviados thead tr th:last-child{
+    border-top-right-radius: 8px;
+}
+
+.Fondo-Icono-Reenviar{
+    background: #FFFFFF;
+    border-radius: 14px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Fondo-Icono-Reenviar:hover{
+    background: #558CFF;
+}
+
+.Fondo-Icono-Reenviar:hover img{ 
+    content:url(../../../Assets/Img/ElementosEnviados/Reenviar-white.png);
+}

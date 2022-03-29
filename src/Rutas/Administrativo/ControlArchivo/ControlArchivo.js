@@ -30,7 +30,7 @@ const ControlArchivo = () => {
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataControlArchivos(paginaActualTabla))
     }
-    console.log(cargandoTablaControlArchivos)
+
     const obtenerFechaHora = (fechaSinFormato, tipo) => {
         if (fechaSinFormato == null) {
             return "NaN"

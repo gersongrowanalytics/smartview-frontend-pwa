@@ -23,6 +23,7 @@ import Usuarios from './Administrativo/Usuarios/Usuarios';
 import Permisos from './Administrativo/Permisos/Permisos';
 import TiposUsuarios from './Administrativo/TiposUsuarios/TiposUsuarios';
 import ControlArchivo from './Administrativo/ControlArchivo/ControlArchivo';
+import ElementosEnviadosNuevo from './ElementosEnviados/ElementosEnviadosNuevo';
 
 const Rutas = () => {
 
@@ -134,6 +135,7 @@ const Rutas = () => {
                     <Route exact path='/contraprestaciones' element={<Contraprestaciones/>}/>
                     <Route exact path='/mi-perfil' element={<MiPerfil/>}/>
                     <Route exact path='/elementos-enviados' element={<ElementosEnviados/>}/>
+                    <Route exact path='/elementos-enviados/actual' element={<ElementosEnviadosNuevo/>}/>
                     <Route exact path='/terminos-condiciones' element={<Terminos/>}/>
                     <Route exact path='/reenviar-elemento' element={<ReenviarElemento/>}/>
                     <Route exact path='/administrativo' element={<Administrativo/>}/>

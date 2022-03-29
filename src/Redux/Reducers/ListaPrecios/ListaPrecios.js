@@ -6,7 +6,10 @@ import {
     SELECCIONAR_COLUMNA_FILTRO_DESCARGA_LISTA_PRECIOS,
     ABRIR_AGRUPACION_COLUMNA_FILTRO_DESCARGAR_LISTA_PRECIOS,
     OBTENER_DATA_DESCARGAR_EXCEL_LISTAPRECIOS_DESCARGAR,
-    CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS
+    CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS,
+
+    OBTENER_DATA_FILTRO_LISTA_PRECIOS,
+    OBTENER_UNICAMENTE_DATA_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 
 const INIT_STATE = {
@@ -203,7 +206,15 @@ const INIT_STATE = {
 
     columnas_seleccionadas_filtro_descarga_listaprecios : [],
     data_descargar_excel_listaprecios : [],
-    cargando_btn_excel_listaprecios : false
+    cargando_btn_excel_listaprecios : false,
+
+
+    // FILTROS
+    fil_dat_categorias : [],
+    fil_dat_subcategorias : [],
+    fil_dat_formato : [],
+    fil_dat_codsap : [],
+    fil_dat_material : []
 };
 
 
@@ -219,6 +230,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 grupos_disponibles_lista_precios: action.payload,
+            }
+        }
+        case OBTENER_UNICAMENTE_DATA_LISTA_PRECIOS: {
+            return{
+                ...state,
+                data_tabla_lista_precios : action.payload
             }
         }
         case OBTENER_DATA_EXCEL_LISTA_PRECIOS: {
@@ -251,6 +268,16 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 cargando_btn_excel_listaprecios : action.payload
+            }
+        }
+        case OBTENER_DATA_FILTRO_LISTA_PRECIOS: {
+            return {
+                ...state,
+                fil_dat_categorias : action.payload.fil_dat_categorias,
+                fil_dat_subcategorias : action.payload.fil_dat_subcategorias,
+                fil_dat_formato : action.payload.fil_dat_formato,
+                fil_dat_codsap : action.payload.fil_dat_codsap,
+                fil_dat_material : action.payload.fil_dat_material
             }
         }
     default:

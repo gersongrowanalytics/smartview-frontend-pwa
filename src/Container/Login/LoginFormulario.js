@@ -9,7 +9,7 @@ import '../../Estilos/Rutas/Login/Login.css';
 import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
 import GrowLogoColor from '../../Assets/Logo/colorlogoCompletoKim.png';
 import {Link} from "react-router-dom";
-
+import IconoFechaAbajo from '../../Assets/Img/Login/flechaabajo.png'
 
 const LoginFormulario = () => {
     
@@ -128,6 +128,20 @@ const LoginFormulario = () => {
                         size={"large"}
                         onChange={
                             (e) => seleccionarPais(e)
+                        }
+                        suffixIcon={
+                            <div>
+                                <img 
+                                    src={IconoFechaAbajo} 
+                                    style={{
+                                        width: "23px",
+                                        height: "21px",
+                                        position: "absolute",
+                                        top: "-5px",
+                                        right: "-6px"
+                                    }}
+                                />
+                            </div>
                         }
                     >
                         <Select.Option danger value="Peru">Peru</Select.Option>

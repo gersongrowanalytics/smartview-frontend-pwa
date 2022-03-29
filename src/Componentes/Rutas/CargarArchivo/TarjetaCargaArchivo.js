@@ -23,6 +23,7 @@ class TarjetaCargaArchivo extends Component {
             archivoExito     : this.props.archivoExito,
             guardarCambios   : false,
             enviarCambios    : this.props.envcambios,
+            archivoSelect : ""
         }   
         this.seleccionarFile = this.seleccionarFile.bind(this)
         this.eliminarArchivo = this.eliminarArchivo.bind(this)
@@ -40,7 +41,8 @@ class TarjetaCargaArchivo extends Component {
 
         this.setState({
             subioArchivo  : true,
-            nombreArchivo : this.state.fileSeleccionado['name']
+            nombreArchivo : this.state.fileSeleccionado['name'],
+            archivoSelect : ""
         })
     }
 
@@ -92,7 +94,9 @@ class TarjetaCargaArchivo extends Component {
                     id="file" 
                     ref="subirArchivoInput" 
                     style={{display: "none"}} 
-                    onChange={(e) => this.cambioInputFile(e)} />
+                    onChange={(e) => this.cambioInputFile(e)} 
+                    value={this.state.archivoSelect}    
+                />
 
                 <div className='Contenedor-Tarjeta-Carga-Archivo'>
 
@@ -151,7 +155,7 @@ class TarjetaCargaArchivo extends Component {
                                                     />
                                                 </div>
 
-                                                <div className='Wbold-S12-H16-C1E1E1E' style={{paddingLeft:'60px', paddingRight:'60px', paddingTop:'90px'}}>
+                                                <div className='Wbold-S12-H16-C1E1E1E' style={{paddingLeft:'60px', paddingRight:'60px', paddingTop:'110px'}}>
                                                     ¡Archivo subido con éxito!
                                                 </div>
 
@@ -177,6 +181,7 @@ class TarjetaCargaArchivo extends Component {
                                                                 archivoExito     : false,
                                                                 guardarCambios   : false,
                                                                 enviarCambios    : false,
+                                                                archivoSelect : ""
                                                             })
                                                         }}
                                                     >
@@ -205,10 +210,8 @@ class TarjetaCargaArchivo extends Component {
                                                                 src={
                                                                     GifAlerta
                                                                 }
-                                                                style={{
-                                                                    color: "white",
-                                                                    width: "180px"
-                                                                }}
+
+                                                                className="Icono-Alerta-Error-TarjetaCargaArchivos"
                                                             />
                                                         {/* </div> */}
                                                     </div>
@@ -219,10 +222,13 @@ class TarjetaCargaArchivo extends Component {
                                                         display: "flex",
                                                         justifyContent: "center",
                                                         textAlign: "center",
-                                                        marginTop:'-25px',
-                                                        paddingLeft:'65px',
-                                                        paddingRight:'65px',
-                                                        marginTop:'125px'
+                                                        paddingLeft:'25px',
+                                                        paddingRight:'25px',
+                                                        marginTop:'24px',
+                                                        position: "absolute",
+                                                        width: "100%",
+                                                        left: "0",
+
                                                     }}
                                                 >
                                                     <div>
@@ -230,7 +236,8 @@ class TarjetaCargaArchivo extends Component {
                                                             ¡Algo salió mal!
                                                         </div>
                                                         <div className='W600-S12-H16-CFF3742' style={{marginTop:'5px'}}> 
-                                                            Encontramos un error en el archivo
+                                                            Tu archivo no se subió porque encontramos un error, por favor revisar tus notificaciones
+                                                            {/* Encontramos un error en el archivo */}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -257,6 +264,7 @@ class TarjetaCargaArchivo extends Component {
                                                                 archivoExito     : false,
                                                                 guardarCambios   : false,
                                                                 enviarCambios    : false,
+                                                                archivoSelect : ""
                                                             })
                                                         }}
                                                     >

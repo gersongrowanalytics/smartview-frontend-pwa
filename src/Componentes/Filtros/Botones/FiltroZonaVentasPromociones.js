@@ -57,6 +57,35 @@ const FiltroZonaVentasPromociones = (props) => {
 
     }, [sucursalesUsuario])
 
+    useEffect(() => {
+
+        cass.map(async (cas, posCas) => {
+            if(posCas == 1){
+                if(idCanalSeleccionada == cas.casid){
+                    setIdCanalSeleccionada(0)
+                }else{
+                    setIdCanalSeleccionada(cas.casid)
+                    let quitarFiltroZona = true
+                    await zonas.map((zona, pos) => {
+                        
+                        if(idZonaSeleccionada == zona.zonid){
+                            if(zona.casid == cas.casid){
+                                quitarFiltroZona = false
+                            }
+                        }
+        
+                    })
+        
+                    if(quitarFiltroZona == true){
+                        setIdZonaSeleccionada(0)
+                    }
+                }
+            }
+        })
+
+    }, [sucursalesUsuario])
+
+
     return (
         <>
             <div
@@ -70,7 +99,7 @@ const FiltroZonaVentasPromociones = (props) => {
                     className='Borde-Filtro-Contenedor W600-S14-H19-C1E1E1E'
                     onClick={() => setMostrarCuerpoFiltro(!mostrarCuerpoFiltro)}
                     onMouseEnter={() => {
-                        console.log('enter mouse')
+                        // console.log('enter mouse')
                         setMostrarCuerpoFiltro(true)
                         // alert('click enter')
                     }}
@@ -96,7 +125,10 @@ const FiltroZonaVentasPromociones = (props) => {
 
                 {
                     mostrarCuerpoFiltro == true
-                    ?<div className='Contenedor-Cuerpo-Filtro-Zonas-Ventas-Promociones'>
+                    ?<div 
+                        className='Contenedor-Cuerpo-Filtro-Zonas-Ventas-Promociones'
+                        id="ID-Contenedor-Cuerpo-Filtro-Zonas-Ventas-Promociones"
+                    >
 
                         <div>
                             {
@@ -140,6 +172,7 @@ const FiltroZonaVentasPromociones = (props) => {
 
                                             <div style={{marginRight:'5px', position:'absolute', top: "6px"}}>
                                                 <Checkbox 
+                                                    className='Check-FiltroZonaVentasPromociones'
                                                     checked={cas.check} 
                                                     onChange={(e) => dispatch(SeleccionarFiltroCanalReducer(posCas, e.target.checked))}
                                                 ></Checkbox>
@@ -154,7 +187,24 @@ const FiltroZonaVentasPromociones = (props) => {
                             }
                         </div>
                         
-                        <div className='Linea-Filtro-Zonas-Ventas-Promociones'>a</div>
+                        <div 
+                            className='Linea-Filtro-Zonas-Ventas-Promociones'
+                            style={{
+                                position: "relative"
+                            }}
+                        >
+                            a
+                            {/* <div
+                                style={{
+                                    position: "fixed",
+                                    background: "#F1F1F1",
+                                    width: "7px",
+                                    height: "400px"
+                                }}
+                            >
+
+                            </div> */}
+                        </div>
 
                         <div style={{paddingRight:'15px'}}>
                             {
@@ -178,6 +228,7 @@ const FiltroZonaVentasPromociones = (props) => {
                                         >
                                             <div style={{marginRight:'5px', position:'absolute', top: "6px"}}>
                                                 <Checkbox 
+                                                    className='Check-FiltroZonaVentasPromociones'
                                                     onChange={(e) => dispatch(SeleccionarFiltroZonaReducer(posZona, e.target.checked))}
                                                     checked={zona.check} ></Checkbox>
                                             </div>
@@ -203,6 +254,7 @@ const FiltroZonaVentasPromociones = (props) => {
                                             >
                                                 <div style={{marginRight:'5px', position:'absolute', top: "6px"}}>
                                                     <Checkbox 
+                                                        className='Check-FiltroZonaVentasPromociones'
                                                         onChange={(e) => dispatch(SeleccionarFiltroZonaReducer(posZona, e.target.checked))}
                                                         checked={zona.check}></Checkbox>
                                                 </div>
@@ -216,7 +268,24 @@ const FiltroZonaVentasPromociones = (props) => {
                             }
                         </div>
 
-                        <div className='Linea-Filtro-Zonas-Ventas-Promociones'>a</div>
+                        <div 
+                            className='Linea-Filtro-Zonas-Ventas-Promociones'
+                            style={{
+                                position: "relative"
+                            }}
+                        >
+                            a
+                            {/* <div
+                                style={{
+                                    position: "fixed",
+                                    background: "#F1F1F1",
+                                    width: "7px",
+                                    height: "400px"
+                                }}
+                            >
+
+                            </div> */}
+                        </div>
 
                         <div style={{display:'flex', paddingLeft:'15px'}} onClick={() => console.log(sucursalesUsuario)}>
                             {
@@ -237,6 +306,7 @@ const FiltroZonaVentasPromociones = (props) => {
                                                     >
                                                         <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
                                                             <Checkbox 
+                                                                className='Check-FiltroZonaVentasPromociones'
                                                                 onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
                                                                 checked={gsu.check}></Checkbox>
                                                         </div>
@@ -251,18 +321,22 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                 ?sucursal.gsuid == gsu.gsuid
                                                                     ?<div 
                                                                         className='Item-Sucursal-Filtro'
+                                                                        style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                     >
                                                                         <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                             <Checkbox 
+                                                                                className='Check-FiltroZonaVentasPromociones'
                                                                                 onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                 checked={sucursal.check}></Checkbox>
                                                                         </div>
                                                                         <div 
                                                                             style={{position:'absolute', left:'25px', top:'1px'}}
                                                                             onClick={() => {
-                                                                                setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                setMostrarCuerpoFiltro(false)
-                                                                                dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                // setMostrarCuerpoFiltro(false)
+                                                                                // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                             }}
                                                                         >
                                                                             {sucursal.sucnombre}
@@ -273,17 +347,21 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                     ?sucursal.gsuid == gsu.gsuid
                                                                         ?<div 
                                                                             className='Item-Sucursal-Filtro' 
+                                                                            style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                         >
                                                                             <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                                 <Checkbox 
+                                                                                    className='Check-FiltroZonaVentasPromociones'
                                                                                     onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                     checked={sucursal.check}></Checkbox>
                                                                             </div>
                                                                             <div
                                                                                 onClick={() => {
-                                                                                    setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                    setMostrarCuerpoFiltro(false)
-                                                                                    dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                    // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                    // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                    // setMostrarCuerpoFiltro(false)
+                                                                                    // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                    dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                                 }} 
                                                                                 style={{position:'absolute', left:'25px', top:'1px'}}>
                                                                                 {sucursal.sucnombre}
@@ -310,6 +388,7 @@ const FiltroZonaVentasPromociones = (props) => {
                                                             >
                                                                 <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
                                                                     <Checkbox 
+                                                                        className='Check-FiltroZonaVentasPromociones'
                                                                         onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
                                                                         checked={gsu.check}></Checkbox>
                                                                 </div>
@@ -324,17 +403,21 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                         ?sucursal.gsuid == gsu.gsuid
                                                                             ?<div 
                                                                                 className='Item-Sucursal-Filtro'
+                                                                                style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                             >
                                                                                 <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                                     <Checkbox 
+                                                                                        className='Check-FiltroZonaVentasPromociones'
                                                                                         onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                         checked={sucursal.check}></Checkbox>
                                                                                 </div>
                                                                                 <div
                                                                                     onClick={() => {
-                                                                                        setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                        setMostrarCuerpoFiltro(false)
-                                                                                        dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                        // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                        // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                        // setMostrarCuerpoFiltro(false)
+                                                                                        // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                        dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                                     }} 
                                                                                     style={{position:'absolute', left:'25px', top:'1px'}}>
                                                                                     {sucursal.sucnombre}
@@ -345,17 +428,21 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                             ?sucursal.gsuid == gsu.gsuid
                                                                                 ?<div 
                                                                                     className='Item-Sucursal-Filtro'
+                                                                                    style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                                 >
                                                                                     <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                                         <Checkbox 
+                                                                                            className='Check-FiltroZonaVentasPromociones'
                                                                                             onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                             checked={sucursal.check}></Checkbox>
                                                                                     </div>
                                                                                     <div
                                                                                         onClick={() => {
-                                                                                            setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                            setMostrarCuerpoFiltro(false)
-                                                                                            dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                            // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                            // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                            // setMostrarCuerpoFiltro(false)
+                                                                                            // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                            dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                                         }} 
                                                                                         style={{position:'absolute', left:'25px', top:'1px'}}>
                                                                                         {sucursal.sucnombre}
@@ -386,6 +473,7 @@ const FiltroZonaVentasPromociones = (props) => {
                                                             >
                                                                 <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
                                                                     <Checkbox 
+                                                                        className='Check-FiltroZonaVentasPromociones'
                                                                         onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
                                                                         checked={gsu.check}></Checkbox>
                                                                 </div>
@@ -400,17 +488,21 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                         ?sucursal.gsuid == gsu.gsuid
                                                                             ?<div 
                                                                                 className='Item-Sucursal-Filtro'
+                                                                                style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                             >
                                                                                 <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                                     <Checkbox 
+                                                                                        className='Check-FiltroZonaVentasPromociones'
                                                                                         onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                         checked={sucursal.check}></Checkbox>
                                                                                 </div>
                                                                                 <div
                                                                                     onClick={() => {
-                                                                                        setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                        setMostrarCuerpoFiltro(false)
-                                                                                        dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                        // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                        // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                        // setMostrarCuerpoFiltro(false)
+                                                                                        // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                        dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                                     }} 
                                                                                     style={{position:'absolute', left:'25px', top:'1px'}}>
                                                                                     {sucursal.sucnombre}
@@ -421,17 +513,21 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                             ?sucursal.gsuid == gsu.gsuid
                                                                                 ?<div 
                                                                                     className='Item-Sucursal-Filtro'
+                                                                                    style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                                 >
                                                                                     <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                                         <Checkbox 
+                                                                                            className='Check-FiltroZonaVentasPromociones'
                                                                                             onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                             checked={sucursal.check}></Checkbox>
                                                                                     </div>
                                                                                     <div
                                                                                         onClick={() => {
-                                                                                            setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                            setMostrarCuerpoFiltro(false)
-                                                                                            dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                            // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                            // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                            // setMostrarCuerpoFiltro(false)
+                                                                                            // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                            dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                                         }} 
                                                                                         style={{position:'absolute', left:'25px', top:'1px'}}>
                                                                                         {sucursal.sucnombre}
@@ -461,6 +557,7 @@ const FiltroZonaVentasPromociones = (props) => {
                                                             >
                                                                 <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
                                                                     <Checkbox 
+                                                                        className='Check-FiltroZonaVentasPromociones'
                                                                         onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
                                                                         checked={gsu.check}></Checkbox>
                                                                 </div>
@@ -475,17 +572,21 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                         ?sucursal.gsuid == gsu.gsuid
                                                                             ?<div 
                                                                                 className='Item-Sucursal-Filtro'
+                                                                                style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                             >
                                                                                 <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                                     <Checkbox 
+                                                                                        className='Check-FiltroZonaVentasPromociones'
                                                                                         onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                         checked={sucursal.check} ></Checkbox>
                                                                                 </div>
                                                                                 <div
                                                                                     onClick={() => {
-                                                                                        setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                        setMostrarCuerpoFiltro(false)
-                                                                                        dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                        // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                        // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                        // setMostrarCuerpoFiltro(false)
+                                                                                        // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                        dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                                     }} 
                                                                                     style={{position:'absolute', left:'25px', top:'1px'}}>
                                                                                     {sucursal.sucnombre}
@@ -496,17 +597,21 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                             ?sucursal.gsuid == gsu.gsuid
                                                                                 ?<div 
                                                                                     className='Item-Sucursal-Filtro'
+                                                                                    style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                                 >
                                                                                     <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
                                                                                         <Checkbox 
+                                                                                            className='Check-FiltroZonaVentasPromociones'
                                                                                             onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                             checked={sucursal.check}></Checkbox>
                                                                                     </div>
                                                                                     <div
                                                                                         onClick={() => {
-                                                                                            setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                            setMostrarCuerpoFiltro(false)
-                                                                                            dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                            // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                            // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                            // setMostrarCuerpoFiltro(false)
+                                                                                            // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                            dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
                                                                                         }} 
                                                                                         style={{position:'absolute', left:'25px', top:'1px'}}>
                                                                                         {sucursal.sucnombre}

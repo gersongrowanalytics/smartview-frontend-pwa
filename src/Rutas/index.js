@@ -24,6 +24,7 @@ import Permisos from './Administrativo/Permisos/Permisos';
 import TiposUsuarios from './Administrativo/TiposUsuarios/TiposUsuarios';
 import ControlArchivo from './Administrativo/ControlArchivo/ControlArchivo';
 import ElementosEnviadosNuevo from './ElementosEnviados/ElementosEnviadosNuevo';
+import Rebate from './Rebate/Rebate';
 
 const Rutas = () => {
 
@@ -125,6 +126,7 @@ const Rutas = () => {
             <div style={{marginTop:'30px'}}>
                 {/* <Menu /> */}
                 <Routes>
+                    <Route exact path='/rebate' element={<Rebate/>}/>
                     <Route exact path='/ventas' element={<Ventas/>}/>
                     <Route exact path='/promociones' element={<Promociones/>}/>
                     <Route exact path='/descargas' element={<Descargas/>}/>

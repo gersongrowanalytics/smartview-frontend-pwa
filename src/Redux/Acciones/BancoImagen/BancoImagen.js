@@ -355,7 +355,9 @@ export const EditandoImagenNuevoBancoImagenesReducer = (tipo, posicion) => async
 }
 
 
-export const EditarImagenNuevoBancoImagenReducer = (tipo, imagen, prosku, posicion) => async (dispatch, getState) => {
+export const EditarImagenNuevoBancoImagenReducer = (
+    tipo, imagen, prosku, posicion, fechas
+) => async (dispatch, getState) => {
     
     let prosConImagenes = getState().bancoImagen.prosConImagenes
     let prosSinImagenes = getState().bancoImagen.prosSinImagenes
@@ -391,7 +393,8 @@ export const EditarImagenNuevoBancoImagenReducer = (tipo, imagen, prosku, posici
             body: JSON.stringify({
                 usutoken    : localStorage.getItem('usutoken'),
                 req_imagen  : imagen,
-                req_prosku  : prosku
+                req_prosku  : prosku,
+                req_fechas  : fechas
             }),
             headers: {
                 'Accept' : 'application/json',
@@ -410,7 +413,7 @@ export const EditarImagenNuevoBancoImagenReducer = (tipo, imagen, prosku, posici
         if(estadoRequest == true){
             if(data.respuesta == true){
                 
-                
+                dispatch(dataBancoImagen())
 
             }else{
 

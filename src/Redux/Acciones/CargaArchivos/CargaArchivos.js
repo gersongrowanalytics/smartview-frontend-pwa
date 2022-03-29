@@ -1,6 +1,10 @@
 import axios from 'axios'
 import {message} from "antd";
 import config from '../../../config'
+import {
+    GUARDAR_NOTIFICACIONES_CARGA_ARCHIVOS
+} from '../../../Constantes/CargaArchivos/CargaArchivos'
+
 
 export const CargarArchivoReducer = (url, data) => async(dispatch, getState) => {
 
@@ -29,9 +33,43 @@ export const CargarArchivoReducer = (url, data) => async(dispatch, getState) => 
         if(datos.respuesta == true){
             respuesta = true
         }else{
-            message.error(datos.mensaje);
+            // message.error(datos.mensaje);
         }
-        // dispatch(ObtenerNotificacionesReducer(datos.logs))
+
+
+        if(respuesta == false){
+            let notificaciones_data_carga_archivos = getState().cargaArchivos.notificaciones_data_carga_archivos
+
+            let nuevaNotificacion = datos.notificacionesLogs
+            let numeroNotificacion = parseInt(notificaciones_data_carga_archivos.length)+1
+            nuevaNotificacion.titulo = "Notificación "+numeroNotificacion
+
+            notificaciones_data_carga_archivos.unshift(nuevaNotificacion)
+
+            dispatch({
+                type: GUARDAR_NOTIFICACIONES_CARGA_ARCHIVOS,
+                payload: notificaciones_data_carga_archivos
+            })
+        }else{
+            let notificaciones_data_carga_archivos = getState().cargaArchivos.notificaciones_data_carga_archivos
+
+            let numeroNotificacion = parseInt(notificaciones_data_carga_archivos.length)+1
+
+            let nuevaNotificacion = {
+                "RESPUESTA" : true,
+                "titulo" : "Notificación "+numeroNotificacion,
+                "MENSAJE" : "El archivo se subio correctamente"
+            }
+
+            notificaciones_data_carga_archivos.unshift(nuevaNotificacion)
+
+            dispatch({
+                type: GUARDAR_NOTIFICACIONES_CARGA_ARCHIVOS,
+                payload: notificaciones_data_carga_archivos
+            })
+        }
+
+        // dispatch(ObtenerNotificacionesReducer(datos.notificacionesLogs))
 
     })
     .catch((error)=> {

@@ -7,7 +7,7 @@
     /* position: relative; */
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 .Logo-KC-Creciendo-Juntos{
@@ -71,7 +71,7 @@
 
 .Fila-Cuerpo-Item-Filtro-Top{
     position: relative;
-    padding-left: 25px;
+    padding-left: 30px;
     padding-bottom: 5px;
     padding-top: 5px;
     cursor: pointer;
@@ -82,10 +82,10 @@
 }
 
 .Icono-Fila-Cuerpo-Item-Filtro-Top{
-    width: 18px;
+    width: 14px;
     position: absolute;
-    left: 5px;
-    top: 6px;
+    left: 11px;
+    top: 8px;
 }
 
 .Img-Icono-Top{
@@ -163,6 +163,6 @@
     width: 25px;
     position: absolute;
     right: 30px;
-    top: 5px;
+    top: 3px;
     cursor: pointer;
 }

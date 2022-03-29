@@ -8,7 +8,8 @@ import {
     ACTUALIZAR_COLOR_SELECCIONADO_PROMOCION,
     OBTENER_CANALES_DE_PROMOCIONES_EXITO,
     ACTUALIZAR_CANALES_DE_PROMOCIONES,
-    CAMBIAR_DISENIO_PROMOCIONES
+    CAMBIAR_DISENIO_PROMOCIONES,
+    MOSTRAR_PROMOCIONES_NUEVAS
 } from "../../../Constantes/Promociones/Promociones";
 
 const INIT_STATE = {
@@ -26,6 +27,7 @@ const INIT_STATE = {
     reiniciandoPromociones      : false,
 
     mostrarDisenioPromocionesPrincipal : false,
+    mostrar_promociones_nuevas : false,
 };
 
 
@@ -105,6 +107,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 mostrarDisenioPromocionesPrincipal : action.payload
+            }
+        }
+        case MOSTRAR_PROMOCIONES_NUEVAS: {
+            return {
+                ...state,
+                mostrar_promociones_nuevas : action.payload
             }
         }
     default:

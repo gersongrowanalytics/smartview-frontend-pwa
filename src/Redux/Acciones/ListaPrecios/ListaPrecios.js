@@ -5,10 +5,12 @@ import {
 
     SELECCIONAR_COLUMNA_FILTRO_DESCARGA_LISTA_PRECIOS,
     ABRIR_AGRUPACION_COLUMNA_FILTRO_DESCARGAR_LISTA_PRECIOS,
-    CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS
+    CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS,
+    OBTENER_DATA_FILTRO_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
+import { ArmarFiltroLpReducer } from "./ArmarFiltrosLp"
 
 function SortArray(x, y){
     if (x.orden < y.orden) {return -1;}
@@ -124,11 +126,21 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (di
                 payload : {
                     excel : data_excel_descargar,
                     tabla : data.data,
-
                 }
             })
 
             dataRpta = data_excel_descargar
+
+            dispatch({
+                type: OBTENER_DATA_FILTRO_LISTA_PRECIOS,
+                payload : {
+                    fil_dat_categorias    : data.arr_filtro_categorias_lp,
+                    fil_dat_subcategorias : data.arr_filtro_subcategorias_lp,
+                    fil_dat_formato       : data.arr_filtro_formato_lp,
+                    fil_dat_codsap        : data.arr_filtro_codsap_lp,
+                    fil_dat_material      : data.arr_filtro_materiales_lp,
+                }
+            })
         }
 
     }).catch((error)=> {

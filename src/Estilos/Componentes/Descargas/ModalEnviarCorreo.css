@@ -59,7 +59,7 @@
     padding-left: 30px;
     padding-top: 15px;
     padding-bottom: 15px;
-    padding-right: 15px;
+    padding-right: 30px;
 }
 
 .Fila-Datos-Enviar-Correo-Descargar{
@@ -87,7 +87,8 @@
 .Icon-Cerar-Modal-Enviar-Correo-Descargar{
     color: white;
     position: absolute;
-    right: 20px;
+    right: 10px;
+    top: 5px;
     cursor: pointer;
 }
 
@@ -95,10 +96,16 @@
     width: 100%;
     border: none;
     outline: none;
+    text-align: justify;
 }
 
 
 .TextArea-Enviar-Correo-Descargar:focus{
     border: none;
     outline: none;
+}
+
+.Icono-Cerrar-Modal-Enviar-Correo{
+    width: 32px;
+    height: 32px;
 }

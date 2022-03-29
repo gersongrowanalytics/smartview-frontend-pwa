@@ -19,6 +19,9 @@ import IconoEquisRojo from '../../Assets/Img/CargaArchivos/equisrojo.png'
 const CargarArchivo = () => {
 
     const dispatch = useDispatch();
+    const { 
+        notificaciones_data_carga_archivos
+      } = useSelector(({cargaArchivos}) => cargaArchivos);
 
     const CargarArchivo = async (url, data) => {
         return await dispatch(CargarArchivoReducer(url, data))
@@ -229,7 +232,249 @@ const CargarArchivo = () => {
 
 
                 <div>
-                    <div className='Fila-Notificacion-CargaArchivos'>
+                    {
+                        notificaciones_data_carga_archivos.map((noti, pos) => {
+                            return(
+                                <div className='Fila-Notificacion-CargaArchivos'>
+                                    <div
+                                        className='Primera-Parte-Fila-Notificacion-CargaArchivos'
+                                    >
+                                        <div
+                                            className={
+                                                noti.RESPUESTA == true
+                                                ?'Wbold-S14-H19-C1E1E1E'
+                                                :'Wbold-S14-H19-CFF3742'
+                                            }
+                                            
+                                        >
+                                            {noti.titulo}
+                                        </div>
+                                        <div 
+                                            className={
+                                                noti.RESPUESTA == true
+                                                ?'Wnormal-S14-H19-C1E1E1E'
+                                                :'Wnormal-S14-H19-CFF3742'
+                                            }
+                                            style={{marginTop:'5px'}}
+                                        >
+                                            {
+                                                notificacionesAbiertas == true
+                                                ?<>
+                                                    {noti.MENSAJE+", a continucación podra ver el detalle"}
+                                                </>
+                                                :noti.MENSAJE
+                                            }
+                                        </div>
+
+                                        {
+                                            notificacionesAbiertas == true
+                                            ?<div
+                                                className='Contenedor-Cuerpo-Notificacion-Carga-Archivos'
+                                            >
+                                                <Row>
+                                                    {
+                                                        noti.NO_EXISTE_PRODUCTOS
+                                                        ?noti.NO_EXISTE_PRODUCTOS.length > 0
+                                                            ?<Col xl={8}>
+                                                                <div 
+                                                                    className='Titulo-Cuerpo-Notificacion-Carga-Archivos Wbold-S14-H16-C1E1E1E'
+                                                                >
+                                                                    Productos no identificados:
+                                                                </div>
+                                                                <div className='Wnormal-S14-H16-C1E1E1E'>
+                                                                    {
+                                                                        noti.NO_EXISTE_PRODUCTOS.map((dato) => {
+                                                                            return(
+                                                                                <>
+                                                                                    <li> {dato.codigo} en la línea {dato.linea} </li>
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </Col>
+                                                            :null
+
+                                                        
+                                                        :null
+                                                    }
+
+                                                    {
+                                                        noti.NO_EXISTE_DISTRIBUIDORA
+                                                        ?noti.NO_EXISTE_DISTRIBUIDORA.length > 0
+                                                            ?<Col xl={8}>
+                                                                <div 
+                                                                    className='Titulo-Cuerpo-Notificacion-Carga-Archivos Wbold-S14-H16-C1E1E1E'
+                                                                >
+                                                                    Distribuidoras no identificadas:
+                                                                </div>
+                                                                <div className='Wnormal-S14-H16-C1E1E1E'>
+                                                                    {
+                                                                        noti.NO_EXISTE_DISTRIBUIDORA.map((dato) => {
+                                                                            return(
+                                                                                <>
+                                                                                    <li> {dato.codigo} en la línea {dato.linea} </li>
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </Col>
+                                                            :null
+
+                                                        
+                                                        :null
+                                                    }
+
+                                                    {
+                                                        noti.NO_HAY_ANIO
+                                                        ?noti.NO_HAY_ANIO.length > 0
+                                                            ?<Col xl={8}>
+                                                                <div 
+                                                                    className='Titulo-Cuerpo-Notificacion-Carga-Archivos Wbold-S14-H16-C1E1E1E'
+                                                                >
+                                                                    Años no identificados:
+                                                                </div>
+                                                                <div className='Wnormal-S14-H16-C1E1E1E'>
+                                                                    {
+                                                                        noti.NO_HAY_ANIO.map((dato) => {
+                                                                            return(
+                                                                                <>
+                                                                                    <li> {dato.codigo} en la línea {dato.linea} </li>
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </Col>
+                                                            :null
+
+                                                        
+                                                        :null
+                                                    }
+
+                                                    {
+                                                        noti.NO_HAY_CLIENTES
+                                                        ?noti.NO_HAY_CLIENTES.length > 0
+                                                            ?<Col xl={8}>
+                                                                <div 
+                                                                    className='Titulo-Cuerpo-Notificacion-Carga-Archivos Wbold-S14-H16-C1E1E1E'
+                                                                >
+                                                                    Clientes no identificados:
+                                                                </div>
+                                                                <div className='Wnormal-S14-H16-C1E1E1E'>
+                                                                    {
+                                                                        noti.NO_HAY_CLIENTES.map((dato) => {
+                                                                            return(
+                                                                                <>
+                                                                                    <li> {dato.codigo} en la línea {dato.linea} </li>
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </Col>
+                                                            :null
+
+                                                        
+                                                        :null
+                                                    }
+
+                                                    {
+                                                        noti.NO_HAY_MES
+                                                        ?noti.NO_HAY_MES.length > 0
+                                                            ?<Col xl={8}>
+                                                                <div 
+                                                                    className='Titulo-Cuerpo-Notificacion-Carga-Archivos Wbold-S14-H16-C1E1E1E'
+                                                                >
+                                                                    Meses no identificados:
+                                                                </div>
+                                                                <div className='Wnormal-S14-H16-C1E1E1E'>
+                                                                    {
+                                                                        noti.NO_HAY_MES.map((dato) => {
+                                                                            return(
+                                                                                <>
+                                                                                    <li> {dato.codigo} en la línea {dato.linea} </li>
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </Col>
+                                                            :null
+
+                                                        
+                                                        :null
+                                                    }
+                                                    
+                                                    
+                                                </Row>
+                                            </div>
+                                            :null
+                                        }
+
+                                    </div>
+                                    <div
+                                        className='Segunda-Parte-Fila-Notificacion-CargaArchivos'
+                                    >
+                                        <div className='Contenedor-Iconos-Notificacion-CargaArchivos'>
+                                            <div 
+                                                style={{cursor:'pointer'}}
+                                                onClick={() => setMostrarModalEliminarNoti(true)}
+                                            >
+                                                <img 
+                                                    src={IconoEquisRojo}
+                                                    style={
+                                                        notificacionesAbiertas == true
+                                                        ?{
+                                                            width:'20px'
+                                                        }
+                                                        :{
+                                                            width:'15px'
+                                                        }
+                                                    }
+                                                />
+                                            </div>
+
+                                            <div 
+                                                style={
+                                                    notificacionesAbiertas == true
+                                                    ?{marginTop:'0px', cursor:'pointer'}
+                                                    :{marginTop:'-10px', cursor:'pointer'}
+                                                }
+                                                onClick={() => {
+                                                    setNotificacionesAbiertas(true)
+                                                    setRegresarNotificacionAbierta(false)
+                                                }}
+                                            >
+                                                {/* <PlusCircleTwoTone 
+                                                    
+                                                /> */}
+                                                <img 
+                                                    src={IconoPlusAzul}
+                                                    style={
+                                                        notificacionesAbiertas == true
+                                                        ?{
+                                                            width:'20px'
+                                                        }
+                                                        :{
+                                                            width:'15px'
+                                                        }
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+                                    
+
+                                </div>            
+                            )
+                        })
+                    }
+
+                    {/* <div className='Fila-Notificacion-CargaArchivos'>
                         <div
                             className='Primera-Parte-Fila-Notificacion-CargaArchivos'
                         >
@@ -241,6 +486,55 @@ const CargarArchivo = () => {
                             <div className='Wnormal-S14-H19-CFF3742' style={{marginTop:'5px'}}>
                                 El archivo Sell In pesa más del límite permitido 25MB
                             </div>
+
+                            {
+                                notificacionesAbiertas == true
+                                ?<div
+                                    className='Contenedor-Cuerpo-Notificacion-Carga-Archivos'
+                                >
+                                    <Row>
+                                        <Col xl={8}>
+                                            <div className='Titulo-Cuerpo-Notificacion-Carga-Archivos'>
+                                                Distribuidoras no identificadas:
+                                            </div>
+                                            <div>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                            </div>
+                                        </Col>
+                                        <Col xl={8}>
+                                            <div>
+                                                Distribuidoras no identificadas:
+                                            </div>
+                                            <div>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                            </div>
+                                        </Col>
+                                        <Col xl={8}>
+                                            <div>
+                                                Distribuidoras no identificadas:
+                                            </div>
+                                            <div>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                                <li>123213 en la línea 8</li>
+                                            </div>
+                                        </Col>
+                                        
+                                    </Row>
+                                </div>
+                                :null
+                            }
+                            
                         </div>
                         <div
                             className='Segunda-Parte-Fila-Notificacion-CargaArchivos'
@@ -250,54 +544,68 @@ const CargarArchivo = () => {
                                     style={{cursor:'pointer'}}
                                     onClick={() => setMostrarModalEliminarNoti(true)}
                                 >
-                                    {/* <CloseCircleTwoTone 
-                                        twoToneColor="#FF3742" 
-                                        style={{color:'white'}}
-                                    /> */}
-
                                     <img 
                                         src={IconoEquisRojo}
-                                        style={{
-                                            width:'15px'
-                                        }}
+                                        style={
+                                            notificacionesAbiertas == true
+                                            ?{
+                                                width:'20px'
+                                            }
+                                            :{
+                                                width:'15px'
+                                            }
+                                        }
                                     />
                                 </div>
 
                                 <div 
-                                    style={{marginTop:'-10px', cursor:'pointer'}}
+                                    style={
+                                        notificacionesAbiertas == true
+                                        ?{marginTop:'0px', cursor:'pointer'}
+                                        :{marginTop:'-10px', cursor:'pointer'}
+                                    }
                                     onClick={() => {
                                         setNotificacionesAbiertas(true)
                                         setRegresarNotificacionAbierta(false)
                                     }}
                                 >
-                                    {/* <PlusCircleTwoTone 
-                                        
-                                    /> */}
                                     <img 
                                         src={IconoPlusAzul}
-                                        style={{
-                                            width:'15px'
-                                        }}
+                                        style={
+                                            notificacionesAbiertas == true
+                                            ?{
+                                                width:'20px'
+                                            }
+                                            :{
+                                                width:'15px'
+                                            }
+                                        }
                                     />
                                 </div>
                             </div>
 
                         </div>
-                    </div>
+
+                    </div> */}
                 </div>
 
-                {/* <div className='Cuerpo-Notificacion-CargaArchivos'>
-                    
-                    <div style={{marginTop:'-260px'}}>
-                        <div>
-                            <img src={IconoCampanaPloma} style={{width:'80px'}} />
-                        </div>
-                        <div className='Wnormal-S14-H19-C1E1E1E'>
-                            No hay notificaciones recientes
-                        </div>
-                    </div>
 
-                </div> */}
+                {
+                    notificaciones_data_carga_archivos.length == 0
+                    ?<div className='Cuerpo-Notificacion-CargaArchivos'>
+                    
+                        <div style={{marginTop:'-260px'}}>
+                            <div>
+                                <img src={IconoCampanaPloma} style={{width:'80px'}} />
+                            </div>
+                            <div className='Wnormal-S14-H19-C1E1E1E'>
+                                No hay notificaciones recientes
+                            </div>
+                        </div>
+
+                    </div>
+                    :null
+                }
             </div>
 
             <Modal

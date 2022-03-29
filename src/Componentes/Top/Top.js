@@ -174,7 +174,7 @@ const Top = () => {
                     width: "100%",
                     height: "34px",
                     top:'0',
-                    zIndex:'1'
+                    zIndex:'2'
                 }}
             >
                 <div 

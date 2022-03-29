@@ -10,7 +10,8 @@ import {
     ACTUALIZAR_COLOR_SELECCIONADO_PROMOCION,
     OBTENER_CANALES_DE_PROMOCIONES_EXITO,
     ACTUALIZAR_CANALES_DE_PROMOCIONES,
-    CAMBIAR_DISENIO_PROMOCIONES
+    CAMBIAR_DISENIO_PROMOCIONES,
+    MOSTRAR_PROMOCIONES_NUEVAS
 } from '../../../Constantes/Promociones/Promociones'
 import config from '../../../config'
 import {
@@ -743,4 +744,15 @@ export const SeleccionarCategoriaXZonaAcumuladaReducer = (scaid, limpiarCanales,
             payload: []
         })
     });
+}
+
+export const MostrarPromocionesNuevasReducer = () => (dispatch, getState) => {
+
+    let mostrar_promociones_nuevas = getState().promociones.mostrar_promociones_nuevas
+
+    dispatch({
+        type: MOSTRAR_PROMOCIONES_NUEVAS,
+        payload : !mostrar_promociones_nuevas
+    })
+
 }

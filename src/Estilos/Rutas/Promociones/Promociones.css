@@ -21,6 +21,8 @@
 
     display: flex;
     align-items: center;
+
+    padding-right: 25px;
 }
 
 .Btn-Entendido-Modal-Promociones{
@@ -34,4 +36,57 @@
     justify-content: center;
 
     cursor: pointer;
+}
+
+.Btn-Entendido-Modal-Promociones:hover{
+    background-color: white;
+    color: black;
+}
+
+.Btn-Prom-Nueva{
+
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: relative;
+    padding-left: 26px;
+    padding-right: 8px;
+    margin-left: 20px;
+
+    cursor: pointer;
+}
+
+.Gif-Prm-Nuevas-Promociones{
+    width: 28px;
+    position: absolute;
+    left: 0;
+    top: 1px;
+    border-radius: 8px;
+    z-index: -1;
+}
+
+.Cont-Gif-Nuevas-Promociones{
+    /* background-color: yellow; */
+    position: absolute;
+    /* width: 60px;
+    height: 60px;
+    border-radius: 500px; */
+    border-radius: 500px;
+    border: 1px solid yellow;
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+    top: 10px;
+    left: 20px;
+    
+}
+
+.Gif-Nuevas-Promociones{
+    width: 26px;
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    z-index: 0;
 }

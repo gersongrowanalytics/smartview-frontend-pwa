@@ -12,6 +12,11 @@ import IconoPersonaBlanco from '../../Assets/Img/Top/personablanco.png'
 import IconoActualizar from '../../Assets/Img/Filtros/actualizar.png'
 import { Tooltip } from 'antd';
 import {Link} from "react-router-dom";
+import CampanaSinRelleno from '../../Assets/Img/Top/Notificación-blue.png'
+import CampanaConRelleno from '../../Assets/Img/Top/Notificación-blue-relleno.png'
+import IconoPorcentaje from '../../Assets/Img/Top/Notificacion-Prom-Activas.png'
+import PromoNueva from '../../Assets/Img/Top/Notificacion-Prom-Nuevas.png'
+import Actualizacion from '../../Assets/Img/Top/Notificacion-Actualización.png'
 
 const Top = () => {
 
@@ -58,7 +63,9 @@ const Top = () => {
     const [mostrarContenidoCanal, setMostrarContenidoCanal] = useState(false)
     const [mostrarContenidoOpcio, setMostrarContenidoOpcio] = useState(false)
     const [mostrarContenidoSopor, setMostrarContenidoSopor] = useState(false)
+    const [mostrarNotificaciones, setmostrarNotificaciones] = useState(false)
 
+    const n = ["1","2","3","4","5","6","7","8"]
     return (
         <div>
             <div className='Contenedor-Top'>
@@ -110,7 +117,86 @@ const Top = () => {
                         setMostrarContenidoSopor(mostrar)
                     }}
                 />
-
+                <div className='Fondo-Notificaciones'>
+                    <div className='Notificacion-Punto'></div>
+                    {
+                        mostrarNotificaciones == false 
+                        ? (
+                            <img 
+                                src={CampanaSinRelleno} 
+                                style={{width:'38px'}}
+                                onClick={() => {setmostrarNotificaciones(!mostrarNotificaciones)}}
+                            />
+                        ) : (
+                            <img 
+                                src={CampanaConRelleno} 
+                                style={{width:'38px'}}
+                                onClick={() => {setmostrarNotificaciones(!mostrarNotificaciones)}}
+                            />
+                        )
+                    }
+                </div>
+                {
+                    mostrarNotificaciones == true
+                    ? (
+                        <div className='Contenedor-Notificaciones-Top'>
+                            <div className='Contenedor-SubTitulo-Notificaciones'>
+                                Nuevas
+                            </div>
+                            <div className='Contenedor-Imagen-Txt'>
+                                <img src={IconoPorcentaje} style={{width: '40px'}}/>
+                                <div className='Contenedor-Txt-Notificaciones'>
+                                    <div>
+                                        Tienes las <span style={{fontWeight:'700'}}>Promociones</span> del mes de <span style={{fontWeight:'700'}}>Abril activas</span>
+                                    </div>
+                                    <div className='Txt-Tiempo-Notificaciones'>
+                                        hace 2 horas
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className='Punto-Azul-Notificacion'></div>
+                                </div>
+                            </div>
+                            <div className='Contenedor-Imagen-Txt'>
+                                <img src={PromoNueva} style={{width: '40px'}}/>
+                                <div className='Contenedor-Txt-Notificaciones'>
+                                    <div>
+                                        Tienes <span style={{fontWeight:'700'}}>Promociones Nuevas</span> en el mes de Abril
+                                    </div>
+                                    <div className='Txt-Tiempo-Notificaciones'>
+                                        hace 2 horas
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className='Punto-Azul-Notificacion'></div>
+                                </div>
+                            </div>
+                            <div className='Contenedor-SubTitulo-Notificaciones'>
+                                Anteriores
+                            </div>
+                            {
+                                n.map((e) => {
+                                    return(
+                                        <div className='Contenedor-Imagen-Txt'>
+                                            <img src={Actualizacion} style={{width: '40px'}}/>
+                                            <div className='Contenedor-Txt-Notificaciones'>
+                                                <div>
+                                                    La plataforma se encuentra actualizando
+                                                </div>
+                                                <div className='Txt-Tiempo-Notificaciones'>
+                                                    hace 18 horas
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className='Punto-Azul-Notificacion'></div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    ) : null 
+                }
                 <div className='Wbold-S14-H19-CFFFFFF Contenedor-Items-Mi-Cuenta-Top' onClick={() => setMostrarCuerpoMiCuenta(!mostrarCuerpoMiCuenta)}>
                     <img src={IconoUsuario} className='Img-Icon-Usuario' />
                     Mi cuenta

@@ -2,6 +2,7 @@ import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
 import {
     OBTENER_VENTAS,
+    OBTENER_DATA_REBATE_BONUS_VENTAS
 } from '../../../Constantes/Ventas/Ventas'
 import {
     APLICANDO_FILTROS_CORRESPONDIENTES,
@@ -51,6 +52,12 @@ export const ObtenerVentasReducer = () =>async (dispatch, getState) => {
                     type: OBTENER_VENTAS,
                     payload: data.datos
                 })
+
+                dispatch({
+                    type: OBTENER_DATA_REBATE_BONUS_VENTAS,
+                    payload: data.rebatebonus
+                })
+
 
             }else{
                 

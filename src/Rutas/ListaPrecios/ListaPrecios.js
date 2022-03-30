@@ -24,7 +24,8 @@ import FiltroLp from '../../Componentes/Rutas/ListaPrecios/FiltroLp';
 import {
     RealizarFiltroReducer,
     SeleccionarCheckFiltrosReducer,
-    TerminarFiltrosReducer
+    TerminarFiltrosReducer,
+    SeleccionarTodoFiltrosLPReducer
 } from '../../Redux/Acciones/ListaPrecios/ArmarFiltrosLp'
 
 const ExcelFile = ReactExport.ExcelFile;
@@ -56,7 +57,13 @@ const ListaPrecios = () => {
         fil_dat_subcategorias,
         fil_dat_formato,
         fil_dat_codsap,
-        fil_dat_material
+        fil_dat_material,
+
+        fil_selectodo_dat_categorias,
+        fil_selectodo_dat_subcategorias,
+        fil_selectodo_dat_formato,
+        fil_selectodo_dat_codsap,
+        fil_selectodo_dat_material
     } = useSelector(({listaPrecios}) => listaPrecios);
 
     let refBtnDescargaListaPrecios = useRef(null)
@@ -123,35 +130,6 @@ const ListaPrecios = () => {
             </div>
 
             <div className='Fila-Btns-Lista-Precios'>
-                {/* {
-                    grupos_disponibles_lista_precios.map((grupo, pos) => {
-                        return (
-                            <Button 
-                                className={
-                                    grupo.seleccionado == true
-                                    ?'Btn-Lista-Precios-Seleccionado W600-S14-H19-CFFFFFF'
-                                    :'Btn-Lista-Precios W600-S14-H19-C1E1E1E'
-                                }
-                                onClick={ async () => {
-                                    await dispatch(ObtenerDataExcelListaPreciosReducer(grupo.treid, pos))
-                                    // refBtnDescargaListaPrecios.current.click()
-                                }}
-                                loading={grupo.cargando}
-                            >
-                                {
-                                    grupo.trenombre == "ZA"
-                                    ?grupo.trenombre+" - Estratégico"
-                                    :grupo.trenombre == "ZB"
-                                        ?grupo.trenombre+" - Táctico"
-                                        :grupo.trenombre == "ZC"
-                                            ?grupo.trenombre+" - Broker"
-                                            :null
-                                }
-                                
-                            </Button>              
-                        )
-                    })
-                } */}
 
                 <div
                     style={{marginLeft:'-20px'}}
@@ -166,6 +144,7 @@ const ListaPrecios = () => {
                     titulo = {"Customer Group"}
                     fil_data = {grupos_disponibles_lista_precios}
                     tamanio = "0"
+                    seleccionartodo = {false}
                 />
 
                 <FiltroLp 
@@ -173,11 +152,14 @@ const ListaPrecios = () => {
                     fil_data = {fil_dat_categorias}
                     tamanio = "160"
                     aceptarFiltro = {() => {
-                        dispatch(RealizarFiltroReducer(""))
-                        // dispatch(TerminarFiltrosReducer())
+                        dispatch(RealizarFiltroReducer("categoria"))
                     }}
                     seleccionarLista = {(posicion, valor) => {
                         dispatch(SeleccionarCheckFiltrosReducer("categoria", posicion, valor))
+                    }}
+                    seleccionartodo = {fil_selectodo_dat_categorias}
+                    funSeleccionarTodo = {(valor) => {
+                        dispatch(SeleccionarTodoFiltrosLPReducer("categoria", valor))
                     }}
                 />
 
@@ -186,10 +168,14 @@ const ListaPrecios = () => {
                     fil_data = {fil_dat_subcategorias}
                     tamanio = "160"
                     aceptarFiltro = {() => {
-                        dispatch(RealizarFiltroReducer(""))
+                        dispatch(RealizarFiltroReducer("subcategoria"))
                     }}
                     seleccionarLista = {(posicion, valor) => {
                         dispatch(SeleccionarCheckFiltrosReducer("subcategoria", posicion, valor))
+                    }}
+                    seleccionartodo = {fil_selectodo_dat_subcategorias}
+                    funSeleccionarTodo = {(valor) => {
+                        dispatch(SeleccionarTodoFiltrosLPReducer("subcategoria", valor))
                     }}
                 />
 
@@ -198,10 +184,14 @@ const ListaPrecios = () => {
                     fil_data = {fil_dat_formato}
                     tamanio = "160"
                     aceptarFiltro = {() => {
-                        dispatch(RealizarFiltroReducer(""))
+                        dispatch(RealizarFiltroReducer("formato"))
                     }}
                     seleccionarLista = {(posicion, valor) => {
                         dispatch(SeleccionarCheckFiltrosReducer("formato", posicion, valor))
+                    }}
+                    seleccionartodo = {fil_selectodo_dat_formato}
+                    funSeleccionarTodo = {(valor) => {
+                        dispatch(SeleccionarTodoFiltrosLPReducer("formato", valor))
                     }}
                 />
 
@@ -210,10 +200,14 @@ const ListaPrecios = () => {
                     fil_data = {fil_dat_codsap}
                     tamanio = "160"
                     aceptarFiltro = {() => {
-                        dispatch(RealizarFiltroReducer(""))
+                        dispatch(RealizarFiltroReducer("codsap"))
                     }}
                     seleccionarLista = {(posicion, valor) => {
                         dispatch(SeleccionarCheckFiltrosReducer("codsap", posicion, valor))
+                    }}
+                    seleccionartodo = {fil_selectodo_dat_codsap}
+                    funSeleccionarTodo = {(valor) => {
+                        dispatch(SeleccionarTodoFiltrosLPReducer("codsap", valor))
                     }}
                 />
 
@@ -222,18 +216,17 @@ const ListaPrecios = () => {
                     fil_data = {fil_dat_material}
                     tamanio = "280"
                     aceptarFiltro = {() => {
-                        dispatch(RealizarFiltroReducer(""))
+                        dispatch(RealizarFiltroReducer("material"))
                     }}
                     seleccionarLista = {(posicion, valor) => {
                         dispatch(SeleccionarCheckFiltrosReducer("material", posicion, valor))
                     }}
+                    seleccionartodo = {fil_selectodo_dat_material}
+                    funSeleccionarTodo = {(valor) => {
+                        dispatch(SeleccionarTodoFiltrosLPReducer("material", valor))
+                    }}
                 />
 
-
-
-                {/* <div className='Btn-Todos-Filtros-Lista-Precios W600-S14-H19-C1E1E1E'>
-                    Todos los filtros
-                </div> */}
             </div>
             
 

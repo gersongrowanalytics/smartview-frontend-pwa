@@ -32,6 +32,7 @@ import {
 import funFormatoDecimal from '../../Funciones/funFormatoDecimal'
 import NumberFormat from 'react-number-format';
 import Contraprestaciones from '../../Componentes/Rutas/Ventas/Contraprestaciones';
+import RebateBonus from '../../Componentes/Rutas/Ventas/RebateBonus';
 
 const Ventas = () => {
 
@@ -50,6 +51,7 @@ const Ventas = () => {
 
     const {
         data_ventas,
+        data_rebate_bonus_ventas
     } = useSelector(({ventas}) => ventas);
 
     const {
@@ -1122,6 +1124,18 @@ const Ventas = () => {
                 canal_seleccionado == "Tradicional"
                 ?null
                 :<Contraprestaciones />
+            }
+
+            {
+                data_rebate_bonus_ventas
+                ?data_rebate_bonus_ventas.categorias
+                ?data_rebate_bonus_ventas.categorias.length > 0
+                ?<RebateBonus
+                    data = {data_rebate_bonus_ventas}
+                />
+                :null
+                :null
+                :null
             }
 
 

@@ -9,7 +9,8 @@ import {
     CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS,
 
     OBTENER_DATA_FILTRO_LISTA_PRECIOS,
-    OBTENER_UNICAMENTE_DATA_LISTA_PRECIOS
+    OBTENER_UNICAMENTE_DATA_LISTA_PRECIOS,
+    SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 
 const INIT_STATE = {
@@ -214,7 +215,14 @@ const INIT_STATE = {
     fil_dat_subcategorias : [],
     fil_dat_formato : [],
     fil_dat_codsap : [],
-    fil_dat_material : []
+    fil_dat_material : [],
+
+    // SELECCIONAR TODO FILTROS
+    fil_selectodo_dat_categorias    : false,
+    fil_selectodo_dat_subcategorias : false,
+    fil_selectodo_dat_formato       : false,
+    fil_selectodo_dat_codsap        : false,
+    fil_selectodo_dat_material      : false,
 };
 
 
@@ -278,6 +286,16 @@ export default (state = INIT_STATE, action) => {
                 fil_dat_formato : action.payload.fil_dat_formato,
                 fil_dat_codsap : action.payload.fil_dat_codsap,
                 fil_dat_material : action.payload.fil_dat_material
+            }
+        }
+        case SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS: {
+            return {
+                ...state,
+                fil_selectodo_dat_categorias    : action.payload.fil_selectodo_dat_categorias,
+                fil_selectodo_dat_subcategorias : action.payload.fil_selectodo_dat_subcategorias,
+                fil_selectodo_dat_formato       : action.payload.fil_selectodo_dat_formato,
+                fil_selectodo_dat_codsap        : action.payload.fil_selectodo_dat_codsap,
+                fil_selectodo_dat_material      : action.payload.fil_selectodo_dat_material,
             }
         }
     default:

@@ -10,7 +10,7 @@ import {
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
-import { ArmarFiltroLpReducer } from "./ArmarFiltrosLp"
+import { ArmarFiltroLpReducer, EstadoSeleccionarTodoFiltrosReducer } from "./ArmarFiltrosLp"
 
 function SortArray(x, y){
     if (x.orden < y.orden) {return -1;}
@@ -121,7 +121,7 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (di
 
             let data_excel_descargar = await LimpiarArrayDescargarExcelReducer(data.excel)
 
-            dispatch({
+            await dispatch({
                 type: OBTENER_DATA_EXCEL_LISTA_PRECIOS,
                 payload : {
                     excel : data_excel_descargar,
@@ -131,7 +131,7 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (di
 
             dataRpta = data_excel_descargar
 
-            dispatch({
+            await dispatch({
                 type: OBTENER_DATA_FILTRO_LISTA_PRECIOS,
                 payload : {
                     fil_dat_categorias    : data.arr_filtro_categorias_lp,
@@ -141,6 +141,8 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (di
                     fil_dat_material      : data.arr_filtro_materiales_lp,
                 }
             })
+
+            dispatch(EstadoSeleccionarTodoFiltrosReducer())
         }
 
     }).catch((error)=> {

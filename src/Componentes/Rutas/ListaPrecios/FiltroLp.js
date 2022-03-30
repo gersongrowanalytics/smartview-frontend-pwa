@@ -9,6 +9,8 @@ const FiltroLp = (props) => {
     const tamanio = props.tamanio
     const aceptarFiltro = props.aceptarFiltro
     const seleccionarLista = props.seleccionarLista
+    const seleccionartodo = props.seleccionartodo
+    const funSeleccionarTodo = props.funSeleccionarTodo
 
     const [mostrarCuerpo, setMostrarCuerpo] = useState(false)
 
@@ -40,8 +42,12 @@ const FiltroLp = (props) => {
                         
                         <div className='Titulo-Filtro-Lp'>
                             <Checkbox 
-                                onChange={() => {}}
+                                onChange={(e) => {
+                                    console.log(e.target.checked)
+                                    funSeleccionarTodo(e.target.checked)
+                                }}
                                 className="Check-Filtro-Lp W400-S12-H16-C1E1E1E-L0015"
+                                checked={seleccionartodo}
                             >Seleccionar Todo</Checkbox>
                         </div>
 
@@ -55,7 +61,7 @@ const FiltroLp = (props) => {
                                         >
                                             <Checkbox 
                                                 onChange={(e) => {
-                                                    console.log(e.target.checked)
+                                                    // console.log(e.target.checked)
                                                     seleccionarLista(pos, e.target.checked)
                                                 }}
                                                 className="Check-Filtro-Lp W400-S12-H16-C1E1E1E-L0015"
@@ -80,7 +86,7 @@ const FiltroLp = (props) => {
                                         >
                                             <Checkbox 
                                                 onChange={(e) => {
-                                                    console.log(e.target.checked)
+                                                    // console.log(e.target.checked)
                                                     seleccionarLista(pos, e.target.checked)
                                                 }}
                                                 className="Check-Filtro-Lp W400-S12-H16-C1E1E1E-L0015"
@@ -102,11 +108,17 @@ const FiltroLp = (props) => {
                                 onClick={() => {
                                     // console.log(fil_data)
                                     aceptarFiltro()
+                                    setMostrarCuerpo(false)
                                 }}
                             >
                                 Aceptar
                             </div>
-                            <div className='Btn-Cancelar-Filtro-Lp W600-S10-H13-C1E1E1E-L0015'>
+                            <div 
+                                className='Btn-Cancelar-Filtro-Lp W600-S10-H13-C1E1E1E-L0015'
+                                onClick={() => {
+                                    setMostrarCuerpo(false)
+                                }}
+                            >
                                 Cancelar
                             </div>
                         </div>

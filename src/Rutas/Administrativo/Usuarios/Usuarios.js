@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Switch,Input, Checkbox } from 'antd'
+import { Row, Col, Switch, Input, Checkbox, Modal } from 'antd'
 import { Link } from "react-router-dom"
 import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
 import Agregar from '../../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
@@ -15,12 +15,13 @@ import Borrar from '../../../Assets/Img/Administrativo/Usuarios/Cortar.png'
 const Usuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
     const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(true)
-    const [estadoUsuario, setestadoUsuario] = useState("Activado")
+    const [estadoUsuario, setestadoUsuario] = useState("Activo")
     const [tipoUsuario, settipoUsuario] = useState("")
     const [tipoUsuarioAbierto, settipoUsuarioAbierto] = useState(false)
     const [busquedaAbierto, setbusquedaAbierto] = useState(false)
     const [paisesAbierto, setpaisesAbierto] = useState(false)
     const [paisesSeleccionados, setpaisesSeleccionados] = useState([])
+    const [abrirModalZona, setabrirModalZona] = useState(false)
 
     const tiposUsuarios = ['Administrador','Gerente de Negocio','Cliente']
     const paises = [
@@ -42,10 +43,10 @@ const Usuarios = () => {
     const cambiarEstado = (valor) => {
         if (valor == true) {
             setestadoBooleanUsuario(true)
-            setestadoUsuario("Activado")
+            setestadoUsuario("Activo")
         }else if (valor == false) {
             setestadoBooleanUsuario(false)
-            setestadoUsuario("Desactivado")
+            setestadoUsuario("Inactivo")
         }
     }
 
@@ -94,7 +95,7 @@ const Usuarios = () => {
         setpaisesSeleccionados(paisesSeleccionados)
     }, [paisesSeleccionados])
     
-    const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14']
+    const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']
 
     return (
         <div className='Contenedor-Administrativo'>
@@ -222,7 +223,7 @@ const Usuarios = () => {
                                     </th>
                                     <th>
                                         <div>
-                                            <span>Tipo de usuario2</span>
+                                            <span>Pais</span>
                                             <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                         </div>
                                     </th>
@@ -255,7 +256,7 @@ const Usuarios = () => {
                                                     Administrador
                                                 </td>
                                                 <td>
-                                                    Administrador2
+                                                    Perú
                                                 </td>
                                                 <td>
                                                     Administrador3
@@ -289,16 +290,20 @@ const Usuarios = () => {
                                         <input/>
                                     </div>
                                     <div className='Campo1-Crear-Adm-Usuario'>
-                                        <span>Correo:</span>
+                                        <span>Correo Corporativo:</span>
                                         <input/>
                                     </div>
                                     <div className='Campo1-Crear-Adm-Usuario'>
-                                        <span>Correo personal:</span>
+                                        <span>Correo Personal:</span>
                                         <input/>
                                     </div>
                                     <div className='Campo1-Crear-Adm-Usuario'>
                                         <span>Contraseña:</span>
                                         <input type='password'/>
+                                    </div>
+                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                        <span>Celular:</span>
+                                        <input/>
                                     </div>
                                 </Col>
                                 <Col xl={12}>
@@ -339,6 +344,13 @@ const Usuarios = () => {
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Fecha Fin:</span>
                                         <input/>
+                                    </div>
+                                    <div className='Campo2-Crear-Adm-Usuario'>   
+                                        <span>Zona:</span>
+                                        <div 
+                                            className='Select-Pais-Adm-Usuario'
+                                            onClick={() => {setabrirModalZona(!abrirModalZona)}}
+                                        ></div>
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>País:</span>
@@ -426,6 +438,82 @@ const Usuarios = () => {
                     </div>
                 </Col>
             </Row>
+            <Modal
+                centered
+                title={null}
+                visible={abrirModalZona}
+                footer={null}
+                closeIcon={<div></div>}
+                width="1063px"
+                height="438px"
+                className='Caja-Modal-Zona'
+                onCancel={() => setabrirModalZona(false)}
+            >
+                <div>
+                    <div className='Titulo-Modal-Zona' style={{paddingLeft:'34px'}}>
+                        <Checkbox style={{marginRight:'7px'}}/>Descargar Todo
+                    </div>
+                    <div style={{paddingLeft:'35px'}}>
+                        <Row>
+                            <Col xl={8}>
+                                <div className='Titulo-Modal-Zona'>
+                                    <Checkbox style={{marginRight:'7px'}}/>Lima Norte & Casco
+                                </div>
+                                {
+                                    a.map((e) => {
+                                        return (
+                                            <div className='Opciones-Modal-Zona'>
+                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Col>
+                            <Col xl={8}>
+                                <div className='Titulo-Modal-Zona'>
+                                    <Checkbox style={{marginRight:'7px'}}/>Lima Sur & Este
+                                </div>
+                                {
+                                    a.map((e) => {
+                                        return (
+                                            <div className='Opciones-Modal-Zona'>
+                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Col>
+                            <Col xl={8}>
+                                <div className='Titulo-Modal-Zona'>
+                                        <Checkbox style={{marginRight:'7px'}}/>Sur
+                                </div>
+                                {
+                                    a.map((e) => {
+                                        return (
+                                            <div className='Opciones-Modal-Zona'>
+                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Col>
+                        </Row>
+                    </div>
+                    <div className='Contenedor-Botones-Modal-Zona'>
+                        <button className='Boton-Aceptar-Eliminar-Modal'>
+                            Aceptar
+                        </button>
+                        <button 
+                            className='Boton-Cancelar-Eliminar-Modal'
+                            onClick={() => {
+                                setabrirModalZona(false)
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

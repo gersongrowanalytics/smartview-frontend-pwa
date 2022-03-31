@@ -43,7 +43,7 @@ const RebateBonus = (props) => {
                                                     src={
                                                         dat.estado == 1
                                                         ?dat.caticonoseleccionado
-                                                        :dat.caticononaranja
+                                                        :dat.caticononegro
                                                     } 
                                                     className="Img-Categoria-Rebate-Bonus"
                                                 />

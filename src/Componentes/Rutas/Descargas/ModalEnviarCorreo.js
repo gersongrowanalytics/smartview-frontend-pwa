@@ -140,7 +140,7 @@ const ModalEnviarCorreo = (props) => {
                                 {"\n\n\n\n\n\n\nEste es un email automático, si tienes cualquier tipo de duda ponte en contacto con nosotros a través de nuestro servicio de atención al cliente al Xxxxxx@xxxx.com.pe, por favor no respondas a este mensaje."}
                             </textarea>
 
-                            <textarea 
+                            {/* <textarea 
                                 className='W400-S11-H15-CA4A3A3-L0015-SYItalic TextArea-Enviar-Correo-Descargar'
                                 name="textarea" rows="6" cols="2"
                                 onChange={(e) => {
@@ -148,7 +148,7 @@ const ModalEnviarCorreo = (props) => {
                                 }}
                             >
                                 {"Este mensaje es estrictamente para el uso de la persona o entidad a quien va dirigida y puede contener información privilegiada, confidencial y de acceso restringido según la legislación aplicable. Si el lector de este mensaje no es el destinatario,  el empleado o agente responsable de entregar este mensaje al destinatario indicado, queda notificado de que cualquier divulgación, distribución o copia de esta comunicación está estrictamente prohibido. Si usted ha recibido esta comunicación por error, le rogamos nos lo notifique inmediatamente a la dirección de respuesta."}   
-                            </textarea>
+                            </textarea> */}
 
                         </div>
 

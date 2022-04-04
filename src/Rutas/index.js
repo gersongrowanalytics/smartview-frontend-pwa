@@ -7,6 +7,7 @@ import Promociones from './Promociones/Promociones'
 import Descargas from './Descargas/Descargas'
 import {obtenerSucursalesReducer} from '../Redux/Acciones/Sucursales'
 import {loginReducer} from '../Redux/Acciones/Auth'
+import {ObtenerNotificacionesUsuarioReducer} from '../Redux/Acciones/Notificaciones/Notificaciones'
 import {useDispatch, useSelector} from "react-redux";
 import BancoImagen from './BancoImagen/BancoImagen';
 import NuevoBancoImagen from './BancoImagen/NuevoBancoImagenes';
@@ -33,6 +34,7 @@ const Rutas = () => {
     useEffect(() => {
 
         disptach(obtenerSucursalesReducer())
+        disptach(ObtenerNotificacionesUsuarioReducer())
         disptach(loginReducer(
             {
                 contrasena : localStorage.getItem('contrasena'),

@@ -2,9 +2,9 @@ import React, {useState, useRef} from 'react';
 import IconoTradicional from '../../Assets/Img/Top/iconoTradicional.png'
 import IconoSoporte from '../../Assets/Img/Top/iconoSoporte.png'
 import IconoSoporteSelect from '../../Assets/Img/Top/iconoSoporteSelect.png'
-import IconoAvion from '../../Assets/Img/Top/avion.png'
+import IconoAvion from '../../Assets/Img/Top/avionnuevo.png'
 import IconoAdministrador from '../../Assets/Img/Top/iconoAdministrador.png'
-import IconoWsp from '../../Assets/Img/Top/wsp.png'
+import IconoWsp from '../../Assets/Img/Top/wspnuevo.png'
 import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -157,7 +157,7 @@ const FiltroSoporteTop = (props) => {
                                         className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAdministrador} 
                                         style={{
                                             width: "12px",
-                                            left: "9px",
+                                            left: "12px",
                                             top: "8px"
                                         }}
                                     />

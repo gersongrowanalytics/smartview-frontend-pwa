@@ -123,7 +123,14 @@ const FiltroCanalTop = (props) => {
                             }}
                         >
                             <div>
-                                <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoTradicional} />
+                                <img 
+                                    className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoTradicional} 
+                                    style={{
+                                        width:'25px',
+                                        left: "5px",
+                                        top: "2px",
+                                    }}
+                                />
                             </div>
                             <div className='Wnormal-S14-H19-C1E1E1E'>Tradicional</div>
                         </div>
@@ -136,7 +143,14 @@ const FiltroCanalTop = (props) => {
                             }}
                         >
                             <div>
-                                <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoModerno} />
+                                <img 
+                                    className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoModerno} 
+                                    style={{
+                                        width:'25px',
+                                        left: "5px",
+                                        top: "2px",
+                                    }}
+                                />
                             </div>
                             <div className='Wnormal-S14-H19-C1E1E1E'>Moderno</div>
                         </div>

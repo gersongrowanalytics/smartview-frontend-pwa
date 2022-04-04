@@ -21,6 +21,7 @@ import Setting from './Setting'
 import ControlArchivos from './ControlArchivos/ControlArchivos'
 import ElementosEnviados from './ElementosEnviados/ElementosEnviados'
 import Rebate from './Rebate/Rebate'
+import Notificaciones from './Notificaciones/Notificaciones'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -44,7 +45,8 @@ const createRootReducer = (history) => combineReducers({
     setting : Setting,
     controlArchivos : ControlArchivos,
     elementosEnviados: ElementosEnviados,
-    rebate : Rebate
+    rebate : Rebate,
+    notificaciones : Notificaciones,
 });
 
 export default createRootReducer

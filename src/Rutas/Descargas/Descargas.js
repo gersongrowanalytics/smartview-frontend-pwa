@@ -245,7 +245,7 @@ const Descargas = () => {
                 }
             </div>
             <div className='Wbold-S26-H35-C1E1E1E' style={{paddingBottom:'25px'}}>Descargar</div>
-            <div style={{position:'relative', marginBottom:'30px'}}>
+            {/* <div style={{position:'relative', marginBottom:'30px'}}>
                 <div>
                     <span className='Wbold-S14-H19-C1E1E1E'>Canal</span> <span className='W600-S14-H19-C1E1E1E'>| Tradicional</span>
                 </div>
@@ -258,7 +258,7 @@ const Descargas = () => {
                 >
                     <CaretDownOutlined />
                 </div>
-            </div>
+            </div> */}
             <div style={{display:'flex', position:'relative', marginBottom:'25px'}}>
                 <div 
                     className={

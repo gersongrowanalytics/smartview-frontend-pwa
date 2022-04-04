@@ -9,6 +9,7 @@ import {
 } from "../../../Constantes/PermisosTypes"
 import {funPermisosObtenidos} from '../../../Funciones/funPermiso'
 import IconoCalendarioPromocion from '../../../Assets/Img/Promociones/calendario.png'
+import IconoRegalo from '../../../Assets/Img/Promociones/regalo.png'
 
 // =========================
 // Slide
@@ -450,9 +451,9 @@ class Slide extends React.Component {
 														<div  style={{width:'100%'}} className="gx-text-center">
 															{
 															cspgratis == 1
-															?<div id="entornoGratis">
+															?<div id="entornoGratis" style={{marginLeft: "-0px"}}>
 																<div>
-																	<img src={require('../../../Assets/Img/Promociones/regalo.png')} alt='' id="imggratis"/>
+																	<img src={IconoRegalo} alt='' id="imggratis"/>
 																	<span id="txtgratis"> Gratis </span>
 																</div>
 																</div>

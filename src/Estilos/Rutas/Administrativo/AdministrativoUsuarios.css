@@ -31,8 +31,8 @@
 
 .Contenedor-Tabla-Adm-Usuarios{
     margin-left: 40px;
-    width: 417px;
-    height: 352px;  
+    width: 456px;
+    height: 394px;  
     overflow-y: scroll;
     overflow-x: scroll;
     border-radius: 8px;
@@ -108,16 +108,15 @@
 
 .Cuerpo-Crear-Adm-Usuario{
     /* width: 773px; */
-    height: 297px;
+    height: 337px;
     border: 1px solid #E5E5E5;
     box-sizing: border-box;
 }
 
-.Campo1-Crear-Adm-Usuario{
+.CampoA-Crear-Adm-Usuario{
     display: flex;
     justify-content: space-between;
-    padding-left: 55px;
-    padding-right: 24px;
+    padding-left: 38px;
     margin-top: 16px;
     font-weight: 600;
     font-size: 12px;
@@ -140,7 +139,7 @@
     padding-left: 20px;
 }
 
-.Campo1-Crear-Adm-Usuario input{
+.CampoA-Crear-Adm-Usuario input{
     width: 208px;
     height: 29px;
     border: 1px solid #C4C4C4;
@@ -417,4 +416,55 @@
     line-height: 16px;
     letter-spacing: -0.015em;
     color: #1E1E1E;
+}
+
+.Caja-Modal-Zona .ant-modal-content{
+    border-radius: 8px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 438px;
+}
+
+.Titulo-Modal-Zona{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    margin-bottom: 10px;
+}
+
+.Opciones-Modal-Zona{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    margin-bottom: 5px;
+}
+
+.Contenedor-Botones-Modal-Zona{
+    display: flex;
+    margin-top: 35px;
+    justify-content: flex-end;
+    padding-right: 20px;
+    margin-bottom: 18px;
+}
+
+.CampoA-Crear-Adm-Usuario .ant-form-item-control-input-content{
+    height: 32px !important;
+}
+
+.CampoA-Crear-Adm-Usuario .ant-form-item{
+    margin-bottom: 0px;
+}
+
+.CampoA-Crear-Adm-Usuario .ant-input:hover{
+    border-color: #C4C4C4;
+}
+
+.CampoA-Crear-Adm-Usuario .ant-input:focus{
+    border-color: #d9d9d9 !important;
 }

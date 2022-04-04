@@ -22,6 +22,7 @@ import ControlArchivos from './ControlArchivos/ControlArchivos'
 import ElementosEnviados from './ElementosEnviados/ElementosEnviados'
 import Rebate from './Rebate/Rebate'
 import Notificaciones from './Notificaciones/Notificaciones'
+import Usuarios from './Administrativo/Usuarios/Usuarios'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -47,6 +48,7 @@ const createRootReducer = (history) => combineReducers({
     elementosEnviados: ElementosEnviados,
     rebate : Rebate,
     notificaciones : Notificaciones,
+    usuarios: Usuarios
 });
 
 export default createRootReducer

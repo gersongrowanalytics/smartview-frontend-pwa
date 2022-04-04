@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import { Row, Col, Switch,Input, Checkbox } from 'antd'
+import React, {useEffect, useState, useRef} from 'react'
+import { Row, Col, Switch, Input, Checkbox, Modal, Form } from 'antd'
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
 import Agregar from '../../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
 import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
@@ -11,17 +12,24 @@ import BanderaPeru from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Per
 import BanderaBolivia from '../../../Assets/Img/Administrativo/Usuarios/Bancedra-Bolivia.png'
 import BanderaChile from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Chile.png'
 import Borrar from '../../../Assets/Img/Administrativo/Usuarios/Cortar.png'
+import {
+    dataUsuarios
+} from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
+import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
+import InputFormulario from '../../../Componentes/Rutas/Administrativo/Usuarios/InputFormulario';
 
 const Usuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
+    const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(true)
-    const [estadoUsuario, setestadoUsuario] = useState("Activado")
+    const [estadoUsuario, setestadoUsuario] = useState("Activo")
     const [tipoUsuario, settipoUsuario] = useState("")
     const [tipoUsuarioAbierto, settipoUsuarioAbierto] = useState(false)
     const [busquedaAbierto, setbusquedaAbierto] = useState(false)
     const [paisesAbierto, setpaisesAbierto] = useState(false)
     const [paisesSeleccionados, setpaisesSeleccionados] = useState([])
-
+    const [abrirModalZona, setabrirModalZona] = useState(false)
+    const refInput = useRef(null)
     const tiposUsuarios = ['Administrador','Gerente de Negocio','Cliente']
     const paises = [
         {
@@ -38,14 +46,49 @@ const Usuarios = () => {
         }
     ]
 
+    const dispatch = useDispatch()
+
+    const { 
+        usuarios,
+        cargandoTablaUsuarios,
+        paginasTotales,
+        paginaActual,
+        indexRegistro
+    } = useSelector(({usuarios}) => usuarios);
+
+    const cargarDatosTabla = async(paginaActualTabla) => {
+        await dispatch(dataUsuarios(paginaActualTabla))
+    }
+
+    const paginaAnterior = (pagina) => {
+        if (cargandoTablaUsuarios == false) {
+            let paginaAnterior = parseFloat(pagina) - 1;
+            if (pagina == "1") {
+                setpaginaActualTabla("1")
+            }else{
+                setpaginaActualTabla(paginaAnterior)
+            }
+        }
+    }
+
+    const paginaSiguiente = (pagina) => {
+        if (cargandoTablaUsuarios == false) {
+            let paginaSiguiente = parseFloat(pagina) + 1;
+            if (pagina == paginasTotales) {
+                setpaginaActualTabla(paginasTotales)
+            }else{
+                setpaginaActualTabla(paginaSiguiente)
+            }
+        }
+    }
 
     const cambiarEstado = (valor) => {
         if (valor == true) {
             setestadoBooleanUsuario(true)
-            setestadoUsuario("Activado")
+            setestadoUsuario("Activo")
         }else if (valor == false) {
             setestadoBooleanUsuario(false)
-            setestadoUsuario("Desactivado")
+            setestadoUsuario("Inactivo")
         }
     }
 
@@ -90,11 +133,19 @@ const Usuarios = () => {
         setpaisesSeleccionados([...paisesSeleccionados])
     }
 
+    const onFinish = (values) => {
+        
+      };
+
     useEffect(() => {
         setpaisesSeleccionados(paisesSeleccionados)
     }, [paisesSeleccionados])
     
-    const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14']
+    useEffect(() => {
+        cargarDatosTabla(paginaActualTabla)
+    },[paginaActualTabla])
+
+    const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']
 
     return (
         <div className='Contenedor-Administrativo'>
@@ -152,8 +203,19 @@ const Usuarios = () => {
                         </Link>
                     </div>
                 </Col>
-                <Col lg={12} xl={12}>
+                <Col lg={12} xl={12}>                   
                     <div className='Contenedor-Btn-Adm-Usuarios'>
+                        <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
+                            <div>1 - {paginasTotales} de {paginaActual}</div>
+                            <LeftOutlined 
+                                style={{marginLeft:'9px'}}
+                                onClick={() => paginaAnterior(paginaActualTabla)}
+                            />
+                            <RightOutlined
+                                style={{marginLeft:'34px'}}
+                                onClick={() => paginaSiguiente(paginaActualTabla)}
+                            />
+                        </div>
                         <div className='Btn-Crear-Administrativo-Usuario'>
                             <span className='Texto-Btn-Adm-Usuarios'>Crear</span>
                             <img src={Agregar} style={{width: '25px'}}></img>
@@ -222,19 +284,55 @@ const Usuarios = () => {
                                     </th>
                                     <th>
                                         <div>
-                                            <span>Tipo de usuario2</span>
+                                            <span>Pais</span>
                                             <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                         </div>
                                     </th>
                                     <th>
                                         <div>
-                                            <span>Tipo de usuario3</span>
+                                            <span>Correo Coorporativo</span>
                                             <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                         </div>
                                     </th>
                                     <th>
                                         <div>
-                                            <span>Tipo de usuario4</span>
+                                            <span>Correo Personal</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Contraseña</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Celular</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Fecha Inicio</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Fecha Fin</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            <span>Zona</span>
+                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        </div>
+                                    </th>   
+                                    <th>
+                                        <div>
+                                            <span>Estado</span>
                                             <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                         </div>
                                     </th>
@@ -242,26 +340,45 @@ const Usuarios = () => {
                             </thead>
                             <tbody>
                                 {
-                                    a.map((elemento) => {
+                                    usuarios.map((usuario,posicion) => {
                                         return (
                                             <tr>
                                                 <td>
-                                                    1
+                                                    {posicion + 1}
                                                 </td>
                                                 <td>
-                                                    Nombre de Persona Apellido
+                                                    {usuario.pernombrecompleto}
                                                 </td>
                                                 <td>
-                                                    Administrador
+                                                    {usuario.tpunombre}
                                                 </td>
                                                 <td>
-                                                    Administrador2
+                                                    {usuario.paises}
                                                 </td>
                                                 <td>
-                                                    Administrador3
+                                                    {usuario.usucorreo}
                                                 </td>
                                                 <td>
-                                                    Administrador4
+                                                    {usuario.usucorreopersonal}
+                                                </td>
+                                                <td>
+                                                    ************************
+                                                </td>
+                                                <td>
+                                                    {usuario.usucelular}
+                                                </td>
+                                                
+                                                <td>
+                                                    {usuario.usufechainicio}
+                                                </td>
+                                                <td>
+                                                    {usuario.usufechafinal}
+                                                </td>
+                                                <td>
+                                                    {usuario.zonnombre}
+                                                </td>
+                                                <td>
+                                                    {usuario.estnombre}
                                                 </td>
                                             </tr>
                                         )
@@ -278,27 +395,49 @@ const Usuarios = () => {
                             <span>Usuario</span>
                         </div>
                         <div className='Cuerpo-Crear-Adm-Usuario'>
+                            <Form
+                                onFinish={onFinish}
+                                autoComplete="off"
+                            >
+
+                            
                             <Row>
                                 <Col xl={12}>
-                                    <div className='Campo1-Crear-Adm-Usuario'>
-                                        <span>Nombre:</span>
-                                        <input/>
+                                    <div className='CampoA-Crear-Adm-Usuario'>
+                                        <span>Nombres:</span>
+                                        <Form.Item name='Nombre'>
+                                            <Input/>
+                                        </Form.Item>
                                     </div>
-                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                    <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Apellidos:</span>
-                                        <input/>
+                                        <Form.Item name='Apellidos'>
+                                            <Input/>
+                                        </Form.Item>
                                     </div>
-                                    <div className='Campo1-Crear-Adm-Usuario'>
-                                        <span>Correo:</span>
-                                        <input/>
+                                    <div className='CampoA-Crear-Adm-Usuario'>
+                                        <span>Correo Coorporativo:</span>
+                                        <Form.Item name='Correo Coorporativo'>
+                                            <Input/>
+                                        </Form.Item>
                                     </div>
-                                    <div className='Campo1-Crear-Adm-Usuario'>
-                                        <span>Correo personal:</span>
-                                        <input/>
+                                    <div className='CampoA-Crear-Adm-Usuario'>
+                                        <span>Correo Personal:</span>
+                                        <Form.Item name='Correo Personal'>
+                                            <Input/>
+                                        </Form.Item>
                                     </div>
-                                    <div className='Campo1-Crear-Adm-Usuario'>
+                                    <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Contraseña:</span>
-                                        <input type='password'/>
+                                        <Form.Item name='Contraseña'>
+                                            <Input/>
+                                        </Form.Item>
+                                    </div>
+                                    <div className='CampoA-Crear-Adm-Usuario'>
+                                        <span>Celular:</span>
+                                        <Form.Item name='Celular'>
+                                            <Input/>
+                                        </Form.Item>
                                     </div>
                                 </Col>
                                 <Col xl={12}>
@@ -330,7 +469,6 @@ const Usuarios = () => {
                                                 }
                                             </div>
                                         </div>
-                                        
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Fecha Inicio:</span>
@@ -339,6 +477,13 @@ const Usuarios = () => {
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Fecha Fin:</span>
                                         <input/>
+                                    </div>
+                                    <div className='Campo2-Crear-Adm-Usuario'>   
+                                        <span>Zona:</span>
+                                        <div 
+                                            className='Select-Pais-Adm-Usuario'
+                                            onClick={() => {setabrirModalZona(!abrirModalZona)}}
+                                        ></div>
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>País:</span>
@@ -367,7 +512,7 @@ const Usuarios = () => {
                                                                 <img src={Borrar} style={{width:'11px'}}></img>
                                                             </div>
                                                             <div className='Contenedor-Cantidad-PreImagen-Pais-Seleccionado'>
-                                                               + { (paisesSeleccionados.length - 2)  } ...
+                                                            + { (paisesSeleccionados.length - 2)  } ...
                                                             </div>
                                                         </div>
                                                     )
@@ -416,16 +561,98 @@ const Usuarios = () => {
                                         </div>
                                     </div>
                                     <div className='Posicion-Btn-Crear-Adm-Usuario'>
-                                        <div className='Btn-Crear-Adm-Usuario'>
-                                            Guardar
-                                        </div>
+                                        <Form.Item>
+                                            <button 
+                                                className='Btn-Crear-Adm-Usuario'
+                                                type='submit'
+                                            >
+                                                Guardar
+                                            </button>
+                                        </Form.Item>
                                     </div>
                                 </Col>
-                            </Row>
+                            </Row> 
+                            </Form>
                         </div>
                     </div>
                 </Col>
             </Row>
+            <Modal
+                centered
+                title={null}
+                visible={abrirModalZona}
+                footer={null}
+                closeIcon={<div></div>}
+                width="1063px"
+                height="438px"
+                className='Caja-Modal-Zona'
+                onCancel={() => setabrirModalZona(false)}
+            >
+                <div>
+                    <div className='Titulo-Modal-Zona' style={{paddingLeft:'34px'}}>
+                        <Checkbox style={{marginRight:'7px'}}/>Descargar Todo
+                    </div>
+                    <div style={{paddingLeft:'35px'}}>
+                        <Row>
+                            <Col xl={8}>
+                                <div className='Titulo-Modal-Zona'>
+                                    <Checkbox style={{marginRight:'7px'}}/>Lima Norte & Casco
+                                </div>
+                                {
+                                    a.map((e) => {
+                                        return (
+                                            <div className='Opciones-Modal-Zona'>
+                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Col>
+                            <Col xl={8}>
+                                <div className='Titulo-Modal-Zona'>
+                                    <Checkbox style={{marginRight:'7px'}}/>Lima Sur & Este
+                                </div>
+                                {
+                                    a.map((e) => {
+                                        return (
+                                            <div className='Opciones-Modal-Zona'>
+                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Col>
+                            <Col xl={8}>
+                                <div className='Titulo-Modal-Zona'>
+                                        <Checkbox style={{marginRight:'7px'}}/>Sur
+                                </div>
+                                {
+                                    a.map((e) => {
+                                        return (
+                                            <div className='Opciones-Modal-Zona'>
+                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Col>
+                        </Row>
+                    </div>
+                    <div className='Contenedor-Botones-Modal-Zona'>
+                        <button className='Boton-Aceptar-Eliminar-Modal'>
+                            Aceptar
+                        </button>
+                        <button 
+                            className='Boton-Cancelar-Eliminar-Modal'
+                            onClick={() => {
+                                setabrirModalZona(false)
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

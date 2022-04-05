@@ -21,6 +21,7 @@ import Setting from './Setting'
 import ControlArchivos from './ControlArchivos/ControlArchivos'
 import ElementosEnviados from './ElementosEnviados/ElementosEnviados'
 import Rebate from './Rebate/Rebate'
+import Notificaciones from './Notificaciones/Notificaciones'
 import Usuarios from './Administrativo/Usuarios/Usuarios'
 
 const createRootReducer = (history) => combineReducers({
@@ -46,6 +47,7 @@ const createRootReducer = (history) => combineReducers({
     controlArchivos : ControlArchivos,
     elementosEnviados: ElementosEnviados,
     rebate : Rebate,
+    notificaciones : Notificaciones,
     usuarios: Usuarios
 });
 

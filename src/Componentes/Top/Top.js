@@ -27,6 +27,11 @@ const Top = () => {
         mostrar_terminos_condiciones_login
     } = useSelector(({auth}) => auth);
 
+    const {
+        not_nuevas_usuario,
+        not_antiguas_usuario
+    } = useSelector(({notificaciones}) => notificaciones);
+
     const newDate = new Date()
     const dia = newDate.getDate();
     let mes = newDate.getMonth() + 1;
@@ -140,56 +145,70 @@ const Top = () => {
                     mostrarNotificaciones == true
                     ? (
                         <div className='Contenedor-Notificaciones-Top'>
-                            <div className='Contenedor-SubTitulo-Notificaciones'>
-                                Nuevas
-                            </div>
-                            <div className='Contenedor-Imagen-Txt'>
-                                <img src={IconoPorcentaje} style={{width: '40px'}}/>
-                                <div className='Contenedor-Txt-Notificaciones'>
-                                    <div>
-                                        Tienes las <span style={{fontWeight:'700'}}>Promociones</span> del mes de <span style={{fontWeight:'700'}}>Abril activas</span>
-                                    </div>
-                                    <div className='Txt-Tiempo-Notificaciones'>
-                                        hace 2 horas
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='Punto-Azul-Notificacion'></div>
-                                </div>
-                            </div>
-                            <div className='Contenedor-Imagen-Txt'>
-                                <img src={PromoNueva} style={{width: '40px'}}/>
-                                <div className='Contenedor-Txt-Notificaciones'>
-                                    <div>
-                                        Tienes <span style={{fontWeight:'700'}}>Promociones Nuevas</span> en el mes de Abril
-                                    </div>
-                                    <div className='Txt-Tiempo-Notificaciones'>
-                                        hace 2 horas
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className='Punto-Azul-Notificacion'></div>
-                                </div>
-                            </div>
-                            <div className='Contenedor-SubTitulo-Notificaciones'>
-                                Anteriores
-                            </div>
                             {
-                                n.map((e) => {
-                                    return(
+                                not_nuevas_usuario.length > 0
+                                ?<div className='Contenedor-SubTitulo-Notificaciones'>
+                                    Nuevas
+                                </div>
+                                :null
+                            }
+
+                            {
+                                not_nuevas_usuario.map((not) => {
+                                    return (
                                         <div className='Contenedor-Imagen-Txt'>
-                                            <img src={Actualizacion} style={{width: '40px'}}/>
+                                            <img src={not.tnoimagen} style={{width: '40px'}}/>
                                             <div className='Contenedor-Txt-Notificaciones'>
-                                                <div>
-                                                    La plataforma se encuentra actualizando
+                                                <div
+                                                    dangerouslySetInnerHTML={{__html : not.tnodescripcion}}
+                                                >
+                                                    {/* Tienes las <span style={{fontWeight:'700'}}>Promociones</span> del mes de <span style={{fontWeight:'700'}}>Abril activas</span> */}
+                                                    
+                                                        
+                                                    
                                                 </div>
                                                 <div className='Txt-Tiempo-Notificaciones'>
-                                                    hace 18 horas
+                                                    {not.textofechacreada}
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div className='Punto-Azul-Notificacion'></div>
+                                            {
+                                                not.nusleyo == true
+                                                ?null
+                                                :<div>
+                                                    <div className='Punto-Azul-Notificacion'></div>
+                                                </div>
+                                            }
+                                        </div>
+                                    )
+                                })
+                            }
+
+                            {
+                                not_antiguas_usuario.length > 0
+                                ?<div className='Contenedor-SubTitulo-Notificaciones'>
+                                    Anteriores
+                                </div>
+                                :null
+                            }
+                            {
+                                not_antiguas_usuario.map((not) => {
+                                    return(
+                                        <div className='Contenedor-Imagen-Txt'>
+                                            <img src={not.tnoimagen} style={{width: '40px'}}/>
+                                            <div className='Contenedor-Txt-Notificaciones'>
+                                                <div dangerouslySetInnerHTML={{__html : not.tnodescripcion}}>
+                                                </div>
+                                                <div className='Txt-Tiempo-Notificaciones'>
+                                                    {not.textofechacreada}
+                                                </div>
                                             </div>
+                                            {
+                                                not.nusleyo == true
+                                                ?null
+                                                :<div>
+                                                    <div className='Punto-Azul-Notificacion'></div>
+                                                </div>
+                                            }
                                         </div>
                                     )
                                 })

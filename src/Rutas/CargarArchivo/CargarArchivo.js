@@ -23,8 +23,8 @@ const CargarArchivo = () => {
         notificaciones_data_carga_archivos
       } = useSelector(({cargaArchivos}) => cargaArchivos);
 
-    const CargarArchivo = async (url, data) => {
-        return await dispatch(CargarArchivoReducer(url, data))
+    const CargarArchivo = async (url, data, tipo = null) => {
+        return await dispatch(CargarArchivoReducer(url, data, tipo))
     }
 
     const [notificacionesAbiertas, setNotificacionesAbiertas] = useState(false)
@@ -71,7 +71,7 @@ const CargarArchivo = () => {
                                     subtitulo     = {"(Efectivo)"}
                                     url           = {'cargarArchivo/ventas/sellout'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
-                                    envcambios = {true}
+                                    // envcambios = {true}
                                 />
                             </Col>
                             <Col xl={6} >
@@ -81,8 +81,8 @@ const CargarArchivo = () => {
                                     // url           = {'modulo/cargaArchivos/prueba-tarjeta'}
                                     url           = {'cargarArchivo/ventas/obejtivos'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
-                                    envcambios = {true}
-                                    archivoExito = {true}
+                                    // envcambios = {true}
+                                    // archivoExito = {true}
                                 />
                             </Col>
                             <Col xl={6}>
@@ -91,7 +91,7 @@ const CargarArchivo = () => {
                                     subtitulo     = {"(Objetivos)"}
                                     url           = {'cargarArchivo/ventas/obejtivossellout'}
                                     CargarArchivo = {(url, data) => CargarArchivo(url, data)}
-                                    cargando = {true}
+                                    // cargando = {true}
                                 />
                             </Col>
 
@@ -102,7 +102,7 @@ const CargarArchivo = () => {
                                     titulo        = {'Mecánica Promocional'}
                                     subtitulo     = {"(Plantilla)"}
                                     url           = {'cargarArchivo/promociones/nuevaspromociones'}
-                                    CargarArchivo = {(url, data) => CargarArchivo(url, data)}
+                                    CargarArchivo = {(url, data) => CargarArchivo(url, data, "Mecanica de Promociones")}
                                 />
                             </Col>
                             <Col xl={6} >

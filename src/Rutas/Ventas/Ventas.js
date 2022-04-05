@@ -1120,11 +1120,11 @@ const Ventas = () => {
             }
 
 
-            {
+            {/* {
                 canal_seleccionado == "Tradicional"
                 ?null
                 :<Contraprestaciones />
-            }
+            } */}
 
             {
                 data_rebate_bonus_ventas

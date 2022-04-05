@@ -27,7 +27,7 @@ const Permisos = () => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={12} xl={12}>
+                <Col lg={13} xl={13}>
                     <div className='Caja-Botones-Administrativo'>
                         <Link to='/administrativo'>
                             <div 
@@ -75,7 +75,7 @@ const Permisos = () => {
                         </Link>
                     </div>
                 </Col>
-                <Col lg={12} xl={12}>
+                <Col lg={11} xl={11}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
                         <div 
                             className='Btn-Crear-Administrativo-Usuario'
@@ -90,7 +90,7 @@ const Permisos = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xl={24}>
+                <Col xl={24} style={{display:'flex',justifyContent:'center'}}>
                     <div className='Contenedor-Tabla-Permisos'>
                         <table className='Tabla-Adm-Permisos'>
                             <thead>

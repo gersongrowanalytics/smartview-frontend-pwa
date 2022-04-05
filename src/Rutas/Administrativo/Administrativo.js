@@ -22,7 +22,7 @@ const Administrativo = () => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={12} xl={12}>
+                <Col lg={13} xl={13}>
                     <div className='Caja-Botones-Administrativo'>
                         <Link to='/administrativo'>
                             <div 
@@ -57,18 +57,20 @@ const Administrativo = () => {
                                 Permisos
                             </div>
                         </Link>
-                        <div 
-                            className={btnSeleccionado == 'CONTROL' 
-                                ? 'Btn-Seleccionado-Administrativo' 
-                                : 'Btn-NoSeleccionado-Administrativo'}
-                            style={{width:'135px'}}
-                            onClick={() => {setBtnSeleccionado("CONTROL")}}
-                        >
-                            Control de archivo
-                        </div>
+                        <Link to='/administrativo/control-archivo'>
+                            <div 
+                                className={btnSeleccionado == 'CONTROL' 
+                                    ? 'Btn-Seleccionado-Administrativo' 
+                                    : 'Btn-NoSeleccionado-Administrativo'}
+                                style={{width:'135px'}}
+                                onClick={() => {setBtnSeleccionado("CONTROL")}}
+                            >
+                                Control de archivo
+                            </div>
+                        </Link>
                     </div>
                 </Col>
-                <Col lg={12} xl={12}>
+                <Col lg={11} xl={11}>
                     <div className='Contenedor-Busqueda-Administrativo'>
                         <input 
                             className='Busqueda-Administrativo'

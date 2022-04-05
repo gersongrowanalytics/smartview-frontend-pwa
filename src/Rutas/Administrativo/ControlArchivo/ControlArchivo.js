@@ -88,7 +88,7 @@ const ControlArchivo = () => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={12} xl={12}>
+                <Col lg={13} xl={13}>
                     <div className='Caja-Botones-Administrativo'>
                         <Link to='/administrativo'>
                             <div 
@@ -136,7 +136,7 @@ const ControlArchivo = () => {
                         </Link>
                     </div>
                 </Col>
-                <Col xl={12}>
+                <Col xl={11}>
                     <div className='Paginacion-Control-Archivo'>
                         <div>1 - {paginasTotales} de {paginaActual}</div>
                         <LeftOutlined 

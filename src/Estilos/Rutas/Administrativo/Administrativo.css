@@ -51,10 +51,33 @@
 
 .Caja-Botones-Administrativo{
     display: flex;
-    justify-content: space-between;
     width: 100%;
     padding-left: 40px;
     padding-top: 11px;
+}
+
+.Caja-Botones-Administrativo .Btn-Seleccionado-Administrativo:nth-child(1){
+    margin-left: 16px;
+}
+
+.Caja-Botones-Administrativo .Btn-NoSeleccionado-Administrativo:nth-child(1){
+    margin-left: 16px;
+}
+
+.Caja-Botones-Administrativo .Btn-Seleccionado-Administrativo:nth-child(2){
+    margin-left: 16px;
+}
+
+.Caja-Botones-Administrativo .Btn-NoSeleccionado-Administrativo:nth-child(2){
+    margin-left: 16px;
+}
+
+.Caja-Botones-Administrativo .Btn-Seleccionado-Administrativo:nth-child(3){
+    margin-left: 18px;
+}
+
+.Caja-Botones-Administrativo .Btn-NoSeleccionado-Administrativo:nth-child(3){
+    margin-left: 18px;
 }
 
 .Contenedor-Busqueda-Administrativo{

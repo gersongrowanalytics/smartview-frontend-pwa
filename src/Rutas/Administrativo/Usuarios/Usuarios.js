@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useRef} from 'react'
-import { Row, Col, Switch, Input, Checkbox, Modal, Form } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Row, Col, Switch, Input, Checkbox, Modal, Form, message, Spin } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
@@ -8,44 +8,30 @@ import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequ
 import Persona from '../../../Assets/Img/Administrativo/Usuarios/Persona-white.png'
 import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
 import { SearchOutlined } from '@ant-design/icons'
-import BanderaPeru from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Perú.png'
-import BanderaBolivia from '../../../Assets/Img/Administrativo/Usuarios/Bancedra-Bolivia.png'
-import BanderaChile from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Chile.png'
 import Borrar from '../../../Assets/Img/Administrativo/Usuarios/Cortar.png'
 import {
-    dataUsuarios
+    dataPaises,
+    dataUsuarios,
+    dataTiposUsuarios,
+    crearUsuario
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
-import InputFormulario from '../../../Componentes/Rutas/Administrativo/Usuarios/InputFormulario';
 
 const Usuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
-    const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(true)
-    const [estadoUsuario, setestadoUsuario] = useState("Activo")
+    const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(false)
+    const [estadoUsuario, setestadoUsuario] = useState("Inactivo")
     const [tipoUsuario, settipoUsuario] = useState("")
+    const [valorFormularioTipoUsuario, setvalorFormularioTipoUsuario] = useState("")
     const [tipoUsuarioAbierto, settipoUsuarioAbierto] = useState(false)
     const [busquedaAbierto, setbusquedaAbierto] = useState(false)
     const [paisesAbierto, setpaisesAbierto] = useState(false)
     const [paisesSeleccionados, setpaisesSeleccionados] = useState([])
     const [abrirModalZona, setabrirModalZona] = useState(false)
-    const refInput = useRef(null)
-    const tiposUsuarios = ['Administrador','Gerente de Negocio','Cliente']
-    const paises = [
-        {
-            bandera: BanderaPeru,
-            nombre: 'Perú'
-        },
-        {
-            bandera: BanderaBolivia,
-            nombre: 'Bolivia'
-        },
-        {
-            bandera: BanderaChile,
-            nombre: 'Chile'
-        }
-    ]
-
+    const [fechaInicio, setfechaInicio] = useState("")
+    const [fechaFinal, setfechaFinal] = useState("")
+    const [form] = Form.useForm();
     const dispatch = useDispatch()
 
     const { 
@@ -53,11 +39,27 @@ const Usuarios = () => {
         cargandoTablaUsuarios,
         paginasTotales,
         paginaActual,
-        indexRegistro
+        indexRegistro,
+        paisesUsuario,
+        tiposUsuarios
     } = useSelector(({usuarios}) => usuarios);
+
+    const {
+        zonas,
+        sucursalesUsuario,
+        gsus
+    } = useSelector(({sucursales}) => sucursales);
+
+    let cantidadZonas = Math.round(zonas.length / 3)
+    let arrayCantidadZonas = []
+    for (let i = 1; i <= cantidadZonas; i++) {
+        arrayCantidadZonas.push(i)
+    }
 
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataUsuarios(paginaActualTabla))
+        await dispatch(dataPaises())
+        await dispatch(dataTiposUsuarios())
     }
 
     const paginaAnterior = (pagina) => {
@@ -92,27 +94,20 @@ const Usuarios = () => {
         }
     }
 
-    const seleccionarTipoUsuario = (posicion) => {
-        if (posicion == '0') {
-            settipoUsuarioAbierto(false)
-            settipoUsuario('Administrador')
-        }else if(posicion == '1'){
-            settipoUsuarioAbierto(false)
-            settipoUsuario('Gerente de Negocio')
-        }else if(posicion == '2'){
-            settipoUsuarioAbierto(false)
-            settipoUsuario('Cliente')
-        }
+    const seleccionarTipoUsuario = (tipo) => {
+        setvalorFormularioTipoUsuario(tipo.tpuid)
+        settipoUsuarioAbierto(false)
+        settipoUsuario(tipo.tpunombre)
     }
 
     const SeleccionarPais = (valor, posicion) => {
-        let paisEliminar = paises[posicion]['nombre']
+        let paisEliminar = paisesUsuario[posicion]['painombre']
         let paisPosicion
         if (valor == true) {
-            setpaisesSeleccionados([...paisesSeleccionados, paises[posicion]]);
+            setpaisesSeleccionados([...paisesSeleccionados, paisesUsuario[posicion]]);
         }else if(valor == false){
             paisesSeleccionados.filter((pais,pos) => {
-                if(pais.nombre == paisEliminar){
+                if(pais.painombre == paisEliminar){
                     return paisPosicion = pos
                 }
             })
@@ -122,7 +117,7 @@ const Usuarios = () => {
     }
 
     const EliminarPaisSeleccionado = (posicion) => {
-        let paisEliminar = paisesSeleccionados[posicion]['nombre']
+        let paisEliminar = paisesSeleccionados[posicion]['painombre']
         let paisPosicion
         paisesSeleccionados.filter((pais,pos) => {
             if(pais.nombre == paisEliminar){
@@ -133,9 +128,44 @@ const Usuarios = () => {
         setpaisesSeleccionados([...paisesSeleccionados])
     }
 
-    const onFinish = (values) => {
+    const onFinish = async(valores) => {
         
-      };
+        let estado
+        if (estadoBooleanUsuario == true) {
+            estado = '1'
+        }else{
+            estado = '2'
+        }
+
+        let usuarioDatos = {
+            'nombre'      : valores['Nombre'],
+            'apellidos'   : valores['Apellidos'],
+            'correo_inst' : valores['Correo Coorporativo'],
+            'correo'      : valores['Correo Personal'],
+            'contrasenia' : valores['Contraseña'],
+            'celular'     : valores['Celular'],
+            'tipo_usuario': valorFormularioTipoUsuario,
+            'fecha_inicio': fechaInicio,
+            'fecha_fin'   : fechaFinal,
+            // 'zonas: zonasSeelccionadas,
+            'paises' : paisesSeleccionados,
+            'estado' : estado,
+        }
+
+        if(await dispatch(crearUsuario(usuarioDatos)) == true){
+            form.resetFields()
+            settipoUsuario("")
+            setfechaInicio("")
+            setfechaFinal("")
+            setpaisesSeleccionados([])
+            cargarDatosTabla(paginaActualTabla)
+            message.success("Usuario creado correctamente")
+        }else{
+            console.log("error")
+        }
+        
+        console.log(usuarioDatos)
+    };
 
     useEffect(() => {
         setpaisesSeleccionados(paisesSeleccionados)
@@ -155,7 +185,7 @@ const Usuarios = () => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={12} xl={12}>
+                <Col lg={13} xl={13}>
                     <div className='Caja-Botones-Administrativo'>
                         <Link to='/administrativo'>
                             <div 
@@ -203,7 +233,7 @@ const Usuarios = () => {
                         </Link>
                     </div>
                 </Col>
-                <Col lg={12} xl={12}>                   
+                <Col lg={11} xl={11}>                   
                     <div className='Contenedor-Btn-Adm-Usuarios'>
                         <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
                             <div>1 - {paginasTotales} de {paginaActual}</div>
@@ -225,168 +255,179 @@ const Usuarios = () => {
             </Row>
             <Row style={{marginTop: '33px'}}>
                 <Col xl={9}>
-                    <div className='Contenedor-Tabla-Adm-Usuarios'>
-                        <table 
-                            className='Tabla-Adm-Usuarios'
-                        >
-                            <thead> 
-                                <tr>
-                                    <th style={{width: '19%'}}>
-                                        <div>
-                                            <span>Item</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div
-                                            style={{cursor:'pointer'}}
-                                            onClick={() => setbusquedaAbierto(!busquedaAbierto)}    
-                                        >
-                                            <span>Nombre y Apellido</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '6px'}}></img>
-                                        </div>
-                                        <div 
-                                            className={ busquedaAbierto == true 
-                                                ? 'Contenedor-Busqueda-Adm-Usuario'
-                                                : 'Contenedor-Busqueda-Adm-Usuario-Ocultar'}
-                                        >
-                                            <div className='Cabecera-Buscar-Adm-Usuario'>
-                                                <Input placeholder="Buscar" suffix={<SearchOutlined />} className='Buscar-Tabla-Adm-Usuario'/>
+                    <Spin
+                        size='large'
+                        spinning={cargandoTablaUsuarios}
+                        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                    >
+                        <div className='Contenedor-Tabla-Adm-Usuarios'>
+                            <table className='Tabla-Adm-Usuarios'>
+                                <thead> 
+                                    <tr>
+                                        <th style={{width: '19%'}}>
+                                            <div>
+                                                <span>Item</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                             </div>
-                                            {
-                                                a.map((e) => {
-                                                    return (
-                                                        <div className='Opcion-Busqueda-Adm-Usuario'>
-                                                            <Checkbox className='Checkbox-Opcion-Adm-Usuario'/>
-                                                            <span className='Txt-Opcion-Busqueda-Adm-Usuario'>
-                                                                Nombre de Persona Apellido
-                                                            </span>
+                                        </th>
+                                        <th>
+                                            <div
+                                                style={{cursor:'pointer'}}
+                                                onClick={() => setbusquedaAbierto(!busquedaAbierto)}    
+                                            >
+                                                <span>Nombre y Apellido</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '6px'}}></img>
+                                            </div>
+                                            <div 
+                                                className={ busquedaAbierto == true 
+                                                    ? 'Contenedor-Busqueda-Adm-Usuario'
+                                                    : 'Contenedor-Busqueda-Adm-Usuario-Ocultar'}
+                                            >
+                                                <div className='Cabecera-Buscar-Adm-Usuario'>
+                                                    <Input placeholder="Buscar" suffix={<SearchOutlined />} className='Buscar-Tabla-Adm-Usuario'/>
+                                                </div>
+                                                {
+                                                    a.map((e) => {
+                                                        return (
+                                                            <div className='Opcion-Busqueda-Adm-Usuario'>
+                                                                <Checkbox className='Checkbox-Opcion-Adm-Usuario'/>
+                                                                <span className='Txt-Opcion-Busqueda-Adm-Usuario'>
+                                                                    Nombre de Persona Apellido
+                                                                </span>
+                                                                
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                                <div className='Footer-Buscar-Adm-Usuario'>
+                                                    <div className='Btn-Opcion-Busqueda-Adm-Usuario' style={{marginRight:'5px'}}>
+                                                        Aceptar
+                                                    </div>
+                                                    <div className='Btn-Opcion-Busqueda-Adm-Usuario'>
+                                                        Cancelar
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Tipo de usuario</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Pais</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Correo Coorporativo</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Correo Personal</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Contraseña</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Celular</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Fecha Inicio</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Fecha Fin</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Zona</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>   
+                                        <th>
+                                            <div>
+                                                <span>Estado</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        usuarios.map((usuario,posicion) => {
+                                            return (
+                                                <tr>
+                                                    <td>
+                                                        {indexRegistro + posicion}
+                                                    </td>
+                                                    <td>
+                                                        {usuario.pernombrecompleto}
+                                                    </td>
+                                                    <td>
+                                                        {usuario.tpunombre}
+                                                    </td>
+                                                    <td>
+                                                        {
+                                                            usuario.paises.map((pais) => {
+                                                                return (
+                                                                    <img src={pais.paiiconomas} className='Banderas-lista' />
+                                                                )
+                                                            })
                                                             
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                            <div className='Footer-Buscar-Adm-Usuario'>
-                                                <div className='Btn-Opcion-Busqueda-Adm-Usuario' style={{marginRight:'5px'}}>
-                                                    Aceptar
-                                                </div>
-                                                <div className='Btn-Opcion-Busqueda-Adm-Usuario'>
-                                                    Cancelar
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Tipo de usuario</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Pais</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Correo Coorporativo</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Correo Personal</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Contraseña</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Celular</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Fecha Inicio</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Fecha Fin</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Zona</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>   
-                                    <th>
-                                        <div>
-                                            <span>Estado</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    usuarios.map((usuario,posicion) => {
-                                        return (
-                                            <tr>
-                                                <td>
-                                                    {posicion + 1}
-                                                </td>
-                                                <td>
-                                                    {usuario.pernombrecompleto}
-                                                </td>
-                                                <td>
-                                                    {usuario.tpunombre}
-                                                </td>
-                                                <td>
-                                                    {usuario.paises}
-                                                </td>
-                                                <td>
-                                                    {usuario.usucorreo}
-                                                </td>
-                                                <td>
-                                                    {usuario.usucorreopersonal}
-                                                </td>
-                                                <td>
-                                                    ************************
-                                                </td>
-                                                <td>
-                                                    {usuario.usucelular}
-                                                </td>
-                                                
-                                                <td>
-                                                    {usuario.usufechainicio}
-                                                </td>
-                                                <td>
-                                                    {usuario.usufechafinal}
-                                                </td>
-                                                <td>
-                                                    {usuario.zonnombre}
-                                                </td>
-                                                <td>
-                                                    {usuario.estnombre}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        {usuario.usucorreo}
+                                                    </td>
+                                                    <td>
+                                                        {usuario.usucorreopersonal}
+                                                    </td>
+                                                    <td>
+                                                        ************************
+                                                    </td>
+                                                    <td>
+                                                        {usuario.usucelular}
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        {usuario.usufechainicio}
+                                                    </td>
+                                                    <td>
+                                                        {usuario.usufechafinal}
+                                                    </td>
+                                                    <td>
+                                                        {usuario.zonnombre}
+                                                    </td>
+                                                    <td>
+                                                        {usuario.estnombre}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </Spin>
                 </Col>
                 <Col xl={15}>
                     <div style={{marginLeft: '15px', marginRight: '58px'}}>
@@ -398,9 +439,8 @@ const Usuarios = () => {
                             <Form
                                 onFinish={onFinish}
                                 autoComplete="off"
+                                form={form}
                             >
-
-                            
                             <Row>
                                 <Col xl={12}>
                                     <div className='CampoA-Crear-Adm-Usuario'>
@@ -418,25 +458,25 @@ const Usuarios = () => {
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Correo Coorporativo:</span>
                                         <Form.Item name='Correo Coorporativo'>
-                                            <Input/>
+                                            <Input type={'email'}/>
                                         </Form.Item>
                                     </div>
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Correo Personal:</span>
                                         <Form.Item name='Correo Personal'>
-                                            <Input/>
+                                            <Input type={'email'}/>
                                         </Form.Item>
                                     </div>
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Contraseña:</span>
                                         <Form.Item name='Contraseña'>
-                                            <Input/>
+                                            <Input type='password'/>
                                         </Form.Item>
                                     </div>
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Celular:</span>
                                         <Form.Item name='Celular'>
-                                            <Input/>
+                                            <Input />
                                         </Form.Item>
                                     </div>
                                 </Col>
@@ -452,17 +492,17 @@ const Usuarios = () => {
                                                 <img src={FlechaAbajoNegro} style={{width: '28px'}}></img>
                                             </div>
                                             <div className={tipoUsuarioAbierto == true 
-                                                            ? 'Contenedor-Opciones-Select-Adm-Usuario'
-                                                            : 'Contenedor-Opciones-Select-Adm-Usuario-Oculto'}
+                                                            ? 'Contenedor-Opciones-Select-Tipos-Usuarios-Adm-Usuario'
+                                                            : 'Contenedor-Opciones-Select-Tipos-Usuarios-Adm-Usuario-Oculto'}
                                             >
                                                 {
                                                     tiposUsuarios.map((tipo, posicion) => {
                                                         return (
                                                             <div 
                                                                 className='Opciones-Select-Adm-Usuario'
-                                                                onClick={() => seleccionarTipoUsuario(posicion)}    
+                                                                onClick={() => seleccionarTipoUsuario(tipo)}    
                                                             >
-                                                                {tipo}
+                                                                {tipo.tpunombre}
                                                             </div>   
                                                         )
                                                     })
@@ -472,11 +512,17 @@ const Usuarios = () => {
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Fecha Inicio:</span>
-                                        <input/>
+                                        <input 
+                                            type={'date'} 
+                                            onChange={(e) => setfechaInicio(e.target.value)}
+                                        />
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Fecha Fin:</span>
-                                        <input/>
+                                        <input 
+                                            type={'date'} 
+                                            onChange={(e) => setfechaFinal(e.target.value)}
+                                        />
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Zona:</span>
@@ -497,18 +543,18 @@ const Usuarios = () => {
                                                         paisesSeleccionados.map((pais, pos) => {
                                                             return (
                                                                 <div className='Contenedor-PreImagen-Pais-Seleccionado'>
-                                                                    <span>{pais.nombre}</span>
-                                                                    <img src={pais.bandera} style={{width:'32px'}}></img>
+                                                                    <span>{pais.painombre}</span>
+                                                                    <img src={pais.paiicono} style={{width:'32px'}}></img>
                                                                     <img src={Borrar} style={{width:'11px'}} 
-                                                                    onClick={() => EliminarPaisSeleccionado(pos)}></img>
+                                                                        onClick={() => EliminarPaisSeleccionado(pos)}/>
                                                                 </div>
                                                             )
                                                         })
                                                     ) : (
                                                         <div style={{display: 'flex'}}>
                                                             <div className='Contenedor-PreImagen-Pais-Seleccionado'>
-                                                                <span>{paisesSeleccionados[0]['nombre']}</span>
-                                                                <img src={paisesSeleccionados[0]['bandera']} style={{width:'32px'}}></img>
+                                                                <span>{paisesSeleccionados[0]['painombre']}</span>
+                                                                <img src={paisesSeleccionados[0]['paiiconomas']} style={{width:'32px'}}></img>
                                                                 <img src={Borrar} style={{width:'11px'}}></img>
                                                             </div>
                                                             <div className='Contenedor-Cantidad-PreImagen-Pais-Seleccionado'>
@@ -528,7 +574,7 @@ const Usuarios = () => {
                                                             : 'Contenedor-Opciones-Select-Adm-Usuario-Oculto'}
                                             >
                                                 {
-                                                    paises.map((pais, posicion) => {
+                                                    paisesUsuario.map((pais, posicion) => {
                                                         return (
                                                             <div 
                                                                 className='Opciones-Select-Adm-Usuario'
@@ -538,8 +584,8 @@ const Usuarios = () => {
                                                                     onChange={(e) => {SeleccionarPais(e.target.checked, posicion)}}
                                                                 />
                                                                 <div className='Contenedor-Nombre-Img'>
-                                                                    <span style={{marginLeft:'10px'}}>{pais.nombre}</span>
-                                                                    <img src={pais.bandera} style={{width:'32px'}}></img>
+                                                                    <span style={{marginLeft:'10px'}}>{pais.painombre}</span>
+                                                                    <img src={pais.paiicono} style={{width:'32px'}}></img>
                                                                 </div>
                                                             </div>   
                                                         )
@@ -593,50 +639,41 @@ const Usuarios = () => {
                         <Checkbox style={{marginRight:'7px'}}/>Descargar Todo
                     </div>
                     <div style={{paddingLeft:'35px'}}>
-                        <Row>
-                            <Col xl={8}>
-                                <div className='Titulo-Modal-Zona'>
-                                    <Checkbox style={{marginRight:'7px'}}/>Lima Norte & Casco
-                                </div>
-                                {
-                                    a.map((e) => {
-                                        return (
-                                            <div className='Opciones-Modal-Zona'>
-                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </Col>
-                            <Col xl={8}>
-                                <div className='Titulo-Modal-Zona'>
-                                    <Checkbox style={{marginRight:'7px'}}/>Lima Sur & Este
-                                </div>
-                                {
-                                    a.map((e) => {
-                                        return (
-                                            <div className='Opciones-Modal-Zona'>
-                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </Col>
-                            <Col xl={8}>
-                                <div className='Titulo-Modal-Zona'>
-                                        <Checkbox style={{marginRight:'7px'}}/>Sur
-                                </div>
-                                {
-                                    a.map((e) => {
-                                        return (
-                                            <div className='Opciones-Modal-Zona'>
-                                                <Checkbox style={{marginRight:'7px'}}/>CORP. CODEFIR
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </Col>
-                        </Row>
+                        {
+                            arrayCantidadZonas.map((e,pos) => {
+                                return(
+                                    <Row>
+                                        {
+                                            zonas.map((zona, posicion) => {
+                                                if ( (posicion+1) >= (1+3*(pos))  && (posicion+1) <= (3*(pos+1)) ) {
+                                                    return (
+                                                        <Col xl={8}>
+                                                            <div className='Titulo-Modal-Zona'>
+                                                                <Checkbox style={{marginRight:'7px'}}/>{zona.zonnombre}
+                                                                {/* <div>
+                                                                {zona.gsus}
+                                                                </div> */}
+                                                            </div>
+                                                            {
+                                                                gsus.map((eG,posG) => {
+                                                                    if (eG.gsuid == zona.gsus[0] || eG.gsuid == zona.gsus[1]) {
+                                                                        return (
+                                                                            <div className='Opciones-Modal-Zona'>
+                                                                                <Checkbox style={{marginRight:'7px'}}/>{eG.gsunombre}
+                                                                            </div>
+                                                                        )
+                                                                    }
+                                                                })
+                                                            }
+                                                        </Col>
+                                                    )
+                                                }                                           
+                                            })
+                                        }
+                                    </Row>
+                                )
+                            })
+                        }
                     </div>
                     <div className='Contenedor-Botones-Modal-Zona'>
                         <button className='Boton-Aceptar-Eliminar-Modal'>

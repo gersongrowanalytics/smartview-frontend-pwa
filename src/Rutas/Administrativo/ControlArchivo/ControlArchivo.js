@@ -151,7 +151,7 @@ const ControlArchivo = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xl={24}>
+                <Col xl={24} style={{display:'flex',justifyContent:'center'}}>
                     <Spin
                         size='large'
                         spinning={cargandoTablaControlArchivos}
@@ -161,7 +161,7 @@ const ControlArchivo = () => {
                             <table className='Tabla-Adm-Control'>
                                 <thead>
                                     <tr>
-                                        <th style={{width:'9%'}}>
+                                        <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Item</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
@@ -173,37 +173,37 @@ const ControlArchivo = () => {
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width:'16%'}}>
                                             <div>
                                                 <span>Tipo</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
                                             </div>
                                         </th>
-                                        <th>
-                                            <div>
+                                        <th style={{width:'22%'}}>
+                                            <div className='Contenedor-Cabecera-Nombre-Apellido'>
                                                 <span>Nombre Apellido</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Pais</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Estado</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Fecha</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Hora</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
@@ -220,19 +220,19 @@ const ControlArchivo = () => {
                                                         {itemTabla(posicion)}
                                                     </td>
                                                     <td>
-                                                        <div>
+                                                        <div className='Contenedor-Columna-Archivo'>
                                                             <img src={Excel} style={{width:'30px'}}/>
-                                                            <span>{archivo.carnombrearchivo}</span>
+                                                            <div className='Texto-Columna-Archivo'>{archivo.carnombrearchivo}</div>
                                                         </div>
                                                     </td>
-                                                    <td>
+                                                    <td style={{textAlign:'initial'}}>
                                                         {archivo.tcanombre}
                                                     </td>
-                                                    <td>
-                                                        Nombre Apellido Apellido
+                                                    <td style={{textAlign:'initial'}}>
+                                                        <div className='Texto-Columna-Nombre'>Nombre Apellido Apellido</div>
                                                     </td>
                                                     <td>
-                                                        <div>
+                                                        <div >
                                                             <span>PE</span>
                                                             <img src={BanderaPeru} style={{width:'30px', marginLeft:'4px'}}/>
                                                         </div>

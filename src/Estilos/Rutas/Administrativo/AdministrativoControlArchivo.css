@@ -1,6 +1,6 @@
 .Contenedor-Tabla-Control{
     margin-top: 33px;
-    margin-left: 96px;
+    /* margin-left: 96px; */
     width: 1148px;
     border-radius: 8px;
 }
@@ -62,4 +62,31 @@
 
 .Tabla-Adm-Control tbody tr td:nth-child(2){
     text-align: start !important;
+}
+
+.Texto-Columna-Archivo{
+    width: 190px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.Contenedor-Columna-Archivo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.Contenedor-Cabecera-Archivo{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Texto-Columna-Nombre{
+    width: 250px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

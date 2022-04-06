@@ -31,15 +31,15 @@
 
 .Contenedor-Tabla-Adm-Usuarios{
     margin-left: 40px;
-    width: 456px;
+    width: 490px;
     height: 394px;  
     overflow-y: scroll;
-    overflow-x: scroll;
+    overflow-x: hidden;
     border-radius: 8px;
 }
 
 .Tabla-Adm-Usuarios{
-    width: 402px;
+    width: 100%;
     text-align : center;
     overflow:scroll;
     white-space: nowrap;
@@ -230,6 +230,7 @@
     display: flex;
     justify-content: space-between;
     padding-left: 19px;
+    padding-right: 5px;
     align-items: center;
 }
 
@@ -242,7 +243,7 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    padding-left: 5px;
+    padding-right: 5px;
     align-items: center;
 }
 
@@ -489,4 +490,35 @@ input[type="date"]:focus { outline: 0; }
 
 .Banderas-lista{
     width: 28px;
+}
+
+.Banderas-Lista-Hover{
+    display: none;
+    padding: 5px;
+    position: absolute;
+    background: #FFFFFF;
+    border-radius: 7px;
+    margin-top: -27px;
+    box-shadow: 0px 4px 4px #E5E5E5;
+    right: 70px;
+}
+
+.Lista-Banderas img:hover ~ .Banderas-Lista-Hover{
+    display: block;
+}
+
+.Text-Nombre-Completo{
+    width: 152px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.Txt-PreSeleccion{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #C4C4C4;
 }

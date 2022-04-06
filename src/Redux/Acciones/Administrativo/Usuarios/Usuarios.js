@@ -6,6 +6,7 @@ import {
     OBTENER_DATOS_PAISES,
     OBTENER_DATOS_TIPOS_USUARIOS
 } from '../../../../Constantes/Administrativo/Usuarios/Usuarios'
+import { message } from 'antd'
 
 export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
 
@@ -153,15 +154,15 @@ export const crearUsuario = (usuario) => async ( dispatch, getState ) => {
     .then( async res => {
         await dispatch(estadoRequestReducer(res.status))
         return res.json()
-        // console.log(res.json())
     })
     .then( async data => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
-            if(data){
+            if(data.respuesta == true){
                 respuesta = true
+                message.success(data.mensaje)
             }else{
-
+                message.error(data.mensaje)
             }
         }
     }).catch((error)=> {

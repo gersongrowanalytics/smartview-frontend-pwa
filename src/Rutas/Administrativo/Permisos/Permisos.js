@@ -190,12 +190,12 @@ const Permisos = () => {
                                         categoriaSeleccionada != "0" ? (
                                             <div className='Texto-Categoria-Seleccionada-Modal'>{categoriaSeleccionada}</div>
                                         ) : (
-                                            <input className='Modal-Input-Select-Crear-Permiso' placeholder='Escribir aqui'/>
+                                            <input className='Modal-Input-Select-Crear-Permiso' placeholder='Escribir aquí'/>
                                         )
                                     }
                                     <img 
                                         src={FlechaAbajoNegro} 
-                                        style={{width: '28px', cursor:'pointer'}}
+                                        style={{width: '20px', cursor:'pointer'}}
                                         onClick={()=>setmostrarSelectCategoria(!mostrarSelectCategoria)}
                                     />
                                 </div>
@@ -224,7 +224,7 @@ const Permisos = () => {
                                 <span className='Campo-Texto-Modal-Crear-Permiso'>Permiso:</span>
                             </Col>
                             <Col xl={17}>
-                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aqui'/>
+                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aquí'/>
                             </Col>
                         </Row>
                         <Row style={{marginTop: '16px'}}>
@@ -232,7 +232,7 @@ const Permisos = () => {
                                 <span className='Campo-Texto-Modal-Crear-Permiso'>Slug:</span>
                             </Col>
                             <Col xl={17}>
-                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aqui'/>
+                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aquí'/>
                             </Col>
                         </Row>
                         <Row style={{marginTop: '16px', marginBottom:'21px'}}>
@@ -240,7 +240,7 @@ const Permisos = () => {
                                 <span className='Campo-Texto-Modal-Crear-Permiso'>Ruta:</span>
                             </Col>
                             <Col xl={17} >
-                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aqui'/>
+                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aquí'/>
                             </Col>
                         </Row>
                     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Switch, Input, Checkbox, Modal, Form, message, Spin } from 'antd'
+import { Row, Col, Switch, Input, Checkbox, Modal, Form, Spin } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
@@ -158,8 +158,9 @@ const Usuarios = () => {
             setfechaInicio("")
             setfechaFinal("")
             setpaisesSeleccionados([])
+            setestadoUsuario("Inactivo")
+            setestadoBooleanUsuario(false)
             cargarDatosTabla(paginaActualTabla)
-            message.success("Usuario creado correctamente")
         }else{
             console.log("error")
         }
@@ -264,13 +265,13 @@ const Usuarios = () => {
                             <table className='Tabla-Adm-Usuarios'>
                                 <thead> 
                                     <tr>
-                                        <th style={{width: '19%'}}>
+                                        <th style={{width: '10%'}}>
                                             <div>
                                                 <span>Item</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width: '40%'}}>
                                             <div
                                                 style={{cursor:'pointer'}}
                                                 onClick={() => setbusquedaAbierto(!busquedaAbierto)}    
@@ -309,63 +310,15 @@ const Usuarios = () => {
                                                 </div>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width: '20%'}}>
                                             <div>
                                                 <span>Tipo de usuario</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                             </div>
                                         </th>
-                                        <th>
+                                        <th style={{width: '30%'}}>
                                             <div>
                                                 <span>Pais</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div>
-                                                <span>Correo Coorporativo</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div>
-                                                <span>Correo Personal</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div>
-                                                <span>Contraseña</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div>
-                                                <span>Celular</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div>
-                                                <span>Fecha Inicio</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div>
-                                                <span>Fecha Fin</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div>
-                                                <span>Zona</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>   
-                                        <th>
-                                            <div>
-                                                <span>Estado</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
                                             </div>
                                         </th>
@@ -379,46 +332,45 @@ const Usuarios = () => {
                                                     <td>
                                                         {indexRegistro + posicion}
                                                     </td>
-                                                    <td>
-                                                        {usuario.pernombrecompleto}
+                                                    <td style={{textAlign:'initial'}}>
+                                                        <div className='Text-Nombre-Completo' title={usuario.pernombrecompleto}>{usuario.pernombrecompleto}</div>
                                                     </td>
-                                                    <td>
+                                                    <td style={{textAlign:'initial'}}>
                                                         {usuario.tpunombre}
                                                     </td>
                                                     <td>
                                                         {
-                                                            usuario.paises.map((pais) => {
-                                                                return (
-                                                                    <img src={pais.paiiconomas} className='Banderas-lista' />
-                                                                )
-                                                            })
-                                                            
+                                                            ( usuario.paises.length >= '2' ) ? (
+                                                                <div className='Lista-Banderas'>
+                                                                    {
+                                                                        usuario.paises.map((pais, posicion) => {
+                                                                            if (posicion == '0') {
+                                                                                return (
+                                                                                    <img src={pais.paiiconomas} className='Banderas-lista' />
+                                                                                )
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                    <div className='Banderas-Lista-Hover'>
+                                                                        {
+                                                                            usuario.paises.map((pais, posicion) => {
+                                                                                if (posicion >= '1') {
+                                                                                    return (
+                                                                                        <img src={pais.paiicono} className='Banderas-lista' />
+                                                                                    )
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                usuario.paises.map((pais) => {
+                                                                    return (
+                                                                        <img src={pais.paiicono} className='Banderas-lista' />
+                                                                    )
+                                                                })
+                                                            )                                                            
                                                         }
-                                                    </td>
-                                                    <td>
-                                                        {usuario.usucorreo}
-                                                    </td>
-                                                    <td>
-                                                        {usuario.usucorreopersonal}
-                                                    </td>
-                                                    <td>
-                                                        ************************
-                                                    </td>
-                                                    <td>
-                                                        {usuario.usucelular}
-                                                    </td>
-                                                    
-                                                    <td>
-                                                        {usuario.usufechainicio}
-                                                    </td>
-                                                    <td>
-                                                        {usuario.usufechafinal}
-                                                    </td>
-                                                    <td>
-                                                        {usuario.zonnombre}
-                                                    </td>
-                                                    <td>
-                                                        {usuario.estnombre}
                                                     </td>
                                                 </tr>
                                             )
@@ -430,7 +382,7 @@ const Usuarios = () => {
                     </Spin>
                 </Col>
                 <Col xl={15}>
-                    <div style={{marginLeft: '15px', marginRight: '58px'}}>
+                    <div style={{marginLeft: '40px', marginRight: '58px'}}>
                         <div className='Cabecera-Crear-Adm-Usuario'>
                             <img src={Persona} style={{width:'33px', marginRight: '8px'}}></img>
                             <span>Usuario</span>
@@ -464,13 +416,13 @@ const Usuarios = () => {
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Correo Personal:</span>
                                         <Form.Item name='Correo Personal'>
-                                            <Input type={'email'}/>
+                                            <Input type={'email'} autoComplete={'off'}/>
                                         </Form.Item>
                                     </div>
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Contraseña:</span>
                                         <Form.Item name='Contraseña'>
-                                            <Input type='password'/>
+                                            <Input type='password' autoComplete={'new-password'}/>
                                         </Form.Item>
                                     </div>
                                     <div className='CampoA-Crear-Adm-Usuario'>
@@ -486,10 +438,19 @@ const Usuarios = () => {
                                         <div>
                                             <div 
                                                 className='Select-Adm-Usuario'
-                                                onClick={() => settipoUsuarioAbierto(!tipoUsuarioAbierto)}
+                                                onClick={() => {
+                                                    settipoUsuarioAbierto(!tipoUsuarioAbierto)
+                                                    setpaisesAbierto(false)
+                                                }}
                                             >
-                                                <span>{tipoUsuario}</span>
-                                                <img src={FlechaAbajoNegro} style={{width: '28px'}}></img>
+                                                {
+                                                    tipoUsuario.length == '0' ? (
+                                                        <div className='Txt-PreSeleccion'>Seleccionar aquí</div>
+                                                    ) : (
+                                                        <div>{tipoUsuario}</div>
+                                                    )
+                                                }
+                                                <img src={FlechaAbajoNegro} style={{width: '20px'}}></img>
                                             </div>
                                             <div className={tipoUsuarioAbierto == true 
                                                             ? 'Contenedor-Opciones-Select-Tipos-Usuarios-Adm-Usuario'
@@ -536,38 +497,45 @@ const Usuarios = () => {
                                         <div>
                                             <div 
                                                 className='Select-Pais-Adm-Usuario'
-                                                onClick={() => setpaisesAbierto(!paisesAbierto)}
+                                                onClick={() => {
+                                                    setpaisesAbierto(!paisesAbierto)
+                                                    settipoUsuarioAbierto(false)
+                                                }}
                                             >
                                                 {
-                                                    paisesSeleccionados.length <= '2' ? (
-                                                        paisesSeleccionados.map((pais, pos) => {
-                                                            return (
-                                                                <div className='Contenedor-PreImagen-Pais-Seleccionado'>
-                                                                    <span>{pais.painombre}</span>
-                                                                    <img src={pais.paiicono} style={{width:'32px'}}></img>
-                                                                    <img src={Borrar} style={{width:'11px'}} 
-                                                                        onClick={() => EliminarPaisSeleccionado(pos)}/>
-                                                                </div>
-                                                            )
-                                                        })
+                                                    paisesSeleccionados.length == '0' ? (
+                                                        <div className='Txt-PreSeleccion' style={{paddingLeft:'19px'}}>Seleccionar aquí</div>
                                                     ) : (
-                                                        <div style={{display: 'flex'}}>
-                                                            <div className='Contenedor-PreImagen-Pais-Seleccionado'>
-                                                                <span>{paisesSeleccionados[0]['painombre']}</span>
-                                                                <img src={paisesSeleccionados[0]['paiiconomas']} style={{width:'32px'}}></img>
-                                                                <img src={Borrar} style={{width:'11px'}}></img>
+                                                        paisesSeleccionados.length <= '2' ? (
+                                                            paisesSeleccionados.map((pais, pos) => {
+                                                                return (
+                                                                    <div className='Contenedor-PreImagen-Pais-Seleccionado'>
+                                                                        <span>{pais.painombre}</span>
+                                                                        <img src={pais.paiicono} style={{width:'32px'}}></img>
+                                                                        <img src={Borrar} style={{width:'11px'}} 
+                                                                            onClick={() => EliminarPaisSeleccionado(pos)}/>
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        ) : (
+                                                            <div style={{display: 'flex'}}>
+                                                                <div className='Contenedor-PreImagen-Pais-Seleccionado'>
+                                                                    <span>{paisesSeleccionados[0]['painombre']}</span>
+                                                                    <img src={paisesSeleccionados[0]['paiiconomas']} style={{width:'32px'}}></img>
+                                                                    <img src={Borrar} style={{width:'11px'}}></img>
+                                                                </div>
+                                                                <div className='Contenedor-Cantidad-PreImagen-Pais-Seleccionado'>
+                                                                + { (paisesSeleccionados.length - 2)  } ...
+                                                                </div>
                                                             </div>
-                                                            <div className='Contenedor-Cantidad-PreImagen-Pais-Seleccionado'>
-                                                            + { (paisesSeleccionados.length - 2)  } ...
-                                                            </div>
-                                                        </div>
+                                                        )
                                                     )
                                                 }
                                                 <img 
                                                     src={FlechaAbajoNegro} 
-                                                    style={{width: '28px'}}
-                                                    className={paisesSeleccionados.length == '0' ? 'Espaciado-Preseleccionar-Pais':''}
-                                                ></img>
+                                                    style={{width: '20px'}}
+                                                    // className={paisesSeleccionados.length == '0' ? 'Espaciado-Preseleccionar-Pais':''}
+                                                />
                                             </div>
                                             <div className={paisesAbierto == true 
                                                             ? 'Contenedor-Opciones-Select-Adm-Usuario'
@@ -585,7 +553,7 @@ const Usuarios = () => {
                                                                 />
                                                                 <div className='Contenedor-Nombre-Img'>
                                                                     <span style={{marginLeft:'10px'}}>{pais.painombre}</span>
-                                                                    <img src={pais.paiicono} style={{width:'32px'}}></img>
+                                                                    <img src={pais.paiicono} style={{width:'20px'}}></img>
                                                                 </div>
                                                             </div>   
                                                         )

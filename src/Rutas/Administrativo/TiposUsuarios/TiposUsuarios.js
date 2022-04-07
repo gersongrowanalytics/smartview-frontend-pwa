@@ -53,7 +53,7 @@ const TiposUsuarios = () => {
         setcanalTradicional(valor)
     }
     const SeleccionarSubCanal = (valor, posicion) => {
-        
+
         if (posicion == '0') {
             setcanalModerno(valor)
         }else if (posicion == '1') {

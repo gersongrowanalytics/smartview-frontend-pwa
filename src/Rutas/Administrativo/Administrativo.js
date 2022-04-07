@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Row, Col } from 'antd'
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
 import '../../Estilos/Rutas/Administrativo/Administrativo.css'
 import Adm from '../../Assets/Img/Administrativo/TiposUsuarios/Administrador.png'
 import Cliente from '../../Assets/Img/Administrativo/TiposUsuarios/Cliente.png'
@@ -9,10 +10,32 @@ import Gerente from '../../Assets/Img/Administrativo/TiposUsuarios/Grente.png'
 import Otro from '../../Assets/Img/Administrativo/TiposUsuarios/Otro-two.png'
 import Otro2 from '../../Assets/Img/Administrativo/TiposUsuarios/Otro.png'
 import Agregar from '../../Assets/Img/Administrativo/TiposUsuarios/agregar.png'
-
+import {
+    dataTiposUsuarios
+} from '../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 const Administrativo = () => {
 
+    const dispatch = useDispatch()
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
+
+    const { 
+        tiposUsuarios
+    } = useSelector(({usuarios}) => usuarios);
+    console.log(tiposUsuarios)
+
+    let cantidadFilas = Math.round(tiposUsuarios.length / 4)
+    let arrayCantidadFilas = []
+    for (let i = 1; i <= cantidadFilas; i++) {
+        arrayCantidadFilas.push(i)
+    }
+    console.log(arrayCantidadFilas)
+    const cargarDatos = async() => {
+        await dispatch(dataTiposUsuarios())
+    }
+
+    useEffect(() => {
+        cargarDatos()
+    },[])
 
     return (
         <div className='Contenedor-Administrativo'>
@@ -79,110 +102,44 @@ const Administrativo = () => {
                     </div>
                 </Col>
             </Row>
-            <Row style={{paddingLeft: '40px', paddingTop: '27px', paddingRight: '60px'}}>
-                <Col xl={4}>
-                    <div className='flip-card'>
-                        <div className='flip-card-inner'>
-                            <div className='flip-card-front'>
-                                <img src={Adm} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Administrador</div>
-                                <div className='Texto2-Card-Perfil'>Ver Perfil</div>
-                            </div>
-                            <div className='flip-card-back'>
-                                <Link 
-                                    to={{
-                                        pathname: '/administrativo/perfil',
-                                    }}
-                                >
-                                    <img src={Agregar} className='Imagen2-Perfil'/>
-                                </Link>
-                                <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
-                                <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-                <Col xl={4}>
-                    <div className='flip-card'>
-                        <div className='flip-card-inner'>
-                            <div className='flip-card-front'>
-                                <img src={Cliente} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Cliente</div>
-                                <div className='Texto2-Card-Perfil'>Ver Perfil</div>
-                            </div>
-                            <div className='flip-card-back'>
-                                <img src={Agregar} className='Imagen2-Perfil'/>
-                                <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
-                                <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-                <Col xl={4}>
-                    <div className='flip-card'>
-                        <div className='flip-card-inner'>
-                            <div className='flip-card-front'>
-                                <img src={Ejecutivo} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Ejecutivo</div>
-                                <div className='Texto2-Card-Perfil'>Ver Perfil</div>
-                            </div>
-                            <div className='flip-card-back'>
-                                <img src={Agregar} className='Imagen2-Perfil'/>
-                                <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
-                                <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-                <Col xl={4}>
-                    <div className='flip-card'>
-                        <div className='flip-card-inner'>
-                            <div className='flip-card-front'>
-                                <img src={Gerente} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Gerente</div>
-                                <div className='Texto2-Card-Perfil'>Ver Perfil</div>
-                            </div>
-                            <div className='flip-card-back'>
-                                <img src={Agregar} className='Imagen2-Perfil'/>
-                                <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
-                                <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-                <Col xl={4}>
-                    <div className='flip-card'>
-                        <div className='flip-card-inner'>
-                            <div className='flip-card-front'>
-                                <img src={Otro} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Otro</div>
-                                <div className='Texto2-Card-Perfil'>Ver Perfil</div>
-                            </div>
-                            <div className='flip-card-back'>
-                                <img src={Agregar} className='Imagen2-Perfil'/>
-                                <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
-                                <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-                <Col xl={4}>
-                    <div className='flip-card'>
-                        <div className='flip-card-inner'>
-                            <div className='flip-card-front'>
-                                <img src={Otro2} className='Imagen-Perfil'></img>
-                                <div className='Texto-Card-Perfil'>Otro</div>
-                                <div className='Texto2-Card-Perfil'>Ver Perfil</div>
-                            </div>
-                            <div className='flip-card-back'>
-                                <img src={Agregar} className='Imagen2-Perfil'/>
-                                <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
-                                <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
+            {
+                arrayCantidadFilas.map((fila, pos) => {
+                    return(
+                        <Row style={{paddingLeft: '40px', paddingTop: '27px', paddingRight: '60px'}}>
+                            {
+                                tiposUsuarios.map((tipo, posicion) => {
+                                    if ((posicion+1) >= (1+6*(pos))  && (posicion+1) <= (6*(pos+1)) ) {
+                                        return (
+                                            <Col xl={4}>
+                                                <div className='flip-card'>
+                                                    <div className='flip-card-inner'>
+                                                        <div className='flip-card-front'>
+                                                            <img src={Adm} className='Imagen-Perfil'></img>
+                                                            <div className='Texto-Card-Perfil'>{tipo.tpunombre}</div>
+                                                            <div className='Texto2-Card-Perfil'>Ver Perfil</div>
+                                                        </div>
+                                                        <div className='flip-card-back'>
+                                                            <Link 
+                                                                to={{
+                                                                    pathname: '/administrativo/perfil',
+                                                                }}
+                                                            >
+                                                                <img src={Agregar} className='Imagen2-Perfil'/>
+                                                            </Link>
+                                                            <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
+                                                            <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Col>
+                                        )
+                                    }
+                                })
+                            }
+                        </Row>
+                    )
+                })
+            }
         </div>
     )
 }

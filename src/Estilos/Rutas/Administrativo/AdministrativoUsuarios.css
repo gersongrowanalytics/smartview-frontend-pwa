@@ -167,6 +167,20 @@
     color: #1E1E1E;
 }
 
+.Fecha-Input{
+    width: 208px;
+    height: 29px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 0px 19px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
 .Btn-Crear-Adm-Usuario{
     width: 66px;
     height: 24px;

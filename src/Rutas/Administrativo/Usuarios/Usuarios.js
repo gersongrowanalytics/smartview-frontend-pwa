@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Switch, Input, Checkbox, Modal, Form, Spin } from 'antd'
+import { Row, Col, Switch, Input, Checkbox, Modal, Form, Spin, DatePicker } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
@@ -18,6 +18,7 @@ import {
 import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
 
 const Usuarios = () => {
+    const dispatch = useDispatch()
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     const [estadoBooleanUsuario, setestadoBooleanUsuario] = useState(false)
@@ -31,9 +32,9 @@ const Usuarios = () => {
     const [abrirModalZona, setabrirModalZona] = useState(false)
     const [fechaInicio, setfechaInicio] = useState("")
     const [fechaFinal, setfechaFinal] = useState("")
-    const [form] = Form.useForm()
-    const dispatch = useDispatch()
 
+    const [form] = Form.useForm()
+    
     const { 
         usuarios,
         cargandoTablaUsuarios,
@@ -128,7 +129,7 @@ const Usuarios = () => {
         setpaisesSeleccionados([...paisesSeleccionados])
     }
 
-    const crearUsuario = () => {
+    const crearAdmUsuario = () => {
         form.resetFields()
         settipoUsuario("")
         setfechaInicio("")
@@ -148,17 +149,20 @@ const Usuarios = () => {
             Contraseña: usuario.usucontrasena,
             Celular: usuario.usucelular
         });
+        // let dateInput = document.getElementById('fecha_final');
+        // console.log(dateInput.value)
+        // dateInput.value = usuario.usufechafinal;
+        // setvalorFormularioTipoUsuario(usuario.)
+        setfechaFinal(usuario.usufechafinal)
     }
 
     const onFinish = async(valores) => {
-        
         let estado
         if (estadoBooleanUsuario == true) {
             estado = '1'
         }else{
             estado = '2'
         }
-
         let usuarioDatos = {
             'nombre'      : valores['Nombre'],
             'apellidos'   : valores['Apellidos'],
@@ -175,12 +179,11 @@ const Usuarios = () => {
         }
 
         if(await dispatch(crearUsuario(usuarioDatos)) == true){
-            crearUsuario()
+            crearAdmUsuario()
             cargarDatosTabla(paginaActualTabla)
         }else{
             console.log("error")
         }
-        
         console.log(usuarioDatos)
     };
 
@@ -265,7 +268,7 @@ const Usuarios = () => {
                         </div>
                         <div 
                             className='Btn-Crear-Administrativo-Usuario'
-                            onClick={() => crearUsuario()}    
+                            onClick={() => crearAdmUsuario()}    
                         >
                             <span className='Texto-Btn-Adm-Usuarios'>Crear</span>
                             <img src={Agregar} style={{width: '25px'}}></img>
@@ -501,13 +504,36 @@ const Usuarios = () => {
                                             type={'date'} 
                                             onChange={(e) => setfechaInicio(e.target.value)}
                                         />
+                                        {/* <Form.Item name='fecha_inicio'>
+                                            <DatePicker onChange={(e) => {console.log(e._d)}} placeholder='Seleccionar fecha'
+                                                className='Fecha-Input'/>
+                                        </Form.Item> */}
+                                        
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Fecha Fin:</span>
                                         <input 
-                                            type={'date'} 
-                                            onChange={(e) => setfechaFinal(e.target.value)}
-                                        />
+                                                    id='fecha_final'
+                                                    type={'date'}
+                                                    onChange={(e) => setfechaFinal(new Date(e.target.value))}
+                                                />
+                                        {/* {
+                                            fechaFinal == null ? (
+                                                <input 
+                                                    id='fecha_final'
+                                                    type={'date'}
+                                                    onChange={(e) => setfechaFinal(new Date(e.target.value))}
+                                                />
+                                            ) : (
+                                                <input 
+                                                    id='fecha_final'
+                                                    type={'date'} 
+                                                    value={fechaFinal}
+                                                    onChange={(e) => setfechaFinal(new Date(e.target.value))}
+                                                />
+                                            )
+                                        } */}
+                                        
                                     </div>
                                     <div className='Campo2-Crear-Adm-Usuario'>   
                                         <span>Zona:</span>

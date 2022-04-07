@@ -2,15 +2,15 @@
     margin-top: 33px;
     width: 1133px;
     height: 352px;  
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
     border-radius: 8px;
 }
 
 .Tabla-Adm-Permisos{
     width: 100%;
     text-align : center;
-    overflow:scroll;
+    /* overflow:scroll; */
     white-space: nowrap;
     position: relative;
     z-index: 0;
@@ -50,6 +50,14 @@
     text-align: center;
     letter-spacing: -0.015em;
     color: #1E1E1E;
+}
+
+.Tabla-Adm-Permisos thead tr th:first-child{
+    border-top-left-radius: 8px;
+}
+
+.Tabla-Adm-Permisos thead tr th:last-child{
+    border-top-right-radius: 8px;
 }
 
 .Caja-Modal-CrearPermiso .ant-modal-content{
@@ -157,4 +165,10 @@
     line-height: 16px;
     letter-spacing: -0.015em;
     width: 147px;
+}
+
+.Texto-Columna{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

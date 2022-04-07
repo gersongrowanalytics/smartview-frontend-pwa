@@ -31,7 +31,7 @@ const Usuarios = () => {
     const [abrirModalZona, setabrirModalZona] = useState(false)
     const [fechaInicio, setfechaInicio] = useState("")
     const [fechaFinal, setfechaFinal] = useState("")
-    const [form] = Form.useForm();
+    const [form] = Form.useForm()
     const dispatch = useDispatch()
 
     const { 
@@ -128,6 +128,28 @@ const Usuarios = () => {
         setpaisesSeleccionados([...paisesSeleccionados])
     }
 
+    const crearUsuario = () => {
+        form.resetFields()
+        settipoUsuario("")
+        setfechaInicio("")
+        setfechaFinal("")
+        setpaisesSeleccionados([])
+        setestadoUsuario("Inactivo")
+        setestadoBooleanUsuario(false)
+    }
+
+    const editarUsuario = (usuario) => {
+        console.log(usuario)
+        form.setFieldsValue({
+            Nombre: usuario.pernombre,
+            Apellidos: usuario.perapellidopaterno,
+            CorreoPersonal: usuario.usucorreopersonal,
+            CorreoCoorporativo: usuario.usucorreo,
+            Contraseña: usuario.usucontrasena,
+            Celular: usuario.usucelular
+        });
+    }
+
     const onFinish = async(valores) => {
         
         let estado
@@ -140,8 +162,8 @@ const Usuarios = () => {
         let usuarioDatos = {
             'nombre'      : valores['Nombre'],
             'apellidos'   : valores['Apellidos'],
-            'correo_inst' : valores['Correo Coorporativo'],
-            'correo'      : valores['Correo Personal'],
+            'correo_inst' : valores['CorreoCoorporativo'],
+            'correo'      : valores['CorreoPersonal'],
             'contrasenia' : valores['Contraseña'],
             'celular'     : valores['Celular'],
             'tipo_usuario': valorFormularioTipoUsuario,
@@ -153,13 +175,7 @@ const Usuarios = () => {
         }
 
         if(await dispatch(crearUsuario(usuarioDatos)) == true){
-            form.resetFields()
-            settipoUsuario("")
-            setfechaInicio("")
-            setfechaFinal("")
-            setpaisesSeleccionados([])
-            setestadoUsuario("Inactivo")
-            setestadoBooleanUsuario(false)
+            crearUsuario()
             cargarDatosTabla(paginaActualTabla)
         }else{
             console.log("error")
@@ -247,7 +263,10 @@ const Usuarios = () => {
                                 onClick={() => paginaSiguiente(paginaActualTabla)}
                             />
                         </div>
-                        <div className='Btn-Crear-Administrativo-Usuario'>
+                        <div 
+                            className='Btn-Crear-Administrativo-Usuario'
+                            onClick={() => crearUsuario()}    
+                        >
                             <span className='Texto-Btn-Adm-Usuarios'>Crear</span>
                             <img src={Agregar} style={{width: '25px'}}></img>
                         </div>
@@ -328,12 +347,17 @@ const Usuarios = () => {
                                     {
                                         usuarios.map((usuario,posicion) => {
                                             return (
-                                                <tr>
+                                                <tr onClick={() => editarUsuario(usuario)}>
                                                     <td>
                                                         {indexRegistro + posicion}
                                                     </td>
                                                     <td style={{textAlign:'initial'}}>
-                                                        <div className='Text-Nombre-Completo' title={usuario.pernombrecompleto}>{usuario.pernombrecompleto}</div>
+                                                        <div 
+                                                            className='Text-Nombre-Completo' 
+                                                            title={usuario.pernombrecompleto}
+                                                        >
+                                                            {usuario.pernombrecompleto}
+                                                        </div>
                                                     </td>
                                                     <td style={{textAlign:'initial'}}>
                                                         {usuario.tpunombre}
@@ -409,13 +433,13 @@ const Usuarios = () => {
                                     </div>
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Correo Coorporativo:</span>
-                                        <Form.Item name='Correo Coorporativo'>
+                                        <Form.Item name='CorreoCoorporativo'>
                                             <Input type={'email'}/>
                                         </Form.Item>
                                     </div>
                                     <div className='CampoA-Crear-Adm-Usuario'>
                                         <span>Correo Personal:</span>
-                                        <Form.Item name='Correo Personal'>
+                                        <Form.Item name='CorreoPersonal'>
                                             <Input type={'email'} autoComplete={'off'}/>
                                         </Form.Item>
                                     </div>

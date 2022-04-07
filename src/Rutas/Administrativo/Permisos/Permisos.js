@@ -1,23 +1,81 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Modal } from 'antd'
+import { Row, Col, Modal, Spin } from 'antd'
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoPermisos.css'
 import Agregar from '../../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
 import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
 import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
+import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons'
+import {
+    dataPermisos
+} from '../../../Redux/Acciones/Administrativo/Permisos/Permisos'
 
 const Permisos = () => {
 
+    const dispatch = useDispatch()
     const [btnSeleccionado, setBtnSeleccionado] = useState("PERMISOS")
+    const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     const [mostrarModalCrear, setmostrarModalCrear] = useState(false)
     const [mostrarSelectCategoria, setmostrarSelectCategoria] = useState(false)
     const [categoriaSeleccionada, setcategoriaSeleccionada] = useState("0")
     const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14']
+    const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Set','Oct','Nov','Dic']
     
+    const { 
+        permisos,
+        cargandoTablaPermisos,
+        paginasTotales,
+        paginaActual,
+        indexRegistro
+    } = useSelector(({permisos}) => permisos);
+
     const SeleccionarCategoria = (valor) => {
         setcategoriaSeleccionada(valor)
         setmostrarSelectCategoria(false)
     }
+
+    const paginaAnterior = (pagina) => {
+        if (cargandoTablaPermisos == false) {
+            let paginaAnterior = parseFloat(pagina) - 1;
+            if (pagina == "1") {
+                setpaginaActualTabla("1")
+            }else{
+                setpaginaActualTabla(paginaAnterior)
+            }
+        }
+    }
+
+    const paginaSiguiente = (pagina) => {
+        if (cargandoTablaPermisos == false) {
+            let paginaSiguiente = parseFloat(pagina) + 1;
+            if (pagina == paginasTotales) {
+                setpaginaActualTabla(paginasTotales)
+            }else{
+                setpaginaActualTabla(paginaSiguiente)
+            }
+        }
+    }
+
+    const obtenerFecha = (fechaSinFormato) => {
+        if (fechaSinFormato == null) {
+            return "NaN"
+        }else{
+            let date = new Date(fechaSinFormato)
+            let dia = date.getDay() + 1
+            let mes = date.getMonth() 
+            let anio = date.getFullYear()
+            return dia+" "+meses[mes]+" "+anio
+        }
+    }
+
+    const cargarDatosTabla = async(paginaActualTabla) => {
+        await dispatch(dataPermisos(paginaActualTabla))
+    }
+
+    useEffect(() => {
+        cargarDatosTabla(paginaActualTabla)
+    },[paginaActualTabla])
 
     return (
         <div className='Contenedor-Administrativo'>
@@ -77,6 +135,17 @@ const Permisos = () => {
                 </Col>
                 <Col lg={11} xl={11}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
+                        <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
+                            <div>1 - {paginasTotales} de {paginaActual}</div>
+                            <LeftOutlined 
+                                style={{marginLeft:'9px'}}
+                                onClick={() => paginaAnterior(paginaActualTabla)}
+                            />
+                            <RightOutlined
+                                style={{marginLeft:'34px'}}
+                                onClick={() => paginaSiguiente(paginaActualTabla)}
+                            />
+                        </div>
                         <div 
                             className='Btn-Crear-Administrativo-Usuario'
                             onClick={() => {
@@ -91,77 +160,101 @@ const Permisos = () => {
             </Row>
             <Row>
                 <Col xl={24} style={{display:'flex',justifyContent:'center'}}>
-                    <div className='Contenedor-Tabla-Permisos'>
-                        <table className='Tabla-Adm-Permisos'>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <div>
-                                            <span>Item</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Categoría</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Permiso</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Slug</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Ruta</span>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            <span>Fecha de Creación</span>
-                                            <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    a.map((e) => {
-                                        return(
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    Canal
-                                                </td>
-                                                <td>
-                                                    Canal Moderno
-                                                </td>
-                                                <td>
-                                                    usuario.mostrar.permisos
-                                                </td>
-                                                <td>
-                                                    Admistrador/Admistrador/Admistrador
-                                                </td>
-                                                <td>
-                                                    31 Mar 2022
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                    <Spin
+                        size='large'
+                        spinning={cargandoTablaPermisos}
+                        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                    >
+                        <div className='Contenedor-Tabla-Permisos'>
+                            <table className='Tabla-Adm-Permisos'>
+                                <thead>
+                                    <tr>
+                                        <th style={{width:'10%'}}>
+                                            <div>
+                                                <span>Item</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                            </div>
+                                        </th>
+                                        <th  style={{width:'15%'}}>
+                                            <div>
+                                                <span>Categoría</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                            </div>
+                                        </th>
+                                        <th style={{width:'20%'}}>
+                                            <div>
+                                                <span>Permiso</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                            </div>
+                                        </th>
+                                        <th style={{width:'20%'}}>
+                                            <div>
+                                                <span>Slug</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                            </div>
+                                        </th>
+                                        <th style={{width:'20%'}}>
+                                            <div>
+                                                <span>Ruta</span>
+                                            </div>
+                                        </th>
+                                        <th style={{width:'15%'}}>
+                                            <div>
+                                                <span>Fecha de Creación</span>
+                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        permisos.map((permiso, posicion) => {
+                                            return(
+                                                <tr>
+                                                    <td>
+                                                        {indexRegistro + posicion}
+                                                    </td>
+                                                    <td>
+                                                        Canal
+                                                    </td>
+                                                    <td>
+                                                        <div 
+                                                            className='Texto-Columna' 
+                                                            style={{width: '220px'}}
+                                                            title={permiso.pemnombre}
+                                                        >
+                                                            {permiso.pemnombre}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div 
+                                                            className='Texto-Columna' 
+                                                            style={{width: '220px'}}
+                                                            title={permiso.pemslug}
+                                                        >
+                                                            {permiso.pemslug}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div 
+                                                            className='Texto-Columna' 
+                                                            style={{width: '220px'}}
+                                                            title={permiso.pemruta}
+                                                        >
+                                                            {permiso.pemruta}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {obtenerFecha(permiso.created_at)}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </Spin>
                 </Col>
             </Row>
             <Modal

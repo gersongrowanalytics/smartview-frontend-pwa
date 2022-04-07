@@ -29,13 +29,13 @@
 }
 
 .Responsive-Tabla {
-    padding-left: 40px;
-    padding-right: 69px;
+    /* padding-left: 40px;
+    padding-right: 69px; */
 }
 
 .Contenedor-Elementos-Enviados{
     margin-top: 100px;
-    margin-bottom: 50px;
+    margin-bottom: 250px;
 }
 
 .Responsive-Tabla table tbody tr {
@@ -331,4 +331,25 @@
     padding-top: 7px;
     padding-bottom: 7px;
     padding-right: 5px;
+}
+
+.Celda-Lista-Sucursales-Elementos-Enviados:hover .Contenedor-Lista-Sucursales-Elementos-Enviados{
+    display:block;
+}
+
+.Contenedor-Lista-Sucursales-Elementos-Enviados{
+    display: none;
+    position: absolute;
+    width: 350px;
+    /* height: 100px; */
+    background-color: white;
+    box-shadow: 0 4px 4px rgb(216 223 233 / 92%);
+    border-radius: 15px;
+    right: -340px;
+    top: 0;
+    z-index: 1;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 }

@@ -125,7 +125,7 @@ const FiltroSoporteTop = (props) => {
                     ?<div 
                         className='Cuerpo-Item-Filtro-Top'
                         style={{
-                            left: "0px",
+                            left: "-5px",
                             zIndex:'6',
                             width:'170px'
                         }}
@@ -142,7 +142,7 @@ const FiltroSoporteTop = (props) => {
                             <div className='Wnormal-S14-H19-C1E1E1E'>Enviar SMS Wsp</div>
                         </div>
                         
-                        <Link to="/elementos-enviados">
+                        <Link to="/elementos-enviados/actual">
                             <div className='Fila-Cuerpo-Item-Filtro-Top'>
                                 <div>
                                     <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAvion} />

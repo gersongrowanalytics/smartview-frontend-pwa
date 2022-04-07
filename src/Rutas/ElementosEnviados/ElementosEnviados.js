@@ -89,7 +89,11 @@ const ElementosEnviados = () => {
                     </div>
                 </Col>
             </Row>
-            <Row>   
+            <Row
+                style={{
+                    textAlign: "-webkit-center"
+                }}
+            >   
                 <Col xl={24} style={{paddingTop: '25px'}}>
                     <div className='Responsive-Tabla'>
                         <table>

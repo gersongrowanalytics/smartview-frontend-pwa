@@ -12,7 +12,10 @@ const FiltroLp = (props) => {
     const seleccionartodo = props.seleccionartodo
     const funSeleccionarTodo = props.funSeleccionarTodo
 
-    const [mostrarCuerpo, setMostrarCuerpo] = useState(false)
+    const mostrarCuerpo = props.mostrarCuerpo
+    const setMostrarCuerpo = props.setMostrarCuerpo
+
+    // const [mostrarCuerpo, setMostrarCuerpo] = useState(false)
 
     return (
         <div
@@ -53,33 +56,33 @@ const FiltroLp = (props) => {
 
                         <div className='Cuerpo-Filtro-Lp'>
                             {
-                                titulo == "Customer Group"
-                                ?fil_data.map((grupo, pos) => {
-                                    return(
-                                        <div
-                                            style={{marginBottom:'5px'}}
-                                        >
-                                            <Checkbox 
-                                                onChange={(e) => {
-                                                    // console.log(e.target.checked)
-                                                    seleccionarLista(pos, e.target.checked)
-                                                }}
-                                                className="Check-Filtro-Lp W400-S12-H16-C1E1E1E-L0015"
-                                            >
-                                                {
-                                                    grupo.trenombre == "ZA"
-                                                    ?grupo.trenombre+" - Estratégico"
-                                                    :grupo.trenombre == "ZB"
-                                                        ?grupo.trenombre+" - Táctico"
-                                                        :grupo.trenombre == "ZC"
-                                                            ?grupo.trenombre+" - Broker"
-                                                            :null
-                                                }
-                                            </Checkbox>
-                                        </div>
-                                    )
-                                })
-                                :fil_data.map((data, pos) => {
+                                // titulo == "Customer Group"
+                                // ?fil_data.map((grupo, pos) => {
+                                //     return(
+                                //         <div
+                                //             style={{marginBottom:'5px'}}
+                                //         >
+                                //             <Checkbox 
+                                //                 onChange={(e) => {
+                                //                     seleccionarLista(pos, e.target.checked)
+                                //                 }}
+                                //                 className="Check-Filtro-Lp W400-S12-H16-C1E1E1E-L0015"
+                                //             >
+                                //                 {
+                                //                     grupo.trenombre == "ZA"
+                                //                     ?grupo.trenombre+" - Estratégico"
+                                //                     :grupo.trenombre == "ZB"
+                                //                         ?grupo.trenombre+" - Táctico"
+                                //                         :grupo.trenombre == "ZC"
+                                //                             ?grupo.trenombre+" - Broker"
+                                //                             :null
+                                //                 }
+                                //             </Checkbox>
+                                //         </div>
+                                //     )
+                                // })
+                                // :fil_data.map((data, pos) => {
+                                fil_data.map((data, pos) => {
                                     return(
                                         <div
                                             style={{marginBottom:'5px'}}

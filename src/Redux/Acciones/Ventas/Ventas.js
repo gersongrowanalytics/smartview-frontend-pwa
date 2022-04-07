@@ -129,7 +129,7 @@ export const ObtenerVentasReducer = () =>async (dispatch, getState) => {
 
 }
 
-export const ObtenerVentasAcumuladaReducer = () => async (dispatch, getState) => {
+export const ObtenerVentasAcumuladaReducer = (eliminandoFiltro = false) => async (dispatch, getState) => {
 
     const mesSeleccionadoFiltro = getState().fechas.mesSeleccionadoFiltro
     const anioSeleccionadoFiltro = getState().fechas.anioSeleccionadoFiltro
@@ -195,6 +195,32 @@ export const ObtenerVentasAcumuladaReducer = () => async (dispatch, getState) =>
     }).catch((error)=> {
         console.log(error)
     });
+
+    if(eliminandoFiltro == true){
+        let aplicantoFiltro = true
+        let numeroAplicandoFiltro = 0
+
+        await sucursalesUsuario.map((sucursal) => {
+            if(sucursal.check == true){
+                // aplicantoFiltro = true
+                numeroAplicandoFiltro = numeroAplicandoFiltro + 1
+            }
+        })
+
+        if(numeroAplicandoFiltro <= 1){
+            aplicantoFiltro = false
+        }
+
+        dispatch({
+            type: CAMBIAR_APLICANDO_FILTRO_ACUMULADO,
+            payload : aplicantoFiltro
+        })
+    }
+
+    dispatch({
+        type: "CARGANDO_TODA_PLATAFORMA_CONFIGURACION",
+        payload : false
+    })
     
     // dispatch({
     //     type: CAMBIAR_APLICANDO_FILTRO_ACUMULADO,

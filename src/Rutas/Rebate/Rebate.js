@@ -24,7 +24,7 @@ import IconoFlechaBlanca from '../../Assets/Img/Rebate/flechaderechablanca.png'
 import IconoFlechaAbajo from '../../Assets/Img/Rebate/flechaabajonegro.png'
 import IconoEditar from '../../Assets/Img/Rebate/editar.png'
 import IconoEditarBlanco from '../../Assets/Img/Rebate/editarblanco.png'
-
+import { Tooltip } from 'antd';
 import ReactExport from 'react-data-export';
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -137,18 +137,22 @@ const Rebate = () => {
                 >
                     Guardar
                 </div>
-
-                <div
-                    className='Btn-Editar-Data-Rebate'
-                    onClick={() => {
-                        dispatch(HabilitarEditarTodosReducer(!editandoRebate))
-                        setEditandoRebate(!editandoRebate)
-                    }}
+                
+                <Tooltip
+                    placement="bottom" 
+                    title={"Editar"}
                 >
-                    <img src={IconoEditar} className="Icono-Editar-Data-Rebate" />
-                    <img src={IconoEditarBlanco} className="Icono-Editar-Blanco-Data-Rebate" />
-                </div>
-
+                    <div
+                        className='Btn-Editar-Data-Rebate'
+                        onClick={() => {
+                            dispatch(HabilitarEditarTodosReducer(!editandoRebate))
+                            setEditandoRebate(!editandoRebate)
+                        }}
+                    >
+                        <img src={IconoEditar} className="Icono-Editar-Data-Rebate" />
+                        <img src={IconoEditarBlanco} className="Icono-Editar-Blanco-Data-Rebate" />
+                    </div>
+                </Tooltip>
 
                 <ExcelFile 
                     filename={"Rebate-"+anioSeleccionadoFiltro+"-"+mesSeleccionadoFiltro}

@@ -1,5 +1,6 @@
 export default {
-    api: 'https://pre-back.leadsmartview.com/',
+    api: 'https://subsidios.gavsistemas.com/',
+    // api: 'https://pre-back.leadsmartview.com/',
     basename: '/', 
     produccion : true,
 

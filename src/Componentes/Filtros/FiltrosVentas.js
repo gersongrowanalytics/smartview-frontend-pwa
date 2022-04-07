@@ -156,7 +156,7 @@ const FiltrosVentas = () => {
                                                         fontSize: "12px",
                                                         color: "#1E1E1E"
                                                     }}
-                                                    onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                    onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "VENTAS"))}
                                                     
                                                 >
                                                     <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
@@ -184,7 +184,7 @@ const FiltrosVentas = () => {
                                                             fontSize: "12px",
                                                             color: "#1E1E1E"
                                                         }}
-                                                        onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                        onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "VENTAS"))}
                                                     >
                                                         <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
                                                         <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
@@ -211,7 +211,7 @@ const FiltrosVentas = () => {
                                                                 fontSize: "12px",
                                                                 color: "#1E1E1E"
                                                             }}
-                                                            onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                            onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "VENTAS"))}
                                                         >
                                                             <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
                                                             <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
@@ -238,7 +238,7 @@ const FiltrosVentas = () => {
                                                                     fontSize: "12px",
                                                                     color: "#1E1E1E"
                                                                 }}
-                                                                onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                                onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "VENTAS"))}
                                                             >
                                                                 <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
                                                                 <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />

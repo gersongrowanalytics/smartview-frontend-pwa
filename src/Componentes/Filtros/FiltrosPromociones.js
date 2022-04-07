@@ -15,7 +15,8 @@ import FiltroZonaVentasPromociones from './Botones/FiltroZonaVentasPromociones';
 import {
     CloseOutlined,
     RightOutlined,
-    LeftOutlined
+    LeftOutlined,
+    EyeOutlined
 } from '@ant-design/icons';
 import {
     EliminarFiltroAplicadoReducer
@@ -44,6 +45,11 @@ const FiltrosPromociones = () => {
         idSucursalUsuarioSelec
     } = useSelector(({sucursales}) => sucursales);
 
+    const {
+        mostrar_promociones_nuevas,
+        mostrarDisenioPromocionesPrincipal
+    } = useSelector(({promociones}) => promociones);
+    
     const refFiltrosAplicados = useRef(null);
 
     const scroll = (scrollOffset) => {
@@ -110,12 +116,40 @@ const FiltrosPromociones = () => {
             <div
                 className='Filtro-Cambio-Disenio-Promociones'
                 onClick={() => dispatch(CambiarDisenioPromocionesReducer())}
+                style={
+                    mostrarDisenioPromocionesPrincipal == true
+                    ?{background:'#3646C3', border:'1px solid #3646C3'}
+                    :{}
+                }
             >
                 <div style={{color:'transparent'}}>aaaaaaaa</div>
-                <img
-                    src={IconoOjoPromociones}
-                    className='Img-Ojo-Cambio-Disenio-Promociones'
-                />
+                {
+                    mostrarDisenioPromocionesPrincipal == true
+                    ?<EyeOutlined 
+                        className='Img-Ojo-Cambio-Disenio-Promociones'
+                        style={{
+                            left: "9px",
+                            top: "6px",
+                            color: "white",
+                            fontSize: "22px"
+                        }}
+                    />
+                    :<EyeOutlined 
+                        className='Img-Ojo-Cambio-Disenio-Promociones'
+                        style={{
+                            left: "9px",
+                            top: "6px",
+                            /* color: white; */
+                            fontSize: "22px"
+                        }}
+                    />
+                    
+                    // <img
+                    //     src={IconoOjoPromociones}
+                    //     className='Img-Ojo-Cambio-Disenio-Promociones'
+                    // />
+                }
+                
             </div>
 
             <div
@@ -123,11 +157,37 @@ const FiltrosPromociones = () => {
                 onClick={() => {
                     dispatch(MostrarPromocionesNuevasReducer())
                 }}
+                style={
+                    mostrar_promociones_nuevas == true
+                    ?{
+                        marginTop: "1px",
+                        height: "36px",
+                        width: "125px",
+                        border: "2px solid #FEDD34"
+                    }
+                    :{
+                        marginTop: "1px",
+                        height: "36px",
+                        width: "125px"
+                    }
+                }
             >
-                <div className='W600-S14-H19-C1E1E1E-L0015'>
+                <div 
+                    className={
+                        mostrar_promociones_nuevas == true
+                        ?'W600-S14-H19-CFEDD34-L0015'
+                        :'W600-S14-H19-C1E1E1E-L0015'
+                    }
+                    style={
+                        mostrar_promociones_nuevas == true
+                        ?{color:'#FEDD34'}
+                        :{}
+                    }
+                >
                     Prom. Nuevas
                 </div>
                 <img src={GifPromNuevas} className="Gif-Prm-Nuevas-Promociones" />
+                <div style={{color:'transparent'}}>aaaaaaaaaaaaaaa</div>
             </div>
 
             <Link to="/descargas" onClick={() => dispatch(SeleccionarModuloDescargaReducer("Promociones"))}>
@@ -184,7 +244,7 @@ const FiltrosPromociones = () => {
                                                 fontSize: "12px",
                                                 color: "#1E1E1E"
                                             }}
-                                            onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                            onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "PROMOCIONES"))}
                                         >
                                             <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
                                             <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
@@ -211,7 +271,7 @@ const FiltrosPromociones = () => {
                                                     fontSize: "12px",
                                                     color: "#1E1E1E"
                                                 }}
-                                                onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "PROMOCIONES"))}
                                             >
                                                 <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
                                                 <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
@@ -238,7 +298,7 @@ const FiltrosPromociones = () => {
                                                         fontSize: "12px",
                                                         color: "#1E1E1E"
                                                     }}
-                                                    onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                    onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "PROMOCIONES"))}
                                                 >
                                                     <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
                                                     <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />
@@ -265,7 +325,7 @@ const FiltrosPromociones = () => {
                                                             fontSize: "12px",
                                                             color: "#1E1E1E"
                                                         }}
-                                                        onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos))}
+                                                        onClick={() => dispatch(EliminarFiltroAplicadoReducer(pos, "PROMOCIONES"))}
                                                     >
                                                         <img src={IconoCerrarNegro} className="Icono-Cerrar-Dt-FiltroVentas" />
                                                         <img src={IconoCerrarAzul} className="Icono-Cerrar-Azul-Dt-FiltroVentas" />

@@ -110,28 +110,32 @@ export const ArmarFiltroLpReducer = (data) => async (dispatch, getState) => {
     // console.log(arr_filtro_subcategorias_lp)
     // console.log(arr_filtro_codsap_lp)
 
-    dispatch({
-        type: OBTENER_DATA_FILTRO_LISTA_PRECIOS,
-        payload : {
-            fil_dat_categorias    : arr_filtro_categorias_lp,
-            fil_dat_subcategorias : arr_filtro_subcategorias_lp,
-            fil_dat_formato       : arr_filtro_formato_lp,
-            fil_dat_codsap        : arr_filtro_codsap_lp,
-            fil_dat_material      : arr_filtro_materiales_lp,
-        }
-    })
+    // dispatch({
+    //     type: OBTENER_DATA_FILTRO_LISTA_PRECIOS,
+    //     payload : {
+    //         fil_dat_customer_group    : [],
+    //         fil_dat_categorias    : arr_filtro_categorias_lp,
+    //         fil_dat_subcategorias : arr_filtro_subcategorias_lp,
+    //         fil_dat_formato       : arr_filtro_formato_lp,
+    //         fil_dat_codsap        : arr_filtro_codsap_lp,
+    //         fil_dat_material      : arr_filtro_materiales_lp,
+    //     }
+    // })
 
 }
 
 export const SeleccionarCheckFiltrosReducer = (campo, posicion, valor) => (dispatch, getState) => {
 
+    let fil_dat_customer_group = getState().listaPrecios.fil_dat_customer_group
     let fil_dat_categorias = getState().listaPrecios.fil_dat_categorias
     let fil_dat_subcategorias = getState().listaPrecios.fil_dat_subcategorias
     let fil_dat_formato = getState().listaPrecios.fil_dat_formato
     let fil_dat_codsap = getState().listaPrecios.fil_dat_codsap
     let fil_dat_material = getState().listaPrecios.fil_dat_material
 
-    if(campo == "categoria"){
+    if(campo == "Customer Group"){
+        fil_dat_customer_group[posicion]['seleccionado'] = valor
+    }else if(campo == "categoria"){
         fil_dat_categorias[posicion]['seleccionado'] = valor
     }else if(campo == "subcategoria"){
         fil_dat_subcategorias[posicion]['seleccionado'] = valor
@@ -148,6 +152,7 @@ export const SeleccionarCheckFiltrosReducer = (campo, posicion, valor) => (dispa
     dispatch({
         type: OBTENER_DATA_FILTRO_LISTA_PRECIOS,
         payload : {
+            fil_dat_customer_group    : fil_dat_customer_group,
             fil_dat_categorias    : fil_dat_categorias,
             fil_dat_subcategorias : fil_dat_subcategorias,
             fil_dat_formato       : fil_dat_formato,
@@ -164,6 +169,7 @@ export const RealizarFiltroReducer = (campo) => async (dispatch, getState) => {
 
     let data_tabla_lista_precios = getState().listaPrecios.data_tabla_lista_precios
     let {
+        fil_dat_customer_group,
         fil_dat_categorias,
         fil_dat_subcategorias,
         fil_dat_formato,
@@ -177,7 +183,19 @@ export const RealizarFiltroReducer = (campo) => async (dispatch, getState) => {
 
     })
 
-    if(campo == "categoria"){
+    if(campo == "Customer Group"){
+        await data_tabla_lista_precios.map(async (dat, pos) => {
+            await fil_dat_customer_group.map((fil_dat, pos_fil) => {
+                if(fil_dat.seleccionado == true){
+                    if(fil_dat.data == dat.trenombre){
+    
+                        data_tabla_lista_precios[pos]['mostrar'] = true
+                        
+                    }
+                }
+            })
+        })
+    }else if(campo == "categoria"){
         await data_tabla_lista_precios.map(async (dat, pos) => {
             await fil_dat_categorias.map((fil_dat, pos_fil) => {
                 if(fil_dat.seleccionado == true){
@@ -258,6 +276,7 @@ export const TerminarFiltrosReducer = (data_tabla_lista_precios) =>async (dispat
 
 export const EstadoSeleccionarTodoFiltrosReducer = () => async (dispatch, getState) => {
 
+    let fil_dat_customer_group = getState().listaPrecios.fil_dat_customer_group
     let fil_dat_categorias = getState().listaPrecios.fil_dat_categorias
     let fil_dat_subcategorias = getState().listaPrecios.fil_dat_subcategorias
     let fil_dat_formato = getState().listaPrecios.fil_dat_formato
@@ -265,11 +284,23 @@ export const EstadoSeleccionarTodoFiltrosReducer = () => async (dispatch, getSta
     let fil_dat_material = getState().listaPrecios.fil_dat_material
 
 
+    let tiene_todo_seleccionado_customer_group = true
     let tiene_todo_seleccionado_categorias = true
     let tiene_todo_seleccionado_subcategorias = true
     let tiene_todo_seleccionado_formato  = true
     let tiene_todo_seleccionado_codsap   = true
     let tiene_todo_seleccionado_material = true
+
+    
+    await fil_dat_customer_group.map((fil_dat, pos) => {
+
+        if(fil_dat.seleccionado == true){
+
+        }else{
+            tiene_todo_seleccionado_customer_group = false
+        }
+
+    })
 
     await fil_dat_categorias.map((fil_dat, pos) => {
 
@@ -324,6 +355,7 @@ export const EstadoSeleccionarTodoFiltrosReducer = () => async (dispatch, getSta
     dispatch({
         type: SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS,
         payload: {
+            fil_selectodo_dat_customer_group    : tiene_todo_seleccionado_customer_group,
             fil_selectodo_dat_categorias    : tiene_todo_seleccionado_categorias,
             fil_selectodo_dat_subcategorias : tiene_todo_seleccionado_subcategorias,
             fil_selectodo_dat_formato       : tiene_todo_seleccionado_formato,
@@ -336,12 +368,14 @@ export const EstadoSeleccionarTodoFiltrosReducer = () => async (dispatch, getSta
 export const SeleccionarTodoFiltrosLPReducer = (campo, valor) => async (dispatch, getState) => {
 
     let {
+        fil_selectodo_dat_customer_group,
         fil_selectodo_dat_categorias,
         fil_selectodo_dat_subcategorias,
         fil_selectodo_dat_formato,
         fil_selectodo_dat_codsap,
         fil_selectodo_dat_material,
 
+        fil_dat_customer_group,
         fil_dat_categorias,
         fil_dat_subcategorias,
         fil_dat_formato,
@@ -350,7 +384,15 @@ export const SeleccionarTodoFiltrosLPReducer = (campo, valor) => async (dispatch
 
     } = getState().listaPrecios
 
-    if(campo == "categoria"){
+    if(campo == "Customer Group"){
+
+        fil_selectodo_dat_customer_group = valor
+
+        await fil_dat_customer_group.map((fil_dat, pos) => {
+            fil_dat_customer_group[pos]['seleccionado'] = valor
+        })
+
+    }else if(campo == "categoria"){
         fil_selectodo_dat_categorias = valor
 
         await fil_dat_categorias.map((fil_dat, pos) => {
@@ -384,6 +426,7 @@ export const SeleccionarTodoFiltrosLPReducer = (campo, valor) => async (dispatch
     dispatch({
         type: SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS,
         payload: {
+            fil_selectodo_dat_customer_group    : fil_selectodo_dat_customer_group,
             fil_selectodo_dat_categorias    : fil_selectodo_dat_categorias,
             fil_selectodo_dat_subcategorias : fil_selectodo_dat_subcategorias,
             fil_selectodo_dat_formato       : fil_selectodo_dat_formato,

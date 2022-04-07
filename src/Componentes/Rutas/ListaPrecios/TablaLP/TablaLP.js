@@ -25,7 +25,8 @@ const TablaLP = (props) => {
                                 position: "sticky",
                                 left: "0",
                                 zIndex: "5",
-                                backgroundColor: "#1EC0ED"
+                                backgroundColor: "#1EC0ED",
+                                borderRight: "1px solid white"
                             }}
                         >
                             Item
@@ -37,7 +38,8 @@ const TablaLP = (props) => {
                                 position: "sticky",
                                 left: "40px",
                                 zIndex: "5",
-                                backgroundColor: "#1EC0ED"
+                                backgroundColor: "#1EC0ED",
+                                borderRight: "1px solid white"
                             }}
                         >
                             <div
@@ -67,7 +69,8 @@ const TablaLP = (props) => {
                                 left: "134px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
-                                textAlign: "left"
+                                textAlign: "left",
+                                borderRight: "1px solid white"
                             }}
                         >
                             <div
@@ -92,7 +95,8 @@ const TablaLP = (props) => {
                                 left: "250px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
-                                textAlign: "left"
+                                textAlign: "left",
+                                borderRight: "1px solid white"
                             }}
                         >
                             <div
@@ -113,11 +117,15 @@ const TablaLP = (props) => {
                                 left: "357px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
-                                textAlign: "left"
+                                textAlign: "left",
+                                borderRight: "1px solid white"
                             }}
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width: "150px"
+                                }}
                             >
                                 <div>
                                     EAN
@@ -145,10 +153,11 @@ const TablaLP = (props) => {
                                 data_tabla_lista_precios.length > 0
                                 ?{
                                     position: "sticky",
-                                    left: "448px",
+                                    left: "517px",
                                     zIndex: "2",
                                     backgroundColor: "#1EC0ED",
-                                    textAlign: "left"
+                                    textAlign: "left",
+                                    borderRight: "1px solid white"
                                 }
                                 :{
 
@@ -157,6 +166,9 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'310px'
+                                }}
                             >
                                 <div>
                                     Material
@@ -178,7 +190,12 @@ const TablaLP = (props) => {
                                 </div>
                             </div>
                         </th> */}
-                        <th rowSpan={2}>
+                        <th 
+                            rowSpan={2}
+                            style={{
+                                borderRight: "1px solid white"
+                            }}
+                        >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
                             >
@@ -191,7 +208,12 @@ const TablaLP = (props) => {
                                 </div>
                             </div>
                         </th>
-                        <th rowSpan={2}>
+                        <th 
+                            rowSpan={2}
+                            style={{
+                                borderRight: "1px solid white"
+                            }}
+                        >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
                             >
@@ -204,7 +226,12 @@ const TablaLP = (props) => {
                                 </div>
                             </div>
                         </th>
-                        <th rowSpan={2}>
+                        <th 
+                            rowSpan={2}
+                            style={{
+                                borderRight: "1px solid white"
+                            }}
+                        >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
                             >
@@ -216,7 +243,12 @@ const TablaLP = (props) => {
                                 </div>
                             </div>
                         </th>
-                        <th rowSpan={2}>
+                        <th 
+                            rowSpan={2}
+                            style={{
+                                borderRight: "1px solid white"
+                            }}
+                        >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
                             >
@@ -228,7 +260,12 @@ const TablaLP = (props) => {
                                 </div>
                             </div>
                         </th>
-                        <th rowSpan={2}>
+                        <th 
+                            rowSpan={2}
+                            style={{
+                                borderRight: "1px solid white"
+                            }}
+                        >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
                             >
@@ -295,8 +332,8 @@ const TablaLP = (props) => {
                                 style={{background:'#1E7DED'}}
                             >
                                 <div>
-                                    MF Ruta <br/>
-                                    Mayorista
+                                    MF Ruta
+                                    {/* Mayorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -311,8 +348,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Reventa<br/>
-                                    Mayorista
+                                    Reventa
+                                    {/* Mayorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -327,8 +364,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Margen<br/>
-                                    Mayorista
+                                    Margen
+                                    {/* Mayorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -343,8 +380,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Marcaje<br/>
-                                    Mayorista
+                                    Marcaje
+                                    {/* Mayorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -362,8 +399,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    MF Ruta<br/>
-                                    Minorista
+                                    MF Ruta
+                                    {/* Minorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -377,8 +414,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Reventa<br/>
-                                    Minorista
+                                    Reventa
+                                    {/* Minorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -392,8 +429,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Margen<br/>
-                                    Minorista
+                                    Margen
+                                    {/* Minorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -407,8 +444,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Marcaje<br/>
-                                    Minorista
+                                    Marcaje
+                                    {/* Minorista */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -428,8 +465,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    MF Ruta <br/>
-                                    Horizontal
+                                    MF Ruta
+                                    {/* Horizontal */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -444,8 +481,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Reventa<br/>
-                                    Bodega
+                                    Reventa
+                                    {/* Bodega */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -460,8 +497,8 @@ const TablaLP = (props) => {
                                 className='Contenedor-Cabecera-Tabla'
                             >
                                 <div>
-                                    Margen<br/>
-                                    Bodega
+                                    Margen
+                                    {/* Bodega */}
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
@@ -545,19 +582,35 @@ const TablaLP = (props) => {
                                             top: "48px",
                                             textAlign: "left"
                                         }}
-                                    >{dat.ltpean }</td>
+                                    >
+                                        <div
+                                            style={{
+                                                width: "150px"
+                                            }}
+                                        >
+                                            {dat.ltpean}
+                                        </div>
+                                    </td>
                                     {/* <td className='W600-S12-H16-C1E1E1E'>{dat.ltpcodigosap}</td> */}
                                     <td 
                                         className='W600-S12-H16-C1E1E1E'
                                         style={{
                                             position: "sticky",
-                                            left: "448px",
+                                            left: "517px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
                                             textAlign: "left"
                                         }}
-                                    >{dat.pronombre}</td>
+                                    >
+                                        <div
+                                            style={{
+                                                width:'310px'
+                                            }}
+                                        >
+                                            {dat.pronombre}
+                                        </div>
+                                    </td>
                                     {/* <td className='W600-S12-H16-C1E1E1E'>{dat.pronombre}</td> */}
 
                                     <td 

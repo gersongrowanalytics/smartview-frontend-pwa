@@ -125,7 +125,7 @@ const FiltroDepartamentosTop = (props) => {
                     ?<div 
                         className='Cuerpo-Item-Filtro-Top'
                         style={{
-                            left: "20px",
+                            left: "12px",
                             zIndex:'4'
                         }}
                     >

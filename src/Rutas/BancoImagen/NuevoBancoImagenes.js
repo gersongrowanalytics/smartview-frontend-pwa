@@ -15,6 +15,7 @@ const NuevoBancoImagenes = () => {
     const { 
         prosSinImagenes, 
         prosConImagenes,
+        prosInactivas,
         cargandoTablaBancoImagen,
         cargandoRegistroEditar 
     } = useSelector(({bancoImagen}) => bancoImagen);
@@ -34,7 +35,14 @@ const NuevoBancoImagenes = () => {
     return (
         <div style={{marginTop:'110px', paddingLeft:'40px', marginBottom:'80px', paddingRight:'38px'}}>
 
-            <div className='W700-S26-H35-C1E1E1E-L0015' onClick={() => console.log(prosSinImagenes)}>
+            <div 
+                className='W700-S26-H35-C1E1E1E-L0015' 
+                onClick={() => {
+                    console.log(prosConImagenes)
+                    console.log(prosInactivas)
+                    console.log(prosSinImagenes)
+                }}
+            >
                 Banco de Imágen
             </div>
             
@@ -73,7 +81,7 @@ const NuevoBancoImagenes = () => {
                     }
                     onClick={() => {setBtnSeleccionado("INACTIVO")}}
                 >
-                    Inactivos (0)
+                    Inactivos ({prosInactivas.length})
                 </div>
                 <div className='Barra-Busqueda-Banco-Imagenes'>
                     <img className='Icono-Lupa-Buscar-Banco-Imagenes' src={IconoLupa} />
@@ -210,7 +218,54 @@ const NuevoBancoImagenes = () => {
                                             :null
                                     )
                                 })
-                                :null
+                                :btnSeleccionado == "INACTIVO"
+                                    ?prosInactivas.map((data, pos) => {
+                                        return(
+    
+                                            data.prosku
+                                            ?data.pronombre
+                                                ?data.prosku.includes(txtInputBuscar) || data.pronombre.toLowerCase().includes(txtInputBuscar.toLowerCase())
+                                                    ?<FilaTablaBancoImagen
+                                                        data = {data}
+                                                        pos  = {pos}
+                                                        editandoFila = {() => {
+                                                            dispatch(EditandoImagenNuevoBancoImagenesReducer(btnSeleccionado, pos))
+                                                        }}
+                                                        editarImagen = {(imagen, sku, fechas) => {
+                                                            dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
+                                                        }}
+                                                        txtInputBuscar = {txtInputBuscar}
+                                                    />
+                                                    :null
+                                                :data.prosku.includes(txtInputBuscar)
+                                                    ?<FilaTablaBancoImagen
+                                                        data = {data}
+                                                        pos  = {pos}
+                                                        editandoFila = {() => {
+                                                            dispatch(EditandoImagenNuevoBancoImagenesReducer(btnSeleccionado, pos))
+                                                        }}
+                                                        editarImagen = {(imagen, sku, fechas) => {
+                                                            dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
+                                                        }}
+                                                        txtInputBuscar = {txtInputBuscar}
+                                                    />
+                                                    :null
+                                            :data.pronombre.toLowerCase().includes(txtInputBuscar.toLowerCase())
+                                                ?<FilaTablaBancoImagen
+                                                    data = {data}
+                                                    pos  = {pos}
+                                                    editandoFila = {() => {
+                                                        dispatch(EditandoImagenNuevoBancoImagenesReducer(btnSeleccionado, pos))
+                                                    }}
+                                                    editarImagen = {(imagen, sku, fechas) => {
+                                                        dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
+                                                    }}
+                                                    txtInputBuscar = {txtInputBuscar}
+                                                />
+                                                :null
+                                        )
+                                    })
+                                    :null
                         }
                     </tbody>
 

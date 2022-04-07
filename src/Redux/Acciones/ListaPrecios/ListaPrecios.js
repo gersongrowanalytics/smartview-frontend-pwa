@@ -6,7 +6,8 @@ import {
     SELECCIONAR_COLUMNA_FILTRO_DESCARGA_LISTA_PRECIOS,
     ABRIR_AGRUPACION_COLUMNA_FILTRO_DESCARGAR_LISTA_PRECIOS,
     CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS,
-    OBTENER_DATA_FILTRO_LISTA_PRECIOS
+    OBTENER_DATA_FILTRO_LISTA_PRECIOS,
+    OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
@@ -63,7 +64,7 @@ export const ObtenerGrupoDisponiblesReducer = () =>async (dispatch, getState) =>
     return true
 }
 
-export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (dispatch, getState) => {
+export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagina = 1) =>async (dispatch, getState) => {
 
     dispatch({
         type: CARGANDO_TABLA_LISTA_PRECIOS,
@@ -92,7 +93,7 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (di
 
     let dataRpta = []
 
-    await fetch(config.api+'exportar-excel-lista-precios',
+    await fetch(config.api+'exportar-excel-lista-precios?page='+numeropagina,
         {
             mode:'cors',
             method: 'POST',
@@ -121,11 +122,16 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (di
 
             let data_excel_descargar = await LimpiarArrayDescargarExcelReducer(data.excel)
 
+            dispatch({
+                type: OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS,
+                payload : data.data
+            })
+
             await dispatch({
                 type: OBTENER_DATA_EXCEL_LISTA_PRECIOS,
                 payload : {
                     excel : data_excel_descargar,
-                    tabla : data.data,
+                    tabla : data.data.data,
                 }
             })
 
@@ -134,11 +140,12 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion) =>async (di
             await dispatch({
                 type: OBTENER_DATA_FILTRO_LISTA_PRECIOS,
                 payload : {
-                    fil_dat_categorias    : data.arr_filtro_categorias_lp,
-                    fil_dat_subcategorias : data.arr_filtro_subcategorias_lp,
-                    fil_dat_formato       : data.arr_filtro_formato_lp,
-                    fil_dat_codsap        : data.arr_filtro_codsap_lp,
-                    fil_dat_material      : data.arr_filtro_materiales_lp,
+                    fil_dat_customer_group : data.arr_filtro_customer_group_lp,
+                    fil_dat_categorias     : data.arr_filtro_categorias_lp,
+                    fil_dat_subcategorias  : data.arr_filtro_subcategorias_lp,
+                    fil_dat_formato        : data.arr_filtro_formato_lp,
+                    fil_dat_codsap         : data.arr_filtro_codsap_lp,
+                    fil_dat_material       : data.arr_filtro_materiales_lp
                 }
             })
 

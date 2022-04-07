@@ -26,6 +26,8 @@ import TiposUsuarios from './Administrativo/TiposUsuarios/TiposUsuarios';
 import ControlArchivo from './Administrativo/ControlArchivo/ControlArchivo';
 import ElementosEnviadosNuevo from './ElementosEnviados/ElementosEnviadosNuevo';
 import Rebate from './Rebate/Rebate';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Rutas = () => {
 
@@ -54,9 +56,18 @@ const Rutas = () => {
         mostrar_terminos_condiciones_login
     } = useSelector(({auth}) => auth);
 
+    const {
+        cargando_plataforma
+    } = useSelector(({setting}) => setting)
+
     const [mostrarTerminos, setMostrarTerminos] = useState(true)
 
     return (
+        <Spin
+            indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+            spinning={cargando_plataforma}
+        >
+
         <div>
 
             {
@@ -160,6 +171,7 @@ const Rutas = () => {
             </div>
             <Bottom />
         </div>
+        </Spin>
     )
 }
 

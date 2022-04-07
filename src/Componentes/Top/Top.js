@@ -152,6 +152,20 @@ const Top = () => {
                                 </div>
                                 :null
                             }
+                            <div className='Contenedor-Imagen-Txt'>
+                                <img src={PromoNueva} style={{width: '40px'}}/>
+                                <div className='Contenedor-Txt-Notificaciones'>
+                                    <div>
+                                        Tienes Promociones Nuevas en el mes de Abril
+                                    </div>
+                                    <div className='Txt-Tiempo-Notificaciones'>
+                                        Hace 1 hora
+                                    </div>
+                                </div>
+                                {/* <div>
+                                    <div className='Punto-Azul-Notificacion'></div>
+                                </div> */}
+                            </div>
 
                             {
                                 not_nuevas_usuario.map((not) => {
@@ -190,6 +204,17 @@ const Top = () => {
                                 </div>
                                 :null
                             }
+                            <div className='Contenedor-Imagen-Txt'>
+                                <img src={Actualizacion} style={{width: '40px'}}/>
+                                <div className='Contenedor-Txt-Notificaciones'>
+                                    <div>
+                                        La plataforma se encuentra actualizando
+                                    </div>
+                                    <div className='Txt-Tiempo-Notificaciones'>
+                                        Hace 20 días
+                                    </div>
+                                </div>
+                            </div>
                             {
                                 not_antiguas_usuario.map((not) => {
                                     return(

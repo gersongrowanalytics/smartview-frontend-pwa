@@ -12,6 +12,7 @@ import {
 const INIT_STATE = {
     prosSinImagenes : [],
     prosConImagenes : [],
+    prosInactivas : [],
     cargandoTablaBancoImagen : false,
     cargandoRegistroEditar : false
 };
@@ -28,8 +29,9 @@ export default (state = INIT_STATE, action) => {
         case OBTENER_DATOS_IMAGENES: {
             return {
                 ...state,
-                prosSinImagenes: JSON.parse(action.payload.SinImagenes),
-                prosConImagenes: JSON.parse(action.payload.ConImagenes),
+                prosSinImagenes : action.payload.SinImagenes,
+                prosConImagenes : action.payload.ConImagenes,
+                prosInactivas   : action.payload.Inactivos,
                 cargandoTablaBancoImagen: action.payload.cargandoTablaBancoImagen
             }
         }

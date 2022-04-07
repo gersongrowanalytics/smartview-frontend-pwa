@@ -48,7 +48,7 @@
     border: 1px solid #1E1E1E;
     box-sizing: border-box;
     border-radius: 8px;
-    padding-top: 5px;
+    padding-top: 7px;
     padding-bottom: 5px;
     position: relative;
     padding-left: 26px;
@@ -58,11 +58,20 @@
     cursor: pointer;
 }
 
+.Btn-Prom-Nueva:hover{
+    border: 2px solid #FEDD34;
+    color: #FEDD34 !important;
+}
+
+.Btn-Prom-Nueva:hover .W600-S14-H19-C1E1E1E-L0015{
+    color: #FEDD34 !important;
+}
+
 .Gif-Prm-Nuevas-Promociones{
     width: 28px;
     position: absolute;
     left: 0;
-    top: 1px;
+    top: 4px;
     border-radius: 8px;
     z-index: -1;
 }
@@ -74,7 +83,7 @@
     height: 60px;
     border-radius: 500px; */
     border-radius: 500px;
-    border: 1px solid yellow;
+    border: 2px solid #FEDD34;
     width: 40px;
     height: 40px;
     z-index: 2;
@@ -86,7 +95,7 @@
 .Gif-Nuevas-Promociones{
     width: 26px;
     position: absolute;
-    left: 7px;
-    top: 7px;
+    left: 5px;
+    top: 5px;
     z-index: 0;
 }

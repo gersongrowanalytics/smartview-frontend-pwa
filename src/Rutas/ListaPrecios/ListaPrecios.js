@@ -27,6 +27,7 @@ import {
     TerminarFiltrosReducer,
     SeleccionarTodoFiltrosLPReducer
 } from '../../Redux/Acciones/ListaPrecios/ArmarFiltrosLp'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -45,6 +46,7 @@ const ListaPrecios = () => {
         grupos_disponibles_lista_precios,
         data_excel_lista_precios,
         data_tabla_lista_precios,
+        data_config_tabla_lista_precios,
         cargando_datos_tabla_lista_precios,
 
         agrupacion_columnas_filtros_descargar_listaprecios,
@@ -53,12 +55,14 @@ const ListaPrecios = () => {
         data_descargar_excel_listaprecios,
         cargando_btn_excel_listaprecios,
 
+        fil_dat_customer_group,
         fil_dat_categorias,
         fil_dat_subcategorias,
         fil_dat_formato,
         fil_dat_codsap,
         fil_dat_material,
-
+        
+        fil_selectodo_dat_customer_group,
         fil_selectodo_dat_categorias,
         fil_selectodo_dat_subcategorias,
         fil_selectodo_dat_formato,
@@ -75,6 +79,14 @@ const ListaPrecios = () => {
     const [infoDataCorreo, setInfoDataCorreo] = useState("")
     const [nombreArchivoCorreoExcel, setNombreArchivoCorreoExcel] = useState("")
     const [tituloArchivoCorreoExcel, setTituloArchivoCorreoExcel] = useState("")
+
+
+    const [filtroCustomerGroup, setFiltroCustomerGroup] = useState(false)
+    const [filtroCategoria, setFiltroCategoria] = useState(false)
+    const [filtroSubCatego, setFiltroSubCatego] = useState(false)
+    const [filtroFormato, setFiltroFormato] = useState(false)
+    const [filtroCodigoSap, setFiltroCodigSap] = useState(false)
+    const [filtroNombMater, setFiltroNombMate] = useState(false)
 
     useEffect(() => {
 
@@ -105,27 +117,9 @@ const ListaPrecios = () => {
             </div>
 
             <div>
-                <div style={{width:'100%'}}>
-                    <Button 
-                        className={
-                            data_excel_lista_precios.length > 0
-                            ?data_excel_lista_precios[0]['data'].length > 0
-                                ?'Btn-Descargar-Lista-Precios Wbold-S14-H19-CFFFFFF'
-                                :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
-                            :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
-                        }
-                        // onClick={() => {
-                        //     if(data_excel_lista_precios[0]['data'].length > 0){
-                        //         refBtnDescargaListaPrecios.current.click()
-                        //     }
-                        // }}
-                        onClick={() => {
-                            setSeleccionoDescargar(true)
-                            setMostrarModalFiltroColumnas(true)
-                        }}
-                    >
-                        Descargar
-                    </Button>
+                <div style={{width:'100%', display:'flex'}}>
+
+                    
                 </div>
             </div>
 
@@ -140,11 +134,36 @@ const ListaPrecios = () => {
                     <FiltroMesVentasPromociones />                    
                 </div>
                 
-                <FiltroLp 
+                {/* <FiltroLp 
                     titulo = {"Customer Group"}
                     fil_data = {grupos_disponibles_lista_precios}
                     tamanio = "0"
                     seleccionartodo = {false}
+                /> */}
+
+                <FiltroLp 
+                    titulo = {"Customer Group"}
+                    fil_data = {fil_dat_customer_group}
+                    tamanio = "160"
+                    aceptarFiltro = {() => {
+                        dispatch(RealizarFiltroReducer("Customer Group"))
+                    }}
+                    seleccionarLista = {(posicion, valor) => {
+                        dispatch(SeleccionarCheckFiltrosReducer("Customer Group", posicion, valor))
+                    }}
+                    seleccionartodo = {fil_selectodo_dat_customer_group}
+                    funSeleccionarTodo = {(valor) => {
+                        dispatch(SeleccionarTodoFiltrosLPReducer("Customer Group", valor))
+                    }}
+                    mostrarCuerpo = {filtroCustomerGroup}
+                    setMostrarCuerpo = {() => {
+                        setFiltroCustomerGroup(!filtroCustomerGroup)
+                        setFiltroCategoria(false)
+                        setFiltroSubCatego(false)
+                        setFiltroFormato(false)
+                        setFiltroCodigSap(false)
+                        setFiltroNombMate(false)
+                    }}
                 />
 
                 <FiltroLp 
@@ -160,6 +179,14 @@ const ListaPrecios = () => {
                     seleccionartodo = {fil_selectodo_dat_categorias}
                     funSeleccionarTodo = {(valor) => {
                         dispatch(SeleccionarTodoFiltrosLPReducer("categoria", valor))
+                    }}
+                    mostrarCuerpo = {filtroCategoria}
+                    setMostrarCuerpo = {() => {
+                        setFiltroCategoria(!filtroCategoria)
+                        setFiltroSubCatego(false)
+                        setFiltroFormato(false)
+                        setFiltroCodigSap(false)
+                        setFiltroNombMate(false)
                     }}
                 />
 
@@ -177,6 +204,14 @@ const ListaPrecios = () => {
                     funSeleccionarTodo = {(valor) => {
                         dispatch(SeleccionarTodoFiltrosLPReducer("subcategoria", valor))
                     }}
+                    mostrarCuerpo = {filtroSubCatego}
+                    setMostrarCuerpo = {() => {
+                        setFiltroSubCatego(!filtroSubCatego)
+                        setFiltroCategoria(false)
+                        setFiltroFormato(false)
+                        setFiltroCodigSap(false)
+                        setFiltroNombMate(false)
+                    }}
                 />
 
                 <FiltroLp 
@@ -192,6 +227,14 @@ const ListaPrecios = () => {
                     seleccionartodo = {fil_selectodo_dat_formato}
                     funSeleccionarTodo = {(valor) => {
                         dispatch(SeleccionarTodoFiltrosLPReducer("formato", valor))
+                    }}
+                    mostrarCuerpo = {filtroFormato}
+                    setMostrarCuerpo = {() => {
+                        setFiltroFormato(!filtroFormato)
+                        setFiltroCategoria(false)
+                        setFiltroSubCatego(false)
+                        setFiltroCodigSap(false)
+                        setFiltroNombMate(false)
                     }}
                 />
 
@@ -209,6 +252,14 @@ const ListaPrecios = () => {
                     funSeleccionarTodo = {(valor) => {
                         dispatch(SeleccionarTodoFiltrosLPReducer("codsap", valor))
                     }}
+                    mostrarCuerpo = {filtroCodigoSap}
+                    setMostrarCuerpo = {() => {
+                        setFiltroCodigSap(!filtroCodigoSap)
+                        setFiltroCategoria(false)
+                        setFiltroSubCatego(false)
+                        setFiltroFormato(false)
+                        setFiltroNombMate(false)
+                    }}
                 />
 
                 <FiltroLp 
@@ -225,7 +276,71 @@ const ListaPrecios = () => {
                     funSeleccionarTodo = {(valor) => {
                         dispatch(SeleccionarTodoFiltrosLPReducer("material", valor))
                     }}
+                    mostrarCuerpo = {filtroNombMater}
+                    setMostrarCuerpo = {() => {
+                        setFiltroNombMate(!filtroNombMater)
+                        setFiltroCategoria(false)
+                        setFiltroSubCatego(false)
+                        setFiltroFormato(false)
+                        setFiltroCodigSap(false)
+                    }}
                 />
+
+
+
+                <div 
+                    className='Contenedor-Btn-Adm-Usuarios'
+                    style={{
+                        position: "relative",
+                        width: "240px",
+                        top: "18px"
+                    }}
+                >
+                    <div 
+                        className='Paginacion-Control-Archivo' 
+                        style={{
+                            paddingTop:'0px',
+                            position: "absolute",
+                            right: "-25px",
+                            top: "-10px"
+                        }}
+                    >
+                        <div>{data_config_tabla_lista_precios.from} - {data_config_tabla_lista_precios.to} de {data_config_tabla_lista_precios.total}</div>
+                        <LeftOutlined 
+                            style={{marginLeft:'9px'}}
+                            onClick={() => {
+                                dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0, data_config_tabla_lista_precios.current_page - 1 ))
+                            }}
+                        />
+                        <RightOutlined
+                            style={{marginLeft:'34px'}}
+                            onClick={() => {
+                                dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0, data_config_tabla_lista_precios.current_page + 1))
+                            }}
+                        />
+                    </div>
+                </div>
+
+                <Button 
+                    className={
+                        data_excel_lista_precios.length > 0
+                        ?data_excel_lista_precios[0]['data'].length > 0
+                            ?'Btn-Descargar-Lista-Precios Wbold-S14-H19-CFFFFFF'
+                            :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
+                        :'Btn-Descargar-Lista-Precios-Desactivado Wbold-S14-H19-C1E1E1E'
+                    }
+                    // onClick={() => {
+                    //     if(data_excel_lista_precios[0]['data'].length > 0){
+                    //         refBtnDescargaListaPrecios.current.click()
+                    //     }
+                    // }}
+                    onClick={() => {
+                        setSeleccionoDescargar(true)
+                        setMostrarModalFiltroColumnas(true)
+                    }}
+                >
+                    Descargar
+                </Button>
 
             </div>
             

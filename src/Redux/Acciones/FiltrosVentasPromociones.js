@@ -6,6 +6,12 @@ import {
     APLICANDO_FILTROS_CORRESPONDIENTES,
     CAMBIAR_APLICANDO_FILTRO_ACUMULADO
 } from '../../Constantes/Sucursales'
+import {
+    ObtenerVentasAcumuladaReducer
+} from '../../Redux/Acciones/Ventas/Ventas'
+import {
+    ObtenerPromocionesAcumuladasReducer
+} from '../../Redux/Acciones/Promociones/Promociones'
 
 export const SeleccionarFiltroCanalReducer = (posicion, estado) => async (dispatch, getState) => {
 
@@ -271,11 +277,16 @@ export const CambiarAplicandoFiltroAcumuladoReducer = () => (dispatch, getState)
 
 }
 
-export const EliminarFiltroAplicadoReducer = (posicion) => (dispatch, getState) => {
+export const EliminarFiltroAplicadoReducer = (posicion, Filtro) => async (dispatch, getState) => {
 
     let aplicandoFiltroAcumulado = getState().sucursales.aplicandoFiltroAcumulado
     
     if(aplicandoFiltroAcumulado == true){
+
+        dispatch({
+            type: "CARGANDO_TODA_PLATAFORMA_CONFIGURACION",
+            payload : true
+        })
 
         const aplicandoFiltroCanal = getState().sucursales.aplicandoFiltroCanal
         const aplicandoFiltroZona  = getState().sucursales.aplicandoFiltroZona
@@ -321,6 +332,21 @@ export const EliminarFiltroAplicadoReducer = (posicion) => (dispatch, getState) 
                 type: SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
                 payload : sucursalesUsuario
             })
+        }
+
+
+        if(Filtro == "VENTAS"){
+            if(aplicandoFiltroAcumulado == true){
+                dispatch(ObtenerVentasAcumuladaReducer(true))
+            }else{
+                
+            }
+        }else if(Filtro == "PROMOCIONES"){
+            if(aplicandoFiltroAcumulado == true){
+                dispatch(ObtenerPromocionesAcumuladasReducer(true))
+            }else{
+
+            }
         }
 
 

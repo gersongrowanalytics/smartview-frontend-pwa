@@ -10,13 +10,15 @@ import {
 
     OBTENER_DATA_FILTRO_LISTA_PRECIOS,
     OBTENER_UNICAMENTE_DATA_LISTA_PRECIOS,
-    SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS
+    SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS,
+    OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 
 const INIT_STATE = {
     grupos_disponibles_lista_precios : [],
     data_excel_lista_precios : [],
     data_tabla_lista_precios : [],
+    data_config_tabla_lista_precios : {},
     cargando_datos_tabla_lista_precios : false,
 
 
@@ -211,6 +213,7 @@ const INIT_STATE = {
 
 
     // FILTROS
+    fil_dat_customer_group : [],
     fil_dat_categorias : [],
     fil_dat_subcategorias : [],
     fil_dat_formato : [],
@@ -218,11 +221,12 @@ const INIT_STATE = {
     fil_dat_material : [],
 
     // SELECCIONAR TODO FILTROS
-    fil_selectodo_dat_categorias    : false,
-    fil_selectodo_dat_subcategorias : false,
-    fil_selectodo_dat_formato       : false,
-    fil_selectodo_dat_codsap        : false,
-    fil_selectodo_dat_material      : false,
+    fil_selectodo_dat_customer_group : false,
+    fil_selectodo_dat_categorias     : false,
+    fil_selectodo_dat_subcategorias  : false,
+    fil_selectodo_dat_formato        : false,
+    fil_selectodo_dat_codsap         : false,
+    fil_selectodo_dat_material       : false,
 };
 
 
@@ -244,6 +248,13 @@ export default (state = INIT_STATE, action) => {
             return{
                 ...state,
                 data_tabla_lista_precios : action.payload
+            }
+        }
+
+        case OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS: {
+            return{
+                ...state,
+                data_config_tabla_lista_precios : action.payload
             }
         }
         case OBTENER_DATA_EXCEL_LISTA_PRECIOS: {
@@ -281,16 +292,18 @@ export default (state = INIT_STATE, action) => {
         case OBTENER_DATA_FILTRO_LISTA_PRECIOS: {
             return {
                 ...state,
-                fil_dat_categorias : action.payload.fil_dat_categorias,
-                fil_dat_subcategorias : action.payload.fil_dat_subcategorias,
-                fil_dat_formato : action.payload.fil_dat_formato,
-                fil_dat_codsap : action.payload.fil_dat_codsap,
-                fil_dat_material : action.payload.fil_dat_material
+                fil_dat_customer_group  : action.payload.fil_dat_customer_group,
+                fil_dat_categorias      : action.payload.fil_dat_categorias,
+                fil_dat_subcategorias   : action.payload.fil_dat_subcategorias,
+                fil_dat_formato         : action.payload.fil_dat_formato,
+                fil_dat_codsap          : action.payload.fil_dat_codsap,
+                fil_dat_material        : action.payload.fil_dat_material
             }
         }
         case SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS: {
             return {
                 ...state,
+                fil_selectodo_dat_customer_group    : action.payload.fil_selectodo_dat_customer_group,
                 fil_selectodo_dat_categorias    : action.payload.fil_selectodo_dat_categorias,
                 fil_selectodo_dat_subcategorias : action.payload.fil_selectodo_dat_subcategorias,
                 fil_selectodo_dat_formato       : action.payload.fil_selectodo_dat_formato,

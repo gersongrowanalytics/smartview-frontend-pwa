@@ -39,22 +39,32 @@ export const dataBancoImagen = () => async ( dispatch, getState ) => {
         return res.json()
     })
     .then( async data => {
+        console.log('DATA OBTENEDIA')
+        console.log(data)
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
             if(data){
-                await (data.prosConImagenes).map((imagenes, pos) => {
-                    data.prosConImagenes[pos]['mostrando'] = true
-                    data.prosConImagenes[pos]['imagenPrev'] = "0"
-                });
-                await (data.prosSinImagenes).map((imagenes, pos) => {
-                    data.prosSinImagenes[pos]['mostrando'] = true
-                    data.prosSinImagenes[pos]['imagenPrev'] = "0"
+
+                console.log('NUEVA OBTENEDIA')
+                let dataConImagenes =  data.prosConImagenes
+                let dataSinImagen = data.prosSinImagenes
+                // dataConImagenes
+                console.log(dataConImagenes)
+                console.log(dataSinImagen)
+                // await dataConImagenes.map((imagenes, pos) => {
+                //     dataConImagenes[pos]['mostrando'] = true
+                //     dataConImagenes[pos]['imagenPrev'] = "0"
+                // });
+                await dataSinImagen.map((imagenes, pos) => {
+                    dataSinImagen[pos]['mostrando'] = true
+                    dataSinImagen[pos]['imagenPrev'] = "0"
                 });
                 dispatch({
                     type: OBTENER_DATOS_IMAGENES,
                     payload: {
-                        ConImagenes: JSON.stringify(data.prosConImagenes), 
-                        SinImagenes: JSON.stringify(data.prosSinImagenes),
+                        ConImagenes: dataConImagenes,
+                        SinImagenes: dataSinImagen,
+                        Inactivos: data.prosVencidos,
                         cargandoTablaBancoImagen: false 
                     }
                 })

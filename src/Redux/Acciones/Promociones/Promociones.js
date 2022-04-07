@@ -545,7 +545,7 @@ export const guardarImagenPromocionReducer = (
 
 }
 
-export const ObtenerPromocionesAcumuladasReducer = () => async (dispatch, getState) => {
+export const ObtenerPromocionesAcumuladasReducer = (eliminandoFiltro = false) => async (dispatch, getState) => {
 
     const mesSeleccionadoFiltro = getState().fechas.mesSeleccionadoFiltro
     const anioSeleccionadoFiltro = getState().fechas.anioSeleccionadoFiltro
@@ -618,6 +618,33 @@ export const ObtenerPromocionesAcumuladasReducer = () => async (dispatch, getSta
     }).catch((error)=> {
         console.log(error)
     });
+
+
+    if(eliminandoFiltro == true){
+        let aplicantoFiltro = true
+        let numeroAplicandoFiltro = 0
+
+        await sucursalesUsuario.map((sucursal) => {
+            if(sucursal.check == true){
+                // aplicantoFiltro = true
+                numeroAplicandoFiltro = numeroAplicandoFiltro + 1
+            }
+        })
+
+        if(numeroAplicandoFiltro <= 1){
+            aplicantoFiltro = false
+        }
+
+        dispatch({
+            type: CAMBIAR_APLICANDO_FILTRO_ACUMULADO,
+            payload : aplicantoFiltro
+        })
+    }
+
+    dispatch({
+        type: "CARGANDO_TODA_PLATAFORMA_CONFIGURACION",
+        payload : false
+    })
 
     return true
 
@@ -746,9 +773,24 @@ export const SeleccionarCategoriaXZonaAcumuladaReducer = (scaid, limpiarCanales,
     });
 }
 
-export const MostrarPromocionesNuevasReducer = () => (dispatch, getState) => {
+export const MostrarPromocionesNuevasReducer = () => async (dispatch, getState) => {
 
     let mostrar_promociones_nuevas = getState().promociones.mostrar_promociones_nuevas
+    let canalesPromociones = getState().promociones.canalesPromociones
+
+    await canalesPromociones.map( async (canal, posCanal) => {
+        await canal.promocionesOrdenadas.map((promos, posPromos) => {
+            if(promos.cspnuevapromocion == true){
+                canalesPromociones[posCanal]['canalconnuevaspromos'] = true
+            }
+        })
+    })
+
+    dispatch({
+        type: ACTUALIZAR_CANALES_DE_PROMOCIONES,
+        payload : canalesPromociones
+    })
+
 
     dispatch({
         type: MOSTRAR_PROMOCIONES_NUEVAS,

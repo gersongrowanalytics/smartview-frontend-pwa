@@ -250,7 +250,8 @@ const Promociones = () => {
                                         // }
         
                                         return (
-                                            <div className="Fila-Canal-Promocion">
+                                            canal.canalconnuevaspromos == true || mostrar_promociones_nuevas == false
+                                            ?<div className="Fila-Canal-Promocion">
                                                 <div
                                                     style={{
                                                         width: "339px",
@@ -292,10 +293,21 @@ const Promociones = () => {
                                                     </div>
                                                     <div
                                                         // onClick={() => console.log(colorSeleciconadoPromo)} 
-                                                        className="Cabecera-Canal-Promocion Wbold-S16-H21-CFFFFFF"
-                                                        style={{
-                                                            background:colorSeleciconadoPromo
-                                                        }}
+                                                        className={
+                                                            mostrar_promociones_nuevas == true
+                                                            ?"Cabecera-Canal-Promocion Wbold-S16-H21-C1E1E1E"
+                                                            :"Cabecera-Canal-Promocion Wbold-S16-H21-CFFFFFF"
+                                                        }
+                                                        style={
+                                                            mostrar_promociones_nuevas == true
+                                                            ?{
+                                                                background:'#FEDD34',
+                                                                color:'#1E1E1E !important'
+                                                            }
+                                                            :{
+                                                                background:colorSeleciconadoPromo
+                                                            }
+                                                        }
                                                         onClick={() => {
                                                             
                                                         }}
@@ -364,6 +376,7 @@ const Promociones = () => {
                                                 </div>
                                                 
                                             </div>
+                                            :null
                                         )
                                     })
                                 }
@@ -451,7 +464,7 @@ class CardPromocionClass extends React.Component {
                         
                         promocion.cspnuevapromocion == true
                         ?{
-                            border: "1px solid #FEDD34"
+                            border: "2px solid #FEDD34"
                         }
                         :{border: "1px solid "+colorSeleciconadoPromo}
                     

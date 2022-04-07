@@ -7,10 +7,15 @@ import '../../Estilos/Rutas/ElementosEnviados/ElementosEnviadosNuevo.css'
 import FlechaAbajo from '../../Assets/Img/ElementosEnviados/Angulo-abajo.png'
 import FlechaAbajoBlanco from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
 import IconoTelegram from '../../Assets/Img/ElementosEnviados/Avión-Reenviar.png'
+import IconoAvionVerde from '../../Assets/Img/ElementosEnviados/Avión-Enviado.png'
+import IconoAvionRojo from '../../Assets/Img/ElementosEnviados/Avión-Pendiente.png'
+
 import IconoReenviar from '../../Assets/Img/ElementosEnviados/Reenviar.png'
 import {
     dataElementosEnviados
 } from '../../Redux/Acciones/ElementosEnviados/ElementosEnviados.js'
+import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
+import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
 
 const ElementosEnviadosNuevo = () => {
 
@@ -24,7 +29,8 @@ const ElementosEnviadosNuevo = () => {
         paginasTotales,
         paginaActual,
         indexRegistro,
-        cargandoTablaElementosEnviados
+        cargandoTablaElementosEnviados,
+        data_paginate_elementos_enviados
     } = useSelector(({elementosEnviados}) => elementosEnviados);
 
     const cargarDatosTabla = async(paginaActualTabla) => {
@@ -71,12 +77,16 @@ const ElementosEnviadosNuevo = () => {
             <Row>
                 <Col xl={12}>
                     <div className='Contenedor-Btn-Elementos-Enviados'>
-                        <div className='Btn-Elementos-Enviados' style={{width:'84px'}}>
-                            Año
+
+                        <div
+                            style={{marginLeft:'-20px'}}
+                        >
+                            <FiltroAnioVentasPromociones />
                         </div>
-                        <div className='Btn-Elementos-Enviados' style={{width:'84px'}}>
-                            Mes
+                        <div style={{marginRight:'20px', marginLeft:'20px'}}>
+                            <FiltroMesVentasPromociones />                    
                         </div>
+
                         <div className='Btn-Elementos-Enviados' style={{width:'143px', paddingLeft:'12px'}}>
                             <span>Tipo de Envio</span>
                             <img src={FlechaAbajo} style={{width:'26px'}}/>
@@ -90,7 +100,7 @@ const ElementosEnviadosNuevo = () => {
                 <Col xl={12}>
                     <div className='Paginacion-Elementos-Enviados'>
                         <div>
-                            <span>1 - 20 de 40 </span>
+                            <span>{data_paginate_elementos_enviados.from} - {data_paginate_elementos_enviados.to} de {data_paginate_elementos_enviados.total} </span>
                             <LeftOutlined 
                                 style={{marginRight:'20px'}}
                                 onClick={() => paginaAnterior(paginaActualTabla)}
@@ -102,7 +112,11 @@ const ElementosEnviadosNuevo = () => {
                     </div>  
                 </Col>
             </Row>
-            <Row>
+            <Row
+                style={{
+                    textAlign: "-webkit-center",
+                }}
+            >
                 <Col xl={24}>
                     <Spin
                         size='large'
@@ -164,30 +178,122 @@ const ElementosEnviadosNuevo = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        n.map((e) => {
+                                        elementosEnviados.map((data, pos) => {
+
+                                            let sucursales = []
+                                            if(data.ucesucursales){
+                                                sucursales = JSON.parse(data.ucesucursales)
+                                            }
+
+
+                                            const newDate = new Date(data.ucefecha)
+                                            const dia = newDate.getDate()+1;
+                                            let mes = newDate.getMonth() + 1;
+                                            const anio = newDate.getFullYear();
+
+                                            if(mes == 1){
+                                                mes = "Enero"
+                                            }else if(mes == 2){
+                                                mes = "Febrero"
+                                            }else if(mes == 3){
+                                                mes = "Marzo"
+                                            }else if(mes == 4){
+                                                mes = "Abril"
+                                            }else if(mes == 5){
+                                                mes = "Mayo"
+                                            }else if(mes == 6){
+                                                mes = "Junio"
+                                            }else if(mes == 7){
+                                                mes = "Julio"
+                                            }else if(mes == 8){
+                                                mes = "Agosto"
+                                            }else if(mes == 9){
+                                                mes = "Setiembre"
+                                            }else if(mes == 10){
+                                                mes = "Octubre"
+                                            }else if(mes == 11){
+                                                mes = "Noviembre"
+                                            }else if(mes == 12){
+                                                mes = "Diciembre"
+                                            }
+
                                             return(
-                                                <tr>
+                                                <tr
+                                                    key={data.uceid}
+                                                >
                                                     <td>
-                                                        1
+                                                        {pos+1}
                                                     </td>
                                                     <td>
-                                                        Prom. Nuevas
+                                                        {data.ucetipo}
+                                                    </td>
+                                                    <td
+                                                        onClick={() => {
+                                                            console.log(data.ucesucursales)
+                                                            console.log(JSON.parse(data.ucesucursales))
+                                                        }}
+                                                        style={{position:'relative'}}
+                                                        className="Celda-Lista-Sucursales-Elementos-Enviados"
+                                                    >
+                                                        {
+                                                            sucursales.length > 0
+                                                            ?sucursales[0]
+                                                            :null
+                                                        }
+                                                        <div className='Contenedor-Lista-Sucursales-Elementos-Enviados'>
+                                                            <Row>
+                                                                {
+                                                                    sucursales.length > 0
+                                                                    ?sucursales.map((sucursal) => {
+                                                                        return(
+                                                                            <Col 
+                                                                                xl={12}
+                                                                                style={{
+                                                                                    paddingRight:'20px'
+                                                                                }}
+                                                                            >
+                                                                                {sucursal}
+                                                                            </Col>
+                                                                        )
+                                                                    })
+                                                                    :null
+                                                                }
+                                                            </Row>
+                                                        </div>
                                                     </td>
                                                     <td>
-                                                        Despensa de la Selva
+                                                        {data.dcedestinatario}
+                                                    </td>
+                                                    <td
+                                                        style={{
+                                                            textAlign: "left",
+                                                            paddingLeft: "5px"
+                                                        }}
+                                                    >
+                                                        {
+                                                            pos == 0 || pos == 1 || pos == 2
+                                                            ?<img src={IconoAvionVerde} style={{width:'19px',marginRight:'5px'}}/>
+                                                            :pos == 5 || pos == 8
+                                                                ?<img src={IconoAvionRojo} style={{width:'19px',marginRight:'5px'}}/>
+                                                                :<img src={IconoTelegram} style={{width:'19px',marginRight:'5px'}}/>
+                                                        }
+
+                                                        {
+                                                            pos == 0 || pos == 1 || pos == 2
+                                                            ?<span style={{color:'#00CA8A'}}>Enviado</span>
+                                                            :pos == 5 || pos == 8
+                                                                ?<span style={{color:'#EF2206'}}>Pendiente</span>
+                                                                :<span style={{color:'#558CFF'}}>Reenviado</span>
+                                                        }
+                                                        
+                                                        
                                                     </td>
                                                     <td>
-                                                        Nombredestino@.com.pe
+                                                        {/* {data.ucedia} {data.ucemes} {data.uceanio} */}
+                                                        {dia} {mes} {anio}
                                                     </td>
                                                     <td>
-                                                        <img src={IconoTelegram} style={{width:'19px',marginRight:'5px'}}/>
-                                                        <span>Reenviado</span>
-                                                    </td>
-                                                    <td>
-                                                        25 Mar 2022
-                                                    </td>
-                                                    <td>
-                                                        8:00
+                                                        {data.ucehora}
                                                     </td>
                                                     <td>
                                                         <div className='Fondo-Icono-Reenviar'>

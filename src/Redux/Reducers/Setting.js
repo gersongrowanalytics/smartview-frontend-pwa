@@ -1,7 +1,8 @@
 
 const initialSettings = {
     cookiesaceptadas : false,
-    leyendopoliticas : false
+    leyendopoliticas : false,
+    cargando_plataforma : false
 };
 
 const Settings = (state = initialSettings, action) => {
@@ -15,6 +16,11 @@ const Settings = (state = initialSettings, action) => {
             return {
                 ...state,
                 leyendopoliticas : action.payload
+            }
+        case "CARGANDO_TODA_PLATAFORMA_CONFIGURACION":
+            return {
+                ...state,
+                cargando_plataforma : action.payload
             }
         default:
             return state;

@@ -13,6 +13,13 @@ import Agregar from '../../Assets/Img/Administrativo/TiposUsuarios/agregar.png'
 import {
     dataTiposUsuarios
 } from '../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
+import {
+    dataPermisos
+} from '../../Redux/Acciones/Administrativo/Permisos/Permisos'
+import {
+    ObtenerPermisosTipoUsuario
+} from '../../Redux/Acciones/Administrativo/TiposUsuarios/TiposUsuarios'
+
 const Administrativo = () => {
 
     const dispatch = useDispatch()
@@ -31,6 +38,7 @@ const Administrativo = () => {
     console.log(arrayCantidadFilas)
     const cargarDatos = async() => {
         await dispatch(dataTiposUsuarios())
+        await dispatch(dataPermisos())
     }
 
     useEffect(() => {
@@ -120,9 +128,9 @@ const Administrativo = () => {
                                                         </div>
                                                         <div className='flip-card-back'>
                                                             <Link 
-                                                                to={{
-                                                                    pathname: '/administrativo/perfil',
-                                                                }}
+                                                                to={{ pathname: '/administrativo/perfil'}}
+                                                                onClick={() => {dispatch(ObtenerPermisosTipoUsuario(tipo.tpuid))
+                                                                console.log(tipo.tpuid)}}
                                                             >
                                                                 <img src={Agregar} className='Imagen2-Perfil'/>
                                                             </Link>

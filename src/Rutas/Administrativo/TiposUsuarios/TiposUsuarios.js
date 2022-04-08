@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { Row, Col, Switch } from 'antd'
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoPerfil.css'
 import FlechaAbajo from '../../../Assets/Img/Administrativo/Perfil/caret-down-black.png'
 import FlechaDerecha from '../../../Assets/Img/Administrativo/Perfil/caret-right-black.png'
@@ -38,6 +39,16 @@ const TiposUsuarios = () => {
                     'Actualizar Distribuidoras','Reconocimientos de pagos','Promociones liquidadas']
     const tradicionales = ["Sell In", 'Sell Out','Rebate','Promociones','Reportes de pago','Catálogo']
     const modernos = ['Sell In','Sell Out','Contraprestaciones']
+
+    const { 
+        permisosTipoUsuario
+    } = useSelector(({tiposUsuarios}) => tiposUsuarios);
+
+    const{
+        permisos
+    } = useSelector(({permisos}) => permisos);
+
+    console.log(permisos)
 
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
@@ -136,7 +147,7 @@ const TiposUsuarios = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xl={12}>
+                <Col xl={13}>
                     <div className='Contenedor-Perfil'>
                         <div className='Titulo-Perfil'>
                             Administrador
@@ -247,56 +258,62 @@ const TiposUsuarios = () => {
                                 ) : null
                             }
                         </div>
-                        {/* CANAL */}
-                        <div className='Select-Canal-Perfil'>
-                            <div 
-                                className='Campo-Switch-Abrir-Cerrar' 
-                                onClick={() => setcanalOpcionesAbierto(!canalOpcionesAbierto)}
-                            >
-                                {
-                                    canalOpcionesAbierto == true ? (
-                                        <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
-                                    ) : (
-                                        <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
-                                    )
-                                }
-                                <span className='Texto-Select-Canal-Perfil' >Canal</span>
-                            </div>
-                            <div className='Switch-Estilos Switch-Modulo'>
-                                <Switch 
-                                    size="small" 
-                                    onChange={(e) => SeleccionarCanales(e)} 
-                                    defaultChecked={canalesSeleccionados}
-                                />
-                            </div>
-                        </div>
-                        <div 
-                            className={canalOpcionesAbierto == true 
-                            ? 'Contenido-Select-Canal'
-                            : 'Contenido-Select-Canal-Oculto'}    
-                        >
-                            {
-                                canales.map((canal, posicion)=>{
-                                    return (
-                                        <>
-                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
-                                                <div>
-                                                    {canal}
-                                                </div>
+                        {
+                            permisosTipoUsuario.map((permiso) => {
+                                return (
+                                    <>
+                                        <div className='Select-Canal-Perfil'>
+                                            <div 
+                                                className='Campo-Switch-Abrir-Cerrar' 
+                                                onClick={() => setcanalOpcionesAbierto(!canalOpcionesAbierto)}
+                                            >
+                                                {
+                                                    canalOpcionesAbierto == true ? (
+                                                        <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
+                                                    ) : (
+                                                        <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
+                                                    )
+                                                }
+                                                <span className='Texto-Select-Canal-Perfil' >{permiso.tipo_permiso}</span>
+                                            </div>
+                                            <div className='Switch-Estilos Switch-Modulo'>
                                                 <Switch 
                                                     size="small" 
-                                                    style={{marginRight:'12px'}} 
-                                                    checked={posicion == '0' ? canalModerno : canalTradicional}
-                                                    onChange={(e) => SeleccionarSubCanal(e, posicion)}
+                                                    onChange={(e) => SeleccionarCanales(e)} 
+                                                    defaultChecked={permiso.seleccionado_todo}
                                                 />
                                             </div>
-                                        </>
-                                    )
-                                })
-                            }
-                        </div>
-                        {/* OPCIONES */}
-                        <div className='Select-Canal-Perfil'>
+                                        </div>
+                                        <div 
+                                            className={canalOpcionesAbierto == true 
+                                            ? 'Contenido-Select-Canal'
+                                            : 'Contenido-Select-Canal-Oculto'}    
+                                        >
+                                            {
+                                                permiso.permisos.map((subpermisos, posicion)=>{
+                                                    return(
+                                                        <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
+                                                            <div>
+                                                                {subpermisos.pemnombre}
+                                                            </div>
+                                                            <Switch 
+                                                                size="small" 
+                                                                style={{marginRight:'12px'}} 
+                                                                defaultChecked={subpermisos.seleccionado}
+                                                                onChange={(e) => SeleccionarSubCanal(e, posicion)}
+                                                            /> 
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
+                        
+                        
+                        {/* <div className='Select-Canal-Perfil'>
                             <div className='Campo-Switch-Abrir-Cerrar' onClick={() => setopcionesOpcionesAbierto(!opcionesOpcionesAbierto)}>
                                 {
                                     opcionesOpcionesAbierto == true ? (
@@ -330,9 +347,8 @@ const TiposUsuarios = () => {
                                     )
                                 })
                             }
-                        </div>
-                        {/* SOPORTE */}
-                        <div className='Select-Canal-Perfil'>
+                        </div> */}
+                        {/* <div className='Select-Canal-Perfil'>
                             <div 
                                 className='Campo-Switch-Abrir-Cerrar' 
                                 onClick={() => setsoporteOpcionesAbierto(!soporteOpcionesAbierto)}
@@ -369,9 +385,8 @@ const TiposUsuarios = () => {
                                     )
                                 })
                             }
-                        </div>
-                        {/* DESCARGA */}
-                        <div className='Select-Canal-Perfil'>
+                        </div> */}
+                        {/* <div className='Select-Canal-Perfil'>
                             <div 
                                 className='Campo-Switch-Abrir-Cerrar' 
                                 onClick={() => setdescargaOpcionesAbierto(!descargaOpcionesAbierto)}
@@ -464,9 +479,8 @@ const TiposUsuarios = () => {
                                     )
                                 })
                             }
-                        </div>
-                        {/* UPLOAD */}
-                        <div className='Select-Canal-Perfil'>
+                        </div> */}
+                        {/* <div className='Select-Canal-Perfil'>
                             <div 
                                 className='Campo-Switch-Abrir-Cerrar' 
                                 onClick={() => setuploadOpcionesAbierto(!uploadOpcionesAbierto)}
@@ -503,11 +517,11 @@ const TiposUsuarios = () => {
                                     )
                                 })
                             }
-                        </div>
+                        </div> */}
                         <div className='Btn-Guardar-Perfil'>Guardar</div>
                     </div>
                 </Col>
-                <Col xl={12}>
+                <Col xl={11}>
                     <div className='Contenedor-Imagen-Perfil'>
                         <img src={ImagenPerfil} style={{width: '80%'}}></img>
                         <div className='Contenedor-Informacion-Perfil'>

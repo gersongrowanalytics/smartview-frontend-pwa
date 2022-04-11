@@ -28,14 +28,14 @@ const Administrativo = () => {
     const { 
         tiposUsuarios
     } = useSelector(({usuarios}) => usuarios);
-    console.log(tiposUsuarios)
+    // console.log(tiposUsuarios)
 
     let cantidadFilas = Math.round(tiposUsuarios.length / 4)
     let arrayCantidadFilas = []
     for (let i = 1; i <= cantidadFilas; i++) {
         arrayCantidadFilas.push(i)
     }
-    console.log(arrayCantidadFilas)
+    // console.log(arrayCantidadFilas)
     const cargarDatos = async() => {
         await dispatch(dataTiposUsuarios())
         await dispatch(dataPermisos())

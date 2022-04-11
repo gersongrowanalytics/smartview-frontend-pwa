@@ -9,9 +9,13 @@ import ImagenPerfil from '../../../Assets/Img/Administrativo/Perfil/Completo-Adm
 import Editar from '../../../Assets/Img/Administrativo/Perfil/Editar-white.png'
 import Cerrar from '../../../Assets/Img/Administrativo/Perfil/Cortar.png'
 import Check from  '../../../Assets/Img/Administrativo/Perfil/Palomita-white.png'
+import {
+     cambiarEstadoAbiertoTiposPermisos
+} from '../../../Redux/Acciones/Administrativo/TiposUsuarios/TiposUsuarios'
 
 const TiposUsuarios = () => {
 
+    const dispatch = useDispatch()
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
     const [anioSeleccionado, setanioSeleccionado] = useState("0")
     const [mesSeleccionado, setmesSeleccionado] = useState("0")
@@ -22,6 +26,7 @@ const TiposUsuarios = () => {
     
     const [anioOpcionesAbierto, setanioOpcionesAbierto] = useState(false)
     const [mesOpcionesAbierto, setmesOpcionesAbierto] = useState(false)
+    const [tipoPermisoAbierto, settipoPermisoAbierto] = useState("")
     const [canalOpcionesAbierto, setcanalOpcionesAbierto] = useState(false)
     const [opcionesOpcionesAbierto, setopcionesOpcionesAbierto] = useState(false)
     const [soporteOpcionesAbierto, setsoporteOpcionesAbierto] = useState(false)
@@ -41,14 +46,17 @@ const TiposUsuarios = () => {
     const modernos = ['Sell In','Sell Out','Contraprestaciones']
 
     const { 
-        permisosTipoUsuario
+        permisosTipoUsuario,
+        datosTipoUsuario,
+        tpuid,
+        tpunombre,
+        tpuimagen,
+        tpufechainicio,
+        tpufechafinal,
+        estid
     } = useSelector(({tiposUsuarios}) => tiposUsuarios);
 
-    const{
-        permisos
-    } = useSelector(({permisos}) => permisos);
-
-    console.log(permisos)
+    console.log(permisosTipoUsuario)
 
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
@@ -153,7 +161,7 @@ const TiposUsuarios = () => {
                             Administrador
                         </div>
                         {/* AÑO */}
-                        <div className='Fila-Select-Anio-Mes-Perfil'>
+                        {/* <div className='Fila-Select-Anio-Mes-Perfil'>
                             <div    
                                 className='Select-Anio-Perfil'
                                 onClick={() => setanioOpcionesAbierto(!anioOpcionesAbierto)}
@@ -213,9 +221,9 @@ const TiposUsuarios = () => {
                                 ) : null
                             }
                             
-                        </div>
+                        </div> */}
                         {/* MES */}
-                        <div className='Fila-Select-Anio-Mes-Perfil'>
+                        {/* <div className='Fila-Select-Anio-Mes-Perfil'>
                             <div 
                                 className='Select-Mes-Perfil'
                                 onClick={() => setmesOpcionesAbierto(!mesOpcionesAbierto)}
@@ -257,18 +265,18 @@ const TiposUsuarios = () => {
                                     </div>
                                 ) : null
                             }
-                        </div>
+                        </div> */}
                         {
-                            permisosTipoUsuario.map((permiso) => {
+                            permisosTipoUsuario.map((permiso,posicion) => {
                                 return (
                                     <>
                                         <div className='Select-Canal-Perfil'>
                                             <div 
                                                 className='Campo-Switch-Abrir-Cerrar' 
-                                                onClick={() => setcanalOpcionesAbierto(!canalOpcionesAbierto)}
+                                                onClick={() => dispatch(cambiarEstadoAbiertoTiposPermisos(posicion))}
                                             >
                                                 {
-                                                    canalOpcionesAbierto == true ? (
+                                                    permiso.abrir_opciones == true ? (
                                                         <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
                                                     ) : (
                                                         <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
@@ -285,7 +293,7 @@ const TiposUsuarios = () => {
                                             </div>
                                         </div>
                                         <div 
-                                            className={canalOpcionesAbierto == true 
+                                            className={ permiso.abrir_opciones == true
                                             ? 'Contenido-Select-Canal'
                                             : 'Contenido-Select-Canal-Oculto'}    
                                         >
@@ -523,34 +531,41 @@ const TiposUsuarios = () => {
                 </Col>
                 <Col xl={11}>
                     <div className='Contenedor-Imagen-Perfil'>
-                        <img src={ImagenPerfil} style={{width: '80%'}}></img>
+                        {
+                            tpuimagen == null ? (
+                                <img src={tpuimagen} style={{width: '80%'}}></img>
+                            ) : ( 
+                                <img src={ImagenPerfil} style={{width: '80%'}}></img>
+                            )
+                        }
+                        
                         <div className='Contenedor-Informacion-Perfil'>
                             {
                                 editando == true ? (
                                     <input value='Administrador' className='Input-Administrativo-Perfil' style={{fontWeight: '700'}}/>
                                 ) : (
-                                    <div>Administrador</div>
+                                    <div>{tpunombre}</div>
                                 )
                             }
                             {
                                  editando == true ? (
                                     <input value='Activo' className='Input-Administrativo-Perfil'/>
                                  ) : (
-                                    <div style={{fontWeight:'400'}}>Activo</div>
+                                    <div style={{fontWeight:'400'}}>{estid}</div>
                                  )
                             }
                             {
                                  editando == true ? (
                                     <input value='Fecha inicio: 07 Enero 2022' className='Input-Administrativo-Perfil'/>
                                  ) : (
-                                    <div style={{fontWeight:'400'}}>Fecha inicio: 07 Enero 2022</div>
+                                    <div style={{fontWeight:'400'}}>Fecha inicio: {tpufechainicio}</div>
                                  )
                             }
                             {
                                  editando == true ? (
                                     <input value='Fecha Fin: 07 Enero 2022' className='Input-Administrativo-Perfil'/>
                                  ) : (
-                                    <div style={{fontWeight:'400'}}>Fecha Fin: 07 Enero 2022</div>
+                                    <div style={{fontWeight:'400'}}>Fecha Fin: {tpufechafinal}</div>
                                  )
                             }                            
                             <div 

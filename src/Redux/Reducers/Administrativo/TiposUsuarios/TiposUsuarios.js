@@ -1,10 +1,16 @@
 import {
-    OBTENER_PERMISOS_TIPO_USUARIO
+    OBTENER_PERMISOS_TIPO_USUARIO,
+    OBTENER_UNICAMENTE_PERMISOS_TIPOS_USUARIOS
 } from '../../../../Constantes/Administrativo/TiposUsuarios/TiposUsuarios'
 
 const INIT_STATE = {
     permisosTipoUsuario: [],
-    tpuid: ""
+    tpuid: "",
+    tpunombre : "",
+    tpuimagen : "",
+    tpufechainicio : "",
+    tpufechafinal : "",
+    estid : ""
 };
 
 export default (state = INIT_STATE, action) => {
@@ -13,7 +19,16 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 permisosTipoUsuario: action.payload.permisosTipoUsuario,
-                tpuid: action.payload.tpuid
+                tipo_usuario: action.payload.datosTipoUsuario,
+                tpuid: action.payload.tpuid,
+                tpunombre : action.payload.tpunombre,
+                estid: action.payload.estid
+            }   
+        }
+        case OBTENER_UNICAMENTE_PERMISOS_TIPOS_USUARIOS:{
+            return {
+                ...state,
+                permisosTipoUsuario: action.payload
             }
         }
         default:

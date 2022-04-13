@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Switch } from 'antd'
+import { Row, Col, Switch, Form, Input } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoPerfil.css'
@@ -10,7 +10,10 @@ import Editar from '../../../Assets/Img/Administrativo/Perfil/Editar-white.png'
 import Cerrar from '../../../Assets/Img/Administrativo/Perfil/Cortar.png'
 import Check from  '../../../Assets/Img/Administrativo/Perfil/Palomita-white.png'
 import {
-     cambiarEstadoAbiertoTiposPermisos
+     cambiarEstadoAbiertoTiposPermisos,
+     cambiarEstadoPermisos,
+     editarPermisosTipoUsuario,
+     cambiarEstadoTipoPermiso
 } from '../../../Redux/Acciones/Administrativo/TiposUsuarios/TiposUsuarios'
 
 const TiposUsuarios = () => {
@@ -21,6 +24,8 @@ const TiposUsuarios = () => {
     const [mesSeleccionado, setmesSeleccionado] = useState("0")
     const [canalesSeleccionados, setcanalesSeleccionados] = useState(true)
     const [editando, seteditando] = useState(false)
+    const [estadoTipoUsuario, setestadoTipoUsuario] = useState("Inactivo")
+    const [estadoBooleanTipoUsuario, setestadoBooleanTipoUsuario] = useState(false)
     const [canalModerno, setcanalModerno] = useState(true)
     const [canalTradicional, setcanalTradicional] = useState(true)
     
@@ -34,29 +39,24 @@ const TiposUsuarios = () => {
     const [uploadOpcionesAbierto, setuploadOpcionesAbierto] = useState(false)
     const [tradicionalOpcionesAbierto, settradicionalOpcionesAbierto] = useState(false)
     const [modernoOpcionesAbierto, setmodernoOpcionesAbierto] = useState(false)
+    const [form] = Form.useForm()
 
     const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Setiembre','Octubre','Noviembre','Diciembre']
-    const canales = ['Canal Moderno', 'Canal Tradicional']
-    const opciones = ['Venta Moderno', 'Venta Tradicional', 'Promociones Tradicional','Lista de Precios','Banco de Imágenes']
-    const soportes = ['Enviar SMS Wsp', 'Elementos enviados', 'Administrador']
     const descargas = ['Tradicional','Moderno']
-    const uploads = ['Sell In', 'Objetivos Sell In', 'Objetivos Sell Out', 'Mecánica Promocional', 'Rebate', 'Actualizar Productos',
-                    'Actualizar Distribuidoras','Reconocimientos de pagos','Promociones liquidadas']
     const tradicionales = ["Sell In", 'Sell Out','Rebate','Promociones','Reportes de pago','Catálogo']
     const modernos = ['Sell In','Sell Out','Contraprestaciones']
 
     const { 
         permisosTipoUsuario,
-        datosTipoUsuario,
-        tpuid,
         tpunombre,
         tpuimagen,
         tpufechainicio,
         tpufechafinal,
-        estid
+        estid,
+        tpuid
     } = useSelector(({tiposUsuarios}) => tiposUsuarios);
 
-    console.log(permisosTipoUsuario)
+    // console.log(permisosTipoUsuario)    
 
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
@@ -71,22 +71,56 @@ const TiposUsuarios = () => {
         setcanalModerno(valor)
         setcanalTradicional(valor)
     }
-    const SeleccionarSubCanal = (valor, posicion) => {
 
+    const SeleccionarSubCanal = (valor, posicion) => {
         if (posicion == '0') {
             setcanalModerno(valor)
         }else if (posicion == '1') {
             setcanalTradicional(valor)
         }
-        
     }
-  
+
     const AbrirSubmoduloDescarga = (posicion) => {
         if (posicion == "0") {
             settradicionalOpcionesAbierto(!tradicionalOpcionesAbierto)
         }else if(posicion == "1"){
             setmodernoOpcionesAbierto(!modernoOpcionesAbierto)
         }
+    }
+
+    const cambiarEstado = (valor) => {
+        if (valor == true) {
+            setestadoBooleanTipoUsuario(true)
+            setestadoTipoUsuario("Activo")
+        }else if (valor == false) {
+            setestadoBooleanTipoUsuario(false)
+            setestadoTipoUsuario("Inactivo")
+        }
+    }
+
+    const editarTipoUsuario = () => {
+        form.setFieldsValue({
+            nombre: tpunombre,
+            // estado: estid, 
+            // fechaInicial: usuario.usucorreopersonal,
+            // fechaFinal: usuario.usucorreo,
+        });
+    }
+
+    const onFinish = async(valores) => {
+        let editarTipoUsuario = true
+        let editarPermisos = false
+        let tipoUsuarioDatos = {
+            're_nombre': valores['nombre'],
+            're_estado': valores['estado'],
+            're_fechaInicio': valores['fechaInicio'],
+            're_fechaFinal': valores['fechaFinal'],
+            're_imagen': " ",
+            're_imagencircular': " "
+        }
+        console.log('editar',tipoUsuarioDatos)
+        await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, [], tpuid, editarTipoUsuario, editarPermisos))
+        seteditando(!editando)
     }
 
     return (
@@ -267,13 +301,13 @@ const TiposUsuarios = () => {
                             }
                         </div> */}
                         {
-                            permisosTipoUsuario.map((permiso,posicion) => {
+                            permisosTipoUsuario.map((permiso,posicionTipoPermiso) => {
                                 return (
                                     <>
                                         <div className='Select-Canal-Perfil'>
                                             <div 
                                                 className='Campo-Switch-Abrir-Cerrar' 
-                                                onClick={() => dispatch(cambiarEstadoAbiertoTiposPermisos(posicion))}
+                                                onClick={() => dispatch(cambiarEstadoAbiertoTiposPermisos(posicionTipoPermiso))}
                                             >
                                                 {
                                                     permiso.abrir_opciones == true ? (
@@ -287,8 +321,8 @@ const TiposUsuarios = () => {
                                             <div className='Switch-Estilos Switch-Modulo'>
                                                 <Switch 
                                                     size="small" 
-                                                    onChange={(e) => SeleccionarCanales(e)} 
-                                                    defaultChecked={permiso.seleccionado_todo}
+                                                    onChange={(estado) => dispatch(cambiarEstadoTipoPermiso(estado, posicionTipoPermiso))} 
+                                                    checked={permiso.seleccionar_tipoPermiso}
                                                 />
                                             </div>
                                         </div>
@@ -298,7 +332,7 @@ const TiposUsuarios = () => {
                                             : 'Contenido-Select-Canal-Oculto'}    
                                         >
                                             {
-                                                permiso.permisos.map((subpermisos, posicion)=>{
+                                                permiso.permisos.map((subpermisos, posicionPermiso)=>{
                                                     return(
                                                         <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
                                                             <div>
@@ -307,8 +341,8 @@ const TiposUsuarios = () => {
                                                             <Switch 
                                                                 size="small" 
                                                                 style={{marginRight:'12px'}} 
-                                                                defaultChecked={subpermisos.seleccionado}
-                                                                onChange={(e) => SeleccionarSubCanal(e, posicion)}
+                                                                checked={subpermisos.seleccionado}
+                                                                onChange={() => dispatch(cambiarEstadoPermisos(posicionPermiso, posicionTipoPermiso))}
                                                             /> 
                                                         </div>
                                                     )
@@ -320,80 +354,6 @@ const TiposUsuarios = () => {
                             })
                         }
                         
-                        
-                        {/* <div className='Select-Canal-Perfil'>
-                            <div className='Campo-Switch-Abrir-Cerrar' onClick={() => setopcionesOpcionesAbierto(!opcionesOpcionesAbierto)}>
-                                {
-                                    opcionesOpcionesAbierto == true ? (
-                                        <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
-                                    ) : (
-                                        <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
-                                    )
-                                }
-                                <span className='Texto-Select-Canal-Perfil' >Opciones</span>
-                            </div>
-                            <div className='Switch-Estilos Switch-Modulo'>
-                                <Switch size="small"/>
-                            </div>
-                        </div>
-                        <div 
-                            className={opcionesOpcionesAbierto == true 
-                            ? 'Contenido-Select-Canal'
-                            : 'Contenido-Select-Canal-Oculto'}    
-                        >
-                            {
-                                opciones.map((opcion)=>{
-                                    return (
-                                        <>
-                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
-                                                <div>
-                                                    {opcion}
-                                                </div>
-                                                <Switch size="small" style={{marginRight:'12px'}}/>
-                                            </div>
-                                        </>
-                                    )
-                                })
-                            }
-                        </div> */}
-                        {/* <div className='Select-Canal-Perfil'>
-                            <div 
-                                className='Campo-Switch-Abrir-Cerrar' 
-                                onClick={() => setsoporteOpcionesAbierto(!soporteOpcionesAbierto)}
-                            >
-                                {
-                                    soporteOpcionesAbierto == true ? (
-                                        <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
-                                    ) : (
-                                        <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
-                                    )
-                                }
-                                <span className='Texto-Select-Canal-Perfil' >Soporte</span>
-                            </div>
-                            <div className='Switch-Estilos Switch-Modulo'>
-                                <Switch size="small"/>
-                            </div>
-                        </div>
-                        <div 
-                            className={soporteOpcionesAbierto == true 
-                            ? 'Contenido-Select-Canal'
-                            : 'Contenido-Select-Canal-Oculto'}    
-                        >
-                            {
-                                soportes.map((soporte)=>{
-                                    return (
-                                        <>
-                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
-                                                <div>
-                                                    {soporte}
-                                                </div>
-                                                <Switch size="small" style={{marginRight:'12px'}}/>
-                                            </div>
-                                        </>
-                                    )
-                                })
-                            }
-                        </div> */}
                         {/* <div className='Select-Canal-Perfil'>
                             <div 
                                 className='Campo-Switch-Abrir-Cerrar' 
@@ -488,45 +448,10 @@ const TiposUsuarios = () => {
                                 })
                             }
                         </div> */}
-                        {/* <div className='Select-Canal-Perfil'>
-                            <div 
-                                className='Campo-Switch-Abrir-Cerrar' 
-                                onClick={() => setuploadOpcionesAbierto(!uploadOpcionesAbierto)}
-                            >
-                                {
-                                    uploadOpcionesAbierto == true ? (
-                                        <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
-                                    ) : (
-                                        <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
-                                    )
-                                }
-                                <span className='Texto-Select-Canal-Perfil' >Upload</span>
-                            </div>
-                            <div className='Switch-Estilos Switch-Modulo'>
-                                <Switch size="small"/>
-                            </div>
-                        </div>
                         <div 
-                            className={uploadOpcionesAbierto == true 
-                            ? 'Contenido-Select-Canal'
-                            : 'Contenido-Select-Canal-Oculto'}    
-                        >
-                            {
-                                uploads.map((upload)=>{
-                                    return (
-                                        <>
-                                            <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
-                                                <div>
-                                                    {upload}
-                                                </div>
-                                                <Switch size="small" style={{marginRight:'12px'}}/>
-                                            </div>
-                                        </>
-                                    )
-                                })
-                            }
-                        </div> */}
-                        <div className='Btn-Guardar-Perfil'>Guardar</div>
+                            className='Btn-Guardar-Perfil'
+                            onClick={() => {dispatch(editarPermisosTipoUsuario(null, permisosTipoUsuario, tpuid, false, true))}}
+                        >Guardar</div>
                     </div>
                 </Col>
                 <Col xl={11}>
@@ -542,51 +467,76 @@ const TiposUsuarios = () => {
                         <div className='Contenedor-Informacion-Perfil'>
                             {
                                 editando == true ? (
-                                    <input value='Administrador' className='Input-Administrativo-Perfil' style={{fontWeight: '700'}}/>
+                                    <Form
+                                        onFinish={onFinish}
+                                        autoComplete="off"
+                                        form={form}
+                                    >
+                                        <Form.Item name='nombre'>
+                                            <Input 
+                                                className='Input-Administrativo-Perfil' 
+                                                style={{fontWeight: '700'}}
+                                            />
+                                        </Form.Item>
+                                        {/* <Form.Item name='estado'>
+                                            <Input 
+                                                value={estid} 
+                                                className='Input-Administrativo-Perfil'
+                                            />
+                                        </Form.Item> */}
+                                        <div className='Switch-Estado-TipoUsuario'>   
+                                            <span>{estadoTipoUsuario}</span>
+                                            <Switch 
+                                                size="small" 
+                                                style={{marginRight:'12px'}}
+                                                onChange={(e)=> cambiarEstado(e)}
+                                                checked={estadoBooleanTipoUsuario}
+                                            />
+                                        </div>
+                                        <Form.Item name='fechaInicio'>
+                                            <Input 
+                                                // value='' 
+                                                type="date"
+                                                className='Input-Administrativo-Perfil'
+                                            />
+                                        </Form.Item>
+                                        <Form.Item name='fechaFinal'>
+                                            <Input 
+                                                // value='Fecha Fin: 07 Enero 2022' 
+                                                className='Input-Administrativo-Perfil'
+                                            />
+                                        </Form.Item>
+                                        <Form.Item>
+                                            <button 
+                                                type='submit' 
+                                                className='Circulo-Editar-Check-Perfil'
+                                            >
+                                                <img src={Check} style={{width: '28px'}}></img>
+                                            </button>
+                                        </Form.Item> 
+                                    </Form>
                                 ) : (
-                                    <div>{tpunombre}</div>
+                                    <>
+                                        <div>{tpunombre}</div>
+                                        <div style={{fontWeight:'400'}}>{estid}</div>
+                                        <div style={{fontWeight:'400'}}>Fecha inicio: {tpufechainicio}</div>
+                                        <div style={{fontWeight:'400'}}>Fecha Fin: {tpufechafinal}</div>
+                                        <div 
+                                            className='Circulo-Editar-Perfil'
+                                            onClick={() => 
+                                                {
+                                                    seteditando(!editando)
+                                                    editarTipoUsuario()
+                                                }}
+                                        >
+                                            <img src={Editar} style={{width: '14px'}}/>
+                                        </div>
+                                    </>
+                                    
                                 )
                             }
-                            {
-                                 editando == true ? (
-                                    <input value='Activo' className='Input-Administrativo-Perfil'/>
-                                 ) : (
-                                    <div style={{fontWeight:'400'}}>{estid}</div>
-                                 )
-                            }
-                            {
-                                 editando == true ? (
-                                    <input value='Fecha inicio: 07 Enero 2022' className='Input-Administrativo-Perfil'/>
-                                 ) : (
-                                    <div style={{fontWeight:'400'}}>Fecha inicio: {tpufechainicio}</div>
-                                 )
-                            }
-                            {
-                                 editando == true ? (
-                                    <input value='Fecha Fin: 07 Enero 2022' className='Input-Administrativo-Perfil'/>
-                                 ) : (
-                                    <div style={{fontWeight:'400'}}>Fecha Fin: {tpufechafinal}</div>
-                                 )
-                            }                            
-                            <div 
-                                className={ editando == true 
-                                    ? 'Circulo-Editar-Check-Perfil'
-                                    : 'Circulo-Editar-Perfil'}
-                                onClick={() => seteditando(!editando)}
-                            >
-                                {
-                                    editando == true ? (
-                                        <img src={Check} style={{width: '28px'}}></img>
-                                    ) : (
-                                        <img src={Editar} style={{width: '14px'}}></img>
-                                    )
-                                }
-                                
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
+                        </div>                  
+                    </div>     
                 </Col>
             </Row>
         </div>

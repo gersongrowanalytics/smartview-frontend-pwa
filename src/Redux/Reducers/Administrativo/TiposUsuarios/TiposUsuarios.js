@@ -19,9 +19,10 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 permisosTipoUsuario: action.payload.permisosTipoUsuario,
-                tipo_usuario: action.payload.datosTipoUsuario,
                 tpuid: action.payload.tpuid,
                 tpunombre : action.payload.tpunombre,
+                tpufechainicio: action.payload.tpufechainicio,
+                tpufechafinal: action.payload.tpufechafinal,
                 estid: action.payload.estid
             }   
         }

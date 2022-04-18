@@ -20,15 +20,16 @@ const TiposUsuarios = () => {
 
     const dispatch = useDispatch()
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
+    const [editando, seteditando] = useState(false)
+    const [estadoTipoUsuario, setestadoTipoUsuario] = useState("Inactivo")
+    const [valorEstadoTu, setvalorEstadoTu] = useState("")
+    const [estadoBooleanTipoUsuario, setestadoBooleanTipoUsuario] = useState(false)
+    
     const [anioSeleccionado, setanioSeleccionado] = useState("0")
     const [mesSeleccionado, setmesSeleccionado] = useState("0")
     const [canalesSeleccionados, setcanalesSeleccionados] = useState(true)
-    const [editando, seteditando] = useState(false)
-    const [estadoTipoUsuario, setestadoTipoUsuario] = useState("Inactivo")
-    const [estadoBooleanTipoUsuario, setestadoBooleanTipoUsuario] = useState(false)
     const [canalModerno, setcanalModerno] = useState(true)
     const [canalTradicional, setcanalTradicional] = useState(true)
-    
     const [anioOpcionesAbierto, setanioOpcionesAbierto] = useState(false)
     const [mesOpcionesAbierto, setmesOpcionesAbierto] = useState(false)
     const [tipoPermisoAbierto, settipoPermisoAbierto] = useState("")
@@ -41,7 +42,7 @@ const TiposUsuarios = () => {
     const [modernoOpcionesAbierto, setmodernoOpcionesAbierto] = useState(false)
     const [form] = Form.useForm()
 
-    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Setiembre','Octubre','Noviembre','Diciembre']
+    // const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Setiembre','Octubre','Noviembre','Diciembre']
     const descargas = ['Tradicional','Moderno']
     const tradicionales = ["Sell In", 'Sell Out','Rebate','Promociones','Reportes de pago','Catálogo']
     const modernos = ['Sell In','Sell Out','Contraprestaciones']
@@ -56,7 +57,7 @@ const TiposUsuarios = () => {
         tpuid
     } = useSelector(({tiposUsuarios}) => tiposUsuarios);
 
-    // console.log(permisosTipoUsuario)    
+    // console.log(tpuid)
 
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
@@ -92,19 +93,34 @@ const TiposUsuarios = () => {
         if (valor == true) {
             setestadoBooleanTipoUsuario(true)
             setestadoTipoUsuario("Activo")
+            setvalorEstadoTu("1")
         }else if (valor == false) {
             setestadoBooleanTipoUsuario(false)
             setestadoTipoUsuario("Inactivo")
+            setvalorEstadoTu("2")
         }
     }
 
-    const editarTipoUsuario = () => {
+    const camposEditarFormularioTipoUsuario = () => {
         form.setFieldsValue({
             nombre: tpunombre,
-            // estado: estid, 
-            // fechaInicial: usuario.usucorreopersonal,
-            // fechaFinal: usuario.usucorreo,
+            fechaInicio: tpufechainicio,
+            fechaFinal: tpufechafinal,
         });
+    }
+
+    const editarDatosTiposUsuarios = () => {
+        seteditando(!editando)
+        camposEditarFormularioTipoUsuario()
+        if(estid == 'Activo'){
+            setestadoBooleanTipoUsuario(true)
+            setestadoTipoUsuario("Activo")
+            setvalorEstadoTu("1")
+        }else{
+            setestadoBooleanTipoUsuario(false)
+            setestadoTipoUsuario("Inactivo")
+            setvalorEstadoTu("2")
+        }
     }
 
     const onFinish = async(valores) => {
@@ -112,13 +128,13 @@ const TiposUsuarios = () => {
         let editarPermisos = false
         let tipoUsuarioDatos = {
             're_nombre': valores['nombre'],
-            're_estado': valores['estado'],
+            're_estado': valorEstadoTu,
             're_fechaInicio': valores['fechaInicio'],
             're_fechaFinal': valores['fechaFinal'],
             're_imagen': " ",
             're_imagencircular': " "
         }
-        console.log('editar',tipoUsuarioDatos)
+        // console.log('editar',tipoUsuarioDatos)
         await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, [], tpuid, editarTipoUsuario, editarPermisos))
         seteditando(!editando)
     }
@@ -463,28 +479,91 @@ const TiposUsuarios = () => {
                                 <img src={ImagenPerfil} style={{width: '80%'}}></img>
                             )
                         }
-                        
-                        <div className='Contenedor-Informacion-Perfil'>
-                            {
-                                editando == true ? (
+                        {
+                            tpuid ? (
+                                <div className='Contenedor-Informacion-Perfil'>
+                                    {
+                                        editando == true ? (
+                                            <Form
+                                                onFinish={onFinish}
+                                                autoComplete="off"
+                                                form={form}
+                                            >
+                                                <div className='Input-Administrativo-Perfil'>
+                                                    <Form.Item name='nombre'>
+                                                        <Input 
+                                                            style={{fontWeight: '700'}}
+                                                        />
+                                                    </Form.Item>
+                                                </div>
+                                                <div className='Switch-Administrativo-Perfil'>   
+                                                    <span>{estadoTipoUsuario}</span>
+                                                    <Switch 
+                                                        size="small" 
+                                                        style={{marginRight:'12px'}}
+                                                        onChange={(e)=> cambiarEstado(e)}
+                                                        checked={estadoBooleanTipoUsuario}
+                                                    />
+                                                </div>
+                                                <div className='Input-Date-Administrativo-Perfil'>
+                                                    <div>Fecha Inicio: </div>
+                                                    <Form.Item name='fechaInicio'>
+                                                        <Input 
+                                                            type="date"
+                                                        />
+                                                    </Form.Item>
+                                                </div>
+                                                <div className='Input-Date-Administrativo-Perfil'>
+                                                    <div>Fecha Final: </div>
+                                                    <Form.Item name='fechaFinal'>
+                                                        <Input 
+                                                            type="date"
+                                                        />
+                                                    </Form.Item>
+                                                </div>
+                                                <Form.Item>
+                                                    <div className='Contenedor-Btn-Editar'>
+                                                        <button 
+                                                            type='submit' 
+                                                            className='Circulo-Editar-Check-Perfil'
+                                                        >
+                                                            <img src={Check} style={{width: '28px'}}></img>
+                                                        </button>
+                                                    </div>
+                                                </Form.Item> 
+                                            </Form>
+                                        ) : (
+                                            <>
+                                                <div>{tpunombre}</div>
+                                                <div style={{fontWeight:'400'}}>{estid}</div>
+                                                <div style={{fontWeight:'400'}}>Fecha inicio: {tpufechainicio}</div>
+                                                <div style={{fontWeight:'400'}}>Fecha Fin: {tpufechafinal}</div>
+                                                <div 
+                                                    className='Circulo-Editar-Perfil'
+                                                    onClick={() => editarDatosTiposUsuarios()}
+                                                >
+                                                    <img src={Editar} style={{width: '14px'}}/>
+                                                </div>
+                                            </>
+                                            
+                                        )
+                                    }
+                                </div>  
+                            ) : (   
+                                <div className='Contenedor-Informacion-Perfil'>
                                     <Form
                                         onFinish={onFinish}
                                         autoComplete="off"
                                         form={form}
                                     >
-                                        <Form.Item name='nombre'>
-                                            <Input 
-                                                className='Input-Administrativo-Perfil' 
-                                                style={{fontWeight: '700'}}
-                                            />
-                                        </Form.Item>
-                                        {/* <Form.Item name='estado'>
-                                            <Input 
-                                                value={estid} 
-                                                className='Input-Administrativo-Perfil'
-                                            />
-                                        </Form.Item> */}
-                                        <div className='Switch-Estado-TipoUsuario'>   
+                                        <div className='Input-Administrativo-Perfil'>
+                                            <Form.Item name='nombre'>
+                                                <Input 
+                                                    style={{fontWeight: '700'}}
+                                                />
+                                            </Form.Item>
+                                        </div>
+                                        <div className='Switch-Administrativo-Perfil'>   
                                             <span>{estadoTipoUsuario}</span>
                                             <Switch 
                                                 size="small" 
@@ -493,49 +572,36 @@ const TiposUsuarios = () => {
                                                 checked={estadoBooleanTipoUsuario}
                                             />
                                         </div>
-                                        <Form.Item name='fechaInicio'>
-                                            <Input 
-                                                // value='' 
-                                                type="date"
-                                                className='Input-Administrativo-Perfil'
-                                            />
-                                        </Form.Item>
-                                        <Form.Item name='fechaFinal'>
-                                            <Input 
-                                                // value='Fecha Fin: 07 Enero 2022' 
-                                                className='Input-Administrativo-Perfil'
-                                            />
-                                        </Form.Item>
+                                        <div className='Input-Date-Administrativo-Perfil'>
+                                            <div>Fecha Inicio: </div>
+                                            <Form.Item name='fechaInicio'>
+                                                <Input 
+                                                    type="date"
+                                                />
+                                            </Form.Item>
+                                        </div>
+                                        <div className='Input-Date-Administrativo-Perfil'>
+                                            <div>Fecha Final: </div>
+                                            <Form.Item name='fechaFinal'>
+                                                <Input 
+                                                    type="date"
+                                                />
+                                            </Form.Item>
+                                        </div>
                                         <Form.Item>
-                                            <button 
-                                                type='submit' 
-                                                className='Circulo-Editar-Check-Perfil'
-                                            >
-                                                <img src={Check} style={{width: '28px'}}></img>
-                                            </button>
+                                            <div className='Contenedor-Btn-Editar'>
+                                                <button 
+                                                    type='submit' 
+                                                    className='Circulo-Editar-Check-Perfil'
+                                                >
+                                                    <img src={Check} style={{width: '28px'}}></img>
+                                                </button>
+                                            </div>
                                         </Form.Item> 
                                     </Form>
-                                ) : (
-                                    <>
-                                        <div>{tpunombre}</div>
-                                        <div style={{fontWeight:'400'}}>{estid}</div>
-                                        <div style={{fontWeight:'400'}}>Fecha inicio: {tpufechainicio}</div>
-                                        <div style={{fontWeight:'400'}}>Fecha Fin: {tpufechafinal}</div>
-                                        <div 
-                                            className='Circulo-Editar-Perfil'
-                                            onClick={() => 
-                                                {
-                                                    seteditando(!editando)
-                                                    editarTipoUsuario()
-                                                }}
-                                        >
-                                            <img src={Editar} style={{width: '14px'}}/>
-                                        </div>
-                                    </>
-                                    
-                                )
-                            }
-                        </div>                  
+                                </div> 
+                            )
+                        } 
                     </div>     
                 </Col>
             </Row>

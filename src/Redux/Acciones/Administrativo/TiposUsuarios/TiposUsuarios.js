@@ -32,8 +32,15 @@ export const ObtenerPermisosTipoUsuario = (tpuid) => async ( dispatch, getState 
 		const estadoRequest = getState().estadoRequest.init_request
 		if(estadoRequest == true){
             if(data.respuesta == true){
+                console.log(data)
                 let tipoPermiso = data.datos
                 let tipoUsuario = data.tipo_usuario
+                let estadoTipoUsuario
+                if(tipoUsuario[0]['estid'] == '1'){
+                    estadoTipoUsuario = 'Activo'
+                }else{
+                    estadoTipoUsuario = 'Inactivo'
+                }
                 await definirEstadoSwitchTipoPermiso(tipoPermiso)
                 dispatch({
                     type: OBTENER_PERMISOS_TIPO_USUARIO,
@@ -44,7 +51,7 @@ export const ObtenerPermisosTipoUsuario = (tpuid) => async ( dispatch, getState 
                         tpuimagen : tipoUsuario[0]['tpuimagen'],
                         tpufechainicio : tipoUsuario[0]['tpufechainicio'],
                         tpufechafinal : tipoUsuario[0]['tpufechafinal'],
-                        estid : tipoUsuario[0]['estid']
+                        estid : estadoTipoUsuario
                     }
                 })
             }else{

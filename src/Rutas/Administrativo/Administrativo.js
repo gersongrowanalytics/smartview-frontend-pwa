@@ -119,26 +119,31 @@ const Administrativo = () => {
                                     if ((posicion+1) >= (1+6*(pos))  && (posicion+1) <= (6*(pos+1)) ) {
                                         return (
                                             <Col xl={4}>
-                                                <div className='flip-card'>
-                                                    <div className='flip-card-inner'>
-                                                        <div className='flip-card-front'>
-                                                            <img src={Adm} className='Imagen-Perfil'></img>
-                                                            <div className='Texto-Card-Perfil'>{tipo.tpunombre}</div>
-                                                            <div className='Texto2-Card-Perfil'>Ver Perfil</div>
-                                                        </div>
-                                                        <div className='flip-card-back'>
+                                                {
+                                                    posicion == '0' ? (
+                                                        <div className='cardCrearTipoUsuario'>
                                                             <Link 
                                                                 to={{ pathname: '/administrativo/perfil'}}
-                                                                onClick={() => {dispatch(ObtenerPermisosTipoUsuario(tipo.tpuid))
-                                                                console.log(tipo.tpuid)}}
+                                                                onClick={() => dispatch(ObtenerPermisosTipoUsuario(tipo.tpuid))}
                                                             >
                                                                 <img src={Agregar} className='Imagen2-Perfil'/>
                                                             </Link>
                                                             <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
                                                             <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    ) : (
+                                                        <div className='cardTipoUsuario'>
+                                                            <img src={Adm} className='Imagen-Perfil'></img>
+                                                            <div className='Texto-Card-Perfil'>{tipo.tpunombre}</div>
+                                                            <Link 
+                                                                to={{ pathname: '/administrativo/perfil'}}
+                                                                onClick={() => dispatch(ObtenerPermisosTipoUsuario(tipo.tpuid))}
+                                                            >
+                                                                <div className='Texto2-Card-Perfil'>Ver Perfil</div>
+                                                            </Link>
+                                                        </div>    
+                                                    )
+                                                }
                                             </Col>
                                         )
                                     }

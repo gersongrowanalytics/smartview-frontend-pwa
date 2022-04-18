@@ -191,3 +191,28 @@
     margin-bottom: 10px;
     cursor: pointer;
 }
+
+.cardCrearTipoUsuario{
+    background: #558CFF;
+    width: 192px;
+    height: 183px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 7px #c4c4c4;
+    border-radius: 8px;
+    padding-bottom: 30px;
+}
+
+.cardTipoUsuario{
+    background: #FFFFFF;
+    width: 192px;
+    height: 183px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 7px #c4c4c4;
+    border-radius: 8px;
+}

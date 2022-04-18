@@ -27,25 +27,12 @@ const TiposUsuarios = () => {
     
     const [anioSeleccionado, setanioSeleccionado] = useState("0")
     const [mesSeleccionado, setmesSeleccionado] = useState("0")
-    const [canalesSeleccionados, setcanalesSeleccionados] = useState(true)
-    const [canalModerno, setcanalModerno] = useState(true)
-    const [canalTradicional, setcanalTradicional] = useState(true)
     const [anioOpcionesAbierto, setanioOpcionesAbierto] = useState(false)
     const [mesOpcionesAbierto, setmesOpcionesAbierto] = useState(false)
-    const [tipoPermisoAbierto, settipoPermisoAbierto] = useState("")
-    const [canalOpcionesAbierto, setcanalOpcionesAbierto] = useState(false)
-    const [opcionesOpcionesAbierto, setopcionesOpcionesAbierto] = useState(false)
-    const [soporteOpcionesAbierto, setsoporteOpcionesAbierto] = useState(false)
-    const [descargaOpcionesAbierto, setdescargaOpcionesAbierto] = useState(false)
-    const [uploadOpcionesAbierto, setuploadOpcionesAbierto] = useState(false)
-    const [tradicionalOpcionesAbierto, settradicionalOpcionesAbierto] = useState(false)
-    const [modernoOpcionesAbierto, setmodernoOpcionesAbierto] = useState(false)
+
     const [form] = Form.useForm()
 
-    // const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Setiembre','Octubre','Noviembre','Diciembre']
-    const descargas = ['Tradicional','Moderno']
-    const tradicionales = ["Sell In", 'Sell Out','Rebate','Promociones','Reportes de pago','Catálogo']
-    const modernos = ['Sell In','Sell Out','Contraprestaciones']
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Setiembre','Octubre','Noviembre','Diciembre']
 
     const { 
         permisosTipoUsuario,
@@ -57,8 +44,6 @@ const TiposUsuarios = () => {
         tpuid
     } = useSelector(({tiposUsuarios}) => tiposUsuarios);
 
-    console.log(tpuid)
-
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
         setanioOpcionesAbierto(false)
@@ -67,25 +52,15 @@ const TiposUsuarios = () => {
         setmesSeleccionado(valor)
         setmesOpcionesAbierto(false)
     }
-    const SeleccionarCanales = (valor) => {
-        setcanalesSeleccionados(valor)
-        setcanalModerno(valor)
-        setcanalTradicional(valor)
-    }
 
-    const SeleccionarSubCanal = (valor, posicion) => {
-        if (posicion == '0') {
-            setcanalModerno(valor)
-        }else if (posicion == '1') {
-            setcanalTradicional(valor)
-        }
-    }
-
-    const AbrirSubmoduloDescarga = (posicion) => {
-        if (posicion == "0") {
-            settradicionalOpcionesAbierto(!tradicionalOpcionesAbierto)
-        }else if(posicion == "1"){
-            setmodernoOpcionesAbierto(!modernoOpcionesAbierto)
+    const formatearFecha = (fecha) => {
+        console.log(fecha)
+        if(fecha){
+            let date = fecha.split('-') 
+            let mes = date[1].replace(/^(0+)/g, '')   
+            return date[2] + " " + meses[mes] + " " + date[0]
+        }else{
+            return 'NaN'
         }
     }
 
@@ -134,7 +109,6 @@ const TiposUsuarios = () => {
             're_imagen': " ",
             're_imagencircular': " "
         }
-        // console.log('editar',tipoUsuarioDatos)
         await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos))
         seteditando(!editando)
     }
@@ -369,101 +343,6 @@ const TiposUsuarios = () => {
                                 )
                             })
                         }
-                        
-                        {/* <div className='Select-Canal-Perfil'>
-                            <div 
-                                className='Campo-Switch-Abrir-Cerrar' 
-                                onClick={() => setdescargaOpcionesAbierto(!descargaOpcionesAbierto)}
-                            >
-                                {
-                                    descargaOpcionesAbierto == true ? (
-                                        <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
-                                    ) : (
-                                        <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
-                                    )
-                                }
-                                <span className='Texto-Select-Canal-Perfil' >Descarga</span>
-                            </div>
-                            <div className='Switch-Estilos Switch-Modulo'>
-                                <Switch size="small"/>
-                            </div>
-                        </div>
-                        <div 
-                            className={descargaOpcionesAbierto == true 
-                            ? 'Contenido-Select-Canal'
-                            : 'Contenido-Select-Canal-Oculto'}    
-                        >
-                            {
-                                descargas.map((descarga, posicion)=>{
-                                    
-                                    return (
-                                        <>
-                                            <div className='Opciones-Select-Descarga-Perfil'>
-                                                <div 
-                                                    className='Campo-Switch-Abrir-Cerrar-SubModulo-Descarga'
-                                                    onClick={() => AbrirSubmoduloDescarga(posicion)}
-                                                >
-                                                    {
-                                                        ((tradicionalOpcionesAbierto == true && posicion == "0") || (modernoOpcionesAbierto == true && posicion == "1" )) ? (
-                                                            <img src={FlechaAbajo} style={{width: '11px', marginRight: '7px'}}></img>
-                                                        ) : (
-                                                            <img src={FlechaDerecha} style={{width: '7px', marginRight: '9px'}} ></img>
-                                                        )
-                                                    }
-                                                    <span>
-                                                        {descarga}
-                                                    </span>
-                                                </div>
-                                                <div className='Switch-Estilos Switch-Submodulo'>
-                                                    <Switch size="small" style={{marginRight:'12px'}}/>
-                                                </div>
-                                            </div>
-                                            <div 
-                                                className={(tradicionalOpcionesAbierto == true && posicion == "0")
-                                                    ? 'Contenido-Select-Canal'
-                                                    : 'Contenido-Select-Canal-Oculto'}      
-                                            >
-                                                {
-                                                    tradicionales.map((tradicional) => {
-                                                        return (
-                                                            <>
-                                                                <div className='Opciones-Select-Canal-Perfil Submodulo-Descarga Switch-Submodulo'>
-                                                                    <div style={{marginLeft: '20px'}}>
-                                                                        {tradicional}
-                                                                    </div>
-                                                                    <Switch size="small" style={{marginRight:'12px'}}/>
-                                                                </div>
-                                                            </>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                            <div 
-                                                className={(modernoOpcionesAbierto == true && posicion == "1" )
-                                                    ? 'Contenido-Select-Canal'
-                                                    : 'Contenido-Select-Canal-Oculto'}      
-                                            >
-                                                {
-                                                    modernos.map((moderno) => {
-                                                        return (
-                                                            <>
-                                                                <div className='Opciones-Select-Canal-Perfil Switch-Submodulo'>
-                                                                    <div style={{marginLeft: '20px'}}>
-                                                                        {moderno}
-                                                                    </div>
-                                                                    <Switch size="small" style={{marginRight:'12px'}}/>
-                                                                </div>
-                                                            </>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                            
-                                        </>
-                                    )
-                                })
-                            }
-                        </div> */}
                         {
                             tpuid == '0' ? (
                                 null
@@ -542,8 +421,8 @@ const TiposUsuarios = () => {
                                             <>
                                                 <div>{tpunombre}</div>
                                                 <div style={{fontWeight:'400'}}>{estid}</div>
-                                                <div style={{fontWeight:'400'}}>Fecha inicio: {tpufechainicio}</div>
-                                                <div style={{fontWeight:'400'}}>Fecha Fin: {tpufechafinal}</div>
+                                                <div style={{fontWeight:'400'}}>Fecha Inicio: {formatearFecha(tpufechainicio)}</div>
+                                                <div style={{fontWeight:'400'}}>Fecha Fin: {formatearFecha(tpufechafinal)}</div>
                                                 <div 
                                                     className='Circulo-Editar-Perfil'
                                                     onClick={() => editarDatosTiposUsuarios()}

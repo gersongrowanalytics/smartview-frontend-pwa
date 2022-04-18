@@ -22,7 +22,7 @@ const TiposUsuarios = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
     const [editando, seteditando] = useState(false)
     const [estadoTipoUsuario, setestadoTipoUsuario] = useState("Inactivo")
-    const [valorEstadoTu, setvalorEstadoTu] = useState("")
+    const [valorEstadoTu, setvalorEstadoTu] = useState("2")
     const [estadoBooleanTipoUsuario, setestadoBooleanTipoUsuario] = useState(false)
     
     const [anioSeleccionado, setanioSeleccionado] = useState("0")
@@ -57,7 +57,7 @@ const TiposUsuarios = () => {
         tpuid
     } = useSelector(({tiposUsuarios}) => tiposUsuarios);
 
-    // console.log(tpuid)
+    console.log(tpuid)
 
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
@@ -135,7 +135,7 @@ const TiposUsuarios = () => {
             're_imagencircular': " "
         }
         // console.log('editar',tipoUsuarioDatos)
-        await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, [], tpuid, editarTipoUsuario, editarPermisos))
+        await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos))
         seteditando(!editando)
     }
 
@@ -208,7 +208,7 @@ const TiposUsuarios = () => {
                 <Col xl={13}>
                     <div className='Contenedor-Perfil'>
                         <div className='Titulo-Perfil'>
-                            Administrador
+                            {tpunombre}
                         </div>
                         {/* AÑO */}
                         {/* <div className='Fila-Select-Anio-Mes-Perfil'>
@@ -464,10 +464,16 @@ const TiposUsuarios = () => {
                                 })
                             }
                         </div> */}
-                        <div 
-                            className='Btn-Guardar-Perfil'
-                            onClick={() => {dispatch(editarPermisosTipoUsuario(null, permisosTipoUsuario, tpuid, false, true))}}
-                        >Guardar</div>
+                        {
+                            tpuid == '0' ? (
+                                null
+                            ) : (
+                                <div 
+                                    className='Btn-Guardar-Perfil'
+                                    onClick={() => {dispatch(editarPermisosTipoUsuario(null, permisosTipoUsuario, tpuid, false, true))}}
+                                >Guardar</div>
+                            )
+                        }
                     </div>
                 </Col>
                 <Col xl={11}>
@@ -480,7 +486,7 @@ const TiposUsuarios = () => {
                             )
                         }
                         {
-                            tpuid ? (
+                            tpuid != 0 ? (
                                 <div className='Contenedor-Informacion-Perfil'>
                                     {
                                         editando == true ? (

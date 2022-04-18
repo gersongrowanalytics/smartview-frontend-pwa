@@ -1,0 +1,92 @@
+.Card-Porcentaje-Rebate-Bonus{
+    width: 230px;
+    height: 213px;
+    background: #EF2206;
+    border-radius: 8px;
+    position: relative;
+    text-align: -webkit-center;
+    padding-top: 20px;
+}
+
+.Icono-Estrella-Rebate-Bonus{
+    width: 220px;
+    position: absolute;
+    left: 10px;
+    top: -20px;
+}
+
+.Txt-Porcentaje-Rebate-Bonus{
+    width: 150px;
+    height: 36px;
+    background: #FE7A7D;
+    border-radius: 8px;
+    margin-top: 110px;
+    position: absolute;
+    left: 39px;
+}
+
+.Card-Categorias-Rebate-Bonus{
+    width: 100%;
+    height: 213px;
+    background: #FFFFFF;
+    /* background: red; */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    /* padding-right: 80px; */
+}
+
+.Titulo-Categorias-Rebate-Bonus{
+    text-align-last: center;
+    padding-top: 10px;
+}
+
+.Card-Categoria-Rebate-Bonus{
+    width: 121px;
+    height: 114px;
+    /* background: rgba(135, 103, 150, 0.35); */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    margin-bottom: 7px;
+    cursor: pointer;
+}
+
+.Card-Descripcion-Rebate-Bonus{
+    width: 100%;
+    height: 80px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.15));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.Input-Porcentaje-Rebate-Bonus{
+    width: 130px;
+    height: 30px;
+    background: #FE7A7D;
+    border: none;
+    /* background: black; */
+    border-radius: 8px;
+    margin-top: 3px;
+    z-index: 10;
+}
+
+.Input-Porcentaje-Rebate-Bonus:focus{
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+.Input-Descripcion-Rebate-Bonus{
+    
+    border: none;
+    width: 95%;
+    background-color: transparent;
+}
+
+.Input-Descripcion-Rebate-Bonus:focus{
+    border: none;
+    outline: none;
+}

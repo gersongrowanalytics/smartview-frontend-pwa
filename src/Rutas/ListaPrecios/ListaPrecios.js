@@ -187,6 +187,7 @@ const ListaPrecios = () => {
                         setFiltroFormato(false)
                         setFiltroCodigSap(false)
                         setFiltroNombMate(false)
+                        setFiltroCustomerGroup(false)
                     }}
                 />
 
@@ -211,6 +212,7 @@ const ListaPrecios = () => {
                         setFiltroFormato(false)
                         setFiltroCodigSap(false)
                         setFiltroNombMate(false)
+                        setFiltroCustomerGroup(false)
                     }}
                 />
 
@@ -235,6 +237,7 @@ const ListaPrecios = () => {
                         setFiltroSubCatego(false)
                         setFiltroCodigSap(false)
                         setFiltroNombMate(false)
+                        setFiltroCustomerGroup(false)
                     }}
                 />
 
@@ -259,6 +262,7 @@ const ListaPrecios = () => {
                         setFiltroSubCatego(false)
                         setFiltroFormato(false)
                         setFiltroNombMate(false)
+                        setFiltroCustomerGroup(false)
                     }}
                 />
 
@@ -283,6 +287,7 @@ const ListaPrecios = () => {
                         setFiltroSubCatego(false)
                         setFiltroFormato(false)
                         setFiltroCodigSap(false)
+                        setFiltroCustomerGroup(false)
                     }}
                 />
 

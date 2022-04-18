@@ -6,6 +6,10 @@ import IconoCanalesSelect from '../../Assets/Img/Top/iconoCanalesSelect.png'
 import {
     CambiarCanalSeleccionadoReducer
 } from '../../Redux/Acciones/Auth'
+import {
+    ObtenerSucursalesCanalModernoReducer,
+    obtenerSucursalesReducer
+} from '../../Redux/Acciones/Sucursales'
 import { useDispatch, useSelector } from "react-redux";
 
 const FiltroCanalTop = (props) => {
@@ -120,6 +124,7 @@ const FiltroCanalTop = (props) => {
                             onClick={() => {
                                 dispatch(CambiarCanalSeleccionadoReducer("Tradicional"))
                                 setMostrarContenido(false)
+                                dispatch(obtenerSucursalesReducer())
                             }}
                         >
                             <div>
@@ -140,6 +145,7 @@ const FiltroCanalTop = (props) => {
                             onClick={() => {
                                 dispatch(CambiarCanalSeleccionadoReducer("Moderno"))
                                 setMostrarContenido(false)
+                                dispatch(ObtenerSucursalesCanalModernoReducer())
                             }}
                         >
                             <div>

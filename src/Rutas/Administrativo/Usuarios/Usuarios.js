@@ -4,11 +4,6 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
 import Agregar from '../../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
-import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
-import Persona from '../../../Assets/Img/Administrativo/Usuarios/Persona-white.png'
-import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
-import { SearchOutlined } from '@ant-design/icons'
-import Borrar from '../../../Assets/Img/Administrativo/Usuarios/Cortar.png'
 import {
     dataPaises,
     dataUsuarios,
@@ -16,6 +11,8 @@ import {
     crearUsuario
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
+import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
+import FormularioUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/FormularioUsuarios';
 
 const Usuarios = () => {
     const dispatch = useDispatch()
@@ -32,6 +29,8 @@ const Usuarios = () => {
     const [abrirModalZona, setabrirModalZona] = useState(false)
     const [fechaInicio, setfechaInicio] = useState("")
     const [fechaFinal, setfechaFinal] = useState("")
+
+    const [editarFilaUsuario, setEditarFilaUsuario] = useState(false)
 
     const [form] = Form.useForm()
     
@@ -130,6 +129,7 @@ const Usuarios = () => {
     }
 
     const crearAdmUsuario = () => {
+        setEditarFilaUsuario(false)
         form.resetFields()
         settipoUsuario("")
         setfechaInicio("")
@@ -139,21 +139,37 @@ const Usuarios = () => {
         setestadoBooleanUsuario(false)
     }
 
-    const editarUsuario = (usuario) => {
-        console.log(usuario)
+    const seleccionarUsuarioEditar = (usuario) => {
+
+        setEditarFilaUsuario(true)
+
         form.setFieldsValue({
             Nombre: usuario.pernombre,
             Apellidos: usuario.perapellidopaterno,
             CorreoPersonal: usuario.usucorreopersonal,
             CorreoCoorporativo: usuario.usucorreo,
-            Contraseña: usuario.usucontrasena,
-            Celular: usuario.usucelular
+            // Contraseña: usuario.usucontrasena,
+            Celular: usuario.percelular
         });
         // let dateInput = document.getElementById('fecha_final');
         // console.log(dateInput.value)
         // dateInput.value = usuario.usufechafinal;
         // setvalorFormularioTipoUsuario(usuario.)
+
+        setvalorFormularioTipoUsuario(usuario.tpuid)
+        settipoUsuario(usuario.tpunombre)
+
         setfechaFinal(usuario.usufechafinal)
+        setfechaInicio(usuario.usufechainicio)
+
+        paisesUsuario.map((pais, pos) => {
+            usuario.paises.map((usuarioPais) => {
+                if(usuarioPais.paiid == pais.paiid){
+                    SeleccionarPais(true, pos)
+                }
+            })
+        })
+        cambiarEstado(usuario.estid)
     }
 
     const onFinish = async(valores) => {
@@ -182,9 +198,9 @@ const Usuarios = () => {
             crearAdmUsuario()
             cargarDatosTabla(paginaActualTabla)
         }else{
-            console.log("error")
+            // console.log("error")
         }
-        console.log(usuarioDatos)
+        // console.log(usuarioDatos)
     };
 
     useEffect(() => {
@@ -194,8 +210,6 @@ const Usuarios = () => {
     useEffect(() => {
         cargarDatosTabla(paginaActualTabla)
     },[paginaActualTabla])
-
-    const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']
 
     return (
         <div className='Contenedor-Administrativo'>
@@ -278,367 +292,49 @@ const Usuarios = () => {
             </Row>
             <Row style={{marginTop: '33px'}}>
                 <Col xl={9}>
-                    <Spin
-                        size='large'
-                        spinning={cargandoTablaUsuarios}
-                        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-                    >
-                        <div className='Contenedor-Tabla-Adm-Usuarios'>
-                            <table className='Tabla-Adm-Usuarios'>
-                                <thead> 
-                                    <tr>
-                                        <th style={{width: '10%'}}>
-                                            <div>
-                                                <span>Item</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th style={{width: '40%'}}>
-                                            <div
-                                                style={{cursor:'pointer'}}
-                                                onClick={() => setbusquedaAbierto(!busquedaAbierto)}    
-                                            >
-                                                <span>Nombre y Apellido</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '6px'}}></img>
-                                            </div>
-                                            <div 
-                                                className={ busquedaAbierto == true 
-                                                    ? 'Contenedor-Busqueda-Adm-Usuario'
-                                                    : 'Contenedor-Busqueda-Adm-Usuario-Ocultar'}
-                                            >
-                                                <div className='Cabecera-Buscar-Adm-Usuario'>
-                                                    <Input placeholder="Buscar" suffix={<SearchOutlined />} className='Buscar-Tabla-Adm-Usuario'/>
-                                                </div>
-                                                {
-                                                    a.map((e) => {
-                                                        return (
-                                                            <div className='Opcion-Busqueda-Adm-Usuario'>
-                                                                <Checkbox className='Checkbox-Opcion-Adm-Usuario'/>
-                                                                <span className='Txt-Opcion-Busqueda-Adm-Usuario'>
-                                                                    Nombre de Persona Apellido
-                                                                </span>
-                                                                
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                                <div className='Footer-Buscar-Adm-Usuario'>
-                                                    <div className='Btn-Opcion-Busqueda-Adm-Usuario' style={{marginRight:'5px'}}>
-                                                        Aceptar
-                                                    </div>
-                                                    <div className='Btn-Opcion-Busqueda-Adm-Usuario'>
-                                                        Cancelar
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <th style={{width: '20%'}}>
-                                            <div>
-                                                <span>Tipo de usuario</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                        <th style={{width: '30%'}}>
-                                            <div>
-                                                <span>Pais</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        usuarios.map((usuario,posicion) => {
-                                            return (
-                                                <tr onClick={() => editarUsuario(usuario)}>
-                                                    <td>
-                                                        {indexRegistro + posicion}
-                                                    </td>
-                                                    <td style={{textAlign:'initial'}}>
-                                                        <div 
-                                                            className='Text-Nombre-Completo' 
-                                                            title={usuario.pernombrecompleto}
-                                                        >
-                                                            {usuario.pernombrecompleto}
-                                                        </div>
-                                                    </td>
-                                                    <td style={{textAlign:'initial'}}>
-                                                        {usuario.tpunombre}
-                                                    </td>
-                                                    <td>
-                                                        {
-                                                            ( usuario.paises.length >= '2' ) ? (
-                                                                <div className='Lista-Banderas'>
-                                                                    {
-                                                                        usuario.paises.map((pais, posicion) => {
-                                                                            if (posicion == '0') {
-                                                                                return (
-                                                                                    <img src={pais.paiiconomas} className='Banderas-lista' />
-                                                                                )
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                    <div className='Banderas-Lista-Hover'>
-                                                                        {
-                                                                            usuario.paises.map((pais, posicion) => {
-                                                                                if (posicion >= '1') {
-                                                                                    return (
-                                                                                        <img src={pais.paiicono} className='Banderas-lista' />
-                                                                                    )
-                                                                                }
-                                                                            })
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                            ) : (
-                                                                usuario.paises.map((pais) => {
-                                                                    return (
-                                                                        <img src={pais.paiicono} className='Banderas-lista' />
-                                                                    )
-                                                                })
-                                                            )                                                            
-                                                        }
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </Spin>
+                    <TablaUsuarios 
+                        seleccionarUsuarioEditar = {(usuario) => {
+                            seleccionarUsuarioEditar(usuario)
+                        }}
+                        busquedaAbierto = {busquedaAbierto}
+                        setbusquedaAbierto = {setbusquedaAbierto}
+                    />
                 </Col>
                 <Col xl={15}>
-                    <div style={{marginLeft: '40px', marginRight: '58px'}}>
-                        <div className='Cabecera-Crear-Adm-Usuario'>
-                            <img src={Persona} style={{width:'33px', marginRight: '8px'}}></img>
-                            <span>Usuario</span>
-                        </div>
-                        <div className='Cuerpo-Crear-Adm-Usuario'>
-                            <Form
-                                onFinish={onFinish}
-                                autoComplete="off"
-                                form={form}
-                            >
-                            <Row>
-                                <Col xl={12}>
-                                    <div className='CampoA-Crear-Adm-Usuario'>
-                                        <span>Nombres:</span>
-                                        <Form.Item name='Nombre'>
-                                            <Input/>
-                                        </Form.Item>
-                                    </div>
-                                    <div className='CampoA-Crear-Adm-Usuario'>
-                                        <span>Apellidos:</span>
-                                        <Form.Item name='Apellidos'>
-                                            <Input/>
-                                        </Form.Item>
-                                    </div>
-                                    <div className='CampoA-Crear-Adm-Usuario'>
-                                        <span>Correo Coorporativo:</span>
-                                        <Form.Item name='CorreoCoorporativo'>
-                                            <Input type={'email'}/>
-                                        </Form.Item>
-                                    </div>
-                                    <div className='CampoA-Crear-Adm-Usuario'>
-                                        <span>Correo Personal:</span>
-                                        <Form.Item name='CorreoPersonal'>
-                                            <Input type={'email'} autoComplete={'off'}/>
-                                        </Form.Item>
-                                    </div>
-                                    <div className='CampoA-Crear-Adm-Usuario'>
-                                        <span>Contraseña:</span>
-                                        <Form.Item name='Contraseña'>
-                                            <Input type='password' autoComplete={'new-password'}/>
-                                        </Form.Item>
-                                    </div>
-                                    <div className='CampoA-Crear-Adm-Usuario'>
-                                        <span>Celular:</span>
-                                        <Form.Item name='Celular'>
-                                            <Input />
-                                        </Form.Item>
-                                    </div>
-                                </Col>
-                                <Col xl={12}>
-                                    <div className='Campo2-Crear-Adm-Usuario'>   
-                                        <span>Tipo de Usuario:</span>
-                                        <div>
-                                            <div 
-                                                className='Select-Adm-Usuario'
-                                                onClick={() => {
-                                                    settipoUsuarioAbierto(!tipoUsuarioAbierto)
-                                                    setpaisesAbierto(false)
-                                                }}
-                                            >
-                                                {
-                                                    tipoUsuario.length == '0' ? (
-                                                        <div className='Txt-PreSeleccion'>Seleccionar aquí</div>
-                                                    ) : (
-                                                        <div>{tipoUsuario}</div>
-                                                    )
-                                                }
-                                                <img src={FlechaAbajoNegro} style={{width: '20px'}}></img>
-                                            </div>
-                                            <div className={tipoUsuarioAbierto == true 
-                                                            ? 'Contenedor-Opciones-Select-Tipos-Usuarios-Adm-Usuario'
-                                                            : 'Contenedor-Opciones-Select-Tipos-Usuarios-Adm-Usuario-Oculto'}
-                                            >
-                                                {
-                                                    tiposUsuarios.map((tipo, posicion) => {
-                                                        return (
-                                                            <div 
-                                                                className='Opciones-Select-Adm-Usuario'
-                                                                onClick={() => seleccionarTipoUsuario(tipo)}    
-                                                            >
-                                                                {tipo.tpunombre}
-                                                            </div>   
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='Campo2-Crear-Adm-Usuario'>   
-                                        <span>Fecha Inicio:</span>
-                                        <input 
-                                            type={'date'} 
-                                            onChange={(e) => setfechaInicio(e.target.value)}
-                                        />
-                                        {/* <Form.Item name='fecha_inicio'>
-                                            <DatePicker onChange={(e) => {console.log(e._d)}} placeholder='Seleccionar fecha'
-                                                className='Fecha-Input'/>
-                                        </Form.Item> */}
-                                        
-                                    </div>
-                                    <div className='Campo2-Crear-Adm-Usuario'>   
-                                        <span>Fecha Fin:</span>
-                                        <input 
-                                                    id='fecha_final'
-                                                    type={'date'}
-                                                    onChange={(e) => setfechaFinal(new Date(e.target.value))}
-                                                />
-                                        {/* {
-                                            fechaFinal == null ? (
-                                                <input 
-                                                    id='fecha_final'
-                                                    type={'date'}
-                                                    onChange={(e) => setfechaFinal(new Date(e.target.value))}
-                                                />
-                                            ) : (
-                                                <input 
-                                                    id='fecha_final'
-                                                    type={'date'} 
-                                                    value={fechaFinal}
-                                                    onChange={(e) => setfechaFinal(new Date(e.target.value))}
-                                                />
-                                            )
-                                        } */}
-                                        
-                                    </div>
-                                    <div className='Campo2-Crear-Adm-Usuario'>   
-                                        <span>Zona:</span>
-                                        <div 
-                                            className='Select-Pais-Adm-Usuario'
-                                            onClick={() => {setabrirModalZona(!abrirModalZona)}}
-                                        ></div>
-                                    </div>
-                                    <div className='Campo2-Crear-Adm-Usuario'>   
-                                        <span>País:</span>
-                                        <div>
-                                            <div 
-                                                className='Select-Pais-Adm-Usuario'
-                                                onClick={() => {
-                                                    setpaisesAbierto(!paisesAbierto)
-                                                    settipoUsuarioAbierto(false)
-                                                }}
-                                            >
-                                                {
-                                                    paisesSeleccionados.length == '0' ? (
-                                                        <div className='Txt-PreSeleccion' style={{paddingLeft:'19px'}}>Seleccionar aquí</div>
-                                                    ) : (
-                                                        paisesSeleccionados.length <= '2' ? (
-                                                            paisesSeleccionados.map((pais, pos) => {
-                                                                return (
-                                                                    <div className='Contenedor-PreImagen-Pais-Seleccionado'>
-                                                                        <span>{pais.painombre}</span>
-                                                                        <img src={pais.paiicono} style={{width:'32px'}}></img>
-                                                                        <img src={Borrar} style={{width:'11px'}} 
-                                                                            onClick={() => EliminarPaisSeleccionado(pos)}/>
-                                                                    </div>
-                                                                )
-                                                            })
-                                                        ) : (
-                                                            <div style={{display: 'flex'}}>
-                                                                <div className='Contenedor-PreImagen-Pais-Seleccionado'>
-                                                                    <span>{paisesSeleccionados[0]['painombre']}</span>
-                                                                    <img src={paisesSeleccionados[0]['paiiconomas']} style={{width:'32px'}}></img>
-                                                                    <img src={Borrar} style={{width:'11px'}}></img>
-                                                                </div>
-                                                                <div className='Contenedor-Cantidad-PreImagen-Pais-Seleccionado'>
-                                                                + { (paisesSeleccionados.length - 2)  } ...
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    )
-                                                }
-                                                <img 
-                                                    src={FlechaAbajoNegro} 
-                                                    style={{width: '20px'}}
-                                                    // className={paisesSeleccionados.length == '0' ? 'Espaciado-Preseleccionar-Pais':''}
-                                                />
-                                            </div>
-                                            <div className={paisesAbierto == true 
-                                                            ? 'Contenedor-Opciones-Select-Adm-Usuario'
-                                                            : 'Contenedor-Opciones-Select-Adm-Usuario-Oculto'}
-                                            >
-                                                {
-                                                    paisesUsuario.map((pais, posicion) => {
-                                                        return (
-                                                            <div 
-                                                                className='Opciones-Select-Adm-Usuario'
-                                                                style={{height:'29px'}}  
-                                                            >
-                                                                <Checkbox className='Checkbox-Opcion-Adm-Usuario'
-                                                                    onChange={(e) => {SeleccionarPais(e.target.checked, posicion)}}
-                                                                />
-                                                                <div className='Contenedor-Nombre-Img'>
-                                                                    <span style={{marginLeft:'10px'}}>{pais.painombre}</span>
-                                                                    <img src={pais.paiicono} style={{width:'20px'}}></img>
-                                                                </div>
-                                                            </div>   
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='Campo2-Crear-Adm-Usuario'>   
-                                        <span>Estado:</span>
-                                        <div className='Contenedor-Estado-Adm-Usuario Switch-Adm'>
-                                            <span>{estadoUsuario}</span>
-                                            <Switch 
-                                                size="small" 
-                                                style={{marginRight:'12px'}}
-                                                onChange={(e)=> cambiarEstado(e)}
-                                                checked={estadoBooleanUsuario}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className='Posicion-Btn-Crear-Adm-Usuario'>
-                                        <Form.Item>
-                                            <button 
-                                                className='Btn-Crear-Adm-Usuario'
-                                                type='submit'
-                                            >
-                                                Guardar
-                                            </button>
-                                        </Form.Item>
-                                    </div>
-                                </Col>
-                            </Row> 
-                            </Form>
-                        </div>
-                    </div>
+                    <FormularioUsuarios 
+                        paisesSeleccionados      = {paisesSeleccionados}
+                        setpaisesSeleccionados   = {setpaisesSeleccionados}
+                        EliminarPaisSeleccionado = {(posicion) => {
+                            EliminarPaisSeleccionado(posicion)
+                        }}
+                        tipoUsuarioAbierto      = {tipoUsuarioAbierto}
+                        settipoUsuarioAbierto   = {(bool) => {
+                            settipoUsuarioAbierto(bool)
+                        }}
+                        paisesAbierto           = {paisesAbierto}
+                        setpaisesAbierto        = {(pais) => {
+                            setpaisesAbierto(pais)
+                        }}
+                        abrirModalZona          = {abrirModalZona}
+                        setabrirModalZona       = {setabrirModalZona}
+                        fechaInicio             = {fechaInicio}
+                        setfechaInicio          = {setfechaInicio}
+                        estadoUsuario           = {estadoUsuario}
+                        setestadoUsuario        = {setestadoUsuario}
+                        tipoUsuario             = {tipoUsuario}
+                        settipoUsuario          = {settipoUsuario}
+                        onFinish                = {onFinish}
+                        seleccionarTipoUsuario  = {seleccionarTipoUsuario}
+                        SeleccionarPais         = {SeleccionarPais}
+                        cambiarEstado           = {cambiarEstado}
+                        estadoBooleanUsuario    = {estadoBooleanUsuario}
+                        setestadoBooleanUsuario = {setestadoBooleanUsuario}
+                        fechaFinal              = {fechaFinal}
+                        setfechaFinal           = {setfechaFinal}
+                        editarFilaUsuario       = {editarFilaUsuario}
+                        form = {form}
+
+                    />
                 </Col>
             </Row>
             <Modal

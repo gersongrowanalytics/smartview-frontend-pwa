@@ -3,6 +3,7 @@ import { estadoRequestReducer } from "../../EstadoRequest"
 import {
     OBTENER_DATOS_PERMISOS,
     CARGANDO_TABLA_DATOS_PERMISOS,
+    OBTENER_DATA_PERMISOS
 } from '../../../../Constantes/Administrativo/Permisos/Permisos'
 
 export const dataPermisos = (pagina) => async ( dispatch, getState ) => {
@@ -41,7 +42,9 @@ export const dataPermisos = (pagina) => async ( dispatch, getState ) => {
                         paginasTotales: data.permisos.last_page,
                         paginaActual: data.permisos.current_page,
                         indexRegistro: data.permisos.from,
-                        cargandoSpin: false 
+                        cargandoSpin: false,
+                        data_paginate_permisos : data.permisos,
+                        data_tipos_permisos : data.tpes,
                     }
                 })
             }else{
@@ -51,4 +54,17 @@ export const dataPermisos = (pagina) => async ( dispatch, getState ) => {
     }).catch((error)=> {
         console.log(error)
     });
+}
+
+export const HabilitarEditarPermisosReducer = (posicion, editando) => async ( dispatch, getState ) => {
+
+    let permisos = getState().estadoRequest.permisos
+
+    permisos[posicion]['editando'] = editando
+
+    dispatch({
+        type: OBTENER_DATA_PERMISOS,
+        payload : permisos
+    })
+
 }

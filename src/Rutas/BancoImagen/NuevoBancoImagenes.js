@@ -3,7 +3,10 @@ import '../../Estilos/Rutas/BancoImagenes/NuevoBancoImagenes.css'
 import { 
     dataBancoImagen,
     EditandoImagenNuevoBancoImagenesReducer,
-    EditarImagenNuevoBancoImagenReducer
+    EditarImagenNuevoBancoImagenReducer,
+    AsignarSkuNuevoBancoImagenReducer,
+    HabilitarAsignarSkuReducer,
+    EditarFechaInicioFinalReducer
 } from '../../Redux/Acciones/BancoImagen/BancoImagen';
 import { useDispatch, useSelector } from "react-redux";
 import FilaTablaBancoImagen from '../../Componentes/Rutas/BancoImagen/FilaTablaBancoImagen'
@@ -38,9 +41,9 @@ const NuevoBancoImagenes = () => {
             <div 
                 className='W700-S26-H35-C1E1E1E-L0015' 
                 onClick={() => {
-                    console.log(prosConImagenes)
-                    console.log(prosInactivas)
-                    console.log(prosSinImagenes)
+                    // console.log(prosConImagenes)
+                    // console.log(prosInactivas)
+                    // console.log(prosSinImagenes)
                 }}
             >
                 Banco de Imágen
@@ -181,6 +184,9 @@ const NuevoBancoImagenes = () => {
                                                 ?<FilaTablaBancoImagen
                                                     data = {data}
                                                     pos  = {pos}
+                                                    habilitarAsignarSku = {() => {
+                                                        dispatch(HabilitarAsignarSkuReducer(btnSeleccionado, pos))
+                                                    }}
                                                     editandoFila = {() => {
                                                         dispatch(EditandoImagenNuevoBancoImagenesReducer(btnSeleccionado, pos))
                                                     }}
@@ -188,12 +194,19 @@ const NuevoBancoImagenes = () => {
                                                         dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
                                                     }}
                                                     txtInputBuscar = {txtInputBuscar}
+                                                    mostrarNuevaFila = {pos == 2 ? true : false}
+                                                    asignarSku = {(imagen, sku, fechas) => {
+                                                        dispatch(AsignarSkuNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
+                                                    }}
                                                 />
                                                 :null
                                             :data.prosku.includes(txtInputBuscar)
                                                 ?<FilaTablaBancoImagen
                                                     data = {data}
                                                     pos  = {pos}
+                                                    habilitarAsignarSku = {() => {
+                                                        dispatch(HabilitarAsignarSkuReducer(btnSeleccionado, pos))
+                                                    }}
                                                     editandoFila = {() => {
                                                         dispatch(EditandoImagenNuevoBancoImagenesReducer(btnSeleccionado, pos))
                                                     }}
@@ -201,12 +214,19 @@ const NuevoBancoImagenes = () => {
                                                         dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
                                                     }}
                                                     txtInputBuscar = {txtInputBuscar}
+                                                    mostrarNuevaFila = {pos == 2 ? true : false}
+                                                    asignarSku = {(imagen, sku, fechas) => {
+                                                        dispatch(AsignarSkuNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
+                                                    }}
                                                 />
                                                 :null
                                         :data.pronombre.toLowerCase().includes(txtInputBuscar.toLowerCase())
                                             ?<FilaTablaBancoImagen
                                                 data = {data}
                                                 pos  = {pos}
+                                                habilitarAsignarSku = {() => {
+                                                    dispatch(HabilitarAsignarSkuReducer(btnSeleccionado, pos))
+                                                }}
                                                 editandoFila = {() => {
                                                     dispatch(EditandoImagenNuevoBancoImagenesReducer(btnSeleccionado, pos))
                                                 }}
@@ -214,12 +234,22 @@ const NuevoBancoImagenes = () => {
                                                     dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
                                                 }}
                                                 txtInputBuscar = {txtInputBuscar}
+                                                mostrarNuevaFila = {pos == 2 ? true : false}
+                                                asignarSku = {(imagen, sku, fechas) => {
+                                                    dispatch(AsignarSkuNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
+                                                }}
                                             />
                                             :null
                                     )
                                 })
                                 :btnSeleccionado == "INACTIVO"
                                     ?prosInactivas.map((data, pos) => {
+
+                                        let tieneFechaInicio = false
+                                        if(data.profechainicio){
+                                            tieneFechaInicio = true
+                                        }
+
                                         return(
     
                                             data.prosku
@@ -235,6 +265,10 @@ const NuevoBancoImagenes = () => {
                                                             dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
                                                         }}
                                                         txtInputBuscar = {txtInputBuscar}
+                                                        tieneFechaInicio = {tieneFechaInicio}
+                                                        EditarFechaInicioFinalReducer = {(fecha) => {
+                                                            dispatch(EditarFechaInicioFinalReducer(btnSeleccionado, pos, fecha ))
+                                                        }}
                                                     />
                                                     :null
                                                 :data.prosku.includes(txtInputBuscar)
@@ -248,6 +282,10 @@ const NuevoBancoImagenes = () => {
                                                             dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
                                                         }}
                                                         txtInputBuscar = {txtInputBuscar}
+                                                        tieneFechaInicio = {tieneFechaInicio}
+                                                        EditarFechaInicioFinalReducer = {(fecha) => {
+                                                            dispatch(EditarFechaInicioFinalReducer(btnSeleccionado, pos, fecha ))
+                                                        }}
                                                     />
                                                     :null
                                             :data.pronombre.toLowerCase().includes(txtInputBuscar.toLowerCase())
@@ -261,6 +299,10 @@ const NuevoBancoImagenes = () => {
                                                         dispatch(EditarImagenNuevoBancoImagenReducer(btnSeleccionado, imagen, sku, pos, fechas))
                                                     }}
                                                     txtInputBuscar = {txtInputBuscar}
+                                                    tieneFechaInicio = {tieneFechaInicio}
+                                                    EditarFechaInicioFinalReducer = {(fecha) => {
+                                                        dispatch(EditarFechaInicioFinalReducer(btnSeleccionado, pos, fecha ))
+                                                    }}
                                                 />
                                                 :null
                                         )

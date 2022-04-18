@@ -2,7 +2,8 @@
 const initialSettings = {
     cookiesaceptadas : false,
     leyendopoliticas : false,
-    cargando_plataforma : false
+    cargando_plataforma : false,
+    permisos_usuario_configuracion : []
 };
 
 const Settings = (state = initialSettings, action) => {
@@ -21,6 +22,11 @@ const Settings = (state = initialSettings, action) => {
             return {
                 ...state,
                 cargando_plataforma : action.payload
+            }
+        case "OBTENER_PERMISOS_USUARIO_CONFIGURACION":
+            return {
+                ...state,
+                permisos_usuario_configuracion : action.payload
             }
         default:
             return state;

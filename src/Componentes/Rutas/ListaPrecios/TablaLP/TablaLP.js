@@ -26,20 +26,32 @@ const TablaLP = (props) => {
                                 left: "0",
                                 zIndex: "5",
                                 backgroundColor: "#1EC0ED",
-                                borderRight: "1px solid white"
+                                // borderRight: "1px solid white"
                             }}
                         >
                             Item
+                            <div
+                                style={{
+                                    position:'absolute',
+                                    width:'2px',
+                                    height:'100%',
+                                    background:'white',
+                                    right:'-2px',
+                                    top:'0'
+                                }}
+                            >
+
+                            </div>
                         </th>
 
                         <th 
                             rowSpan={2}
                             style={{
                                 position: "sticky",
-                                left: "40px",
+                                left: "42px",
                                 zIndex: "5",
                                 backgroundColor: "#1EC0ED",
-                                borderRight: "1px solid white"
+                                // borderRight: "1px solid white"
                             }}
                         >
                             <div
@@ -48,10 +60,21 @@ const TablaLP = (props) => {
                                 <div>
                                     Categoría
                                 </div>
-                                <div className='Contenedor-Icono-Flecha-Tabla'>
+                                {/* <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
-                                </div>
+                                </div> */}
+                                <div
+                                    style={{
+                                        position:'absolute',
+                                        width:'2px',
+                                        height:'100%',
+                                        background:'white',
+                                        right:'-2px',
+                                        top:'0'
+                                    }}
+                                >
 
+                                </div>
                                 
 
                             </div>
@@ -66,11 +89,11 @@ const TablaLP = (props) => {
                             rowSpan={2}
                             style={{
                                 position: "sticky",
-                                left: "134px",
+                                left: "117px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
                                 textAlign: "left",
-                                borderRight: "1px solid white"
+                                // borderRight: "1px solid white"
                             }}
                         >
                             <div
@@ -79,9 +102,21 @@ const TablaLP = (props) => {
                                 <div>
                                     Subcategoría
                                 </div>
-                                <div className='Contenedor-Icono-Flecha-Tabla'>
+                                {/* <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
-                                </div>
+                                </div> */}
+                            </div>
+                            <div
+                                style={{
+                                    position:'absolute',
+                                    width:'2px',
+                                    height:'100%',
+                                    background:'white',
+                                    right:'-2px',
+                                    top:'0'
+                                }}
+                            >
+
                             </div>
                         </th>
 
@@ -92,11 +127,11 @@ const TablaLP = (props) => {
                             rowSpan={2} 
                             style={{
                                 position: "sticky",
-                                left: "250px",
+                                left: "215px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
                                 textAlign: "left",
-                                borderRight: "1px solid white"
+                                // borderRight: "1px solid white"
                             }}
                         >
                             <div
@@ -105,20 +140,32 @@ const TablaLP = (props) => {
                                 <div>
                                     Código SAP
                                 </div>
-                                <div className='Contenedor-Icono-Flecha-Tabla'>
+                                {/* <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
-                                </div>
+                                </div> */}
+                            </div>
+                            <div
+                                style={{
+                                    position:'absolute',
+                                    width:'2px',
+                                    height:'100%',
+                                    background:'white',
+                                    right:'-2px',
+                                    top:'0'
+                                }}
+                            >
+
                             </div>
                         </th>
                         <th 
                             rowSpan={2}
                             style={{
                                 position: "sticky",
-                                left: "357px",
+                                left: "304px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
                                 textAlign: "left",
-                                borderRight: "1px solid white"
+                                // borderRight: "1px solid white"
                             }}
                         >
                             <div
@@ -130,34 +177,35 @@ const TablaLP = (props) => {
                                 <div>
                                     EAN
                                 </div>
-                                <div className='Contenedor-Icono-Flecha-Tabla'>
+                                {/* <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
-                                </div>
+                                </div> */}
+                            </div>
+                            <div
+                                style={{
+                                    position:'absolute',
+                                    width:'2px',
+                                    height:'100%',
+                                    background:'white',
+                                    right:'-2px',
+                                    top:'0'
+                                }}
+                            >
+
                             </div>
                         </th>
-                        {/* <th rowSpan={2}>
-                            <div
-                                className='Contenedor-Cabecera-Tabla'
-                            >
-                                <div>
-                                    Código SAP
-                                </div>
-                                <div className='Contenedor-Icono-Flecha-Tabla'>
-                                    <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
-                                </div>
-                            </div>
-                        </th> */}
+                        
                         <th 
                             rowSpan={2}
                             style={
                                 data_tabla_lista_precios.length > 0
                                 ?{
                                     position: "sticky",
-                                    left: "517px",
+                                    left: "466px",
                                     zIndex: "2",
                                     backgroundColor: "#1EC0ED",
                                     textAlign: "left",
-                                    borderRight: "1px solid white"
+                                    // borderRight: "1px solid white"
                                 }
                                 :{
 
@@ -167,15 +215,28 @@ const TablaLP = (props) => {
                             <div
                                 className='Contenedor-Cabecera-Tabla'
                                 style={{
-                                    width:'310px'
+                                    width:'285px'
                                 }}
                             >
                                 <div>
                                     Material
                                 </div>
-                                <div className='Contenedor-Icono-Flecha-Tabla'>
+                                {/* <div className='Contenedor-Icono-Flecha-Tabla'>
                                     <img src={IconoFlechaAbajo} className="Icono-Flecha-Tabla" />
-                                </div>
+                                </div> */}
+                            </div>
+
+                            <div
+                                style={{
+                                    position:'absolute',
+                                    width:'2px',
+                                    height:'100%',
+                                    background:'white',
+                                    right:'-2px',
+                                    top:'0'
+                                }}
+                            >
+
                             </div>
                         </th>
                         {/* <th rowSpan={2}>
@@ -193,7 +254,8 @@ const TablaLP = (props) => {
                         <th 
                             rowSpan={2}
                             style={{
-                                borderRight: "1px solid white"
+                                borderRight: "1px solid white",
+                                paddingLeft: "18px"
                             }}
                         >
                             <div
@@ -535,12 +597,26 @@ const TablaLP = (props) => {
                                 dat.mostrar == true
                                 ?<tr className='W600-S12-H16-C1E1E1E'>
 
-                                    <td className='W600-S12-H16-C1E1E1E'>{pos+1}</td>
+                                    <td className='W600-S12-H16-C1E1E1E'>
+                                        {pos+1}
+                                        <div
+                                            style={{
+                                                position:'absolute',
+                                                width:'2px',
+                                                height:'100%',
+                                                background:'white',
+                                                right:'-2px',
+                                                top:'0'
+                                            }}
+                                        >
+
+                                        </div>
+                                    </td>
                                     <td 
                                         className='W600-S12-H16-C1E1E1E'
                                         style={{
                                             position: "sticky",
-                                            left: "40px",
+                                            left: "42px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
@@ -548,35 +624,75 @@ const TablaLP = (props) => {
                                         }}
                                     >
                                         {dat.catnombre}
+                                        <div
+                                            style={{
+                                                position:'absolute',
+                                                width:'2px',
+                                                height:'100%',
+                                                background:'white',
+                                                right:'-2px',
+                                                top:'0'
+                                            }}
+                                        >
+
+                                        </div>
                                     </td>
                                     <td 
                                         className='W600-S12-H16-C1E1E1E'
                                         style={{
                                             position: "sticky",
-                                            left: "134px",
+                                            left: "117px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
                                             textAlign: "left"
                                         }}
-                                    >{dat.ltpsubcategoria}</td>
+                                    >
+                                        {dat.ltpsubcategoria}
+                                        <div
+                                            style={{
+                                                position:'absolute',
+                                                width:'2px',
+                                                height:'100%',
+                                                background:'white',
+                                                right:'-2px',
+                                                top:'0'
+                                            }}
+                                        >
+
+                                        </div>
+                                    </td>
 
                                     <td 
                                         className='W600-S12-H16-C1E1E1E'
                                         style={{
                                             position: "sticky",
-                                            left: "250px",
+                                            left: "215px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
                                             textAlign: "left"
                                         }}
-                                    >{dat.ltpcodigosap}</td>
+                                    >
+                                        {dat.ltpcodigosap}
+                                        <div
+                                            style={{
+                                                position:'absolute',
+                                                width:'2px',
+                                                height:'100%',
+                                                background:'white',
+                                                right:'-2px',
+                                                top:'0'
+                                            }}
+                                        >
+
+                                        </div>
+                                    </td>
                                     <td 
                                         className='W600-S12-H16-C1E1E1E'
                                         style={{
                                             position: "sticky",
-                                            left: "357px",
+                                            left: "304px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
@@ -590,13 +706,25 @@ const TablaLP = (props) => {
                                         >
                                             {dat.ltpean}
                                         </div>
+                                        <div
+                                            style={{
+                                                position:'absolute',
+                                                width:'2px',
+                                                height:'100%',
+                                                background:'white',
+                                                right:'-2px',
+                                                top:'0'
+                                            }}
+                                        >
+
+                                        </div>
                                     </td>
                                     {/* <td className='W600-S12-H16-C1E1E1E'>{dat.ltpcodigosap}</td> */}
                                     <td 
                                         className='W600-S12-H16-C1E1E1E'
                                         style={{
                                             position: "sticky",
-                                            left: "517px",
+                                            left: "466px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
@@ -609,6 +737,18 @@ const TablaLP = (props) => {
                                             }}
                                         >
                                             {dat.pronombre}
+                                        </div>
+                                        <div
+                                            style={{
+                                                position:'absolute',
+                                                width:'2px',
+                                                height:'100%',
+                                                background:'white',
+                                                right:'-2px',
+                                                top:'0'
+                                            }}
+                                        >
+
                                         </div>
                                     </td>
                                     {/* <td className='W600-S12-H16-C1E1E1E'>{dat.pronombre}</td> */}

@@ -5,7 +5,8 @@ import {
     GUARDAR_NOTIFICACIONES_CARGA_ARCHIVOS
 } from '../../../Constantes/CargaArchivos/CargaArchivos'
 import {
-    EnviarMailPromocionesActivasReducer
+    EnviarMailPromocionesActivasReducer,
+    EnviarMailPromocionesNuevasReducer
 } from '../../../Redux/Acciones/Promociones/MailPromociones'
 
 export const CargarArchivoReducer = (url, data, tipo) => async(dispatch, getState) => {
@@ -81,6 +82,13 @@ export const CargarArchivoReducer = (url, data, tipo) => async(dispatch, getStat
                     datos.sucursalesSeleccionadas,
                     datos.fechaSeleccionadaMes
                 ))
+
+                if(datos.sucursalesSeleccionadasPromocionesNuevas.length > 0){
+                    dispatch(EnviarMailPromocionesNuevasReducer(
+                        datos.sucursalesSeleccionadas,
+                        datos.fechaSeleccionadaMes
+                    ))
+                }
             }
         }
 

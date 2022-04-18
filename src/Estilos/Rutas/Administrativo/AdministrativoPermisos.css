@@ -78,6 +78,11 @@
     letter-spacing: -0.015em;
 }
 
+
+.Modal-Input-Crear-Permiso:focus{
+    border: 1px solid #C4C4C4 !important;
+}
+
 .Modal-Select-Crear-Permiso{
     width: 208px;
     height: 29px;
@@ -171,4 +176,69 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.Icono-Editar-Permisos{
+    width: 13px;
+}
+
+.Icono-Eliminar-Permisos{
+    width: 13px;
+}
+
+.Icono-Guardar-Permisos{
+    width: 28px;
+}
+
+.Contenedor-Icono-Opciones-Permisos{
+    border-radius: 50px;
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover{
+    background-color: #558CFF;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Editar-Permisos{
+    display: none;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Eliminar-Permisos{
+    display: none;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Editar-Permisos-Blanco{
+    display: flex;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Eliminar-Permisos-Blanco{
+    display: flex;
+}
+
+.Icono-Editar-Permisos-Blanco{
+    display: none;
+    width: 13px;
+}
+
+.Icono-Eliminar-Permisos-Blanco{
+    display: none;
+    width: 13px;
+}
+
+.Contenedor-Fila-Permisos:hover .Contenedor-Fecha-Permisos{
+    display: none;
+}
+
+.Contenedor-Fila-Permisos:hover .Contenedor-Opciones-Permisos{
+    display: flex;
+}
+
+.Contenedor-Opciones-Permisos{
+    display: none;
 }

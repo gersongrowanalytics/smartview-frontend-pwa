@@ -9,7 +9,8 @@ import {
     OBTENER_DATOS_FILTRADO_SINIMAGENES,
     OBTENER_DATOS_SINIMAGENES,
     CARGANDO_TABLA_DATOS_IMAGENES,
-    MOSTRAR_CARGANDO_EDITAR_REGISTRO
+    MOSTRAR_CARGANDO_EDITAR_REGISTRO,
+    EDITAR_FECHA_INICIO_FINAL_BANCO_IMAGENES
 } from '../../../Constantes/BancoImagen/BancoImagen'
 
 export const dataBancoImagen = () => async ( dispatch, getState ) => {
@@ -463,5 +464,172 @@ export const EditarImagenNuevoBancoImagenReducer = (
     
 }
 
+export const HabilitarAsignarSkuReducer = (tipo, posicion) => async (dispatch, getState) => {
+
+    let prosConImagenes = getState().bancoImagen.prosConImagenes
+    let prosSinImagenes = getState().bancoImagen.prosSinImagenes
+
+    if(tipo == "PENDIENTES"){
+
+        prosSinImagenes[posicion]['agregarsku'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_SINIMAGENES,
+            payload: {
+                SinImagenes: JSON.stringify(prosSinImagenes) 
+            }
+        })
+
+    }else if(tipo == "ACTIVOS"){
+
+        prosConImagenes[posicion]['agregarsku'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
+            payload: {
+                ConImagenes: JSON.stringify(prosConImagenes) 
+            }
+        })
+
+    }
+
+}
+
+export const AsignarSkuNuevoBancoImagenReducer = (
+    tipo, imagen, prosku, posicion, fechas
+) => async (dispatch, getState) => {
+
+    let prosConImagenes = getState().bancoImagen.prosConImagenes
+    let prosSinImagenes = getState().bancoImagen.prosSinImagenes
+
+    if(tipo == "PENDIENTES"){
+
+        prosSinImagenes[posicion]['cargandoEdicion'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_SINIMAGENES,
+            payload: {
+                SinImagenes: JSON.stringify(prosSinImagenes) 
+            }
+        })
+
+    }else if(tipo == "ACTIVOS"){
+
+        prosConImagenes[posicion]['cargandoEdicion'] = true
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
+            payload: {
+                ConImagenes: JSON.stringify(prosConImagenes) 
+            }
+        })
+
+    }
+
+    await fetch(config.api+'control-promociones/asignar-sku-productos',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                usutoken    : localStorage.getItem('usutoken'),
+                req_imagen  : imagen,
+                req_prosku  : prosku,
+                req_fechas  : fechas
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken'),
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then( async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                
+                dispatch(dataBancoImagen())
+
+            }else{
+
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
 
 
+
+    if(tipo == "PENDIENTES"){
+
+        prosSinImagenes.splice(posicion,1)
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_SINIMAGENES,
+            payload: {
+                SinImagenes: JSON.stringify(prosSinImagenes) 
+            }
+        })
+
+    }else if(tipo == "ACTIVOS"){
+
+        prosConImagenes[posicion]['cargandoEdicion'] = false
+
+        dispatch({
+            type: OBTENER_DATOS_EDITANDO_CONIMAGENES,
+            payload: {
+                ConImagenes: JSON.stringify(prosConImagenes) 
+            }
+        })
+
+    }
+    
+    return true
+
+}
+
+export const EditarFechaInicioFinalReducer = (tipo, posicion, fecha) => async (dispatch, getState) => {
+
+    let prosSinImagenes = getState().bancoImagen.prosSinImagenes
+    let prosConImagenes = getState().bancoImagen.prosConImagenes
+    let prosInactivas = getState().bancoImagen.prosInactivas
+    let cargandoTablaBancoImagen = getState().bancoImagen.cargandoTablaBancoImagen
+
+    let fechaInicio = fecha[0]
+    let fechaFinal = fecha[1]
+
+    fechaInicio = fechaInicio.split("/")
+    fechaInicio = fechaInicio[2]+"/"+fechaInicio[1]+"/"+fechaInicio[0]
+
+    fechaFinal = fechaFinal.split("/")
+    fechaFinal = fechaFinal[2]+"/"+fechaFinal[1]+"/"+fechaFinal[0]
+
+
+    if(tipo == "PENDIENTES" ){
+        prosSinImagenes[posicion]['profechainicio'] = fechaInicio
+        prosSinImagenes[posicion]['profechafinal'] = fechaFinal
+
+    }else if(tipo == "ACTIVOS"){
+        prosConImagenes[posicion]['profechainicio'] = fechaInicio
+        prosConImagenes[posicion]['profechafinal'] = fechaFinal
+    }else if(tipo == "INACTIVO"){
+        prosInactivas[posicion]['profechainicio'] = fechaInicio
+        prosInactivas[posicion]['profechafinal'] = fechaFinal
+    }
+
+    dispatch({
+        type: OBTENER_DATOS_IMAGENES,
+        payload: {
+            SinImagenes : prosSinImagenes,
+            ConImagenes : prosConImagenes,
+            Inactivos : prosInactivas,
+            cargandoTablaBancoImagen : cargandoTablaBancoImagen,
+        }
+    })
+
+}

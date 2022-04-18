@@ -73,4 +73,42 @@ export const AceptarTerminosCondicionesReducer = () => async (dispatch, getState
       console.log(error)
     });
   
-  }
+}
+
+export const ObtenerPermisosUsuarioReducer = () => async (dispatch, getState) => {
+
+  	await fetch(config.api+'usuario/mostrar/permisos',
+		{
+			mode:'cors',
+			method: 'POST',
+			headers: {
+				'Accept' : 'application/json',
+				'Content-type' : 'application/json',
+				'api-token'	   : localStorage.getItem('usutoken'),
+				'api_token'	   : localStorage.getItem('usutoken')
+			}
+      	}
+    )
+    .then( async res => {
+		await dispatch(estadoRequestReducer(res.status))
+		return res.json()
+    })
+    .then(data => {
+		const estadoRequest = getState().estadoRequest.init_request
+		if(estadoRequest == true){
+			if(data.respuesta == true){
+
+				dispatch({
+					type : "OBTENER_PERMISOS_USUARIO_CONFIGURACION",
+					payload : data.datos
+				})
+
+			}else{
+				
+			}
+		}
+    }).catch((error)=> {
+		console.log(error)
+    });
+
+}

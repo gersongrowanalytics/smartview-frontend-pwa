@@ -7,6 +7,9 @@ import IconoAdministrador from '../../Assets/Img/Top/iconoAdministrador.png'
 import IconoWsp from '../../Assets/Img/Top/wspnuevo.png'
 import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import {
+    funPermisosObtenidos
+} from '../../Funciones/funPermiso'
 
 const FiltroSoporteTop = (props) => {
 
@@ -22,6 +25,8 @@ const FiltroSoporteTop = (props) => {
         datosUsuarioLogeado,
         mostrar_terminos_condiciones_login
     } = useSelector(({auth}) => auth);
+
+    const {permisos_usuario_configuracion} = useSelector(({setting}) => setting);
 
     return (
         <>
@@ -141,30 +146,45 @@ const FiltroSoporteTop = (props) => {
                             </div>
                             <div className='Wnormal-S14-H19-C1E1E1E'>Enviar SMS Wsp</div>
                         </div>
+
+
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.elementos.enviados",
+                                <Link to="/elementos-enviados/actual">
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAvion} />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>Elementos Enviados</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
+
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.administrador",
+                                <Link to="/administrativo">
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img 
+                                                className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAdministrador} 
+                                                style={{
+                                                    width: "12px",
+                                                    left: "12px",
+                                                    top: "8px"
+                                                }}
+                                            />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>Administrador</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
                         
-                        <Link to="/elementos-enviados/actual">
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAvion} />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>Elementos Enviados</div>
-                            </div>
-                        </Link>
-                        <Link to="/administrativo">
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img 
-                                        className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoAdministrador} 
-                                        style={{
-                                            width: "12px",
-                                            left: "12px",
-                                            top: "8px"
-                                        }}
-                                    />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>Administrador</div>
-                            </div>
-                        </Link>
                     </div>
                     :null
                 }

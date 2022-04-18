@@ -10,6 +10,7 @@ import {
 import config from '../../config'
 import { estadoRequestReducer } from "./EstadoRequest"
 import { message } from "antd";
+import {ObtenerPermisosUsuarioReducer} from './Setting'
 
 export const MostrarCargandoLogin = () => (dispatch, getState) => {
 
@@ -53,6 +54,9 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
             if(data.respuesta == true){
+
+                dispatch(ObtenerPermisosUsuarioReducer())
+
                 // console.log(data.datos)
                 localStorage.setItem('contrasena', usuario.contrasena)
                 localStorage.setItem('usuario', usuario.usuario)

@@ -2,7 +2,8 @@ import {useSelector} from "react-redux";
 
 export default function(permiso, componente)
 {
-    const {permisos} = useSelector(({auth}) => auth);
+    // const {permisos} = useSelector(({auth}) => auth);
+    const {permisos_usuario_configuracion} = useSelector(({setting}) => setting);
 
     if(localStorage.getItem('tpuprivilegio') == "todo"){
         return componente
@@ -10,7 +11,7 @@ export default function(permiso, componente)
 
     let tienePermiso = false
 
-    permisos.map((pem) => {
+    permisos_usuario_configuracion.map((pem) => {
         if(permiso == pem.pemslug){
             tienePermiso = true
         }

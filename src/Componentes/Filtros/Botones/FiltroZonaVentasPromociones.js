@@ -119,7 +119,17 @@ const FiltroZonaVentasPromociones = (props) => {
                 </div>
                 {
                     mostrarCuerpoFiltro == true
-                    ?<div className='Linea-Filtro-Zona-Venta-Promociones'></div>
+                    ?<div 
+                        className='Linea-Filtro-Zona-Venta-Promociones'
+                        onClick={() => {
+                            console.log(cass)
+                            console.log(zonas)
+                            console.log(gsus)
+                            console.log(sucursalesUsuario)
+                            console.log(idSucursalUsuarioSelec)
+                            console.log(aplicandoFiltroAcumulado)
+                        }}
+                    ></div>
                     :null
                 }
 
@@ -128,11 +138,21 @@ const FiltroZonaVentasPromociones = (props) => {
                     ?<div 
                         className='Contenedor-Cuerpo-Filtro-Zonas-Ventas-Promociones'
                         id="ID-Contenedor-Cuerpo-Filtro-Zonas-Ventas-Promociones"
+                        style={
+                            sucursalesUsuario.length == 1
+                            ?{
+                                width: "auto",
+                                height:'auto'
+                            }
+                            :{}
+                        }
                     >
 
                         <div>
                             {
-                                cass.map((cas, posCas) => {
+                                sucursalesUsuario.length == 1
+                                ?null
+                                :cass.map((cas, posCas) => {
                                     return(
                                         <div 
                                             className='Fila-Filtro-Zona-Ventas-Promociones Wnormal-S14-H19-L0015-C1E1E1E' 
@@ -187,28 +207,24 @@ const FiltroZonaVentasPromociones = (props) => {
                             }
                         </div>
                         
-                        <div 
-                            className='Linea-Filtro-Zonas-Ventas-Promociones'
-                            style={{
-                                position: "relative"
-                            }}
-                        >
-                            a
-                            {/* <div
+                        {
+                            sucursalesUsuario.length == 1
+                            ?null
+                            :<div 
+                                className='Linea-Filtro-Zonas-Ventas-Promociones'
                                 style={{
-                                    position: "fixed",
-                                    background: "#F1F1F1",
-                                    width: "7px",
-                                    height: "400px"
+                                    position: "relative"
                                 }}
                             >
-
-                            </div> */}
-                        </div>
+                                a
+                            </div>
+                        }
 
                         <div style={{paddingRight:'15px'}}>
                             {
-                                zonas.map((zona, posZona) => {
+                                sucursalesUsuario.length == 1
+                                ?null
+                                :zonas.map((zona, posZona) => {
                                     return( 
                                         idCanalSeleccionada == 0
                                         ?<div 
@@ -267,86 +283,90 @@ const FiltroZonaVentasPromociones = (props) => {
                                 })
                             }
                         </div>
+                        
 
-                        <div 
-                            className='Linea-Filtro-Zonas-Ventas-Promociones'
-                            style={{
-                                position: "relative"
-                            }}
-                        >
-                            a
-                            {/* <div
+                        {
+                            sucursalesUsuario.length == 1
+                            ?null
+                            :<div 
+                                className='Linea-Filtro-Zonas-Ventas-Promociones'
                                 style={{
-                                    position: "fixed",
-                                    background: "#F1F1F1",
-                                    width: "7px",
-                                    height: "400px"
+                                    position: "relative"
                                 }}
                             >
+                                a
+                            </div>
+                        }
 
-                            </div> */}
-                        </div>
+                        {
+                            sucursalesUsuario.length == 1
+                            ?sucursalesUsuario.map((sucursal, posSucursal) => {
+                                return(
+                                    <div 
+                                        className='Item-Sucursal-Filtro'
+                                    >
+                                        <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
+                                            <Checkbox 
+                                                className='Check-FiltroZonaVentasPromociones'
+                                                onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
+                                                checked={sucursal.check}></Checkbox>
+                                        </div>
+                                        <div 
+                                            style={{position:'absolute', left:'25px', top:'1px'}}
+                                            onClick={() => {
+                                                // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                // setSucursalSeleccionada(sucursal.sucnombre)
+                                                // setMostrarCuerpoFiltro(false)
+                                                // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
+                                            }}
+                                        >
+                                            {sucursal.sucnombre}
+                                        </div>
+                                    </div>
+                                )
+                            })
+                            :null
+                        }
 
-                        <div style={{display:'flex', paddingLeft:'15px'}} onClick={() => console.log(sucursalesUsuario)}>
-                            {
-                                gsus.map((gsu, posGsu) => {
-                                    return (
-                                        gsu.gsuid != 0
-                                        ?idCanalSeleccionada == 0
-                                            ?idZonaSeleccionada == 0
-                                                ?<div style={{paddingRight:'20px'}}>
-                                                    <div 
-                                                        className='Wbold-S14-H19-L0015-C1E1E1E'
-                                                        style={{
-                                                            marginBottom:'4px', position:'relative',
-                                                            width: "190px",
-                                                            height: "30px",
-                                                            display:'flex'
-                                                        }}
-                                                    >
-                                                        <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
-                                                            <Checkbox 
-                                                                className='Check-FiltroZonaVentasPromociones'
-                                                                onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
-                                                                checked={gsu.check}></Checkbox>
+
+                        {
+                            sucursalesUsuario.length == 1
+                            ?null
+                            :<div style={{display:'flex', paddingLeft:'15px'}} onClick={() => console.log(sucursalesUsuario)}>
+                                {
+                                    gsus.map((gsu, posGsu) => {
+                                        return (
+                                            gsu.gsuid != 0
+                                            ?idCanalSeleccionada == 0
+                                                ?idZonaSeleccionada == 0
+                                                    ?<div style={{paddingRight:'20px'}}>
+                                                        <div 
+                                                            className='Wbold-S14-H19-L0015-C1E1E1E'
+                                                            style={{
+                                                                marginBottom:'4px', position:'relative',
+                                                                width: "190px",
+                                                                height: "30px",
+                                                                display:'flex'
+                                                            }}
+                                                        >
+                                                            <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
+                                                                <Checkbox 
+                                                                    className='Check-FiltroZonaVentasPromociones'
+                                                                    onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
+                                                                    checked={gsu.check}></Checkbox>
+                                                            </div>
+                                                            <div style={{position:'absolute', left:'25px', top: "4px"}}>
+                                                                {gsu.gsunombre}
+                                                            </div>
                                                         </div>
-                                                        <div style={{position:'absolute', left:'25px', top: "4px"}}>
-                                                            {gsu.gsunombre}
-                                                        </div>
-                                                    </div>
-                                                    {
-                                                        sucursalesUsuario.map((sucursal, posSucursal) => {
-                                                            return(
-                                                                idCanalSeleccionada == 0
-                                                                ?sucursal.gsuid == gsu.gsuid
-                                                                    ?<div 
-                                                                        className='Item-Sucursal-Filtro'
-                                                                        style={gsu.gsuid == 6?{width: "250px"}:{}}
-                                                                    >
-                                                                        <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
-                                                                            <Checkbox 
-                                                                                className='Check-FiltroZonaVentasPromociones'
-                                                                                onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
-                                                                                checked={sucursal.check}></Checkbox>
-                                                                        </div>
-                                                                        <div 
-                                                                            style={{position:'absolute', left:'25px', top:'1px'}}
-                                                                            onClick={() => {
-                                                                                // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
-                                                                                // setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                // setMostrarCuerpoFiltro(false)
-                                                                                // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
-                                                                                dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
-                                                                            }}
-                                                                        >
-                                                                            {sucursal.sucnombre}
-                                                                        </div>
-                                                                    </div>
-                                                                    :null
-                                                                :idCanalSeleccionada == sucursal.casid
+                                                        {
+                                                            sucursalesUsuario.map((sucursal, posSucursal) => {
+                                                                return(
+                                                                    idCanalSeleccionada == 0
                                                                     ?sucursal.gsuid == gsu.gsuid
                                                                         ?<div 
-                                                                            className='Item-Sucursal-Filtro' 
+                                                                            className='Item-Sucursal-Filtro'
                                                                             style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                         >
                                                                             <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
@@ -355,54 +375,24 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                                     onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
                                                                                     checked={sucursal.check}></Checkbox>
                                                                             </div>
-                                                                            <div
+                                                                            <div 
+                                                                                style={{position:'absolute', left:'25px', top:'1px'}}
                                                                                 onClick={() => {
                                                                                     // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
                                                                                     // setSucursalSeleccionada(sucursal.sucnombre)
                                                                                     // setMostrarCuerpoFiltro(false)
                                                                                     // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
                                                                                     dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
-                                                                                }} 
-                                                                                style={{position:'absolute', left:'25px', top:'1px'}}>
+                                                                                }}
+                                                                            >
                                                                                 {sucursal.sucnombre}
                                                                             </div>
                                                                         </div>
                                                                         :null
-                                                                    :null
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
-                                                :gsu.zonas.map((gsuzona) => {
-                                                    return(
-                                                        idZonaSeleccionada == gsuzona
-                                                        ?<div style={{paddingRight:'20px'}}>
-                                                            <div 
-                                                                className='Wbold-S14-H19-L0015-C1E1E1E'
-                                                                style={{
-                                                                    marginBottom:'4px', position:'relative',
-                                                                    width: "190px",
-                                                                    height: "30px",
-                                                                    display:'flex'
-                                                                }}
-                                                            >
-                                                                <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
-                                                                    <Checkbox 
-                                                                        className='Check-FiltroZonaVentasPromociones'
-                                                                        onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
-                                                                        checked={gsu.check}></Checkbox>
-                                                                </div>
-                                                                <div style={{position:'absolute', left:'25px', top: "4px"}}>
-                                                                    {gsu.gsunombre}
-                                                                </div>
-                                                            </div>
-                                                            {
-                                                                sucursalesUsuario.map((sucursal, posSucursal) => {
-                                                                    return(
-                                                                        idCanalSeleccionada == 0
+                                                                    :idCanalSeleccionada == sucursal.casid
                                                                         ?sucursal.gsuid == gsu.gsuid
                                                                             ?<div 
-                                                                                className='Item-Sucursal-Filtro'
+                                                                                className='Item-Sucursal-Filtro' 
                                                                                 style={gsu.gsuid == 6?{width: "250px"}:{}}
                                                                             >
                                                                                 <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
@@ -424,7 +414,38 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                                 </div>
                                                                             </div>
                                                                             :null
-                                                                        :idCanalSeleccionada == sucursal.casid
+                                                                        :null
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                    :gsu.zonas.map((gsuzona) => {
+                                                        return(
+                                                            idZonaSeleccionada == gsuzona
+                                                            ?<div style={{paddingRight:'20px'}}>
+                                                                <div 
+                                                                    className='Wbold-S14-H19-L0015-C1E1E1E'
+                                                                    style={{
+                                                                        marginBottom:'4px', position:'relative',
+                                                                        width: "190px",
+                                                                        height: "30px",
+                                                                        display:'flex'
+                                                                    }}
+                                                                >
+                                                                    <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
+                                                                        <Checkbox 
+                                                                            className='Check-FiltroZonaVentasPromociones'
+                                                                            onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
+                                                                            checked={gsu.check}></Checkbox>
+                                                                    </div>
+                                                                    <div style={{position:'absolute', left:'25px', top: "4px"}}>
+                                                                        {gsu.gsunombre}
+                                                                    </div>
+                                                                </div>
+                                                                {
+                                                                    sucursalesUsuario.map((sucursal, posSucursal) => {
+                                                                        return(
+                                                                            idCanalSeleccionada == 0
                                                                             ?sucursal.gsuid == gsu.gsuid
                                                                                 ?<div 
                                                                                     className='Item-Sucursal-Filtro'
@@ -449,67 +470,67 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                                     </div>
                                                                                 </div>
                                                                                 :null
-                                                                            :null
-                                                                    )
-                                                                })
-                                                            }
-                                                        </div>
-                                                        :null
-                                                    )
-                                                })
-                                            :idZonaSeleccionada == 0
-                                                ?gsu.canales.map((gsucan) => {
-                                                    return (
-                                                        idCanalSeleccionada == gsucan
-                                                        ?<div style={{paddingRight:'20px'}}>
-                                                            <div 
-                                                                className='Wbold-S14-H19-L0015-C1E1E1E'
-                                                                style={{
-                                                                    marginBottom:'4px', position:'relative',
-                                                                    width: "190px",
-                                                                    height: "30px",
-                                                                    display:'flex'
-                                                                }}
-                                                            >
-                                                                <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
-                                                                    <Checkbox 
-                                                                        className='Check-FiltroZonaVentasPromociones'
-                                                                        onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
-                                                                        checked={gsu.check}></Checkbox>
-                                                                </div>
-                                                                <div style={{position:'absolute', left:'25px', top: "4px"}}>
-                                                                    {gsu.gsunombre}
-                                                                </div>
+                                                                            :idCanalSeleccionada == sucursal.casid
+                                                                                ?sucursal.gsuid == gsu.gsuid
+                                                                                    ?<div 
+                                                                                        className='Item-Sucursal-Filtro'
+                                                                                        style={gsu.gsuid == 6?{width: "250px"}:{}}
+                                                                                    >
+                                                                                        <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
+                                                                                            <Checkbox 
+                                                                                                className='Check-FiltroZonaVentasPromociones'
+                                                                                                onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
+                                                                                                checked={sucursal.check}></Checkbox>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            onClick={() => {
+                                                                                                // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                                // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                                // setMostrarCuerpoFiltro(false)
+                                                                                                // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                                dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
+                                                                                            }} 
+                                                                                            style={{position:'absolute', left:'25px', top:'1px'}}>
+                                                                                            {sucursal.sucnombre}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    :null
+                                                                                :null
+                                                                        )
+                                                                    })
+                                                                }
                                                             </div>
-                                                            {
-                                                                sucursalesUsuario.map((sucursal, posSucursal) => {
-                                                                    return(
-                                                                        idCanalSeleccionada == 0
-                                                                        ?sucursal.gsuid == gsu.gsuid
-                                                                            ?<div 
-                                                                                className='Item-Sucursal-Filtro'
-                                                                                style={gsu.gsuid == 6?{width: "250px"}:{}}
-                                                                            >
-                                                                                <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
-                                                                                    <Checkbox 
-                                                                                        className='Check-FiltroZonaVentasPromociones'
-                                                                                        onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
-                                                                                        checked={sucursal.check}></Checkbox>
-                                                                                </div>
-                                                                                <div
-                                                                                    onClick={() => {
-                                                                                        // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
-                                                                                        // setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                        // setMostrarCuerpoFiltro(false)
-                                                                                        // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
-                                                                                        dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
-                                                                                    }} 
-                                                                                    style={{position:'absolute', left:'25px', top:'1px'}}>
-                                                                                    {sucursal.sucnombre}
-                                                                                </div>
-                                                                            </div>
-                                                                            :null
-                                                                        :idCanalSeleccionada == sucursal.casid
+                                                            :null
+                                                        )
+                                                    })
+                                                :idZonaSeleccionada == 0
+                                                    ?gsu.canales.map((gsucan) => {
+                                                        return (
+                                                            idCanalSeleccionada == gsucan
+                                                            ?<div style={{paddingRight:'20px'}}>
+                                                                <div 
+                                                                    className='Wbold-S14-H19-L0015-C1E1E1E'
+                                                                    style={{
+                                                                        marginBottom:'4px', position:'relative',
+                                                                        width: "190px",
+                                                                        height: "30px",
+                                                                        display:'flex'
+                                                                    }}
+                                                                >
+                                                                    <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
+                                                                        <Checkbox 
+                                                                            className='Check-FiltroZonaVentasPromociones'
+                                                                            onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
+                                                                            checked={gsu.check}></Checkbox>
+                                                                    </div>
+                                                                    <div style={{position:'absolute', left:'25px', top: "4px"}}>
+                                                                        {gsu.gsunombre}
+                                                                    </div>
+                                                                </div>
+                                                                {
+                                                                    sucursalesUsuario.map((sucursal, posSucursal) => {
+                                                                        return(
+                                                                            idCanalSeleccionada == 0
                                                                             ?sucursal.gsuid == gsu.gsuid
                                                                                 ?<div 
                                                                                     className='Item-Sucursal-Filtro'
@@ -534,66 +555,66 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                                     </div>
                                                                                 </div>
                                                                                 :null
-                                                                            :null
-                                                                    )
-                                                                })
-                                                            }
-                                                        </div>
-                                                        :null
-                                                    )
-                                                })
-                                                :gsu.zonas.map((gsuzona) => {
-                                                    return(
-                                                        idZonaSeleccionada == gsuzona
-                                                        ?<div style={{paddingRight:'20px'}}>
-                                                            <div 
-                                                                className='Wbold-S14-H19-L0015-C1E1E1E'
-                                                                style={{
-                                                                    marginBottom:'4px', position:'relative',
-                                                                    width: "190px",
-                                                                    height: "30px",
-                                                                    display:'flex'
-                                                                }}
-                                                            >
-                                                                <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
-                                                                    <Checkbox 
-                                                                        className='Check-FiltroZonaVentasPromociones'
-                                                                        onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
-                                                                        checked={gsu.check}></Checkbox>
-                                                                </div>
-                                                                <div style={{position:'absolute', left:'25px', top: "4px"}}>
-                                                                    {gsu.gsunombre}
-                                                                </div>
+                                                                            :idCanalSeleccionada == sucursal.casid
+                                                                                ?sucursal.gsuid == gsu.gsuid
+                                                                                    ?<div 
+                                                                                        className='Item-Sucursal-Filtro'
+                                                                                        style={gsu.gsuid == 6?{width: "250px"}:{}}
+                                                                                    >
+                                                                                        <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
+                                                                                            <Checkbox 
+                                                                                                className='Check-FiltroZonaVentasPromociones'
+                                                                                                onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
+                                                                                                checked={sucursal.check}></Checkbox>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            onClick={() => {
+                                                                                                // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                                // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                                // setMostrarCuerpoFiltro(false)
+                                                                                                // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                                dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
+                                                                                            }} 
+                                                                                            style={{position:'absolute', left:'25px', top:'1px'}}>
+                                                                                            {sucursal.sucnombre}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    :null
+                                                                                :null
+                                                                        )
+                                                                    })
+                                                                }
                                                             </div>
-                                                            {
-                                                                sucursalesUsuario.map((sucursal, posSucursal) => {
-                                                                    return(
-                                                                        idCanalSeleccionada == 0
-                                                                        ?sucursal.gsuid == gsu.gsuid
-                                                                            ?<div 
-                                                                                className='Item-Sucursal-Filtro'
-                                                                                style={gsu.gsuid == 6?{width: "250px"}:{}}
-                                                                            >
-                                                                                <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
-                                                                                    <Checkbox 
-                                                                                        className='Check-FiltroZonaVentasPromociones'
-                                                                                        onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
-                                                                                        checked={sucursal.check} ></Checkbox>
-                                                                                </div>
-                                                                                <div
-                                                                                    onClick={() => {
-                                                                                        // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
-                                                                                        // setSucursalSeleccionada(sucursal.sucnombre)
-                                                                                        // setMostrarCuerpoFiltro(false)
-                                                                                        // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
-                                                                                        dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
-                                                                                    }} 
-                                                                                    style={{position:'absolute', left:'25px', top:'1px'}}>
-                                                                                    {sucursal.sucnombre}
-                                                                                </div>
-                                                                            </div>
-                                                                            :null
-                                                                        :idCanalSeleccionada == sucursal.casid
+                                                            :null
+                                                        )
+                                                    })
+                                                    :gsu.zonas.map((gsuzona) => {
+                                                        return(
+                                                            idZonaSeleccionada == gsuzona
+                                                            ?<div style={{paddingRight:'20px'}}>
+                                                                <div 
+                                                                    className='Wbold-S14-H19-L0015-C1E1E1E'
+                                                                    style={{
+                                                                        marginBottom:'4px', position:'relative',
+                                                                        width: "190px",
+                                                                        height: "30px",
+                                                                        display:'flex'
+                                                                    }}
+                                                                >
+                                                                    <div style={{marginRight:'5px', position:'absolute', top: "4px"}}>
+                                                                        <Checkbox 
+                                                                            className='Check-FiltroZonaVentasPromociones'
+                                                                            onChange={(e) => dispatch(SeleccionarFiltroGrupoReducer(posGsu, e.target.checked))}
+                                                                            checked={gsu.check}></Checkbox>
+                                                                    </div>
+                                                                    <div style={{position:'absolute', left:'25px', top: "4px"}}>
+                                                                        {gsu.gsunombre}
+                                                                    </div>
+                                                                </div>
+                                                                {
+                                                                    sucursalesUsuario.map((sucursal, posSucursal) => {
+                                                                        return(
+                                                                            idCanalSeleccionada == 0
                                                                             ?sucursal.gsuid == gsu.gsuid
                                                                                 ?<div 
                                                                                     className='Item-Sucursal-Filtro'
@@ -603,7 +624,7 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                                         <Checkbox 
                                                                                             className='Check-FiltroZonaVentasPromociones'
                                                                                             onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
-                                                                                            checked={sucursal.check}></Checkbox>
+                                                                                            checked={sucursal.check} ></Checkbox>
                                                                                     </div>
                                                                                     <div
                                                                                         onClick={() => {
@@ -618,19 +639,45 @@ const FiltroZonaVentasPromociones = (props) => {
                                                                                     </div>
                                                                                 </div>
                                                                                 :null
-                                                                            :null
-                                                                    )
-                                                                })
-                                                            }
-                                                        </div>
-                                                        :null
-                                                    )
-                                                })
-                                        :null
-                                    )
-                                })
-                            }
-                        </div>
+                                                                            :idCanalSeleccionada == sucursal.casid
+                                                                                ?sucursal.gsuid == gsu.gsuid
+                                                                                    ?<div 
+                                                                                        className='Item-Sucursal-Filtro'
+                                                                                        style={gsu.gsuid == 6?{width: "250px"}:{}}
+                                                                                    >
+                                                                                        <div style={{marginRight:'5px', position:'absolute', top: "2px"}}>
+                                                                                            <Checkbox 
+                                                                                                className='Check-FiltroZonaVentasPromociones'
+                                                                                                onChange={(e) => dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, e.target.checked))}
+                                                                                                checked={sucursal.check}></Checkbox>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            onClick={() => {
+                                                                                                // CUANDO SELECCIONAMOS UNA SUCURSAL DESDE EL NOMBRE SE REINICIA TODO LO FILTRADO POR CHECKBOX Y SOLO SE FILTR EL SELECCIONADO
+                                                                                                // setSucursalSeleccionada(sucursal.sucnombre)
+                                                                                                // setMostrarCuerpoFiltro(false)
+                                                                                                // dispatch(SeleccionarSucursalReducer(sucursal.sucid))
+                                                                                                dispatch(SeleccionarFiltroSucursalesReducer(posSucursal, !sucursal.check))
+                                                                                            }} 
+                                                                                            style={{position:'absolute', left:'25px', top:'1px'}}>
+                                                                                            {sucursal.sucnombre}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    :null
+                                                                                :null
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </div>
+                                                            :null
+                                                        )
+                                                    })
+                                            :null
+                                        )
+                                    })
+                                }
+                            </div>
+                        }
 
                     </div>
                     :null

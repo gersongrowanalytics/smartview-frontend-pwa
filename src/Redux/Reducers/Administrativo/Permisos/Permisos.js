@@ -1,6 +1,7 @@
 import {
     OBTENER_DATOS_PERMISOS,
     CARGANDO_TABLA_DATOS_PERMISOS,
+    OBTENER_DATA_PERMISOS
 } from '../../../../Constantes/Administrativo/Permisos/Permisos'
 
 const INIT_STATE = {
@@ -9,6 +10,8 @@ const INIT_STATE = {
     paginasTotales: "",
     paginaActual: "",
     indexRegistro: "",
+    data_paginate_permisos : {},
+    data_tipos_permisos : []
 };
 
 export default (state = INIT_STATE, action) => {
@@ -26,7 +29,15 @@ export default (state = INIT_STATE, action) => {
                 paginasTotales: action.payload.paginasTotales,
                 paginaActual: action.payload.paginaActual,
                 indexRegistro: action.payload.indexRegistro,
-                cargandoTablaPermisos: action.payload.cargandoSpin
+                cargandoTablaPermisos: action.payload.cargandoSpin,
+                data_paginate_permisos: action.payload.data_paginate_permisos,
+                data_tipos_permisos : action.payload.data_tipos_permisos,
+            }
+        }
+        case OBTENER_DATA_PERMISOS: {
+            return {
+                ...state,
+                permisos: action.payload,
             }
         }
         default:

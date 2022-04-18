@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Modal, Spin } from 'antd'
+import { Row, Col, Modal, Spin, Tooltip } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoPermisos.css'
@@ -8,8 +8,14 @@ import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequ
 import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
 import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons'
 import {
-    dataPermisos
+    dataPermisos,
+    HabilitarEditarPermisosReducer
 } from '../../../Redux/Acciones/Administrativo/Permisos/Permisos'
+import IconoEditar from '../../../Assets/Img/Administrativo/Permisos/editar.png'
+import IconoEditarBlanco from '../../../Assets/Img/Administrativo/Permisos/editarBlanco.png'
+import IconoEliminar from '../../../Assets/Img/Administrativo/Permisos/eliminar.png'
+import IconoEliminarBlanco from '../../../Assets/Img/Administrativo/Permisos/eliminarBlanco.png'
+import IconoGuardar from '../../../Assets/Img/Administrativo/Permisos/guardar.png'
 
 const Permisos = () => {
 
@@ -27,7 +33,9 @@ const Permisos = () => {
         cargandoTablaPermisos,
         paginasTotales,
         paginaActual,
-        indexRegistro
+        indexRegistro,
+        data_paginate_permisos,
+        data_tipos_permisos
     } = useSelector(({permisos}) => permisos);
 
     const SeleccionarCategoria = (valor) => {
@@ -78,7 +86,12 @@ const Permisos = () => {
     },[paginaActualTabla])
 
     return (
-        <div className='Contenedor-Administrativo'>
+        <div 
+            className='Contenedor-Administrativo'
+            style={{
+                marginBottom:'200px'
+            }}
+        >
             <Row>
                 <Col lg={24} xl={24}>
                     <div className='Titulo-Administrativo'>Administrador</div>
@@ -136,7 +149,15 @@ const Permisos = () => {
                 <Col lg={11} xl={11}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
                         <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
-                            <div>1 - {paginasTotales} de {paginaActual}</div>
+                            {/* <div>1 - {paginasTotales} de {paginaActual}</div> */}
+                            
+                            {
+                                data_paginate_permisos
+                                ?<div>{data_paginate_permisos.from} - {data_paginate_permisos.to} de {data_paginate_permisos.total}</div>
+                                :null
+                            }
+                            
+                            
                             <LeftOutlined 
                                 style={{marginLeft:'9px'}}
                                 onClick={() => paginaAnterior(paginaActualTabla)}
@@ -210,14 +231,25 @@ const Permisos = () => {
                                     {
                                         permisos.map((permiso, posicion) => {
                                             return(
-                                                <tr>
-                                                    <td>
+                                                <tr
+                                                    className='Contenedor-Fila-Permisos'
+                                                >
+                                                    <td
+                                                    style={{
+                                                        padding: "11px 0px 11px 0px"
+                                                    }}
+                                                    >
                                                         {indexRegistro + posicion}
                                                     </td>
                                                     <td>
-                                                        Canal
+                                                        {permiso.tpenombre}
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        style={{
+                                                            textAlign: "left",
+                                                            paddingRight: "40px"
+                                                        }}
+                                                    >
                                                         <div 
                                                             className='Texto-Columna' 
                                                             style={{width: '220px'}}
@@ -226,7 +258,11 @@ const Permisos = () => {
                                                             {permiso.pemnombre}
                                                         </div>
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        style={{
+                                                            textAlign: "left"
+                                                        }}
+                                                    >
                                                         <div 
                                                             className='Texto-Columna' 
                                                             style={{width: '220px'}}
@@ -245,7 +281,60 @@ const Permisos = () => {
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        {obtenerFecha(permiso.created_at)}
+
+                                                        <div
+                                                            style={{
+                                                                // display:'flex',
+                                                                alignItems: 'center',
+                                                                placeContent: 'center'
+                                                            }}
+                                                            className="Contenedor-Opciones-Permisos"
+                                                        >
+                                                            <Tooltip
+                                                                placement="bottom" 
+                                                                title={"Editar"}
+                                                            >
+                                                                <div
+                                                                    style={{ marginRight: "12px"}}
+                                                                    className="Contenedor-Icono-Opciones-Permisos"
+                                                                > 
+                                                                    <img className='Icono-Editar-Permisos' src={IconoEditar} /> 
+                                                                    <img className='Icono-Editar-Permisos-Blanco' src={IconoEditarBlanco} /> 
+                                                                </div>
+                                                            </Tooltip>
+
+                                                            <Tooltip
+                                                                placement="bottom" 
+                                                                title={"Eliminar"}
+                                                            >
+                                                                <div
+                                                                    style={{ marginRight: "10px", }}
+                                                                    className="Contenedor-Icono-Opciones-Permisos"
+                                                                > 
+                                                                    <img className='Icono-Eliminar-Permisos' src={IconoEliminar} />
+                                                                    <img className='Icono-Eliminar-Permisos-Blanco' src={IconoEliminarBlanco} />
+                                                                </div>
+                                                            </Tooltip>
+                                                            <Tooltip
+                                                                placement="bottom" 
+                                                                title={"Guardar"}
+                                                            >
+                                                                <div
+                                                                    style={{}}
+                                                                    className="Contenedor-Icono-Opciones-Permisos"
+                                                                > 
+                                                                    <img className='Icono-Guardar-Permisos' src={IconoGuardar} /> 
+                                                                </div>
+                                                            </Tooltip>
+                                                            
+                                                        </div>
+                                                        
+                                                        <div
+                                                            className='Contenedor-Fecha-Permisos'
+                                                        >
+                                                            {obtenerFecha(permiso.created_at)}
+                                                        </div>
+                                                        
                                                     </td>
                                                 </tr>
                                             )
@@ -298,13 +387,15 @@ const Permisos = () => {
                                             : 'Contenedor-Select-Categoria-Modal-Ocultar'}
                                 >
                                     {
-                                        a.map((e)=>{
+                                        data_tipos_permisos.map((tpe)=>{
                                             return (
                                                 <div 
                                                     className='Opciones-Select-Categoria-Modal'
-                                                    onClick={()=> SeleccionarCategoria("Canal")}
+                                                    onClick={()=> {
+                                                        SeleccionarCategoria(tpe.tpenombre)
+                                                    }}
                                                 >
-                                                    <span>Canal</span>
+                                                    <span>{tpe.tpenombre}</span>
                                                 </div>
                                             )
                                         })

@@ -1,34 +1,19 @@
-import React, {useState, useEffect, useRef} from 'react'
-import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones'
-import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones'
-import '../../Estilos/Rutas/Rebate/Rebate.css'
-import {useDispatch, useSelector} from "react-redux";
-import { Link } from "react-router-dom";
-import {
-    ObtenerRebatesActualesReducer, 
-    AgregarFilaRebateReducer,
-    ActivarCarouselTablaRebateReducer,
-    ObtenerGrupoRebateReducer,
-    EditarFilaRebateReducer,
-    EditandoFilaRebateReducer,
-    CrearRebatesReducer,
-    FiltrarGrupoReducer,
-    HabilitarEditarTodosReducer
-} from '../../Redux/Acciones/Rebate/Rebate'
+import React, {useState, useEffect} from 'react'
+import FiltrosRebate from '../../../Componentes/Rutas/Rebate/FiltrosRebate'
 import {InputNumber, Select} from "antd";
+import IconoFlechaBlanca from '../../../Assets/Img/Rebate/flechaderechablanca.png'
+import IconoAgregar from '../../../Assets/Img/Rebate/agregarceleste.png'
+import {useDispatch, useSelector} from "react-redux";
 import {
-    LeftOutlined,
-    RightOutlined
-} from '@ant-design/icons';
-import IconoAgregar from '../../Assets/Img/Rebate/agregarceleste.png'
-import IconoFlechaBlanca from '../../Assets/Img/Rebate/flechaderechablanca.png'
-import { Tooltip } from 'antd';
-import ReactExport from 'react-data-export';
-import FiltrosRebate from '../../Componentes/Rutas/Rebate/FiltrosRebate';
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+    ObtenerDataRebateTrimestralReducer,
+    ActivarCarouselTablaRebateTrimestralReducer,
+    AgregarFilaRebateTrimestralReducer,
+    EditandoFilaRebateTrimestralReducer,
+    HabilitarEditarTodosRebateTrimestralReducer,
+    CrearRebatesTrimestralReducer
+} from '../../../Redux/Acciones/Rebate/Trimestre/Trimestre'
 
-const Rebate = () => {
+const Trimestral = () => {
 
     const dispatch = useDispatch()
     
@@ -38,25 +23,19 @@ const Rebate = () => {
     } = useSelector(({fechas}) => fechas);
 
     const {
-        data_rebate,
+        data_rebate_trimestral,
         data_grupos_rebate,
-        cargando_data_rebate,
+        cargando_data_rebate_trimestral,
         grupo_seleccionado_rebate,
-        data_rebate_descargar
     } = useSelector(({rebate}) => rebate);
 
     const [mostrarFilaAgregar, setMostrarFilaAgregar] = useState(false)
     const [numeroFilasNuevas, setNumeroFilasNuevas] = useState(0)
-
     const [editandoRebate, setEditandoRebate] = useState(false)
 
     useEffect(() => {
-        if(cargando_data_rebate == false){
-            dispatch(ObtenerRebatesActualesReducer())
-
-            if(data_grupos_rebate.length <= 0){
-                dispatch(ObtenerGrupoRebateReducer())
-            }
+        if(cargando_data_rebate_trimestral == false){
+            dispatch(ObtenerDataRebateTrimestralReducer())
         }
     }, [mesSeleccionadoFiltro, anioSeleccionadoFiltro])
 
@@ -64,173 +43,18 @@ const Rebate = () => {
         <>
 
             <FiltrosRebate 
-                guardarData = {(editando) => {
-                    dispatch(CrearRebatesReducer(editando))
+                guardarData = {() => {
+                    dispatch(CrearRebatesTrimestralReducer(editandoRebate))
                 }}
+                editarData = {() => {
+                    dispatch(HabilitarEditarTodosRebateTrimestralReducer(!editandoRebate))
+                    setEditandoRebate(!editandoRebate)
+                }}
+                editandoRebate = {editandoRebate}
             />
 
-            {/* <Link 
-                style={{display:'none'}}
-                ref={RefBtnRebateMensual}
-                to="/rebate" ></Link>
-            <Link 
-                style={{display:'none'}}
-                ref={RefBtnRebateTrimestral}
-                to="/rebate/trimestral" ></Link>
-            <Link 
-                style={{display:'none'}}
-                ref={RefBtnRebateBonus}
-                to="/rebate/bonus" ></Link> */}
-
-            {/* <div 
-                className='Wbold-S20-H35-C3646C4' 
-                style={{paddingLeft:'40px', marginBottom:'20px', marginTop: "95px", background:'#EDF0FA', paddingTop:'5px', paddingBottom:'5px'}}
-            >
-                Rebate
-            </div> */}
             
-            {/* <div
-                className='Contenedor-Fila-Filtros-Rebate'
-            >
-                <Select
-                    bordered = {true}
-                    dropdownStyle={{
-                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                        borderRadius: "0px 0px 10px 10px"
-                    }}
-                    className="Btn-Select-Grupo-Rebate W600-S14-H19-C1E1E1E-L0015"
-                    placeholder="Tipo de Rebate"
-                    style={{ 
-                        marginRight:'20px'
-                    }}
-                    onChange={(e) => {
-                        if(e == 1){
-                            RefBtnRebateMensual.current.click()
-                        }else if(e == 2){
-                            RefBtnRebateTrimestral.current.click()
-                        }else if(e == 3){
-                            RefBtnRebateBonus.current.click()
-                        }
-                    }}
-                    suffixIcon={
-                        <div>
-                            <img 
-                                src={IconoFlechaAbajo} 
-                                style={{
-                                    width: "23px",
-                                    height: "21px",
-                                    position: "absolute",
-                                    top: "-5px",
-                                    right: "-6px"
-                                }}
-                            />
-                        </div>
-                    }
-                >
-                    <Select.Option danger value={"1"}>{"Rebate Mensual"}</Select.Option>
-                    <Select.Option danger value={"2"}>{"Rebate Trimestral"}</Select.Option>
-                    <Select.Option danger value={"3"}>{"Rebate Bonus"}</Select.Option>
-                </Select>
 
-                <Select
-                    bordered = {true}
-                    dropdownStyle={{
-                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                        borderRadius: "0px 0px 10px 10px"
-                    }}
-                    className="Btn-Select-Grupo-Rebate W600-S14-H19-C1E1E1E-L0015"
-                    placeholder="Customer Group"
-                    style={{ 
-                        marginRight:'20px'
-                    }}
-                    onChange={(e) => {
-                        dispatch(FiltrarGrupoReducer(e))
-                    }}
-                    suffixIcon={
-                        <div>
-                            <img 
-                                src={IconoFlechaAbajo} 
-                                style={{
-                                    width: "23px",
-                                    height: "21px",
-                                    position: "absolute",
-                                    top: "-5px",
-                                    right: "-6px"
-                                }}
-                            />
-                        </div>
-                    }
-                >
-                    {
-                        data_rebate.map((dat) => {
-                            return (
-                                <Select.Option danger value={dat.treid}>{dat.trenombre}</Select.Option>
-                            )
-                        })
-                    }
-                </Select>
-                
-                <FiltroMesVentasPromociones />
-                <div style={{marginRight:'20px'}}>
-                    <FiltroAnioVentasPromociones />
-                </div>
-
-                <div
-                    className='Btn-Guardar-Data-Rebate W600-S14-H19-C558CFF-L0015'
-                    onClick={() => {
-                        dispatch(CrearRebatesReducer(editandoRebate))
-                    }}
-                >
-                    Guardar
-                </div>
-                
-                <Tooltip
-                    placement="bottom" 
-                    title={"Editar"}
-                >
-                    <div
-                        className='Btn-Editar-Data-Rebate'
-                        onClick={() => {
-                            dispatch(HabilitarEditarTodosReducer(!editandoRebate))
-                            setEditandoRebate(!editandoRebate)
-                        }}
-                    >
-                        <img src={IconoEditar} className="Icono-Editar-Data-Rebate" />
-                        <img src={IconoEditarBlanco} className="Icono-Editar-Blanco-Data-Rebate" />
-                    </div>
-                </Tooltip>
-
-                <ExcelFile 
-                    filename={"Rebate-"+anioSeleccionadoFiltro+"-"+mesSeleccionadoFiltro}
-                    element={
-                        <div
-                            className='Btn-Descargar-Data-Rebate W700-S14-H19-CFFFFFF-L0015'
-                        >
-                            Descargar
-                        </div>
-                    }>
-                    <ExcelSheet 
-                        dataSet={data_rebate_descargar} 
-                        name={"Rebate "+" "+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro}
-                    />
-                </ExcelFile>
-                
-            </div> */}
-            
-            {/* <div
-                className='Contenedor-Completo-Tabla-Rebate'
-                style={{marginBottom:'8px'}}
-            >
-                <div 
-                    className='Contenedor-Filtro-Fecha-Seleccionado-Rebate W700-S20-H27-C1E1E1E-L0015'
-                >
-                    <div
-                        className="Filtro-Fecha-Seleccionado-Rebate"
-                    >
-                        {grupo_seleccionado_rebate} - {mesSeleccionadoFiltro} - {anioSeleccionadoFiltro}
-                    </div>
-                </div>
-            </div> */}
 
             <div
                 className='Contenedor-Completo-Tabla-Rebate'
@@ -243,15 +67,10 @@ const Rebate = () => {
                 >
                     
                     {
-                        data_rebate.map((dat, posData) => {
+                        data_rebate_trimestral.map((dat, posData) => {
                             return (
                                 <table
                                     className=
-                                    // {
-                                    //     dat.mostrando == true
-                                    //     ?"Tabla-Principal-Rebate"
-                                    //     :"Tabla-Principal-Rebate Tabla-Principal-Rebate-Ocultando"
-                                    // }
                                     {
                                         dat.retroceder == true
                                         ?dat.mostrando == true
@@ -273,40 +92,44 @@ const Rebate = () => {
                                         <tr>
                                             <th
                                                 style={{
-                                                    borderTopLeftRadius: "8px"
+                                                    borderTopLeftRadius: "8px",
+                                                    background:'#FFCD1B'
                                                 }}
                                             >
                                                 Item 
                                             </th>
                                             <th
-                                                style={{width:'50px'}}
+                                                style={{width:'50px', background:'#FFCD1B'}}
                                             >
                                                 Customer Group 
                                             </th>
-                                            <th>
+                                            <th
+                                                style={{background:'#FFCD1B'}}
+                                            >
                                                 Escala Inicial 
                                             </th>
-                                            <th>
+                                            <th style={{background:'#FFCD1B'}}>
                                                 Escala Final 
                                             </th>
-                                            <th>
+                                            <th style={{background:'#FFCD1B'}}>
                                                 Métrica 
                                             </th>
-                                            <th>
+                                            <th style={{background:'#FFCD1B'}}>
                                                 Infant 
                                             </th>
-                                            <th>
+                                            <th style={{background:'#FFCD1B'}}>
                                                 Wipes 
                                             </th>
-                                            <th>
+                                            <th style={{background:'#FFCD1B'}}>
                                                 Family 
                                             </th>
-                                            <th>
+                                            <th style={{background:'#FFCD1B'}}>
                                                 Adult 
                                             </th>
                                             <th
                                                 style={{
-                                                    borderTopRightRadius: "8px"
+                                                    borderTopRightRadius: "8px",
+                                                    background:'#FFCD1B'
                                                 }}
                                             >
                                                 Fem 
@@ -322,7 +145,7 @@ const Rebate = () => {
                                                     <tr 
                                                         className='W600-S14-H19-C1E1E1E'
                                                         onDoubleClick={() => {
-                                                            dispatch(EditarFilaRebateReducer(posData, pos, true))
+                                                            // dispatch(EditarFilaRebateReducer(posData, pos, true))
                                                         }}
                                                     >
                                                         <td>
@@ -342,7 +165,7 @@ const Rebate = () => {
                                                                         defaultValue={grupo_seleccionado_rebate}
                                                                         style={{ width: 120 }} 
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "treideditando", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "treideditando", e))
                                                                         }}
                                                                         className="Select-Editar-Rebate"
                                                                     >
@@ -373,18 +196,18 @@ const Rebate = () => {
                                                                     <InputNumber 
                                                                         className="gx-mb-3 gx-w-100 Input-Editar-Porcentaje-Rebate" 
                                                                         rules={[{ required: true, message: 'Es necesario un porcentaje desde' }]}
-                                                                        defaultValue={rebate.rtpporcentajedesde}
+                                                                        defaultValue={rebate.ttrporcentajedesde}
                                                                         min={0}
                                                                         max={10000}
                                                                         formatter={value => `${value}%`}
                                                                         parser={value => value.replace('%', '')}
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "desdeeditando", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "desdeeditando", e))
                                                                         }}
                                                                     />
                                                                 </>
                                                                 :<>
-                                                                    {rebate.rtpporcentajedesde} %
+                                                                    {rebate.ttrporcentajedesde} %
                                                                 </>
                                                             }
                                                         </td>
@@ -401,22 +224,22 @@ const Rebate = () => {
                                                                     <InputNumber 
                                                                         className="gx-mb-3 gx-w-100 Input-Editar-Porcentaje-Rebate" 
                                                                         rules={[{ required: true, message: 'Es necesario un porcentaje desde' }]}
-                                                                        defaultValue={rebate.rtpporcentajehasta}
+                                                                        defaultValue={rebate.ttrporcentajehasta}
                                                                         min={0}
                                                                         max={10000}
                                                                         formatter={value => `${value}%`}
                                                                         parser={value => value.replace('%', '')}
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "hastaeditando", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "hastaeditando", e))
                                                                         }}
                                                                         
                                                                     />
                                                                 </>
                                                                 :<>
                                                                     {
-                                                                        rebate.rtpporcentajehasta == "10000"
+                                                                        rebate.ttrporcentajehasta == "10000"
                                                                         ?<>&#x221e;</>
-                                                                        :rebate.rtpporcentajehasta  
+                                                                        :rebate.ttrporcentajehasta  
                                                                     } %
                                                                 </>
                                                             }
@@ -436,7 +259,7 @@ const Rebate = () => {
                                                                         style={{ width: 120 }} 
                                                                         className="Select-Editar-Rebate"
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "tprideditando", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "tprideditando", e))
                                                                         }}
                                                                     >
                                                                         <Select.Option value="1">Sell In</Select.Option>
@@ -469,7 +292,7 @@ const Rebate = () => {
                                                                         formatter={value => `${value}%`}
                                                                         parser={value => value.replace('%', '')}
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "cat-1", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "cat-1", e))
                                                                         }}
                                                                     />
                                                                 </>
@@ -497,7 +320,7 @@ const Rebate = () => {
                                                                         formatter={value => `${value}%`}
                                                                         parser={value => value.replace('%', '')}
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "cat-2", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "cat-2", e))
                                                                         }}
                                                                     />
                                                                 </>
@@ -525,7 +348,7 @@ const Rebate = () => {
                                                                         formatter={value => `${value}%`}
                                                                         parser={value => value.replace('%', '')}
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "cat-3", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "cat-3", e))
                                                                         }}
                                                                     />
                                                                 </>
@@ -553,7 +376,7 @@ const Rebate = () => {
                                                                         formatter={value => `${value}%`}
                                                                         parser={value => value.replace('%', '')}
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "cat-4", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "cat-4", e))
                                                                         }}
                                                                     />
                                                                 </>
@@ -583,7 +406,7 @@ const Rebate = () => {
                                                                         formatter={value => `${value}%`}
                                                                         parser={value => value.replace('%', '')}
                                                                         onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "cat-5", e))
+                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "cat-5", e))
                                                                         }}
                                                                     />
                                                                 </>
@@ -618,7 +441,7 @@ const Rebate = () => {
                                                     setMostrarFilaAgregar(false)
                                                 }}
                                                 onClick={() => {
-                                                    dispatch(AgregarFilaRebateReducer(posData))
+                                                    dispatch(AgregarFilaRebateTrimestralReducer(posData))
                                                     setNumeroFilasNuevas(numeroFilasNuevas+1)
                                                 }}
                                             >
@@ -662,11 +485,9 @@ const Rebate = () => {
                 <div 
                     className='Btn-Flecha-Retroceder-Rebate'
                     onClick={async () => {
-                        // console.log(data_tablas_contraprestaciones)
-                        await dispatch(ActivarCarouselTablaRebateReducer("retroceder"))
+                        await dispatch(ActivarCarouselTablaRebateTrimestralReducer("retroceder"))
                     }}
                 >
-                    {/* <LeftOutlined /> */}
                     <img 
                         style={{
                             transform: "rotate(-180deg)",
@@ -678,12 +499,10 @@ const Rebate = () => {
                 </div>
                 <div 
                     className='Btn-Flecha-Avanzar-Rebate'
-                    onClick={async () => {
-                        // console.log(data_tablas_contraprestaciones)
-                        await dispatch(ActivarCarouselTablaRebateReducer())
+                    onClick={async () => {       
+                        await dispatch(ActivarCarouselTablaRebateTrimestralReducer())
                     }}
                 >
-                    {/* <RightOutlined /> */}
                     <img 
                         src={IconoFlechaBlanca} 
                         className="Icono-Flecha-Blanca-Rebate"
@@ -691,21 +510,35 @@ const Rebate = () => {
                 </div>
             </div>
 
-            {/* <div 
-                className='Contenedor-Btn-Guardar-Rebate'
-                onClick={() => {
-                    dispatch(CrearRebatesReducer())
-                }}
-            >
-                <div className='Btn-Guardar-Rebate W600-S14-H19-CFFFFFF'>
-                    Guardar
-                </div>
-            </div> */}
-            <div style={{marginBottom: "80px"}}>
 
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </>
     )
 }
 
-export default Rebate
+export default Trimestral

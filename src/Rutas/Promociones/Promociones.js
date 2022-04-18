@@ -717,7 +717,7 @@ class CardPromocionClass extends React.Component {
                     
                     promocion.cspnuevapromocion == true
                     ?{
-                        border: "1px solid #FEDD34"
+                        border: "2px solid #FEDD34"
                     }
                     :{border: "1px solid "+colorSeleciconadoPromo}
                 

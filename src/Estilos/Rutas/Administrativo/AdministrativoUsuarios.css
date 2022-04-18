@@ -155,7 +155,7 @@
 
 .Campo2-Crear-Adm-Usuario input{
     width: 208px;
-    height: 29px;
+    height: 32px;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 8px;
@@ -209,7 +209,7 @@
 
 .Contenedor-Estado-Adm-Usuario{
     width: 208px;
-    height: 29px;
+    height: 32px;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 8px;
@@ -236,7 +236,7 @@
 
 .Select-Adm-Usuario{
     width: 208px;
-    height: 29px;
+    height: 32px;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 8px;
@@ -250,7 +250,7 @@
 
 .Select-Pais-Adm-Usuario{
     width: 208px;
-    height: 29px;
+    height: 32px;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 8px;

@@ -330,6 +330,12 @@ export const seleccionarCategoriaReducer = (scaid, limpiarCanales, posicion) => 
                             scaid              : scaid
                         }
                     })
+
+                    let mostrar_promociones_nuevas = getState().promociones.mostrar_promociones_nuevas
+                    if(mostrar_promociones_nuevas == true){
+                        dispatch(MostrarPromocionesNuevasReducer(true))
+                    }
+                    
                     
                 }else{
                     dispatch({
@@ -748,6 +754,11 @@ export const SeleccionarCategoriaXZonaAcumuladaReducer = (scaid, limpiarCanales,
                             scaid              : scaid
                         }
                     })
+
+                    let mostrar_promociones_nuevas = getState().promociones.mostrar_promociones_nuevas
+                    if(mostrar_promociones_nuevas == true){
+                        dispatch(MostrarPromocionesNuevasReducer(true))
+                    }
                     
                 }else{
                     dispatch({
@@ -773,7 +784,7 @@ export const SeleccionarCategoriaXZonaAcumuladaReducer = (scaid, limpiarCanales,
     });
 }
 
-export const MostrarPromocionesNuevasReducer = () => async (dispatch, getState) => {
+export const MostrarPromocionesNuevasReducer = (desactivarNuevasPromociones = false) => async (dispatch, getState) => {
 
     let mostrar_promociones_nuevas = getState().promociones.mostrar_promociones_nuevas
     let canalesPromociones = getState().promociones.canalesPromociones
@@ -791,10 +802,16 @@ export const MostrarPromocionesNuevasReducer = () => async (dispatch, getState) 
         payload : canalesPromociones
     })
 
-
-    dispatch({
-        type: MOSTRAR_PROMOCIONES_NUEVAS,
-        payload : !mostrar_promociones_nuevas
-    })
+    if(desactivarNuevasPromociones == true){
+        dispatch({
+            type: MOSTRAR_PROMOCIONES_NUEVAS,
+            payload : true
+        })
+    }else{
+        dispatch({
+            type: MOSTRAR_PROMOCIONES_NUEVAS,
+            payload : !mostrar_promociones_nuevas
+        })
+    }
 
 }

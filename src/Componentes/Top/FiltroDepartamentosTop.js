@@ -20,6 +20,10 @@ import IconoMenuFileUpload from '../../Assets/Img/menu/fileupload.png'
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
 
+import {
+    funPermisosObtenidos
+} from '../../Funciones/funPermiso'
+
 const FiltroDepartamentosTop = (props) => {
     
     // const [mostrarContenido, setMostrarContenido] = useState(false)
@@ -32,6 +36,7 @@ const FiltroDepartamentosTop = (props) => {
         datosUsuarioLogeado,
         mostrar_terminos_condiciones_login
     } = useSelector(({auth}) => auth);
+    const {permisos_usuario_configuracion} = useSelector(({setting}) => setting);
 
     return (
         <>
@@ -129,59 +134,96 @@ const FiltroDepartamentosTop = (props) => {
                             zIndex:'4'
                         }}
                     >
-                        <Link to="/ventas" onClick={() => setMostrarContenido(!mostrarContenido)}>
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuVentas} />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>Ventas</div>
-                            </div>
-                        </Link>
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.ventas",
+                                <Link to="/ventas" onClick={() => setMostrarContenido(!mostrarContenido)}>
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuVentas} />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>Ventas</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
 
-                        <Link to="/promociones" onClick={() => setMostrarContenido(!mostrarContenido)}>
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuPromociones} />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>Promociones</div>
-                            </div>
-                        </Link>
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.promociones",
+                                <Link to="/promociones" onClick={() => setMostrarContenido(!mostrarContenido)}>
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuPromociones} />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>Promociones</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
 
-                        <Link to="/rebate" onClick={() => setMostrarContenido(!mostrarContenido)}>
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuRebate} />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>Rebate</div>
-                            </div>
-                        </Link>
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.rebate",
+                                <Link to="/rebate" onClick={() => setMostrarContenido(!mostrarContenido)}>
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuRebate} />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>Rebate</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
 
-                        <Link to="/lista-precios" onClick={() => setMostrarContenido(!mostrarContenido)}>
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuListaPrecios} />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>Lista de Precios</div>
-                            </div>
-                        </Link>
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.lista.precios",
+                                <Link to="/lista-precios" onClick={() => setMostrarContenido(!mostrarContenido)}>
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuListaPrecios} />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>Lista de Precios</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
 
-                        <Link to="/banco-imagen">
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuBancoImagenes} />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>Banco de Imágen</div>
-                            </div>
-                        </Link>
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.control.productos",
+                                <Link to="/banco-imagen">
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuBancoImagenes} />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>Banco de Imágen</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
 
-                        <Link to="/carga-archivo" onClick={() => setMostrarContenido(!mostrarContenido)}>
-                            <div className='Fila-Cuerpo-Item-Filtro-Top'>
-                                <div>
-                                    <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuFileUpload} />
-                                </div>
-                                <div className='Wnormal-S14-H19-C1E1E1E'>File upload</div>
-                            </div>
-                        </Link>
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "modulo.cargar.archivos",
+                                <Link to="/carga-archivo" onClick={() => setMostrarContenido(!mostrarContenido)}>
+                                    <div className='Fila-Cuerpo-Item-Filtro-Top'>
+                                        <div>
+                                            <img className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoMenuFileUpload} />
+                                        </div>
+                                        <div className='Wnormal-S14-H19-C1E1E1E'>File upload</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
+
                     </div>
                     :null
                 }

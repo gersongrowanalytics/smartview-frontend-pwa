@@ -676,6 +676,16 @@
     color: #1E1E1E;
 }
 
+.W700-S20-H27-CFFFFFF-L0015{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
 .W700-S10-H13-CFFFFFF-L0015{
     font-family: 'Segoe UI';
     font-style: normal;
@@ -705,6 +715,15 @@
     color: #FFFFFF;
 }
 
+.W400-S14-H16-C1E1E1E{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #1E1E1E;
+}
+
 .W500-S17-H20-CFFFFFF{
     font-family: 'Segoe UI';
     font-style: normal;
@@ -721,4 +740,14 @@
     font-size: 15px;
     line-height: 20px;
     color: #1E1E1E;
+}
+
+.W700-S25-H33-CFFFFFF-L0015{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 33px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
 }

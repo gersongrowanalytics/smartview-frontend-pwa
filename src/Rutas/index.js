@@ -26,6 +26,8 @@ import TiposUsuarios from './Administrativo/TiposUsuarios/TiposUsuarios';
 import ControlArchivo from './Administrativo/ControlArchivo/ControlArchivo';
 import ElementosEnviadosNuevo from './ElementosEnviados/ElementosEnviadosNuevo';
 import Rebate from './Rebate/Rebate';
+import RebateBonus from './Rebate/Bonus/Bonus';
+import RebateTrimestral from './Rebate/Trimestral/Trimestral';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -125,6 +127,9 @@ const Rutas = () => {
                             El usuario del sitio Web y/o App se compromete a leer detenidamente los términos y condiciones, antes de utilizar los portales y servicios Web ofrecidos. Ello implica que usted acepta expresamente los términos y condiciones. En caso de no aceptarlos, se le solicita que no haga uso, ni acceda, ni manipule la información de los servicios ofrecidos por el sitio Web; ya que usted (usuario) está haciendo un uso inadecuado de éste.<br/>Para continuar con el uso de la platforma ir y aceptar al siguiente link:   
                             <Link 
                                 to="/terminos-condiciones"
+                                onClick={() => {
+                                    setMostrarTerminos(false)
+                                }}
                             >
                                 <span
                                     style={{color:'blue', cursor:'pointer', textDecoration:'underline'}}>{" Terminos y Condiciones"}</span>
@@ -140,6 +145,8 @@ const Rutas = () => {
                 {/* <Menu /> */}
                 <Routes>
                     <Route exact path='/rebate' element={<Rebate/>}/>
+                    <Route exact path='/rebate/bonus' element={<RebateBonus/>}/>
+                    <Route exact path='/rebate/trimestral' element={<RebateTrimestral/>}/>
                     <Route exact path='/ventas' element={<Ventas/>}/>
                     <Route exact path='/promociones' element={<Promociones/>}/>
                     <Route exact path='/descargas' element={<Descargas/>}/>

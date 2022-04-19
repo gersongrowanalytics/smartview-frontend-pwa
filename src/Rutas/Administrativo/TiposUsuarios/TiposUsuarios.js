@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Switch, Form, Input } from 'antd'
+import { Row, Col, Switch, Form, Input, Modal } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoPerfil.css'
@@ -15,6 +15,7 @@ import {
      editarPermisosTipoUsuario,
      cambiarEstadoTipoPermiso
 } from '../../../Redux/Acciones/Administrativo/TiposUsuarios/TiposUsuarios'
+import FormItem from 'antd/lib/form/FormItem';
 
 const TiposUsuarios = () => {
 
@@ -24,6 +25,8 @@ const TiposUsuarios = () => {
     const [estadoTipoUsuario, setestadoTipoUsuario] = useState("Inactivo")
     const [valorEstadoTu, setvalorEstadoTu] = useState("2")
     const [estadoBooleanTipoUsuario, setestadoBooleanTipoUsuario] = useState(false)
+    const [modalTipoUsuario, setmodalTipoUsuario] = useState(false)
+    const [respuestaCrearTipoUsuario, setrespuestaCrearTipoUsuario] = useState("")
     
     const [anioSeleccionado, setanioSeleccionado] = useState("0")
     const [mesSeleccionado, setmesSeleccionado] = useState("0")
@@ -109,8 +112,17 @@ const TiposUsuarios = () => {
             're_imagen': " ",
             're_imagencircular': " "
         }
-        await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos))
-        seteditando(!editando)
+        if (tpuid == '0') {
+            setmodalTipoUsuario(true)
+            if (await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos)) == true){
+                setrespuestaCrearTipoUsuario('Su usuario fue creado con éxito')
+            }else{
+                setrespuestaCrearTipoUsuario('Lo siento, error al crear su usuario')
+            }
+        }else{
+            await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos))
+            seteditando(!editando)
+        }
     }
 
     return (
@@ -345,7 +357,19 @@ const TiposUsuarios = () => {
                         }
                         {
                             tpuid == '0' ? (
-                                null
+                                <Form
+                                    onFinish={onFinish}
+                                    autoComplete="off"
+                                    form={form}
+                                >
+                                    <Form.Item>
+                                        <button 
+                                            type='submit'
+                                            className='Btn-Crear-Guardar-Perfil'
+                                        >Crear y Guardar</button>
+                                    </Form.Item>
+                                </Form>
+                                
                             ) : (
                                 <div 
                                     className='Btn-Guardar-Perfil'
@@ -520,7 +544,7 @@ const TiposUsuarios = () => {
                                                 </Form.Item>
                                             </div>
                                         </div>
-                                        <Form.Item>
+                                        {/* <Form.Item>
                                             <div className='Contenedor-Btn-Editar'>
                                                 <button 
                                                     type='submit' 
@@ -529,7 +553,7 @@ const TiposUsuarios = () => {
                                                     <img src={Check} style={{width: '28px'}}></img>
                                                 </button>
                                             </div>
-                                        </Form.Item> 
+                                        </Form.Item>  */}
                                     </Form>
                                 </div> 
                             )
@@ -537,6 +561,31 @@ const TiposUsuarios = () => {
                     </div>     
                 </Col>
             </Row>
+            <Modal
+                centered
+                title={null}
+                visible={modalTipoUsuario}
+                footer={null}
+                closeIcon={<div></div>}
+                width="310px"
+                height="139px"
+                className='Caja-Modal-Tipo-Usuario'
+                onCancel={() => setmodalTipoUsuario(false)}
+            >
+                <div className='Contenedor-Modal-Tipo-Usuario'>
+                    <div className='Titulo-Modal-Tipo-Usuario'>
+                        Crear Nuevo Tipo de Usuario
+                    </div>
+                    <div>
+                        {respuestaCrearTipoUsuario}
+                    </div>
+                    <Link to='/administrativo'>
+                        <div className='Btn-Listo-Modal-Tipo-Usuario'>
+                            Listo
+                        </div>
+                    </Link>
+                </div>
+            </Modal>
         </div>
     )
 }

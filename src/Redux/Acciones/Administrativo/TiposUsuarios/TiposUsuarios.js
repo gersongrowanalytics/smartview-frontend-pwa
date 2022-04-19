@@ -88,7 +88,7 @@ export const cambiarEstadoPermisos = (posicionPermiso, posicionTipoPermiso) => (
 }
 
 export const editarPermisosTipoUsuario = (tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos) => async (dispatch, getState) => {
-
+    let respuesta = false
     await fetch(config.api+'tipos-usuarios/permisos/editar',
 		{
 			mode:'cors',
@@ -121,7 +121,10 @@ export const editarPermisosTipoUsuario = (tipoUsuarioDatos, permisosTipoUsuario,
                     type: OBTENER_UNICAMENTE_PERMISOS_TIPOS_USUARIOS,
                     payload: permisosTipoUsuario
                 })
-                message.success(data.mensaje) 
+                if (tpuid != 0) {
+                    message.success(data.mensaje)
+                }
+                respuesta = true 
             }else{
                 message.error(data.mensaje)                
             }
@@ -129,6 +132,7 @@ export const editarPermisosTipoUsuario = (tipoUsuarioDatos, permisosTipoUsuario,
 	}).catch((error)=> {
         console.log(error)
 	});
+    return respuesta
 }
 
 export const definirEstadoSwitchTipoPermiso = async (tipoPermiso) => {

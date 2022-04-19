@@ -84,7 +84,8 @@
     justify-content: center;
     cursor: pointer;
     margin-top: 26px;
-    margin-left: 73%;
+    position: absolute;
+    right: 50px;
 }
 
 .Contenedor-Imagen-Perfil{
@@ -439,4 +440,68 @@
     border: 1px solid #C4C4C4 !important;
     box-sizing: border-box !important;
     border-radius: 8px !important;
+}
+
+.Btn-Crear-Guardar-Perfil{
+    width: 116px;
+    height: 24px;
+    background: #3646C4;
+    border: 1px solid #3646C3;
+    box-sizing: border-box;
+    border-radius: 14px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    justify-content: center;
+    margin-top: 26px;
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+}
+
+.Caja-Modal-Tipo-Usuario .ant-modal-content{
+    border-radius: 8px;
+}
+
+.Titulo-Modal-Tipo-Usuario{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+    margin-bottom: 10px;
+}
+
+.Btn-Listo-Modal-Tipo-Usuario{
+    width: 66px;
+    height: 24px;
+    background: #558CFF;
+    border: 1px solid #558CFF;
+    box-sizing: border-box;
+    border-radius: 14px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    justify-content: center;
+    margin-top: 17px;
+}
+
+.Contenedor-Modal-Tipo-Usuario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

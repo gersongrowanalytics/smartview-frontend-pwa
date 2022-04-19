@@ -119,9 +119,9 @@ const Promociones = () => {
 
         }else{
     
-            setTimeout(() => {
-                setMostrarNoticia(true)
-            }, 3000);
+            // setTimeout(() => {
+            //     setMostrarNoticia(true)
+            // }, 3000);
     
         }
 
@@ -323,7 +323,7 @@ const Promociones = () => {
                                                             // subiendo = false
                                                         }}
                                                     >
-                                                        {canal.cannombre}
+                                                        {canal.cannombre} ({canal.cantidadPromociones})
                                                     </div>
                                                 </div>
         

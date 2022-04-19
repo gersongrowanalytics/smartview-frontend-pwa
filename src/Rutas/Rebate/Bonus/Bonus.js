@@ -147,7 +147,10 @@ const Bonus = () => {
                                                         setTxtDescripcion("Siempre que cumpla con lo siguiente: Cumplimiento de la cuota NIV al 100% sin incluir la categoría "+categoriasNoIncluidas+". De lograr el cumplimiento, este rebate será cancelado el mes siguiente.")
                                                     }}
                                                 >
-
+                                                    <img 
+                                                        src={cat.caticonohover} 
+                                                        className="Icono-Blanco-Categorias-Bonus"
+                                                    />
                                                 </div>
                                                 <div 
                                                     className={

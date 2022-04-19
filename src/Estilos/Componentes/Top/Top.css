@@ -215,15 +215,16 @@
 }
 .Contenedor-Txt-Notificaciones{
     margin-left: 9px;
+    color: black;
 }
 
 .Txt-Tiempo-Notificaciones{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 9px;
-    line-height: 12px;
-    letter-spacing: -0.015em;
-    color: #558CFF;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 9px !important;
+    line-height: 12px !important;
+    letter-spacing: -0.015em !important;
+    color: #558CFF !important;
 }
 
 .Punto-Azul-Notificacion{

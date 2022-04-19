@@ -724,6 +724,16 @@
     color: #1E1E1E;
 }
 
+.W400-S14-H19-C1E1E1E{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #1E1E1E;
+}
+
 .W500-S17-H20-CFFFFFF{
     font-family: 'Segoe UI';
     font-style: normal;
@@ -749,5 +759,23 @@
     font-size: 25px;
     line-height: 33px;
     letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.W400-S16-H21-CFFFFFF{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+
+.W700-S23-H23-CFFFFFF{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
     color: #FFFFFF;
 }

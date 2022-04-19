@@ -11,7 +11,8 @@ import {
     OBTENER_CANALES_DE_PROMOCIONES_EXITO,
     ACTUALIZAR_CANALES_DE_PROMOCIONES,
     CAMBIAR_DISENIO_PROMOCIONES,
-    MOSTRAR_PROMOCIONES_NUEVAS
+    MOSTRAR_PROMOCIONES_NUEVAS,
+    OBTENER_DATA_RESUMEN_PROMOCIONES
 } from '../../../Constantes/Promociones/Promociones'
 import config from '../../../config'
 import {
@@ -68,6 +69,12 @@ export const obtenerPromocionesReducer = () =>async (dispatch, getState) => {
                         "fecha" : data.fechaActualiza
                     }
                 })
+
+                dispatch({
+                    type: OBTENER_DATA_RESUMEN_PROMOCIONES,
+                    payload: data.arr_resumenPromociones
+                })
+
             }else{
                 dispatch({
                     type: OBTENER_PROMOCIONES_FAIL,

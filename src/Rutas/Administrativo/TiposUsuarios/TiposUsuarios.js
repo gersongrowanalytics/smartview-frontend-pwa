@@ -445,6 +445,7 @@ const TiposUsuarios = () => {
                                             <Form.Item name='nombre'>
                                                 <Input 
                                                     style={{fontWeight: '700'}}
+                                                    placeholder="Ingresar nombre"
                                                 />
                                             </Form.Item>
                                         </div>
@@ -457,21 +458,67 @@ const TiposUsuarios = () => {
                                                 checked={estadoBooleanTipoUsuario}
                                             />
                                         </div>
-                                        <div className='Input-Date-Administrativo-Perfil'>
-                                            <div>Fecha Inicio: </div>
-                                            <Form.Item name='fechaInicio'>
-                                                <Input 
-                                                    type="date"
-                                                />
-                                            </Form.Item>
+                                        <div 
+                                            // className='Input-Date-Administrativo-Perfil'
+                                            style={{
+                                                display:'flex',
+                                                height: "33px",
+                                                position:'relative',
+                                                marginTop:'15px'
+                                            }}
+                                        >
+                                            <div 
+                                                className='W400-S14-H19-C1E1E1E'
+                                                style={{
+                                                    paddingTop: "6px",
+                                                }}
+                                            >
+                                                Fecha Inicio:
+                                            </div>
+                                            <div
+                                                style={{
+                                                    position:'absolute',
+                                                    right:'0'
+                                                }}
+                                                className="Contenedor-Fechas-EditarCrear-TiposUsuarios"
+                                            >
+                                                <Form.Item name='fechaInicio'>
+                                                    <Input 
+                                                        type="date"
+                                                    />
+                                                </Form.Item>
+                                            </div>
                                         </div>
-                                        <div className='Input-Date-Administrativo-Perfil'>
-                                            <div>Fecha Final: </div>
-                                            <Form.Item name='fechaFinal'>
-                                                <Input 
-                                                    type="date"
-                                                />
-                                            </Form.Item>
+                                        <div 
+                                            // className='Input-Date-Administrativo-Perfil'
+                                            style={{
+                                                display:'flex',
+                                                height: "33px",
+                                                position:'relative',
+                                                marginTop:'15px'
+                                            }}
+                                        >
+                                            <div 
+                                                className='W400-S14-H19-C1E1E1E'
+                                                style={{
+                                                    paddingTop: "6px",
+                                                }}
+                                            >
+                                                Fecha Final:
+                                            </div>
+                                            <div
+                                                style={{
+                                                    position:'absolute',
+                                                    right:'0'
+                                                }}
+                                                className="Contenedor-Fechas-EditarCrear-TiposUsuarios"
+                                            >
+                                                <Form.Item name='fechaFinal'>
+                                                    <Input 
+                                                        type="date"
+                                                    />
+                                                </Form.Item>
+                                            </div>
                                         </div>
                                         <Form.Item>
                                             <div className='Contenedor-Btn-Editar'>

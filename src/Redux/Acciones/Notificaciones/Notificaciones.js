@@ -50,3 +50,41 @@ export const ObtenerNotificacionesUsuarioReducer = () =>async (dispatch, getStat
 
 
 }
+
+export const VerNotificacionesUsuarioReducer = () => async (dispatch, getState) => {
+
+    await fetch(config.api+'guardar-leido-notificaciones-usuario',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken'),
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then(data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest === true){
+            if(data.respuesta === true){
+                
+                
+
+            }else{
+                
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });    
+
+}

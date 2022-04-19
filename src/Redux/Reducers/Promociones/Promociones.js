@@ -9,7 +9,8 @@ import {
     OBTENER_CANALES_DE_PROMOCIONES_EXITO,
     ACTUALIZAR_CANALES_DE_PROMOCIONES,
     CAMBIAR_DISENIO_PROMOCIONES,
-    MOSTRAR_PROMOCIONES_NUEVAS
+    MOSTRAR_PROMOCIONES_NUEVAS,
+    OBTENER_DATA_RESUMEN_PROMOCIONES
 } from "../../../Constantes/Promociones/Promociones";
 
 const INIT_STATE = {
@@ -28,6 +29,7 @@ const INIT_STATE = {
 
     mostrarDisenioPromocionesPrincipal : false,
     mostrar_promociones_nuevas : false,
+    arr_resumenPromociones : [],
 };
 
 
@@ -113,6 +115,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 mostrar_promociones_nuevas : action.payload
+            }
+        }
+        case OBTENER_DATA_RESUMEN_PROMOCIONES: {
+            return {
+                ...state,
+                arr_resumenPromociones : action.payload
             }
         }
     default:

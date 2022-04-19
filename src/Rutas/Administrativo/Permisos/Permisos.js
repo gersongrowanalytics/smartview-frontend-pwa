@@ -235,13 +235,17 @@ const Permisos = () => {
                                                     className='Contenedor-Fila-Permisos'
                                                 >
                                                     <td
-                                                    style={{
-                                                        padding: "11px 0px 11px 0px"
-                                                    }}
+                                                        style={{
+                                                            padding: "11px 0px 11px 0px"
+                                                        }}
                                                     >
                                                         {indexRegistro + posicion}
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        style={{
+                                                            textAlignLast: "left"
+                                                        }}
+                                                    >
                                                         {permiso.tpenombre}
                                                     </td>
                                                     <td

@@ -6,6 +6,7 @@ import FiltroCanalTop from './FiltroCanalTop';
 import FiltroDepartamentosTop from './FiltroDepartamentosTop';
 import FiltroSoporteTop from './FiltroSoporteTop';
 import {cerrarSesionReducer} from '../../Redux/Acciones/Auth'
+import {VerNotificacionesUsuarioReducer} from '../../Redux/Acciones/Notificaciones/Notificaciones'
 import {useDispatch, useSelector} from "react-redux"
 import IconoCerrar from '../../Assets/Img/Top/cerrarsession.png'
 import IconoPersonaBlanco from '../../Assets/Img/Top/personablanco.png'
@@ -122,21 +123,32 @@ const Top = () => {
                         setMostrarContenidoSopor(mostrar)
                     }}
                 />
-                <div className='Fondo-Notificaciones'>
-                    <div className='Notificacion-Punto'></div>
+                <div 
+                    className='Fondo-Notificaciones'
+                >
+                    {
+                        not_nuevas_usuario.length > 0
+                        ?<div className='Notificacion-Punto'></div>
+                        :null
+                    }
                     {
                         mostrarNotificaciones == false 
                         ? (
                             <img 
                                 src={CampanaSinRelleno} 
                                 style={{width:'38px'}}
-                                onClick={() => {setmostrarNotificaciones(!mostrarNotificaciones)}}
+                                onClick={() => {
+                                    setmostrarNotificaciones(!mostrarNotificaciones)
+                                    dispatch(VerNotificacionesUsuarioReducer())
+                                }}
                             />
                         ) : (
                             <img 
                                 src={CampanaConRelleno} 
                                 style={{width:'38px'}}
-                                onClick={() => {setmostrarNotificaciones(!mostrarNotificaciones)}}
+                                onClick={() => {
+                                    setmostrarNotificaciones(!mostrarNotificaciones)
+                                }}
                             />
                         )
                     }
@@ -152,7 +164,7 @@ const Top = () => {
                                 </div>
                                 :null
                             }
-                            <div className='Contenedor-Imagen-Txt'>
+                            {/* <div className='Contenedor-Imagen-Txt'>
                                 <img src={PromoNueva} style={{width: '40px'}}/>
                                 <div className='Contenedor-Txt-Notificaciones'>
                                     <div>
@@ -162,10 +174,10 @@ const Top = () => {
                                         Hace 1 hora
                                     </div>
                                 </div>
-                                {/* <div>
+                                <div>
                                     <div className='Punto-Azul-Notificacion'></div>
-                                </div> */}
-                            </div>
+                                </div>
+                            </div> */}
 
                             {
                                 not_nuevas_usuario.map((not) => {
@@ -204,7 +216,7 @@ const Top = () => {
                                 </div>
                                 :null
                             }
-                            <div className='Contenedor-Imagen-Txt'>
+                            {/* <div className='Contenedor-Imagen-Txt'>
                                 <img src={Actualizacion} style={{width: '40px'}}/>
                                 <div className='Contenedor-Txt-Notificaciones'>
                                     <div>
@@ -214,27 +226,38 @@ const Top = () => {
                                         Hace 20 días
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             {
                                 not_antiguas_usuario.map((not) => {
                                     return(
-                                        <div className='Contenedor-Imagen-Txt'>
-                                            <img src={not.tnoimagen} style={{width: '40px'}}/>
-                                            <div className='Contenedor-Txt-Notificaciones'>
-                                                <div dangerouslySetInnerHTML={{__html : not.tnodescripcion}}>
-                                                </div>
-                                                <div className='Txt-Tiempo-Notificaciones'>
-                                                    {not.textofechacreada}
-                                                </div>
-                                            </div>
-                                            {
-                                                not.nusleyo == true
-                                                ?null
-                                                :<div>
-                                                    <div className='Punto-Azul-Notificacion'></div>
-                                                </div>
+                                        <Link
+                                            to={
+                                                not.tnolink == "/promociones" || not.tnolink == "/promociones-nuevas"
+                                                ?"/promociones"
+                                                :"/"
                                             }
-                                        </div>
+                                            onClick={() => {
+                                                setmostrarNotificaciones(false)
+                                            }}
+                                        >
+                                            <div className='Contenedor-Imagen-Txt'>
+                                                <img src={not.tnoimagen} style={{width: '40px'}}/>
+                                                <div className='Contenedor-Txt-Notificaciones'>
+                                                    <div dangerouslySetInnerHTML={{__html : not.tnodescripcion}}>
+                                                    </div>
+                                                    <div className='Txt-Tiempo-Notificaciones'>
+                                                        {not.textofechacreada}
+                                                    </div>
+                                                </div>
+                                                {
+                                                    not.nusleyo == true
+                                                    ?null
+                                                    :<div>
+                                                        <div className='Punto-Azul-Notificacion'></div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </Link>
                                     )
                                 })
                             }

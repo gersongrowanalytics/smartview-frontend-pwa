@@ -24,6 +24,7 @@ const Administrativo = () => {
 
     const dispatch = useDispatch()
     const [btnSeleccionado, setBtnSeleccionado] = useState("TIPOS")
+    const [txtBuscarTipoUsuario, setTxtBuscarTipoUsuario] = useState("")
 
     const { 
         tiposUsuarios
@@ -106,19 +107,29 @@ const Administrativo = () => {
                         <input 
                             className='Busqueda-Administrativo'
                             placeholder='Buscar'
+                            value={txtBuscarTipoUsuario}
+                            onChange={(e) => {
+                                setTxtBuscarTipoUsuario(e.target.value)
+                            }}
                         />
                     </div>
                 </Col>
             </Row>
             {
-                arrayCantidadFilas.map((fila, pos) => {
-                    return(
+                // arrayCantidadFilas.map((fila, pos) => {
+                //     return(
                         <Row style={{paddingLeft: '40px', paddingTop: '27px', paddingRight: '60px'}}>
                             {
                                 tiposUsuarios.map((tipo, posicion) => {
-                                    if ((posicion+1) >= (1+6*(pos))  && (posicion+1) <= (6*(pos+1)) ) {
+                                    // if ((posicion+1) >= (1+6*(pos))  && (posicion+1) <= (6*(pos+1)) ) {
                                         return (
-                                            <Col xl={4}>
+                                            tipo.tpunombre.includes(txtBuscarTipoUsuario) || tipo.tpunombre.toLowerCase().includes(txtBuscarTipoUsuario.toLowerCase())
+                                            ?<Col 
+                                                xl={4}
+                                                style={{
+                                                    marginBottom:'25px'
+                                                }}
+                                            >
                                                 {
                                                     posicion == '0' ? (
                                                         <div className='cardCrearTipoUsuario'>
@@ -145,13 +156,35 @@ const Administrativo = () => {
                                                     )
                                                 }
                                             </Col>
+                                            :posicion == 0
+                                                ?<Col 
+                                                    xl={4}
+                                                    style={{
+                                                        marginBottom:'25px'
+                                                    }}
+                                                >
+                                                    {
+                                                        
+                                                        <div className='cardCrearTipoUsuario'>
+                                                            <Link 
+                                                                to={{ pathname: '/administrativo/perfil'}}
+                                                                onClick={() => dispatch(ObtenerPermisosTipoUsuario(tipo.tpuid))}
+                                                            >
+                                                                <img src={Agregar} className='Imagen2-Perfil'/>
+                                                            </Link>
+                                                            <div className='Texto3-Card-Perfil'>Crear Nuevo</div>
+                                                            <div className='Texto3-Card-Perfil'>Tipo de Usuario</div>
+                                                        </div>
+                                                    }
+                                                </Col>
+                                                :null
                                         )
-                                    }
+                                    // }
                                 })
                             }
                         </Row>
-                    )
-                })
+                    // )
+                // })
             }
         </div>
     )

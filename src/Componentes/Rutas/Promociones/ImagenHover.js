@@ -21,7 +21,9 @@ const ImagenHover = (props) => {
         caticonohover, 
         cantidadPromociones,
         cantidadCodigosPromocion,
-        cantidadCanales
+        cantidadCanales,
+        cantidadPromocionesNuevas,
+        cantidadPromocionesRegulares
     } = props
 
     const {seleccionoPromocion} = useSelector(({promociones}) => promociones);
@@ -175,10 +177,20 @@ const ImagenHover = (props) => {
                             {
                                 aplicandoFiltroAcumulado == true
                                 ?null
-                                :<span 
-                                    id="textoPromocionHover"
-                                    className='Wnormal-S16-H21-CFFFFFF'
-                                >Promoción: {cantidadPromociones}<br/></span>
+                                :<>
+                                    <span 
+                                        id="textoPromocionHover"
+                                        className='Wnormal-S16-H21-CFFFFFF'
+                                    >Promociones Regulares: {cantidadPromocionesRegulares}<br/></span>
+                                    <span 
+                                        id="textoPromocionHover"
+                                        className='Wnormal-S16-H21-CFFFFFF'
+                                    >Promociones Nuevas: {cantidadPromocionesNuevas}<br/></span>
+                                    <span 
+                                        id="textoPromocionHover"
+                                        className='Wnormal-S16-H21-CFFFFFF'
+                                    >Total promociones DT: {cantidadPromociones}<br/></span>
+                                </>
                             }
                             {
                                 aplicandoFiltroAcumulado == true

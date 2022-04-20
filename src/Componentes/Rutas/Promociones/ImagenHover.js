@@ -23,7 +23,8 @@ const ImagenHover = (props) => {
         cantidadCodigosPromocion,
         cantidadCanales,
         cantidadPromocionesNuevas,
-        cantidadPromocionesRegulares
+        cantidadPromocionesRegulares,
+        totalPromos
     } = props
 
     const {seleccionoPromocion} = useSelector(({promociones}) => promociones);
@@ -106,7 +107,9 @@ const ImagenHover = (props) => {
                                                     alt="Remy Sharp" 
                                                     id={
                                                         seleccionoPromocion == true
-                                                        ?"iconoImagenHoverSeleccionado"
+                                                        ?seleccionado == true 
+                                                            ?"iconoImagenHoverSeleccionado"
+                                                            :""
                                                         :"iconoImagenHover"
                                                     }
                                                     width= "100px"
@@ -189,12 +192,12 @@ const ImagenHover = (props) => {
                                     <span 
                                         id="textoPromocionHover"
                                         className='Wnormal-S16-H21-CFFFFFF'
-                                    >Total promociones DT: {cantidadPromociones}<br/></span>
+                                    // >Total promociones DT: {cantidadPromociones}<br/></span>
+                                    >Total promociones DT: {totalPromos}<br/></span>
                                 </>
                             }
-                            {
+                            {/* {
                                 aplicandoFiltroAcumulado == true
-                                // ?<span id="textoPromocionHover">Código de Promociones: {cantidadCodigosPromocion}<br/></span>
                                 ?<span 
                                     id="textoPromocionHover"
                                     className='Wnormal-S16-H21-CFFFFFF'
@@ -208,6 +211,27 @@ const ImagenHover = (props) => {
                                     id="textoPromocionHover"
                                     className='Wnormal-S16-H21-CFFFFFF'
                                 >Canales: {cantidadCanales}</div>
+                                :null
+                            } */}
+
+                            {
+                                aplicandoFiltroAcumulado == true
+                                ?<>    
+                                    <span 
+                                        id="textoPromocionHover"
+                                        className='Wnormal-S16-H21-CFFFFFF'
+                                    >Promociones Regulares: {cantidadPromocionesRegulares}<br/></span>
+                                    <span 
+                                        id="textoPromocionHover"
+                                        className='Wnormal-S16-H21-CFFFFFF'
+                                    >Promociones Nuevas: {cantidadPromocionesNuevas}<br/></span>
+                                    <span 
+                                        id="textoPromocionHover"
+                                        className='Wnormal-S16-H21-CFFFFFF'
+                                    // >Total promociones DT: {cantidadPromociones}<br/></span>
+                                    >Total promociones DT: {totalPromos}<br/></span>
+
+                                </>
                                 :null
                             }
                         </h2>

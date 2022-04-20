@@ -621,6 +621,10 @@ export const ObtenerPromocionesAcumuladasReducer = (eliminandoFiltro = false) =>
                         "fecha" : data.fechaActualiza
                     }
                 })
+                dispatch({
+                    type: OBTENER_DATA_RESUMEN_PROMOCIONES,
+                    payload: data.arr_resumenPromociones
+                })
             }else{
                 dispatch({
                     type: OBTENER_PROMOCIONES_FAIL,

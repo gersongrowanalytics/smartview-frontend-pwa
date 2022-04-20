@@ -28,7 +28,12 @@ const Bonus = () => {
     }, [mesSeleccionadoFiltro, anioSeleccionadoFiltro])
 
     useEffect(async () => {
-        setTxtPorcentaje(data_rebate_bonus.rbbporcentaje)
+        if(data_rebate_bonus.rbbporcentaje){
+            setTxtPorcentaje(data_rebate_bonus.rbbporcentaje)
+        }else{
+            setTxtPorcentaje(0)
+        }
+        
         setTxtDescripcion(data_rebate_bonus.rbbdescripcion)
     }, [data_rebate_bonus])
 

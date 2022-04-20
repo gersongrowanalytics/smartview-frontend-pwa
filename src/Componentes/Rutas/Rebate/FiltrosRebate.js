@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import { Link } from "react-router-dom";
-import {Tooltip, Select} from "antd";
+import {Tooltip, Select, Spin} from "antd";
 import FiltroAnioVentasPromociones from '../../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones'
 import FiltroMesVentasPromociones from '../../../Componentes/Filtros/Botones/FiltroMesVentasPromociones'
 import IconoFlechaAbajo from '../../../Assets/Img/Rebate/flechaabajonegro.png'
@@ -31,7 +31,8 @@ const FiltrosRebate = (props) => {
     const {
         data_rebate,
         data_rebate_descargar,
-        grupo_seleccionado_rebate
+        grupo_seleccionado_rebate,
+        cargando_guardar_rebate_bonus
     } = useSelector(({rebate}) => rebate);
 
 
@@ -148,15 +149,19 @@ const FiltrosRebate = (props) => {
                     <FiltroAnioVentasPromociones />
                 </div>
 
-                <div
-                    className='Btn-Guardar-Data-Rebate W600-S14-H19-C558CFF-L0015'
-                    onClick={() => {
-                        // dispatch(CrearRebatesReducer(editandoRebate))
-                        guardarData(editandoRebate)
-                    }}
+                <Spin
+                    spinning={cargando_guardar_rebate_bonus}
                 >
-                    Guardar
-                </div>
+                    <div
+                        className='Btn-Guardar-Data-Rebate W600-S14-H19-C558CFF-L0015'
+                        onClick={() => {
+                            // dispatch(CrearRebatesReducer(editandoRebate))
+                            guardarData(editandoRebate)
+                        }}
+                    >
+                        Guardar
+                    </div>
+                </Spin>
                 
                 <Tooltip
                     placement="bottom" 

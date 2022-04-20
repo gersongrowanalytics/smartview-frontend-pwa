@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react'
-import { Row, Col, Button, Spin, Checkbox  } from 'antd';
+import { Row, Col, Button, Spin, Tooltip  } from 'antd';
 import '../../Estilos/Rutas/ListaPrecios/ListaPrecios.css'
 import ReactExport from 'react-data-export';
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,8 @@ import {
     SeleccionarColumnaFiltroListaPreciosReducer,
     CambiarOrdenColumnasFiltroListaPreciosReducer,
 
-    ObtenerDataDescargarExcelReducer
+    ObtenerDataDescargarExcelReducer,
+    ActivarDuplicadosComplejosListaPreciosReducer
 } from '../../Redux/Acciones/ListaPrecios/ListaPrecios'
 import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
 import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
@@ -48,6 +49,9 @@ const ListaPrecios = () => {
         data_tabla_lista_precios,
         data_config_tabla_lista_precios,
         cargando_datos_tabla_lista_precios,
+        cargando_eliminar_fila_lista_precios,
+        cargando_editar_fila_lista_precios,
+        duplicados_complejos_activados_lista_precios,
 
         agrupacion_columnas_filtros_descargar_listaprecios,
         columnas_filtro_descargar_listaprecios,
@@ -292,13 +296,34 @@ const ListaPrecios = () => {
                 />
 
 
+                <Tooltip
+                    placement="bottom" 
+                    title={"Duplicados Complejos"}
+                >
+                    <div
+                        className='btn-filtrar-duplicados-complejos-listaprecios'
+                        onClick={() => {
+                            dispatch(ActivarDuplicadosComplejosListaPreciosReducer())
+                        }}
+                        style={
+                            duplicados_complejos_activados_lista_precios == true
+                            ?{background:'#E41A37'}
+                            :{}
+                        }
+                    >
+
+                    </div>
+                </Tooltip>
+
+
 
                 <div 
                     className='Contenedor-Btn-Adm-Usuarios'
                     style={{
                         position: "relative",
-                        width: "240px",
-                        top: "18px"
+                        width: "190px",
+                        top: "18px",
+                        // background:'blue'
                     }}
                 >
                     <div 
@@ -355,6 +380,8 @@ const ListaPrecios = () => {
                     <Spin spinning={cargando_datos_tabla_lista_precios}>
                         <TablaLP 
                             data_tabla_lista_precios = {data_tabla_lista_precios}
+                            cargando_eliminar_fila_lista_precios = {cargando_eliminar_fila_lista_precios}
+                            cargando_editar_fila_lista_precios = {cargando_editar_fila_lista_precios}
                         />
                     </Spin>
                 </div>

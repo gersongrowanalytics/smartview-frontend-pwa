@@ -12,7 +12,8 @@ import IconoAvionRojo from '../../Assets/Img/ElementosEnviados/Avión-Pendiente.
 
 import IconoReenviar from '../../Assets/Img/ElementosEnviados/Reenviar.png'
 import {
-    dataElementosEnviados
+    dataElementosEnviados,
+    enviarCorreoPromociones
 } from '../../Redux/Acciones/ElementosEnviados/ElementosEnviados.js'
 import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
 import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
@@ -22,6 +23,7 @@ const ElementosEnviadosNuevo = () => {
     const [modalAbiertoReenviar, setmodalAbiertoReenviar] = useState(false)
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     let n = ['1','2','3','4','5','6','7','8','9']
+    const [posicionFilaTabla, setposicionFilaTabla] = useState("")
 
     const dispatch = useDispatch()
     const { 
@@ -30,8 +32,11 @@ const ElementosEnviadosNuevo = () => {
         paginaActual,
         indexRegistro,
         cargandoTablaElementosEnviados,
-        data_paginate_elementos_enviados
+        data_paginate_elementos_enviados,
+        cargandoBtnModal
     } = useSelector(({elementosEnviados}) => elementosEnviados);
+
+    console.log(elementosEnviados)
 
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataElementosEnviados(paginaActualTabla))
@@ -63,6 +68,14 @@ const ElementosEnviadosNuevo = () => {
         return indexRegistro + posicion
      }
  
+    const  enviarCorreoElementos = async() => {
+        if (await dispatch(enviarCorreoPromociones(elementosEnviados[posicionFilaTabla])) == true) {
+            setmodalAbiertoReenviar(!modalAbiertoReenviar)
+            setposicionFilaTabla("")
+            cargarDatosTabla(paginaActualTabla)
+        }
+    }
+
     useEffect(() => {
         cargarDatosTabla(paginaActualTabla)
     },[paginaActualTabla])
@@ -179,12 +192,10 @@ const ElementosEnviadosNuevo = () => {
                                 <tbody>
                                     {
                                         elementosEnviados.map((data, pos) => {
-
                                             let sucursales = []
                                             if(data.ucesucursales){
                                                 sucursales = JSON.parse(data.ucesucursales)
                                             }
-
 
                                             const newDate = new Date(data.ucefecha)
                                             const dia = newDate.getDate()+1;
@@ -244,7 +255,7 @@ const ElementosEnviadosNuevo = () => {
                                                             <Row>
                                                                 {
                                                                     sucursales.length > 0
-                                                                    ?sucursales.map((sucursal) => {
+                                                                    ? sucursales.map((sucursal) => {
                                                                         return(
                                                                             <Col 
                                                                                 xl={12}
@@ -300,7 +311,10 @@ const ElementosEnviadosNuevo = () => {
                                                             <img 
                                                                 src={IconoReenviar} 
                                                                 style={{width:'16px'}}
-                                                                onClick={() => setmodalAbiertoReenviar(!modalAbiertoReenviar) }
+                                                                onClick={() => {
+                                                                    setmodalAbiertoReenviar(!modalAbiertoReenviar)
+                                                                    setposicionFilaTabla(pos)
+                                                                }}
                                                             />
                                                         </div>
                                                     </td>
@@ -333,9 +347,16 @@ const ElementosEnviadosNuevo = () => {
                         ¿Está seguro que desea reenviar el correo?
                     </div>
                     <div className='Contenedor-Botones-Modal'>
-                        <button className='Boton-Aceptar-Eliminar-Modal'>
-                            Aceptar
-                        </button>
+                        <Spin
+                            spinning={cargandoBtnModal}
+                        >
+                            <button 
+                                className='Boton-Aceptar-Eliminar-Modal'
+                                onClick={() => enviarCorreoElementos()}
+                            >
+                                Aceptar
+                            </button>
+                        </Spin>
                         <button 
                             className='Boton-Cancelar-Eliminar-Modal'
                             onClick={() => {

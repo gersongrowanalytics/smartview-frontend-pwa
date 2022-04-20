@@ -29,7 +29,8 @@ const Administrativo = () => {
     const { 
         tiposUsuarios
     } = useSelector(({usuarios}) => usuarios);
-    // console.log(tiposUsuarios)
+
+    console.log(tiposUsuarios)
 
     let cantidadFilas = Math.round(tiposUsuarios.length / 4)
     let arrayCantidadFilas = []
@@ -144,7 +145,13 @@ const Administrativo = () => {
                                                         </div>
                                                     ) : (
                                                         <div className='cardTipoUsuario'>
-                                                            <img src={Adm} className='Imagen-Perfil'></img>
+                                                            {
+                                                                (tipo.tpuimagencircular == " " || tipo.tpuimagencircular ==null) ? (
+                                                                    <img src={Adm} className='Imagen-Perfil'/>
+                                                                ) : (
+                                                                    <img src={tipo.tpuimagencircular} className='Imagen-Perfil'/>
+                                                                )
+                                                            }
                                                             <div className='Texto-Card-Perfil'>{tipo.tpunombre}</div>
                                                             <Link 
                                                                 to={{ pathname: '/administrativo/perfil'}}

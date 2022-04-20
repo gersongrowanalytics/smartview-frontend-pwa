@@ -32,6 +32,7 @@ export const ObtenerPermisosTipoUsuario = (tpuid) => async ( dispatch, getState 
 		const estadoRequest = getState().estadoRequest.init_request
 		if(estadoRequest == true){
             if(data.respuesta == true){
+                console.log(data)
                 let tipoPermiso = data.datos
                 let tipoUsuario = data.tipo_usuario
                 let estadoTipoUsuario

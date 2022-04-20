@@ -1,7 +1,8 @@
 import {
     OBTENER_DATOS_ELEMENTOS_ENVIADOS,
     CARGANDO_TABLA_DATOS_ELEMENTOS_ENVIADOS,
-    OBTENER_DATOS_PAGINATE_ELEMENTOS_ENVIADOS
+    OBTENER_DATOS_PAGINATE_ELEMENTOS_ENVIADOS,
+    CARGANDO_BTN_MODAL_ELEMENTOS_ENVIADOS
 } from '../../../Constantes/ElementosEnviados/ElementosEnviados'
 
 const INIT_STATE = {
@@ -10,7 +11,8 @@ const INIT_STATE = {
     paginasTotales: "",
     paginaActual: "",
     indexRegistro: "",
-    data_paginate_elementos_enviados : {}
+    data_paginate_elementos_enviados : {},
+    cargandoBtnModal: false
 };
 
 export default (state = INIT_STATE, action) => {
@@ -35,6 +37,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 data_paginate_elementos_enviados : action.payload
+            }
+        }
+        case CARGANDO_BTN_MODAL_ELEMENTOS_ENVIADOS: {
+            return {
+                ...state,
+                cargandoBtnModal: action.payload
             }
         }
         default:

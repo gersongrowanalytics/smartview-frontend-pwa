@@ -15,7 +15,6 @@ import {
      editarPermisosTipoUsuario,
      cambiarEstadoTipoPermiso
 } from '../../../Redux/Acciones/Administrativo/TiposUsuarios/TiposUsuarios'
-import FormItem from 'antd/lib/form/FormItem';
 
 const TiposUsuarios = () => {
 
@@ -47,6 +46,7 @@ const TiposUsuarios = () => {
         tpuid
     } = useSelector(({tiposUsuarios}) => tiposUsuarios);
 
+    console.log(tpuimagen)
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
         setanioOpcionesAbierto(false)
@@ -57,7 +57,6 @@ const TiposUsuarios = () => {
     }
 
     const formatearFecha = (fecha) => {
-        console.log(fecha)
         if(fecha){
             let date = fecha.split('-') 
             let mes = date[1].replace(/^(0+)/g, '')   
@@ -100,19 +99,30 @@ const TiposUsuarios = () => {
             setvalorEstadoTu("2")
         }
     }
+    const imagenCircular = [
+        'https://i.blogs.es/05ff1f/incognitowhatsapp/1366_2000.jpg',
+        'https://w0.peakpx.com/wallpaper/419/208/HD-wallpaper-face-art-abstract-face-painting-profile.jpg',
+        'https://thumbs.dreamstime.com/z/pintura-de-perfil-serie-interna-retrato-abstracto-en-el-sobre-tema-del-arte-la-energ%C3%ADa-creatividad-y-emoci%C3%B3n-169706456.jpg'
+    ]
+    const imagenPerfil = [
+        'https://i.blogs.es/05ff1f/incognitowhatsapp/1366_2000.jpg',
+        'https://w0.peakpx.com/wallpaper/419/208/HD-wallpaper-face-art-abstract-face-painting-profile.jpg',
+        'https://thumbs.dreamstime.com/z/pintura-de-perfil-serie-interna-retrato-abstracto-en-el-sobre-tema-del-arte-la-energ%C3%ADa-creatividad-y-emoci%C3%B3n-169706456.jpg'
+    ]
 
     const onFinish = async(valores) => {
         let editarTipoUsuario = true
         let editarPermisos = false
-        let tipoUsuarioDatos = {
-            're_nombre': valores['nombre'],
-            're_estado': valorEstadoTu,
-            're_fechaInicio': valores['fechaInicio'],
-            're_fechaFinal': valores['fechaFinal'],
-            're_imagen': " ",
-            're_imagencircular': " "
-        }
         if (tpuid == '0') {
+            let posicionArrayImagenRandom = Math.round(Math.random()*(2-0)+parseInt(0))
+            let tipoUsuarioDatos = {
+                're_nombre': valores['nombre'],
+                're_estado': valorEstadoTu,
+                're_fechaInicio': valores['fechaInicio'],
+                're_fechaFinal': valores['fechaFinal'],
+                're_imagen': imagenCircular[posicionArrayImagenRandom],
+                're_imagencircular': imagenPerfil[posicionArrayImagenRandom]
+            }
             setmodalTipoUsuario(true)
             if (await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos)) == true){
                 setrespuestaCrearTipoUsuario('Su usuario fue creado con éxito')
@@ -120,6 +130,14 @@ const TiposUsuarios = () => {
                 setrespuestaCrearTipoUsuario('Lo siento, error al crear su usuario')
             }
         }else{
+            let tipoUsuarioDatos = {
+                're_nombre': valores['nombre'],
+                're_estado': valorEstadoTu,
+                're_fechaInicio': valores['fechaInicio'],
+                're_fechaFinal': valores['fechaFinal'],
+                're_imagen': " ",
+                're_imagencircular': " "
+            }
             await dispatch(editarPermisosTipoUsuario(tipoUsuarioDatos, permisosTipoUsuario, tpuid, editarTipoUsuario, editarPermisos))
             seteditando(!editando)
         }
@@ -382,10 +400,10 @@ const TiposUsuarios = () => {
                 <Col xl={11}>
                     <div className='Contenedor-Imagen-Perfil'>
                         {
-                            tpuimagen == null ? (
-                                <img src={tpuimagen} style={{width: '80%'}}></img>
-                            ) : ( 
+                            (tpuimagen == " " || tpuimagen == null) ? (
                                 <img src={ImagenPerfil} style={{width: '80%'}}></img>
+                            ) : ( 
+                                <img src={tpuimagen} style={{width: '80%', marginTop:'100px'}}></img>
                             )
                         }
                         {
@@ -459,7 +477,13 @@ const TiposUsuarios = () => {
                                     }
                                 </div>  
                             ) : (   
-                                <div className='Contenedor-Informacion-Perfil'>
+                                <div 
+                                    className='Contenedor-Informacion-Perfil'
+                                    style={{
+                                        marginRight: '20%',
+                                        marginTop: '0px'
+                                    }}
+                                >
                                     <Form
                                         onFinish={onFinish}
                                         autoComplete="off"

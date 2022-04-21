@@ -11,9 +11,11 @@ import IconoAvionVerde from '../../Assets/Img/ElementosEnviados/Avión-Enviado.p
 import IconoAvionRojo from '../../Assets/Img/ElementosEnviados/Avión-Pendiente.png'
 
 import IconoReenviar from '../../Assets/Img/ElementosEnviados/Reenviar.png'
+import IconoEliminar from '../../Assets/Img/ElementosEnviados/Eliminar.png'
 import {
     dataElementosEnviados,
-    enviarCorreoPromociones
+    enviarCorreoPromociones,
+    eliminarCorreoPromociones
 } from '../../Redux/Acciones/ElementosEnviados/ElementosEnviados.js'
 import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
 import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
@@ -21,6 +23,7 @@ import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/Filtro
 const ElementosEnviadosNuevo = () => {
 
     const [modalAbiertoReenviar, setmodalAbiertoReenviar] = useState(false)
+    const [modalAbiertoEliminar, setmodalAbiertoEliminar] = useState(false)
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     let n = ['1','2','3','4','5','6','7','8','9']
     const [posicionFilaTabla, setposicionFilaTabla] = useState("")
@@ -71,6 +74,14 @@ const ElementosEnviadosNuevo = () => {
     const  enviarCorreoElementos = async() => {
         if (await dispatch(enviarCorreoPromociones(elementosEnviados[posicionFilaTabla])) == true) {
             setmodalAbiertoReenviar(!modalAbiertoReenviar)
+            setposicionFilaTabla("")
+            cargarDatosTabla(paginaActualTabla)
+        }
+    }
+
+    const eliminarCorreoElementos = async() => {
+        if (await dispatch(eliminarCorreoPromociones(elementosEnviados[posicionFilaTabla])) == true) {
+            setmodalAbiertoEliminar(!modalAbiertoEliminar)
             setposicionFilaTabla("")
             cargarDatosTabla(paginaActualTabla)
         }
@@ -307,15 +318,31 @@ const ElementosEnviadosNuevo = () => {
                                                         {data.ucehora}
                                                     </td>
                                                     <td>
-                                                        <div className='Fondo-Icono-Reenviar'>
-                                                            <img 
-                                                                src={IconoReenviar} 
-                                                                style={{width:'16px'}}
-                                                                onClick={() => {
-                                                                    setmodalAbiertoReenviar(!modalAbiertoReenviar)
-                                                                    setposicionFilaTabla(pos)
-                                                                }}
-                                                            />
+                                                        <div style={{
+                                                            display: 'flex'
+                                                        }}>
+                                                            <div className='Fondo-Icono-Reenviar'>
+                                                                <img 
+                                                                    className='Icono-Reenviar'
+                                                                    src={IconoReenviar} 
+                                                                    style={{width:'16px'}}
+                                                                    onClick={() => {
+                                                                        setmodalAbiertoReenviar(!modalAbiertoReenviar)
+                                                                        setposicionFilaTabla(pos)
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                            <div className='Fondo-Icono-Eliminar'>
+                                                                <img 
+                                                                    className='Icono-Eliminar'
+                                                                    src={IconoEliminar} 
+                                                                    style={{width:'16px'}}
+                                                                    onClick={() => {
+                                                                        setmodalAbiertoEliminar(!modalAbiertoEliminar)
+                                                                        setposicionFilaTabla(pos)
+                                                                    }}
+                                                                />
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -361,6 +388,46 @@ const ElementosEnviadosNuevo = () => {
                             className='Boton-Cancelar-Eliminar-Modal'
                             onClick={() => {
                                 setmodalAbiertoReenviar(false)
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </Modal>
+            <Modal
+                centered
+                title={null}
+                visible={modalAbiertoEliminar}
+                footer={null}
+                closeIcon={<div></div>}
+                width="310px"
+                height="139px"
+                className='Caja-Modal-ReenviarElemento'
+                onCancel={() => setmodalAbiertoEliminar(false)}
+            >
+                <div>
+                    <div className='Titulo-Modal-Reenviar-Elemento'>
+                        Eliminar Correo
+                    </div>
+                    <div className='Texto-Modal-Reenviar-Elemento'>
+                        ¿Está seguro que desea eliminar el correo?
+                    </div>
+                    <div className='Contenedor-Botones-Modal'>
+                        <Spin
+                            spinning={cargandoBtnModal}
+                        >
+                            <button 
+                                className='Boton-Aceptar-Eliminar-Modal'
+                                onClick={() => eliminarCorreoElementos()}
+                            >
+                                Aceptar
+                            </button>
+                        </Spin>
+                        <button 
+                            className='Boton-Cancelar-Eliminar-Modal'
+                            onClick={() => {
+                                setmodalAbiertoEliminar(false)
                             }}
                         >
                             Cancelar

@@ -44,7 +44,7 @@
 .Contenedor-Tabla-Elementos-Enviados{
     margin-top: 33px;
     /* margin-left: 227px; */
-    width: 880px;
+    width: 960px;
     border-radius: 8px;
 }
 
@@ -101,7 +101,29 @@
     cursor: pointer;
 }
 
+.Fondo-Icono-Eliminar{
+    background: #FFFFFF;
+    border-radius: 14px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 .Fondo-Icono-Reenviar:hover{
     background: #558CFF;
 }
 
+.Fondo-Icono-Eliminar:hover{
+    background: #558CFF;
+}
+
+.Fondo-Icono-Reenviar:hover .Icono-Reenviar{ 
+    content:url(../../../Assets/Img/ElementosEnviados/Reenviar-white.png);
+}
+
+.Fondo-Icono-Eliminar:hover .Icono-Eliminar{ 
+    content:url(../../../Assets/Img/ElementosEnviados/Eliminar-white.png);
+}

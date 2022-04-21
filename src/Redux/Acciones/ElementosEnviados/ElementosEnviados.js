@@ -114,4 +114,49 @@ export const enviarCorreoPromociones = (datosElementoEnviado) => async ( dispatc
         console.log(error)
     });
     return respuesta
-}
+}   
+
+export const  eliminarCorreoPromociones = (datosElementoEnviado) => async ( dispatch, getState ) => {
+    
+    let respuesta = false
+
+    dispatch({
+        type: CARGANDO_BTN_MODAL_ELEMENTOS_ENVIADOS,
+        payload: true
+    })
+
+    await fetch(config.api+'/eliminar-elementos-enviados',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                re_uceid : datosElementoEnviado.uceid
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken')
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))   
+        return res.json()
+    })
+    .then( async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                respuesta = true
+                dispatch({
+                    type: CARGANDO_BTN_MODAL_ELEMENTOS_ENVIADOS,
+                    payload: false
+                })
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+    return respuesta
+}   

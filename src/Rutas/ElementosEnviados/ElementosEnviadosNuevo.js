@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
-import { Row, Col, Spin, Modal } from 'antd'
+import { Row, Col, Spin, Modal, Input } from 'antd'
 import { useDispatch, useSelector } from "react-redux";
-import { LeftOutlined, RightOutlined, LoadingOutlined } from '@ant-design/icons'
+import { LeftOutlined, RightOutlined, LoadingOutlined, SearchOutlined } from '@ant-design/icons'
 import '../../Estilos/Rutas/ElementosEnviados/ElementosEnviadosNuevo.css'
 import FlechaAbajo from '../../Assets/Img/ElementosEnviados/Angulo-abajo.png'
 import FlechaAbajoBlanco from '../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
@@ -27,6 +27,7 @@ const ElementosEnviadosNuevo = () => {
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     let n = ['1','2','3','4','5','6','7','8','9']
     const [posicionFilaTabla, setposicionFilaTabla] = useState("")
+    const [txtBuscarElementosEnviados, setTxtBuscarElementosEnviados] = useState("")
 
     const dispatch = useDispatch()
     const { 
@@ -115,14 +116,29 @@ const ElementosEnviadosNuevo = () => {
                             <span>Tipo de Envio</span>
                             <img src={FlechaAbajo} style={{width:'26px'}}/>
                         </div>
-                        <div className='Btn-Elementos-Enviados' style={{width:'143px', paddingLeft:'12px'}}>
+                        {/* <div className='Btn-Elementos-Enviados' style={{width:'143px', paddingLeft:'12px'}}>
                             <span>Distribuidora</span>
                             <img src={FlechaAbajo} style={{width:'26px'}}/>
-                        </div>
+                        </div> */}
                     </div>
                 </Col>
                 <Col xl={12}>
                     <div className='Paginacion-Elementos-Enviados'>
+                        <div className='Input-Buscar-Elementos-Enviados'
+                            style={{
+                            width: '77%',
+                            marginRight: '10px'
+                        }}>
+                            <Input 
+                                suffix = { <SearchOutlined/>}
+                                className='Busqueda-Elementos-Enviados'
+                                placeholder='Buscar'
+                                value={txtBuscarElementosEnviados}
+                                onChange={(e) => {
+                                    setTxtBuscarElementosEnviados(e.target.value)
+                                }}
+                            />
+                        </div>
                         <div>
                             <span>{data_paginate_elementos_enviados.from} - {data_paginate_elementos_enviados.to} de {data_paginate_elementos_enviados.total} </span>
                             <LeftOutlined 
@@ -155,47 +171,47 @@ const ElementosEnviadosNuevo = () => {
                                         <th>
                                             <div>
                                                 <span>Item</span>
-                                                <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th>
                                             <div>
                                                 <span>Tipo</span>
-                                                <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th>
                                             <div>
                                                 <span>Distribuidora</span>
-                                                <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th>
                                             <div>
                                                 <span>Destinatario</span>
-                                                <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th>
                                             <div>
                                                 <span>Estado</span>
-                                                <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th>
                                             <div>
                                                 <span>Fecha</span>
-                                                <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th>
                                             <div>
                                                 <span>Hora</span>
-                                                <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th>
-                                            <div style={{width:'30px'}}>
+                                            <div style={{width:'60px'}}>
                                             </div>
                                         </th>
                                     </tr>
@@ -240,6 +256,9 @@ const ElementosEnviadosNuevo = () => {
                                             }
 
                                             return(
+                                                data.ucetipo.includes(txtBuscarElementosEnviados) || data.ucetipo.toLowerCase().includes(txtBuscarElementosEnviados.toLowerCase()) ||
+                                                data.dcedestinatario.includes(txtBuscarElementosEnviados) || data.dcedestinatario.toLowerCase().includes(txtBuscarElementosEnviados.toLowerCase())
+                                                ?
                                                 <tr
                                                     key={data.uceid}
                                                 >
@@ -335,7 +354,8 @@ const ElementosEnviadosNuevo = () => {
                                                     </td>
                                                     <td>
                                                         <div style={{
-                                                            display: 'flex'
+                                                            display: 'flex',
+                                                            justifyContent: 'center'                                                            
                                                         }}>
                                                             <div className='Fondo-Icono-Reenviar'>
                                                                 <img 
@@ -362,6 +382,7 @@ const ElementosEnviadosNuevo = () => {
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                : null
                                             )
                                         })
                                     }

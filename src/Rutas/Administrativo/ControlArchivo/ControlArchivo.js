@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Spin } from 'antd'
+import { Row, Col, Spin, Input } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoControlArchivo.css'
@@ -9,7 +9,7 @@ import BanderaPeru from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Per
 import {
     dataControlArchivos
 } from '../../../Redux/Acciones/ControlArchivos/ControlArchivos'
-import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
+import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 
 
 const ControlArchivo = () => {
@@ -139,11 +139,13 @@ const ControlArchivo = () => {
                 </Col>
                 <Col xl={11}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
-                        <div style={{
+                        <div className='Input-Buscar-Control-Archivo'
+                            style={{
                             width: '64%',
                             marginRight: '10px'
                         }}>
-                            <input 
+                            <Input 
+                                suffix = { <SearchOutlined/>}
                                 className='Busqueda-Control-Archivos'
                                 placeholder='Buscar'
                                 value={txtBuscarControlArchivo}
@@ -230,7 +232,6 @@ const ControlArchivo = () => {
                                 <tbody>
                                     {
                                         archivosSubidos.map((archivo, posicion)=> {
-                                            console.log(archivosSubidos)
                                             return(
                                                 archivo.carnombrearchivo.includes(txtBuscarControlArchivo) || archivo.carnombrearchivo.toLowerCase().includes(txtBuscarControlArchivo.toLowerCase()) ||
                                                 archivo.tcanombre.includes(txtBuscarControlArchivo) || archivo.tcanombre.toLowerCase().includes(txtBuscarControlArchivo.toLowerCase())

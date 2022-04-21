@@ -10,7 +10,7 @@ import {
     dataTiposUsuarios,
     crearUsuario
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
-import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
+import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
 import FormularioUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/FormularioUsuarios';
 
@@ -269,13 +269,16 @@ const Usuarios = () => {
                     </div>
                 </Col>
                 <Col lg={11} xl={11}>
-                                       
                     <div className='Contenedor-Btn-Adm-Usuarios'>
-                        <div style={{
-                            width: '51%',
-                            marginRight: '10px'
-                        }}>
-                            <input 
+                        <div 
+                            className='Input-Buscar-Usuarios'
+                            style={{
+                                width: '51%',
+                                marginRight: '10px'
+                            }}
+                        >
+                            <Input
+                                suffix = { <SearchOutlined/>} 
                                 className='Busqueda-Usuarios'
                                 placeholder='Buscar'
                                 value={txtBuscarUsuario}

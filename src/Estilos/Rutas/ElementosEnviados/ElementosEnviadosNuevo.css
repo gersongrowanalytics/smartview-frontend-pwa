@@ -127,3 +127,33 @@
 .Fondo-Icono-Eliminar:hover .Icono-Eliminar{ 
     content:url(../../../Assets/Img/ElementosEnviados/Eliminar-white.png);
 }
+
+.Busqueda-Elementos-Enviados{
+    width: 100%;
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 27px !important;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #A4A3A3;
+    padding: 0px 14px;
+    border-color: #000000 !important;
+}
+
+.Busqueda-Elementos-Enviados:hover{
+    border-color: #000000 !important;
+}
+
+.Input-Buscar-Elementos-Enviados .ant-input-affix-wrapper:focus{
+    box-shadow: none !important;
+    border-color: #000000 !important;
+}
+
+.Input-Buscar-Elementos-Enviados .ant-input-affix-wrapper-focused{
+    box-shadow: none !important;
+    border-color: #000000 !important;
+}

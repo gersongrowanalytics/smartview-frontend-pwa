@@ -543,11 +543,26 @@ input[type="date"]:focus { outline: 0; }
     background: #FFFFFF;
     border: 1px solid #000000;
     box-sizing: border-box;
-    border-radius: 27px;
+    border-radius: 27px !important;
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
     letter-spacing: -0.015em;
     color: #A4A3A3;
     padding: 0px 14px;
+    border-color: #000000 !important;
+}
+
+.Busqueda-Usuarios:hover{
+    border-color: #000000 !important;
+}
+
+.Input-Buscar-Usuarios .ant-input-affix-wrapper:focus{
+    box-shadow: none !important;
+    border-color: #000000 !important;
+}
+
+.Input-Buscar-Usuarios .ant-input-affix-wrapper-focused{
+    box-shadow: none !important;
+    border-color: #000000 !important;
 }

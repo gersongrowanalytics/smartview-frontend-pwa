@@ -88,21 +88,6 @@
     padding-top: 11px;
 }
 
-.Busqueda-Administrativo{
-    width: 529px;
-    height: 36px;
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 27px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-    letter-spacing: -0.015em;
-    color: #A4A3A3;
-    padding: 0px 14px;
-}
-
 .flip-card {
     background-color: transparent;
     width: 192px;
@@ -215,4 +200,34 @@
     align-items: center;
     box-shadow: 0px 4px 7px #c4c4c4;
     border-radius: 8px;
+}
+
+.Busqueda-Administrativo{
+    width: 529px;
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 27px !important;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #A4A3A3;
+    padding: 0px 14px;
+    border-color: #000000 !important;
+}
+
+.Busqueda-Administrativo:hover{
+    border-color: #000000 !important;
+}
+
+.Contenedor-Busqueda-Administrativo .ant-input-affix-wrapper:focus{
+    box-shadow: none !important;
+    border-color: #000000 !important;
+}
+
+.Contenedor-Busqueda-Administrativo .ant-input-affix-wrapper-focused{
+    box-shadow: none !important;
+    border-color: #000000 !important;
 }

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Input } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../Estilos/Rutas/Administrativo/Administrativo.css'
@@ -19,6 +19,7 @@ import {
 import {
     ObtenerPermisosTipoUsuario
 } from '../../Redux/Acciones/Administrativo/TiposUsuarios/TiposUsuarios'
+import { SearchOutlined } from '@ant-design/icons';
 
 const Administrativo = () => {
 
@@ -105,7 +106,8 @@ const Administrativo = () => {
                 </Col>
                 <Col lg={11} xl={11}>
                     <div className='Contenedor-Busqueda-Administrativo'>
-                        <input 
+                        <Input
+                            suffix = { <SearchOutlined/>} 
                             className='Busqueda-Administrativo'
                             placeholder='Buscar'
                             value={txtBuscarTipoUsuario}

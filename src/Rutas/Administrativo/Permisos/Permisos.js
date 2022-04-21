@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Modal, Spin, Tooltip } from 'antd'
+import { Row, Col, Modal, Spin, Tooltip, Input } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoPermisos.css'
 import Agregar from '../../../Assets/Img/Administrativo/Usuarios/Agregar-blue.png'
 import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
 import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
-import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons'
+import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons'
 import {
     dataPermisos,
     HabilitarEditarPermisosReducer
@@ -149,11 +149,14 @@ const Permisos = () => {
                 </Col>
                 <Col lg={11} xl={11}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
-                        <div style={{
-                            width: '49%',
-                            marginRight: '10px'
+                        <div 
+                            className='Input-Buscar-Permisos'
+                            style={{
+                                width: '49%',
+                                marginRight: '10px'
                         }}>
-                            <input 
+                            <Input 
+                                suffix = { <SearchOutlined/>}
                                 className='Busqueda-Permisos'
                                 placeholder='Buscar'
                                 value={txtBuscarPermiso}

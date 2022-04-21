@@ -42,3 +42,40 @@
 .Tabla-Principal tbody{
     z-index: 0;
 }
+
+.Contenedor-Fila-TablaLp{
+    /* position: relative; */
+}
+
+.Contenedor-Fila-TablaLp:hover .Contenedor-Opciones-TablaLp{
+    display: revert;
+    /* position: relative; */
+}
+
+.Contenedor-Opciones-TablaLp{
+    display: none;
+    /* position: relative; */
+}
+
+.Contenedor-Fila-TablaLp:hover .Contenedor-Item-TablaLp{
+    display: none;
+}
+
+.Contenedor-Fila-TablaLp:hover .Contenedor-Categoria-TablaLp{
+    display: none;
+}
+
+.Input-Editando-TablaLp{
+    outline: none;
+    border: none;
+    width: 95%;
+}
+
+.Input-Editando-TablaLp:focus{
+    outline: none;
+}
+
+
+.Modal-Eliminar-Lp-TablaLp .ant-modal-content{
+    border-radius: 8px;
+}

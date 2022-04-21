@@ -277,3 +277,12 @@
 .Check-Filtro-Lp .ant-checkbox{
     width: 12px;
 }
+
+.btn-filtrar-duplicados-complejos-listaprecios{
+    width: 43px;
+    height: 36px;
+    border: 1px solid #E41A37;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: pointer;
+}

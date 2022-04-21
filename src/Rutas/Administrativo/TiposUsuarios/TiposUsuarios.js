@@ -384,6 +384,9 @@ const TiposUsuarios = () => {
                                         <button 
                                             type='submit'
                                             className='Btn-Crear-Guardar-Perfil'
+                                            style={{
+                                                marginRight: "90px"
+                                            }}
                                         >Crear y Guardar</button>
                                     </Form.Item>
                                 </Form>
@@ -391,6 +394,9 @@ const TiposUsuarios = () => {
                             ) : (
                                 <div 
                                     className='Btn-Guardar-Perfil'
+                                    style={{
+                                        marginRight: "90px"
+                                    }}
                                     onClick={() => {dispatch(editarPermisosTipoUsuario(null, permisosTipoUsuario, tpuid, false, true))}}
                                 >Guardar</div>
                             )

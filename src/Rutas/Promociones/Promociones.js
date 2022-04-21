@@ -52,7 +52,8 @@ const Promociones = () => {
         canalesPromociones,
         colorSeleciconadoPromo,
         mostrarDisenioPromocionesPrincipal,
-        mostrar_promociones_nuevas
+        mostrar_promociones_nuevas,
+        arr_resumenPromociones
     } = useSelector(({promociones}) => promociones);
 
     const {permisos, cargando_vista_inicio_sistema} = useSelector(({auth}) => auth);
@@ -110,8 +111,20 @@ const Promociones = () => {
 
     }, [aplicandoFiltroAcumulado])
 
+    useEffect(async () => {
+        let totalPromos = 0
+        arr_resumenPromociones.map((resumen) => {
+            totalPromos = totalPromos + resumen.total
+        })
+
+        setTotalPromos(totalPromos)
+
+    }, [arr_resumenPromociones])
+
+
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("0")
     const [mostrarNoticia, setMostrarNoticia] = useState(false)
+    const [totalPromos, setTotalPromos] = useState(0)
 
     useEffect(() => {
 
@@ -203,6 +216,7 @@ const Promociones = () => {
                 deseleccionarCategoria   = {deseleccionarCategoria}
                 seleccionarFiltroZona    = {false}
                 aplicandoFiltroAcumulado = {aplicandoFiltroAcumulado}
+                totalPromos = {totalPromos}
             />
 
 

@@ -11,7 +11,10 @@ import {
     OBTENER_DATA_FILTRO_LISTA_PRECIOS,
     OBTENER_UNICAMENTE_DATA_LISTA_PRECIOS,
     SELECCIONAR_TODO_FILTROS_LISTA_PRECIOS,
-    OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS
+    OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS,
+    CARGANDO_ELIMINAR_FILA_LISTA_PRECIOS,
+    CARGANDO_EDITAR_FILA_LISTA_PRECIOS,
+    ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 
 const INIT_STATE = {
@@ -20,6 +23,11 @@ const INIT_STATE = {
     data_tabla_lista_precios : [],
     data_config_tabla_lista_precios : {},
     cargando_datos_tabla_lista_precios : false,
+
+    cargando_eliminar_fila_lista_precios : false,
+    cargando_editar_fila_lista_precios : false,
+
+    duplicados_complejos_activados_lista_precios : false,
 
 
     agrupacion_columnas_filtros_descargar_listaprecios : [
@@ -311,6 +319,27 @@ export default (state = INIT_STATE, action) => {
                 fil_selectodo_dat_material      : action.payload.fil_selectodo_dat_material,
             }
         }
+
+        case CARGANDO_ELIMINAR_FILA_LISTA_PRECIOS: {
+            return {
+                ...state,
+                cargando_eliminar_fila_lista_precios : action.payload
+            }
+        }
+        case CARGANDO_EDITAR_FILA_LISTA_PRECIOS: {
+            return {
+                ...state,
+                cargando_editar_fila_lista_precios : action.payload
+            }
+        }
+
+        case ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS: {
+            return {
+                ...state,
+                duplicados_complejos_activados_lista_precios : action.payload
+            }
+        }
+
     default:
         return state;
     }

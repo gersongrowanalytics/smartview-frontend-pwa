@@ -41,6 +41,7 @@ class Slide extends React.Component {
   }
   
   render() {
+    const totalPromos = this.props.totalPromos
     const { 
         seleccionado,
         catnombre,
@@ -99,6 +100,7 @@ class Slide extends React.Component {
                 cantidadPromocionesRegulares = {cantidadPromociones - cantidadPromocionesNuevas}
                 cantidadCodigosPromocion = {cantidadCodigosPromocion}
                 cantidadCanales = {cantidadCanales}
+                totalPromos = {totalPromos}
             />
         </div>
       </li>
@@ -199,7 +201,7 @@ class CarouselPromociones extends React.Component {
 
   render() {
     const { current, direction, activarCarouselAvanzar} = this.state
-    const { slides, heading, seleccionarCategoria, seleccionoPromocion, deseleccionarCategoria } = this.props 
+    const { slides, heading, seleccionarCategoria, seleccionoPromocion, deseleccionarCategoria, totalPromos } = this.props 
     const headingId = `slider-heading__${heading.replace(/\s+/g, '-').toLowerCase()}`
     const wrapperTransform = {
       'transform': `translateX(-${current * (100 / slides.length)}%)`,
@@ -331,6 +333,7 @@ class CarouselPromociones extends React.Component {
 						colorhover                 = {slide.catcolorhover}
 						seleccionoPromocion        = {seleccionoPromocion}
 						catimagenfondoseleccionado = {slide.catimagenfondoseleccionado}
+						totalPromos = {totalPromos}
 					/>
 				</div>
               

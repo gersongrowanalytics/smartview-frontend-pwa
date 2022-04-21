@@ -1,6 +1,7 @@
 import {
     CARGANDO_DATA_REBATE_BONUS,
-    OBTENER_DATA_REBATE_BONUS
+    OBTENER_DATA_REBATE_BONUS,
+    CARGANDO_GUARDAR_REBATE_BONUS
 } from '../../../../Constantes/Rebate/Rebate'
 import config from '../../../../config'
 import { estadoRequestReducer } from "../../EstadoRequest"
@@ -77,7 +78,10 @@ export const SeleccionarCategoriaRebateBonusReducer = (posicion) => async (dispa
 
 export const CrearRebateBonusReducer = (data) => async (dispatch, getState) => {
 
-
+    dispatch({
+        type: CARGANDO_GUARDAR_REBATE_BONUS,
+        payload: true
+    })
 
     await fetch(config.api+'crear-rebate-bonus',
         {
@@ -108,5 +112,10 @@ export const CrearRebateBonusReducer = (data) => async (dispatch, getState) => {
     }).catch((error)=> {
         console.log(error)
     });
+
+    dispatch({
+        type: CARGANDO_GUARDAR_REBATE_BONUS,
+        payload: false
+    })
     
 }

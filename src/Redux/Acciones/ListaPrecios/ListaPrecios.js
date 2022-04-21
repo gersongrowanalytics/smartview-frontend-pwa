@@ -7,7 +7,8 @@ import {
     ABRIR_AGRUPACION_COLUMNA_FILTRO_DESCARGAR_LISTA_PRECIOS,
     CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS,
     OBTENER_DATA_FILTRO_LISTA_PRECIOS,
-    OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS
+    OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS,
+    ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
@@ -72,6 +73,7 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagin
     })
 
     let grupos_disponibles_lista_precios = getState().listaPrecios.grupos_disponibles_lista_precios
+    const duplicados_complejos_activados_lista_precios = getState().listaPrecios.duplicados_complejos_activados_lista_precios
 
     await grupos_disponibles_lista_precios.map((grupo, pos) => {
         if(pos == posicion){
@@ -103,6 +105,7 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagin
                 dia      : "01",
                 mes      : mesSeleccionadoFiltro,
                 treid    : treid,
+                duplicados : duplicados_complejos_activados_lista_precios
             }),
             headers: {
                 'Accept' : 'application/json',
@@ -385,4 +388,18 @@ export const ObtenerDataDescargarExcelReducer = () => async (dispatch, getState)
 
     return dataRpta
 
+}
+
+export const ActivarDuplicadosComplejosListaPreciosReducer = () => async (dispatch, getState) => {
+
+    const duplicados_complejos_activados_lista_precios = getState().listaPrecios.duplicados_complejos_activados_lista_precios
+    const grupos_disponibles_lista_precios = getState().listaPrecios.grupos_disponibles_lista_precios
+
+    dispatch({
+        type: ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS,
+        payload : !duplicados_complejos_activados_lista_precios
+    })
+
+    dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0))
+    
 }

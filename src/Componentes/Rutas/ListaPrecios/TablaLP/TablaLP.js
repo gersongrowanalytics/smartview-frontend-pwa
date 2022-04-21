@@ -1,12 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react'
 import funFormatoDecimal from '../../../../Funciones/funFormatoDecimal'
 import NumberFormat from 'react-number-format';
 import IconoFlechaAbajo from '../../../../Assets/Img/Tabla/flechaabajo.png'
 import '../../../../Estilos/Componentes/ListaPrecios/TablaLP.css'
+import { 
+    Tooltip,
+    Modal,
+    Spin
+} from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import IconoEditarBlanco from '../../../../Assets/Img/BancoImagen/editarBlanco.png'
+import IconoEditar from '../../../../Assets/Img/BancoImagen/Editar.png'
+import {useDispatch} from "react-redux";
+import IconoEliminar from '../../../../Assets/Img/ListaPrecios/eliminar.png'
+import IconoEliminarBlanco from '../../../../Assets/Img/ListaPrecios/eliminarBlanco.png'
+
+import IconoGuardar from '../../../../Assets/Img/ListaPrecios/guardar.png'
+
+import {
+    HabilitarEdicionLpReducer,
+    CambiarValorInputLpReducer,
+    EliminarLpReducer,
+    EditarLpReducer
+} from '../../../../Redux/Acciones/ListaPrecios/OpcionesLp'
 
 const TablaLP = (props) => {
 
     const data_tabla_lista_precios = props.data_tabla_lista_precios
+    const cargando_eliminar_fila_lista_precios = props.cargando_eliminar_fila_lista_precios
+    const cargando_editar_fila_lista_precios = props.cargando_editar_fila_lista_precios
+    const dispatch = useDispatch()
+
+    const [mostrarModalEditar, setMostrarModalEditar] = useState(false)
+    const [mostrarModalEliminar, setMostrarModalEliminar] = useState(false)
+    const [ltpidSeleccionado, setLtpidSeleccionado] = useState(0)
+    const [posicionSeleccionado, setPosicionSeleccionado] = useState(0)
 
     return (
         <div>
@@ -595,25 +623,77 @@ const TablaLP = (props) => {
                         data_tabla_lista_precios.map((dat, pos) => {
                             return(
                                 dat.mostrar == true
-                                ?<tr className='W600-S12-H16-C1E1E1E'>
+                                ?<tr 
+                                    className={'W600-S12-H16-C1E1E1E Contenedor-Fila-TablaLp'}
+                                >                                    
 
-                                    <td className='W600-S12-H16-C1E1E1E'>
-                                        {pos+1}
-                                        <div
+                                    <td 
+                                        className={
+                                            dat.editando == true
+                                            ?'W600-S12-H16-C1E1E1E'
+                                            :'W600-S12-H16-C1E1E1E Contenedor-Opciones-TablaLp'
+                                        }
+                                    >
+
+                                        <div 
+                                            // className='Contenedor-Opciones-TablaLp'
                                             style={{
+                                                placeContent: "center",
                                                 position:'absolute',
-                                                width:'2px',
-                                                height:'100%',
-                                                background:'white',
-                                                right:'-2px',
-                                                top:'0'
+                                                left:'0',
+                                                display:'flex',
+                                                top:'0px'
                                             }}
                                         >
+                                            <Tooltip
+                                                placement="bottom" 
+                                                title={"Editar"}
+                                            >
+                                                <div
+                                                    className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
+                                                >
+                                                    <img 
+                                                        className='Icon-Editar-Nuevo-Banco-Imagenes'
+                                                        src={IconoEditar}
+                                                        onClick={() => {
+                                                            // editandoFila()
+                                                            // refInputImagen.current.click()
+                                                            dispatch(HabilitarEdicionLpReducer(pos))
+                                                        }}
+                                                        style={{
+                                                            width:'13px'
+                                                        }}
+                                                    />
 
+                                                    <img 
+                                                        className='Icon-Editar-Blanco-Nuevo-Banco-Imagenes'
+                                                        src={IconoEditarBlanco}
+                                                        onClick={() => {
+                                                            // editandoFila()
+                                                            // refInputImagen.current.click()
+                                                            dispatch(HabilitarEdicionLpReducer(pos))
+                                                        }}
+                                                        style={{
+                                                            width:'13px',
+                                                            position: "absolute",
+                                                            left: "8px",
+                                                            top: "8px",
+                                                        }}
+                                                        
+
+                                                    />
+                                                </div>
+                                            </Tooltip>
                                         </div>
+
                                     </td>
-                                    <td 
-                                        className='W600-S12-H16-C1E1E1E'
+
+                                    <td
+                                        className={
+                                            dat.editando == true
+                                            ?'W600-S12-H16-C1E1E1E'
+                                            :'W600-S12-H16-C1E1E1E Contenedor-Opciones-TablaLp'
+                                        }
                                         style={{
                                             position: "sticky",
                                             left: "42px",
@@ -623,22 +703,171 @@ const TablaLP = (props) => {
                                             textAlign: "left"
                                         }}
                                     >
-                                        {dat.catnombre}
-                                        <div
+
+                                        <div 
+                                            // className='Contenedor-Opciones-TablaLp'
                                             style={{
+                                                placeContent: "center",
                                                 position:'absolute',
-                                                width:'2px',
-                                                height:'100%',
-                                                background:'white',
-                                                right:'-2px',
-                                                top:'0'
+                                                left:'0',
+                                                display:'flex',
+                                                top:'0px'
                                             }}
                                         >
+                                            
+                                            <Tooltip
+                                                placement="bottom" 
+                                                title={"Eliminar"}
+                                            >
+                                                <div
+                                                    className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
+                                                >
+                                                    <img 
+                                                        className='Icon-Editar-Nuevo-Banco-Imagenes'
+                                                        src={IconoEliminar}
+                                                        onClick={() => {
+                                                            // dispatch(EliminarLpReducer())
+                                                            setMostrarModalEliminar(true)
+                                                            setLtpidSeleccionado(dat.ltpid)
+                                                        }}
+                                                        style={{
+                                                            width:'13px'
+                                                        }}
+                                                    />
 
-                                        </div>
+                                                    <img 
+                                                        className='Icon-Editar-Blanco-Nuevo-Banco-Imagenes'
+                                                        src={IconoEliminarBlanco}
+                                                        onClick={() => {
+                                                            // dispatch(EliminarLpReducer())
+                                                            setMostrarModalEliminar(true)
+                                                            setLtpidSeleccionado(dat.ltpid)
+                                                        }}
+                                                        style={{
+                                                            width:'13px'
+                                                        }}
+                                                    />
+
+                                                </div>
+                                            </Tooltip>
+                                            <Tooltip
+                                                placement="bottom" 
+                                                title={"Guardar"}
+                                            >
+                                                <div
+                                                    className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
+                                                    style={{position:'relative'}}
+                                                >
+                                                    <img 
+                                                        className='Icon-Editar-Nuevo-Banco-Imagenes'
+                                                        src={IconoGuardar}
+                                                        onClick={() => {
+                                                            setMostrarModalEditar(true)
+                                                            setPosicionSeleccionado(pos)
+                                                        }}
+                                                        style={{
+                                                            width:'26px',
+                                                            position:'absolute',
+                                                            left: "0",
+                                                            top: "2px"
+                                                        }}
+                                                    />
+
+                                                    <img 
+                                                        className='Icon-Editar-Blanco-Nuevo-Banco-Imagenes'
+                                                        src={IconoGuardar}
+                                                        onClick={() => {
+                                                            setMostrarModalEditar(true)
+                                                            setPosicionSeleccionado(pos)
+                                                        }}
+                                                        style={{
+                                                            width:'26px',
+                                                            position:'absolute',
+                                                            right:'20px',
+                                                            left: "0",
+                                                            top: "2px"
+                                                        }}
+                                                    />
+
+                                                </div>
+                                            </Tooltip>
+                                        </div>  
+
                                     </td>
+
+
+
+
+                                    {
+                                        dat.editando == true
+                                        ?null
+                                        :<td
+                                            // className='W600-S12-H16-C1E1E1E Contenedor-Item-TablaLp'
+                                            className={
+                                                dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37 Contenedor-Item-TablaLp'
+                                                :'W600-S12-H16-C1E1E1E Contenedor-Item-TablaLp'
+                                            }
+                                        >
+
+                                            {pos+1}
+                                            <div
+                                                style={{
+                                                    position:'absolute',
+                                                    width:'2px',
+                                                    height:'100%',
+                                                    background:'white',
+                                                    right:'-2px',
+                                                    top:'0'
+                                                }}
+                                            >
+
+                                            </div>
+
+                                        </td>
+                                    }
+
+                                    {
+                                        dat.editando == true
+                                        ?null
+                                        :<td 
+                                            // className='W600-S12-H16-C1E1E1E Contenedor-Categoria-TablaLp'
+                                            className={
+                                                dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37 Contenedor-Categoria-TablaLp'
+                                                :'W600-S12-H16-C1E1E1E Contenedor-Categoria-TablaLp'
+                                            }
+                                            style={{
+                                                position: "sticky",
+                                                left: "42px",
+                                                zIndex: "0",
+                                                backgroundColor: "white",
+                                                top: "48px",
+                                                textAlign: "left"
+                                            }}
+                                        >
+                                            {dat.catnombre}
+                                            <div
+                                                style={{
+                                                    position:'absolute',
+                                                    width:'2px',
+                                                    height:'100%',
+                                                    background:'white',
+                                                    right:'-2px',
+                                                    top:'0'
+                                                }}
+                                            >
+
+                                            </div>
+                                        </td>
+                                    }
+
                                     <td 
-                                        className='W600-S12-H16-C1E1E1E'
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
                                         style={{
                                             position: "sticky",
                                             left: "117px",
@@ -664,7 +893,11 @@ const TablaLP = (props) => {
                                     </td>
 
                                     <td 
-                                        className='W600-S12-H16-C1E1E1E'
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
                                         style={{
                                             position: "sticky",
                                             left: "215px",
@@ -689,7 +922,11 @@ const TablaLP = (props) => {
                                         </div>
                                     </td>
                                     <td 
-                                        className='W600-S12-H16-C1E1E1E'
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
                                         style={{
                                             position: "sticky",
                                             left: "304px",
@@ -721,7 +958,11 @@ const TablaLP = (props) => {
                                     </td>
                                     {/* <td className='W600-S12-H16-C1E1E1E'>{dat.ltpcodigosap}</td> */}
                                     <td 
-                                        className='W600-S12-H16-C1E1E1E'
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
                                         style={{
                                             position: "sticky",
                                             left: "466px",
@@ -736,7 +977,23 @@ const TablaLP = (props) => {
                                                 width:'310px'
                                             }}
                                         >
-                                            {dat.pronombre}
+                                            {
+                                                dat.editando == true
+                                                ?<div
+                                                    className='W600-S12-H16-CC4C4C4'
+                                                >
+                                                    <input 
+                                                        className='Input-Editando-TablaLp'
+                                                        value={dat.pronombreeditando}
+                                                        onChange={(e) => {
+                                                            dispatch(CambiarValorInputLpReducer(pos, e.target.value))
+                                                        }}
+                                                    />
+                                                </div>
+                                                :dat.ltpeditandonombre == true
+                                                    ?dat.ltpdescripcionproducto
+                                                    :dat.pronombre
+                                            }
                                         </div>
                                         <div
                                             style={{
@@ -754,74 +1011,174 @@ const TablaLP = (props) => {
                                     {/* <td className='W600-S12-H16-C1E1E1E'>{dat.pronombre}</td> */}
 
                                     <td 
-                                        className='W600-S12-H16-C1E1E1E'
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
                                     >{dat.ltpunidadventa}</td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltppreciolistasinigv, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpalza * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpsdtpr * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltppreciolistaconigv, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpmfrutamayorista * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpreventamayorista, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpmargenmayorista * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpmarcajemayorista, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
                                     
                                     {/* MINORISTA */}
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpmfrutaminorista * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpreventaminorista, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpmargenminorista * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpmarcajeminorista, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
 
                                     {/* BODEGA */}
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpmfrutahorizontal * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpreventabodega, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         {
                                             funFormatoDecimal(dat.ltpmargenbodega * 100, 2)
                                         }%
                                     </td>
-                                    <td className='W600-S12-H16-C1E1E1E'>
+                                    <td 
+                                        className={
+                                            dat.ltpduplicadocomplejo == true
+                                            ?'W600-S12-H16-CE41A37'
+                                            :'W600-S12-H16-C1E1E1E'
+                                        }
+                                    >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltppvp, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
 
@@ -833,6 +1190,179 @@ const TablaLP = (props) => {
                 </tbody>
                 
             </table>
+
+            <Modal
+                visible={mostrarModalEliminar}
+                footer={null}
+                centered
+                closeIcon={<div></div>}
+                width = "310px"
+                height = "139px"
+                className='Modal-Eliminar-Lp-TablaLp'
+            >
+                <div>
+                    <div 
+                        className='W600-S14-H19-C1E1E1E-L0015'
+                        style={{
+                            textAlignLast: "center",
+                            marginBottom:'10px'
+                        }}
+                    >
+                        Eliminar Fila
+                    </div>
+                    <div 
+                        className='W400-S12-H16-C1E1E1E-L0015'
+                        style={{
+                            textAlignLast: "center"
+                        }}
+                    >
+                        ¿Está seguro que desea eliminar la Fila?
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            marginTop:'20px'
+                        }}
+                    >
+                        <Spin
+                            spinning={cargando_eliminar_fila_lista_precios}
+                            indicator={
+                                <LoadingOutlined style={{ fontSize: 18 }} spin />
+                            }
+                        >
+                            <div
+                                style={{
+                                    width: "66px",
+                                    height: "24px",
+                                    background: "#3646C4",
+                                    border: "1px solid #3646C3",
+                                    boxSizing: "border-box",
+                                    borderRadius: "14px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    marginRight:'10px',
+                                    cursor:'pointer'
+                                }}
+                                className="W700-S12-H16-CFFFFFF-L0015"
+                                onClick={async () => {
+                                    await dispatch(EliminarLpReducer(ltpidSeleccionado))
+                                    setMostrarModalEliminar(false)
+                                }}
+                            >
+                                Aceptar
+                            </div>
+                        </Spin>
+                        <div
+                            className='W600-S12-H16-C1E1E1E-L0015'
+                            style={{
+                                width: "67px",
+                                height: "24px",
+                                border: "1px solid #1E1E1E",
+                                boxSizing: "border-box",
+                                borderRadius: "14px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor:'pointer'
+                            }}
+                            onClick={() => {
+                                setMostrarModalEliminar(false)
+                            }}
+                        >
+                            Cancelar
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal
+                visible={mostrarModalEditar}
+                footer={null}
+                centered
+                closeIcon={<div></div>}
+                width = "310px"
+                height = "139px"
+                className='Modal-Eliminar-Lp-TablaLp'
+            >
+                <div>
+                    <div 
+                        className='W600-S14-H19-C1E1E1E-L0015'
+                        style={{
+                            textAlignLast: "center",
+                            marginBottom:'10px'
+                        }}
+                    >
+                        Editar Fila
+                    </div>
+                    <div 
+                        className='W400-S12-H16-C1E1E1E-L0015'
+                        style={{
+                            textAlignLast: "center"
+                        }}
+                    >
+                        ¿Está seguro que desea editar la Fila?
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            marginTop:'20px'
+                        }}
+                    >
+                        <Spin
+                            spinning={cargando_editar_fila_lista_precios}
+                            indicator={
+                                <LoadingOutlined style={{ fontSize: 18 }} spin />
+                            }
+                        >
+                            <div
+                                style={{
+                                    width: "66px",
+                                    height: "24px",
+                                    background: "#3646C4",
+                                    border: "1px solid #3646C3",
+                                    boxSizing: "border-box",
+                                    borderRadius: "14px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    marginRight:'10px',
+                                    cursor:'pointer'
+                                }}
+                                className="W700-S12-H16-CFFFFFF-L0015"
+                                onClick={async () => {
+                                    await dispatch(EditarLpReducer(posicionSeleccionado))
+                                    setMostrarModalEditar(false)
+                                }}
+                            >
+                                Aceptar
+                            </div>
+                        </Spin>
+                        <div
+                            className='W600-S12-H16-C1E1E1E-L0015'
+                            style={{
+                                width: "67px",
+                                height: "24px",
+                                border: "1px solid #1E1E1E",
+                                boxSizing: "border-box",
+                                borderRadius: "14px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor:'pointer'
+                            }}
+                            onClick={() => {
+                                setMostrarModalEditar(false)
+                            }}
+                        >
+                            Cancelar
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
         </div>
     )
 }

@@ -251,8 +251,8 @@ const ElementosEnviadosNuevo = () => {
                                                     </td>
                                                     <td
                                                         onClick={() => {
-                                                            console.log(data.ucesucursales)
-                                                            console.log(JSON.parse(data.ucesucursales))
+                                                            // console.log(data.ucesucursales)
+                                                            // console.log(JSON.parse(data.ucesucursales))
                                                         }}
                                                         style={{position:'relative'}}
                                                         className="Celda-Lista-Sucursales-Elementos-Enviados"
@@ -293,6 +293,22 @@ const ElementosEnviadosNuevo = () => {
                                                         }}
                                                     >
                                                         {
+                                                            data.dceestado == 'E'
+                                                            ?<>
+                                                                <img src={IconoAvionVerde} style={{width:'19px',marginRight:'5px'}}/>
+                                                                <span style={{color:'#00CA8A'}}>Enviado</span>
+                                                            </>
+                                                            :data.dceestado == 'R'
+                                                                ?<>
+                                                                    <img src={IconoTelegram} style={{width:'19px',marginRight:'5px'}}/>
+                                                                    <span style={{color:'#558CFF'}}>Reenviado</span>
+                                                                </>
+                                                                :<>
+                                                                    <img src={IconoAvionRojo} style={{width:'19px',marginRight:'5px'}}/>
+                                                                    <span style={{color:'#EF2206'}}>Pendiente</span>
+                                                                </>
+                                                        }
+                                                        {/* {
                                                             pos == 0 || pos == 1 || pos == 2
                                                             ?<img src={IconoAvionVerde} style={{width:'19px',marginRight:'5px'}}/>
                                                             :pos == 5 || pos == 8
@@ -306,7 +322,7 @@ const ElementosEnviadosNuevo = () => {
                                                             :pos == 5 || pos == 8
                                                                 ?<span style={{color:'#EF2206'}}>Pendiente</span>
                                                                 :<span style={{color:'#558CFF'}}>Reenviado</span>
-                                                        }
+                                                        } */}
                                                         
                                                         
                                                     </td>

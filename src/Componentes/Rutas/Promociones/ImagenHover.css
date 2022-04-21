@@ -89,6 +89,16 @@
 #iconoImagenHoverSeleccionado{
     /* width: 84.06px;
     height: 84.06px; */
+    animation: rotacionPromosCat 5s infinite linear;
+}
+
+@keyframes rotacionPromosCat {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
 }
 
 #contenedorIcono{

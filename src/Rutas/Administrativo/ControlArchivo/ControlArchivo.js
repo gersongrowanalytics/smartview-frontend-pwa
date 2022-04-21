@@ -17,6 +17,7 @@ const ControlArchivo = () => {
     const [btnSeleccionado, setBtnSeleccionado] = useState("CONTROL")
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Set','Oct','Nov','Dic']
+    const [txtBuscarControlArchivo, setTxtBuscarControlArchivo] = useState("")
 
     const dispatch = useDispatch()
     const { 
@@ -137,16 +138,31 @@ const ControlArchivo = () => {
                     </div>
                 </Col>
                 <Col xl={11}>
-                    <div className='Paginacion-Control-Archivo'>
-                        <div>1 - {paginasTotales} de {paginaActual}</div>
-                        <LeftOutlined 
-                            style={{marginLeft:'9px'}}
-                            onClick={() => paginaAnterior(paginaActualTabla)}
-                        />
-                        <RightOutlined
-                            style={{marginLeft:'34px'}}
-                            onClick={() => paginaSiguiente(paginaActualTabla)}
-                        />
+                    <div className='Contenedor-Btn-Adm-Usuarios'>
+                        <div style={{
+                            width: '64%',
+                            marginRight: '10px'
+                        }}>
+                            <input 
+                                className='Busqueda-Control-Archivos'
+                                placeholder='Buscar'
+                                value={txtBuscarControlArchivo}
+                                onChange={(e) => {
+                                    setTxtBuscarControlArchivo(e.target.value)
+                                }}
+                            />
+                        </div>
+                        <div className='Paginacion-Control-Archivo'>
+                            <div>1 - {paginasTotales} de {paginaActual}</div>
+                            <LeftOutlined 
+                                style={{marginLeft:'9px'}}
+                                onClick={() => paginaAnterior(paginaActualTabla)}
+                            />
+                            <RightOutlined
+                                style={{marginLeft:'34px'}}
+                                onClick={() => paginaSiguiente(paginaActualTabla)}
+                            />
+                        </div>
                     </div>
                 </Col>
             </Row>
@@ -214,7 +230,11 @@ const ControlArchivo = () => {
                                 <tbody>
                                     {
                                         archivosSubidos.map((archivo, posicion)=> {
+                                            console.log(archivosSubidos)
                                             return(
+                                                archivo.carnombrearchivo.includes(txtBuscarControlArchivo) || archivo.carnombrearchivo.toLowerCase().includes(txtBuscarControlArchivo.toLowerCase()) ||
+                                                archivo.tcanombre.includes(txtBuscarControlArchivo) || archivo.tcanombre.toLowerCase().includes(txtBuscarControlArchivo.toLowerCase())
+                                                ?
                                                 <tr>
                                                     <td>
                                                         {itemTabla(posicion)}
@@ -222,7 +242,13 @@ const ControlArchivo = () => {
                                                     <td>
                                                         <div className='Contenedor-Columna-Archivo'>
                                                             <img src={Excel} style={{width:'30px'}}/>
-                                                            <div className='Texto-Columna-Archivo'>{archivo.carnombrearchivo}</div>
+                                                            <div 
+                                                                className='Texto-Columna-Archivo' 
+                                                            >
+                                                                <a href={archivo.carurl}>
+                                                                    {archivo.carnombrearchivo}
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td style={{textAlign:'initial'}}>
@@ -238,7 +264,8 @@ const ControlArchivo = () => {
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        {archivo.estid}
+                                                        {/* { archivo.estid } */}
+                                                        Cargado
                                                     </td>
                                                     <td>
                                                         {obtenerFechaHora(archivo.created_at,'fecha')}
@@ -247,6 +274,7 @@ const ControlArchivo = () => {
                                                         {obtenerFechaHora(archivo.created_at,'hora')}
                                                     </td>
                                                 </tr>
+                                                : null
                                             )
                                         })
                                     }

@@ -285,4 +285,42 @@
     box-sizing: border-box;
     border-radius: 8px;
     cursor: pointer;
+    
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.btn-filtrar-duplicados-complejos-listaprecios:hover{
+    background: #E41A37;
+}
+
+.btn-filtrar-duplicados-complejos-listaprecios:hover .Icono-Duplicados-Complejos-Rojo-Lista-Precios{
+    display: none;
+}
+
+.btn-filtrar-duplicados-complejos-listaprecios:hover .Icono-Duplicados-Complejos-Blanco-Lista-Precios{
+    display: flex;
+}
+
+.Icono-Duplicados-Complejos-Rojo-Lista-Precios{
+    width: 22px;
+}
+
+.Icono-Duplicados-Complejos-Blanco-Lista-Precios{
+    display: none;
+    width: 22px;
+}
+
+.btn-filtrar-duplicados-complejos-seleccionado-listaprecios{
+    width: 43px;
+    height: 36px;
+    border: 1px solid #E41A37;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    display: flex;
+    place-items: center;
+    justify-content: center;
 }

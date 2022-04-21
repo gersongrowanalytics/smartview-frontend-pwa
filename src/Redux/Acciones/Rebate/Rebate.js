@@ -3,7 +3,8 @@ import {
     OBTENER_GRUPOS_REBATES_REBATE,
     CARGANDO_DATA_REBATE,
     SELECCIONAR_GRUPO_REBATE,
-    OBTENER_REBATE_DESCARGAR_REBATE
+    OBTENER_REBATE_DESCARGAR_REBATE,
+    CARGANDO_GUARDAR_REBATE_MENSUAL
 } from '../../../Constantes/Rebate/Rebate'
 import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
@@ -307,6 +308,11 @@ export const CrearRebatesReducer = (reiniciar) => async (dispatch, getState) => 
 
     if(await dispatch(ValidarDatosCrearRebateReducer())){
 
+        dispatch({
+            type: CARGANDO_GUARDAR_REBATE_MENSUAL,
+            payload : true
+        })
+
         await fetch(config.api+'crear-varios-rebate',
             {
                 mode:'cors',
@@ -344,6 +350,11 @@ export const CrearRebatesReducer = (reiniciar) => async (dispatch, getState) => 
         }).catch((error)=> {
             console.log(error)
         });
+
+        dispatch({
+            type: CARGANDO_GUARDAR_REBATE_MENSUAL,
+            payload : false
+        })
 
     }else{
 

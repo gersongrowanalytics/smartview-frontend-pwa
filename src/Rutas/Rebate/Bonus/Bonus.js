@@ -18,7 +18,8 @@ const Bonus = () => {
         anioSeleccionadoFiltro
     } = useSelector(({fechas}) => fechas);
     const {
-        data_rebate_bonus
+        data_rebate_bonus,
+        cargando_guardar_rebate_bonus
     } = useSelector(({rebate}) => rebate);
 
     useEffect(async () => {
@@ -55,6 +56,9 @@ const Bonus = () => {
                     }
                     dispatch(CrearRebateBonusReducer(data))
                 }}
+
+                cargando_guardar = {cargando_guardar_rebate_bonus}
+
             />
 
             <div>

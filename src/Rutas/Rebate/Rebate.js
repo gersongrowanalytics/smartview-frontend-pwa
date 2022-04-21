@@ -42,7 +42,8 @@ const Rebate = () => {
         data_grupos_rebate,
         cargando_data_rebate,
         grupo_seleccionado_rebate,
-        data_rebate_descargar
+        data_rebate_descargar,
+        cargando_guardar_rebate_mensual
     } = useSelector(({rebate}) => rebate);
 
     const [mostrarFilaAgregar, setMostrarFilaAgregar] = useState(false)
@@ -67,6 +68,11 @@ const Rebate = () => {
                 guardarData = {(editando) => {
                     dispatch(CrearRebatesReducer(editando))
                 }}
+                editarData = {() => {
+                    dispatch(HabilitarEditarTodosReducer(!editandoRebate))
+                    setEditandoRebate(!editandoRebate)
+                }}
+                cargando_guardar = {cargando_guardar_rebate_mensual}
             />
 
             {/* <Link 

@@ -13,7 +13,10 @@ import {
     CambiarOrdenColumnasFiltroListaPreciosReducer,
 
     ObtenerDataDescargarExcelReducer,
-    ActivarDuplicadosComplejosListaPreciosReducer
+    ActivarDuplicadosComplejosListaPreciosReducer,
+
+    SeleccionarGrupoCustomerFiltroListaPreciosReducer,
+    SeleccionarTodoGrupoCustomerFiltroListaPreciosReducer
 } from '../../Redux/Acciones/ListaPrecios/ListaPrecios'
 import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
 import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
@@ -29,6 +32,9 @@ import {
     SeleccionarTodoFiltrosLPReducer
 } from '../../Redux/Acciones/ListaPrecios/ArmarFiltrosLp'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import IconoDuplicadosRojo from '../../Assets/Img/ListaPrecios/duplicados-rojo.png'
+import IconoDuplicadosBlanco from '../../Assets/Img/ListaPrecios/duplicados-blanco.png'
+import FiltroCustomer from '../../Componentes/Rutas/ListaPrecios/FiltroCustomer';
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -71,7 +77,9 @@ const ListaPrecios = () => {
         fil_selectodo_dat_subcategorias,
         fil_selectodo_dat_formato,
         fil_selectodo_dat_codsap,
-        fil_selectodo_dat_material
+        fil_selectodo_dat_material,
+
+        fil_grupo_customer_lista_precios
     } = useSelector(({listaPrecios}) => listaPrecios);
 
     let refBtnDescargaListaPrecios = useRef(null)
@@ -145,19 +153,27 @@ const ListaPrecios = () => {
                     seleccionartodo = {false}
                 /> */}
 
-                <FiltroLp 
+                <FiltroCustomer 
                     titulo = {"Customer Group"}
                     fil_data = {fil_dat_customer_group}
                     tamanio = "160"
                     aceptarFiltro = {() => {
-                        dispatch(RealizarFiltroReducer("Customer Group"))
+                        // dispatch(RealizarFiltroReducer("Customer Group"))
+                        dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0, 1, fil_grupo_customer_lista_precios))
+                        
+                        setFiltroCustomerGroup(!filtroCustomerGroup)
+                        setFiltroCategoria(false)
+                        setFiltroSubCatego(false)
+                        setFiltroFormato(false)
+                        setFiltroCodigSap(false)
+                        setFiltroNombMate(false)
                     }}
                     seleccionarLista = {(posicion, valor) => {
-                        dispatch(SeleccionarCheckFiltrosReducer("Customer Group", posicion, valor))
+                        dispatch(SeleccionarGrupoCustomerFiltroListaPreciosReducer(posicion, valor))
                     }}
                     seleccionartodo = {fil_selectodo_dat_customer_group}
                     funSeleccionarTodo = {(valor) => {
-                        dispatch(SeleccionarTodoFiltrosLPReducer("Customer Group", valor))
+                        dispatch(SeleccionarTodoGrupoCustomerFiltroListaPreciosReducer(valor))
                     }}
                     mostrarCuerpo = {filtroCustomerGroup}
                     setMostrarCuerpo = {() => {
@@ -168,6 +184,8 @@ const ListaPrecios = () => {
                         setFiltroCodigSap(false)
                         setFiltroNombMate(false)
                     }}
+
+                    fil_grupo_customer_lista_precios = {fil_grupo_customer_lista_precios}
                 />
 
                 <FiltroLp 
@@ -301,7 +319,11 @@ const ListaPrecios = () => {
                     title={"Duplicados Complejos"}
                 >
                     <div
-                        className='btn-filtrar-duplicados-complejos-listaprecios'
+                        className={
+                            duplicados_complejos_activados_lista_precios == true
+                            ?'btn-filtrar-duplicados-complejos-seleccionado-listaprecios'
+                            :'btn-filtrar-duplicados-complejos-listaprecios'
+                        }
                         onClick={() => {
                             dispatch(ActivarDuplicadosComplejosListaPreciosReducer())
                         }}
@@ -311,7 +333,23 @@ const ListaPrecios = () => {
                             :{}
                         }
                     >
+                        <img 
+                            src={
+                                duplicados_complejos_activados_lista_precios == true
+                                ?IconoDuplicadosBlanco
+                                :IconoDuplicadosRojo
+                            }
+                            className="Icono-Duplicados-Complejos-Rojo-Lista-Precios"
+                        />
 
+                        <img 
+                            src={
+                                duplicados_complejos_activados_lista_precios == true
+                                ?IconoDuplicadosRojo
+                                :IconoDuplicadosBlanco
+                            }
+                            className="Icono-Duplicados-Complejos-Blanco-Lista-Precios"
+                        />
                     </div>
                 </Tooltip>
 

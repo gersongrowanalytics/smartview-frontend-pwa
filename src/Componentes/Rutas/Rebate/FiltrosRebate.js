@@ -32,7 +32,6 @@ const FiltrosRebate = (props) => {
         data_rebate,
         data_rebate_descargar,
         grupo_seleccionado_rebate,
-        cargando_guardar_rebate_bonus
     } = useSelector(({rebate}) => rebate);
 
 
@@ -150,7 +149,8 @@ const FiltrosRebate = (props) => {
                 </div>
 
                 <Spin
-                    spinning={cargando_guardar_rebate_bonus}
+                    // spinning={cargando_guardar_rebate_bonus}
+                    spinning={props.cargando_guardar}
                 >
                     <div
                         className='Btn-Guardar-Data-Rebate W600-S14-H19-C558CFF-L0015'

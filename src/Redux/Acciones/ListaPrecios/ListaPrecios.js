@@ -8,7 +8,10 @@ import {
     CARGANDO_BTN_EXCEL_DESCARGAR_LISTA_PRECIOS,
     OBTENER_DATA_FILTRO_LISTA_PRECIOS,
     OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS,
-    ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS
+    ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS,
+
+    FILTRO_CUSTOMER_GROUP_LISTA_PRECIOS,
+    SELECCIONAR_TODO_FILTRO_GRUPO_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
@@ -50,6 +53,14 @@ export const ObtenerGrupoDisponiblesReducer = () =>async (dispatch, getState) =>
                 payload : data.data
             })
 
+            let grupos = data.data
+            grupos[0]['seleccionadoFiltro'] = true
+
+            dispatch({
+                type: FILTRO_CUSTOMER_GROUP_LISTA_PRECIOS,
+                payload : grupos
+            })
+
             let grupoData = data.data
 
             if(grupoData.length > 0){
@@ -65,7 +76,7 @@ export const ObtenerGrupoDisponiblesReducer = () =>async (dispatch, getState) =>
     return true
 }
 
-export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagina = 1) =>async (dispatch, getState) => {
+export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagina = 1, tresid = []) =>async (dispatch, getState) => {
 
     dispatch({
         type: CARGANDO_TABLA_LISTA_PRECIOS,
@@ -105,7 +116,8 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagin
                 dia      : "01",
                 mes      : mesSeleccionadoFiltro,
                 treid    : treid,
-                duplicados : duplicados_complejos_activados_lista_precios
+                duplicados : duplicados_complejos_activados_lista_precios,
+                tresid : tresid
             }),
             headers: {
                 'Accept' : 'application/json',
@@ -402,4 +414,57 @@ export const ActivarDuplicadosComplejosListaPreciosReducer = () => async (dispat
 
     dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0))
     
+}
+
+
+export const SeleccionarGrupoCustomerFiltroListaPreciosReducer = (posicion, valor) => async (dispatch, getState) => {
+
+    let fil_grupo_customer_lista_precios = getState().listaPrecios.fil_grupo_customer_lista_precios
+
+    fil_grupo_customer_lista_precios[posicion]['seleccionadoFiltro'] = valor
+
+    dispatch({
+        type: FILTRO_CUSTOMER_GROUP_LISTA_PRECIOS,
+        payload : fil_grupo_customer_lista_precios
+    })
+
+    dispatch(IdentificarSeleccionoTodoGrupoCustomerFiltroListaPreciosReducer())
+}
+
+export const SeleccionarTodoGrupoCustomerFiltroListaPreciosReducer = (valor) => async (dispatch, getState) => {
+
+    let fil_grupo_customer_lista_precios = getState().listaPrecios.fil_grupo_customer_lista_precios
+
+    await fil_grupo_customer_lista_precios.map((filtro, pos) => {
+        fil_grupo_customer_lista_precios[pos]['seleccionadoFiltro'] = valor
+    })
+
+    dispatch({
+        type: FILTRO_CUSTOMER_GROUP_LISTA_PRECIOS,
+        payload : fil_grupo_customer_lista_precios
+    })
+
+    dispatch({
+        type: SELECCIONAR_TODO_FILTRO_GRUPO_LISTA_PRECIOS,
+        payload : valor
+    })
+}
+
+export const IdentificarSeleccionoTodoGrupoCustomerFiltroListaPreciosReducer = () => async (dispatch, getState) => {
+
+    let seleccionoTodo = true
+
+    let fil_grupo_customer_lista_precios = getState().listaPrecios.fil_grupo_customer_lista_precios
+
+    await fil_grupo_customer_lista_precios.map((filtro, pos) => {
+        if(filtro.seleccionadoFiltro != true){
+            seleccionoTodo = false
+        }
+    })
+
+    dispatch({
+        type: SELECCIONAR_TODO_FILTRO_GRUPO_LISTA_PRECIOS,
+        payload : seleccionoTodo
+    })
+
 }

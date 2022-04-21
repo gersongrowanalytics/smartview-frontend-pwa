@@ -16,6 +16,7 @@ import IconoEliminar from '../../../../Assets/Img/ListaPrecios/eliminar.png'
 import IconoEliminarBlanco from '../../../../Assets/Img/ListaPrecios/eliminarBlanco.png'
 
 import IconoGuardar from '../../../../Assets/Img/ListaPrecios/guardar.png'
+import IconoGuardarBlanco from '../../../../Assets/Img/ListaPrecios/guardar-blanco.png'
 
 import {
     HabilitarEdicionLpReducer,
@@ -651,6 +652,11 @@ const TablaLP = (props) => {
                                             >
                                                 <div
                                                     className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
+                                                    style={{
+                                                        width: "24px",
+                                                        height: "24px",
+                                                        marginTop: "2px",
+                                                    }}
                                                 >
                                                     <img 
                                                         className='Icon-Editar-Nuevo-Banco-Imagenes'
@@ -661,7 +667,10 @@ const TablaLP = (props) => {
                                                             dispatch(HabilitarEdicionLpReducer(pos))
                                                         }}
                                                         style={{
-                                                            width:'13px'
+                                                            width:'13px',
+                                                            position: "absolute",
+                                                            left: "5px",
+                                                            top: "6px",
                                                         }}
                                                     />
 
@@ -676,8 +685,8 @@ const TablaLP = (props) => {
                                                         style={{
                                                             width:'13px',
                                                             position: "absolute",
-                                                            left: "8px",
-                                                            top: "8px",
+                                                            left: "5px",
+                                                            top: "6px",
                                                         }}
                                                         
 
@@ -707,11 +716,12 @@ const TablaLP = (props) => {
                                         <div 
                                             // className='Contenedor-Opciones-TablaLp'
                                             style={{
-                                                placeContent: "center",
+                                                // placeContent: "center",
                                                 position:'absolute',
                                                 left:'0',
                                                 display:'flex',
-                                                top:'0px'
+                                                top:'0px',
+                                                marginLeft: "-12px",
                                             }}
                                         >
                                             
@@ -721,6 +731,11 @@ const TablaLP = (props) => {
                                             >
                                                 <div
                                                     className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
+                                                    style={{
+                                                        width: "24px",
+                                                        height: "24px",
+                                                        marginTop: "2px",
+                                                    }}
                                                 >
                                                     <img 
                                                         className='Icon-Editar-Nuevo-Banco-Imagenes'
@@ -731,7 +746,9 @@ const TablaLP = (props) => {
                                                             setLtpidSeleccionado(dat.ltpid)
                                                         }}
                                                         style={{
-                                                            width:'13px'
+                                                            width:'12px',
+                                                            top:'5px',
+                                                            left: "6px"
                                                         }}
                                                     />
 
@@ -744,7 +761,8 @@ const TablaLP = (props) => {
                                                             setLtpidSeleccionado(dat.ltpid)
                                                         }}
                                                         style={{
-                                                            width:'13px'
+                                                            width:'12px',
+                                                            top:'5px'
                                                         }}
                                                     />
 
@@ -756,7 +774,13 @@ const TablaLP = (props) => {
                                             >
                                                 <div
                                                     className='Contenedor-Icono-Opciones-Nuevo-Banco-Imagenes'
-                                                    style={{position:'relative'}}
+                                                    style={{
+                                                        position:'relative',
+                                                        width: "24px",
+                                                        height: "24px",
+                                                        marginTop: "2px",
+                                                        marginLeft:'1px'
+                                                    }}
                                                 >
                                                     <img 
                                                         className='Icon-Editar-Nuevo-Banco-Imagenes'
@@ -768,24 +792,24 @@ const TablaLP = (props) => {
                                                         style={{
                                                             width:'26px',
                                                             position:'absolute',
-                                                            left: "0",
-                                                            top: "2px"
+                                                            left: "-1px",
+                                                            top: "-1px"
                                                         }}
                                                     />
 
                                                     <img 
                                                         className='Icon-Editar-Blanco-Nuevo-Banco-Imagenes'
-                                                        src={IconoGuardar}
+                                                        src={IconoGuardarBlanco}
                                                         onClick={() => {
                                                             setMostrarModalEditar(true)
                                                             setPosicionSeleccionado(pos)
                                                         }}
                                                         style={{
-                                                            width:'26px',
+                                                            width:'16px',
                                                             position:'absolute',
                                                             right:'20px',
-                                                            left: "0",
-                                                            top: "2px"
+                                                            left: "4px",
+                                                            top: "4px"
                                                         }}
                                                     />
 

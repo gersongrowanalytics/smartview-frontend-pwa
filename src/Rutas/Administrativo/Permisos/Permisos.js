@@ -25,6 +25,7 @@ const Permisos = () => {
     const [mostrarModalCrear, setmostrarModalCrear] = useState(false)
     const [mostrarSelectCategoria, setmostrarSelectCategoria] = useState(false)
     const [categoriaSeleccionada, setcategoriaSeleccionada] = useState("0")
+    const [txtBuscarPermiso, setTxtBuscarPermiso] = useState("")
     const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14']
     const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Set','Oct','Nov','Dic']
     
@@ -148,6 +149,19 @@ const Permisos = () => {
                 </Col>
                 <Col lg={11} xl={11}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
+                        <div style={{
+                            width: '49%',
+                            marginRight: '10px'
+                        }}>
+                            <input 
+                                className='Busqueda-Permisos'
+                                placeholder='Buscar'
+                                value={txtBuscarPermiso}
+                                onChange={(e) => {
+                                    setTxtBuscarPermiso(e.target.value)
+                                }}
+                            />
+                        </div>
                         <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
                             {/* <div>1 - {paginasTotales} de {paginaActual}</div> */}
                             
@@ -193,25 +207,25 @@ const Permisos = () => {
                                         <th style={{width:'10%'}}>
                                             <div>
                                                 <span>Item</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th  style={{width:'15%'}}>
                                             <div>
                                                 <span>Categoría</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'20%'}}>
                                             <div>
                                                 <span>Permiso</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'20%'}}>
                                             <div>
                                                 <span>Slug</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'20%'}}>
@@ -222,7 +236,7 @@ const Permisos = () => {
                                         <th style={{width:'15%'}}>
                                             <div>
                                                 <span>Fecha de Creación</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                     </tr>
@@ -230,7 +244,13 @@ const Permisos = () => {
                                 <tbody>
                                     {
                                         permisos.map((permiso, posicion) => {
+                                            
                                             return(
+                                                permiso.tpenombre.includes(txtBuscarPermiso) || permiso.tpenombre.toLowerCase().includes(txtBuscarPermiso.toLowerCase()) ||
+                                                permiso.pemnombre.includes(txtBuscarPermiso) || permiso.pemnombre.toLowerCase().includes(txtBuscarPermiso.toLowerCase()) ||
+                                                permiso.pemslug.includes(txtBuscarPermiso) || permiso.pemslug.toLowerCase().includes(txtBuscarPermiso.toLowerCase()) ||
+                                                permiso.pemruta.includes(txtBuscarPermiso) || permiso.pemruta.toLowerCase().includes(txtBuscarPermiso.toLowerCase())
+                                                ?
                                                 <tr
                                                     className='Contenedor-Fila-Permisos'
                                                 >
@@ -341,6 +361,7 @@ const Permisos = () => {
                                                         
                                                     </td>
                                                 </tr>
+                                                : null
                                             )
                                         })
                                     }

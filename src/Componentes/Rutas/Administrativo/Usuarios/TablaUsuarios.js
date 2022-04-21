@@ -15,6 +15,7 @@ const TablaUsuarios = (props) => {
     const busquedaAbierto = props.busquedaAbierto
     const setbusquedaAbierto = props.setbusquedaAbierto
     const seleccionarUsuarioEditar = props.seleccionarUsuarioEditar
+    const txtBuscarUsuario = props.txtBuscarUsuario
 
     return (
         <div>
@@ -30,7 +31,7 @@ const TablaUsuarios = (props) => {
                                 <th style={{width: '10%'}}>
                                     <div>
                                         <span>Item</span>
-                                        <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img> */}
                                     </div>
                                 </th>
                                 <th style={{width: '40%'}}>
@@ -39,9 +40,9 @@ const TablaUsuarios = (props) => {
                                         onClick={() => setbusquedaAbierto(!busquedaAbierto)}    
                                     >
                                         <span>Nombre y Apellido</span>
-                                        <img src={FlechaAbajo} style={{width:'7px', marginLeft: '6px'}}></img>
+                                        {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '6px'}}></img> */}
                                     </div>
-                                    <div 
+                                    {/* <div 
                                         className={ busquedaAbierto == true 
                                             ? 'Contenedor-Busqueda-Adm-Usuario'
                                             : 'Contenedor-Busqueda-Adm-Usuario-Ocultar'}
@@ -70,18 +71,18 @@ const TablaUsuarios = (props) => {
                                                 Cancelar
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </th>
                                 <th style={{width: '20%'}}>
                                     <div>
                                         <span>Tipo de usuario</span>
-                                        <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img> */}
                                     </div>
                                 </th>
                                 <th style={{width: '30%'}}>
                                     <div>
                                         <span>Pais</span>
-                                        <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img>
+                                        {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}></img> */}
                                     </div>
                                 </th>
                             </tr>
@@ -90,7 +91,9 @@ const TablaUsuarios = (props) => {
                             {
                                 usuarios.map((usuario,posicion) => {
                                     return (
-                                        <tr 
+                                        usuario.pernombrecompleto.includes(txtBuscarUsuario) || usuario.pernombrecompleto.toLowerCase().includes(txtBuscarUsuario.toLowerCase()) ||
+                                        usuario.tpunombre.includes(txtBuscarUsuario) || usuario.tpunombre.toLowerCase().includes(txtBuscarUsuario.toLowerCase())  
+                                        ?<tr 
                                             onClick={() => seleccionarUsuarioEditar(usuario)}
                                         >
                                             <td>
@@ -142,6 +145,7 @@ const TablaUsuarios = (props) => {
                                                 }
                                             </td>
                                         </tr>
+                                        : null
                                     )
                                 })
                             }

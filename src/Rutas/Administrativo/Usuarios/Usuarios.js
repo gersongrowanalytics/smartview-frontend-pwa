@@ -29,6 +29,7 @@ const Usuarios = () => {
     const [abrirModalZona, setabrirModalZona] = useState(false)
     const [fechaInicio, setfechaInicio] = useState("")
     const [fechaFinal, setfechaFinal] = useState("")
+    const [txtBuscarUsuario, setTxtBuscarUsuario] = useState("")
 
     const [editarFilaUsuario, setEditarFilaUsuario] = useState(false)
 
@@ -267,8 +268,22 @@ const Usuarios = () => {
                         </Link>
                     </div>
                 </Col>
-                <Col lg={11} xl={11}>                   
+                <Col lg={11} xl={11}>
+                                       
                     <div className='Contenedor-Btn-Adm-Usuarios'>
+                        <div style={{
+                            width: '51%',
+                            marginRight: '10px'
+                        }}>
+                            <input 
+                                className='Busqueda-Usuarios'
+                                placeholder='Buscar'
+                                value={txtBuscarUsuario}
+                                onChange={(e) => {
+                                    setTxtBuscarUsuario(e.target.value)
+                                }}
+                            />
+                        </div>
                         <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
                             <div>1 - {paginasTotales} de {paginaActual}</div>
                             <LeftOutlined 
@@ -298,6 +313,7 @@ const Usuarios = () => {
                         }}
                         busquedaAbierto = {busquedaAbierto}
                         setbusquedaAbierto = {setbusquedaAbierto}
+                        txtBuscarUsuario = {txtBuscarUsuario}
                     />
                 </Col>
                 <Col xl={15}>

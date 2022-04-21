@@ -536,3 +536,18 @@ input[type="date"]:focus { outline: 0; }
     letter-spacing: -0.015em;
     color: #C4C4C4;
 }
+
+.Busqueda-Usuarios{
+    width: 100%;
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 27px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #A4A3A3;
+    padding: 0px 14px;
+}

@@ -8,7 +8,8 @@ import {
     OBTENER_DATA_REBATE_TRIMESTRAL,
     CARGANDO_DATA_REBATE_TRIMESTRAL,
     CARGANDO_GUARDAR_REBATE_BONUS,
-    CARGANDO_GUARDAR_REBATE_MENSUAL
+    CARGANDO_GUARDAR_REBATE_MENSUAL,
+    CARGANDO_BTN_GUARDAR_TRIMESTRE
 } from "../../../Constantes/Rebate/Rebate";
 
 const INIT_STATE = {
@@ -23,7 +24,8 @@ const INIT_STATE = {
     cargando_data_rebate_trimestral : false,
     cargando_guardar_rebate_bonus : false,
 
-    cargando_guardar_rebate_mensual : false
+    cargando_guardar_rebate_mensual : false,
+    cargando_guardar_rebate_trimestral : false
 
 };
 
@@ -87,6 +89,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 cargando_guardar_rebate_mensual : action.payload
+            }
+        }
+        case CARGANDO_BTN_GUARDAR_TRIMESTRE: {
+            return {
+                ...state,
+                cargando_guardar_rebate_trimestral : action.payload                            
             }
         }
     default:

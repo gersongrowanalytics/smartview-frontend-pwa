@@ -192,8 +192,8 @@ const ImagenHover = (props) => {
                                     <span 
                                         id="textoPromocionHover"
                                         className='Wnormal-S16-H21-CFFFFFF'
-                                    // >Total promociones DT: {cantidadPromociones}<br/></span>
-                                    >Total promociones DT: {totalPromos}<br/></span>
+                                    >Total promociones DT: {cantidadPromociones}<br/></span>
+                                    {/* >Total promociones DT: {totalPromos}<br/></span> */}
                                 </>
                             }
                             {/* {
@@ -220,7 +220,8 @@ const ImagenHover = (props) => {
                                     <span 
                                         id="textoPromocionHover"
                                         className='Wnormal-S16-H21-CFFFFFF'
-                                    >Promociones Regulares: {cantidadPromocionesRegulares}<br/></span>
+                                    // >Promociones Regulares: {cantidadPromocionesRegulares}<br/></span>
+                                    >Promociones Regulares: {cantidadCodigosPromocion - cantidadPromocionesNuevas}<br/></span>
                                     <span 
                                         id="textoPromocionHover"
                                         className='Wnormal-S16-H21-CFFFFFF'
@@ -228,8 +229,8 @@ const ImagenHover = (props) => {
                                     <span 
                                         id="textoPromocionHover"
                                         className='Wnormal-S16-H21-CFFFFFF'
-                                    // >Total promociones DT: {cantidadPromociones}<br/></span>
-                                    >Total promociones DT: {totalPromos}<br/></span>
+                                    >Total promociones DT: {cantidadCodigosPromocion}<br/></span>
+                                    {/* >Total promociones DT: {totalPromos}<br/></span> */}
 
                                 </>
                                 :null

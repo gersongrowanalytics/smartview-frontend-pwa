@@ -9,7 +9,11 @@ import FlechaAbajoNegro from '../../../Assets/Img/Administrativo/Usuarios/Angulo
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons'
 import {
     dataPermisos,
-    HabilitarEditarPermisosReducer
+    HabilitarEditarPermisosReducer,
+    CambiarValorEditarPermisoReducer,
+    EditarPermisoReducer,
+    EliminarEditarPermisosReducer,
+    CrearPermisoReducer
 } from '../../../Redux/Acciones/Administrativo/Permisos/Permisos'
 import IconoEditar from '../../../Assets/Img/Administrativo/Permisos/editar.png'
 import IconoEditarBlanco from '../../../Assets/Img/Administrativo/Permisos/editarBlanco.png'
@@ -26,6 +30,13 @@ const Permisos = () => {
     const [mostrarSelectCategoria, setmostrarSelectCategoria] = useState(false)
     const [categoriaSeleccionada, setcategoriaSeleccionada] = useState("0")
     const [txtBuscarPermiso, setTxtBuscarPermiso] = useState("")
+
+    const [nombreTipoPermiso, setNombreTipoPermiso] = useState("")
+    const [permiso, setPermiso] = useState("")
+    const [slug, setSlug] = useState("")
+    const [ruta, setRuta] = useState("")
+    const [cargandoBtnGuardar, setCargandoBtnGuardar] = useState(false)
+
     const a = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14']
     const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Set','Oct','Nov','Dic']
     
@@ -256,6 +267,7 @@ const Permisos = () => {
                                                 ?
                                                 <tr
                                                     className='Contenedor-Fila-Permisos'
+                                                    key={permiso.pemid}
                                                 >
                                                     <td
                                                         style={{
@@ -277,13 +289,46 @@ const Permisos = () => {
                                                             paddingRight: "40px"
                                                         }}
                                                     >
-                                                        <div 
-                                                            className='Texto-Columna' 
-                                                            style={{width: '220px'}}
-                                                            title={permiso.pemnombre}
-                                                        >
-                                                            {permiso.pemnombre}
-                                                        </div>
+                                                        {
+                                                            permiso.editando == true
+                                                            ?<input 
+                                                                value={permiso.nombreEditando}
+                                                                className="Input-Editar-Permisos-Adminitrador"
+                                                                onChange={(e) => {{
+                                                                    dispatch(CambiarValorEditarPermisoReducer(posicion, "nombre", e.target.value))
+                                                                }}}
+                                                            />
+                                                            :<div 
+                                                                className='Texto-Columna' 
+                                                                style={{width: '220px'}}
+                                                                title={permiso.pemnombre}
+                                                            >
+                                                                {permiso.pemnombre}
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                    <td
+                                                        style={{
+                                                            textAlign: "left"
+                                                        }}
+                                                    >
+                                                        {
+                                                            permiso.editando == true
+                                                            ?<input 
+                                                                value={permiso.slugEditando}
+                                                                className="Input-Editar-Permisos-Adminitrador"
+                                                                onChange={(e) => {{
+                                                                    dispatch(CambiarValorEditarPermisoReducer(posicion, "slug", e.target.value))
+                                                                }}}
+                                                            />
+                                                            :<div 
+                                                                className='Texto-Columna' 
+                                                                style={{width: '220px'}}
+                                                                title={permiso.pemslug}
+                                                            >
+                                                                {permiso.pemslug}
+                                                            </div>
+                                                        }
                                                     </td>
                                                     <td
                                                         style={{
@@ -293,18 +338,21 @@ const Permisos = () => {
                                                         <div 
                                                             className='Texto-Columna' 
                                                             style={{width: '220px'}}
-                                                            title={permiso.pemslug}
-                                                        >
-                                                            {permiso.pemslug}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div 
-                                                            className='Texto-Columna' 
-                                                            style={{width: '220px'}}
                                                             title={permiso.pemruta}
                                                         >
-                                                            {permiso.pemruta}
+                                                            {
+                                                                permiso.editando == true
+                                                                ?<input 
+                                                                    value={permiso.rutaEditando}
+                                                                    className="Input-Editar-Permisos-Adminitrador"
+                                                                    onChange={(e) => {{
+                                                                        dispatch(CambiarValorEditarPermisoReducer(posicion, "ruta", e.target.value))
+                                                                    }}}
+                                                                />
+                                                                :permiso.pemruta
+                                                                    ?permiso.pemruta
+                                                                    :"/"
+                                                            }
                                                         </div>
                                                     </td>
                                                     <td>
@@ -324,6 +372,15 @@ const Permisos = () => {
                                                                 <div
                                                                     style={{ marginRight: "12px"}}
                                                                     className="Contenedor-Icono-Opciones-Permisos"
+                                                                    onClick={() => {
+                                                                        let editando = true
+                                                                        if(permiso.editando == true){
+                                                                            editando = false
+                                                                        }
+                                                                        
+                                                                        dispatch(HabilitarEditarPermisosReducer(posicion, editando))
+
+                                                                    }}
                                                                 > 
                                                                     <img className='Icono-Editar-Permisos' src={IconoEditar} /> 
                                                                     <img className='Icono-Editar-Permisos-Blanco' src={IconoEditarBlanco} /> 
@@ -337,6 +394,9 @@ const Permisos = () => {
                                                                 <div
                                                                     style={{ marginRight: "10px", }}
                                                                     className="Contenedor-Icono-Opciones-Permisos"
+                                                                    onClick={() => {
+                                                                        dispatch(EliminarEditarPermisosReducer(permiso.pemid, paginaActualTabla ))
+                                                                    }}
                                                                 > 
                                                                     <img className='Icono-Eliminar-Permisos' src={IconoEliminar} />
                                                                     <img className='Icono-Eliminar-Permisos-Blanco' src={IconoEliminarBlanco} />
@@ -349,6 +409,15 @@ const Permisos = () => {
                                                                 <div
                                                                     style={{}}
                                                                     className="Contenedor-Icono-Opciones-Permisos"
+                                                                    onClick={() => {
+                                                                        dispatch(EditarPermisoReducer(
+                                                                            permiso.pemid,
+                                                                            permiso.nombreEditando,
+                                                                            permiso.slugEditando,
+                                                                            permiso.rutaEditando,
+                                                                            paginaActualTabla
+                                                                        ))
+                                                                    }}
                                                                 > 
                                                                     <img className='Icono-Guardar-Permisos' src={IconoGuardar} /> 
                                                                 </div>
@@ -359,7 +428,11 @@ const Permisos = () => {
                                                         <div
                                                             className='Contenedor-Fecha-Permisos'
                                                         >
-                                                            {obtenerFecha(permiso.created_at)}
+                                                            {
+                                                                permiso.created_at
+                                                                ?obtenerFecha(permiso.created_at)
+                                                                :"20 Abr 2022"
+                                                            }
                                                         </div>
                                                         
                                                     </td>
@@ -374,6 +447,7 @@ const Permisos = () => {
                     </Spin>
                 </Col>
             </Row>
+
             <Modal
                 centered
                 title={null}
@@ -397,10 +471,15 @@ const Permisos = () => {
                             <Col xl={17}>
                                 <div className='Modal-Select-Crear-Permiso'>
                                     {
-                                        categoriaSeleccionada != "0" ? (
-                                            <div className='Texto-Categoria-Seleccionada-Modal'>{categoriaSeleccionada}</div>
-                                        ) : (
-                                            <input className='Modal-Input-Select-Crear-Permiso' placeholder='Escribir aquí'/>
+                                        (
+                                            <input 
+                                                className='Modal-Input-Select-Crear-Permiso' 
+                                                placeholder='Escribir aquí'
+                                                value={nombreTipoPermiso}
+                                                onChange={(e) => {
+                                                    setNombreTipoPermiso(e.target.value)
+                                                }}
+                                            />
                                         )
                                     }
                                     <img 
@@ -421,6 +500,7 @@ const Permisos = () => {
                                                     className='Opciones-Select-Categoria-Modal'
                                                     onClick={()=> {
                                                         SeleccionarCategoria(tpe.tpenombre)
+                                                        setNombreTipoPermiso(tpe.tpenombre)
                                                     }}
                                                 >
                                                     <span>{tpe.tpenombre}</span>
@@ -436,7 +516,14 @@ const Permisos = () => {
                                 <span className='Campo-Texto-Modal-Crear-Permiso'>Permiso:</span>
                             </Col>
                             <Col xl={17}>
-                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aquí'/>
+                                <input 
+                                    className='Modal-Input-Crear-Permiso' 
+                                    placeholder='Escribir aquí'
+                                    onChange={(e) => {
+                                        setPermiso(e.target.value)
+                                    }}
+                                    value={permiso}
+                                />
                             </Col>
                         </Row>
                         <Row style={{marginTop: '16px'}}>
@@ -444,7 +531,14 @@ const Permisos = () => {
                                 <span className='Campo-Texto-Modal-Crear-Permiso'>Slug:</span>
                             </Col>
                             <Col xl={17}>
-                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aquí'/>
+                                <input 
+                                    className='Modal-Input-Crear-Permiso' 
+                                    placeholder='Escribir aquí'
+                                    onChange={(e) => {
+                                        setSlug(e.target.value)
+                                    }}
+                                    value={slug}
+                                />
                             </Col>
                         </Row>
                         <Row style={{marginTop: '16px', marginBottom:'21px'}}>
@@ -452,14 +546,35 @@ const Permisos = () => {
                                 <span className='Campo-Texto-Modal-Crear-Permiso'>Ruta:</span>
                             </Col>
                             <Col xl={17} >
-                                <input className='Modal-Input-Crear-Permiso' placeholder='Escribir aquí'/>
+                                <input 
+                                    className='Modal-Input-Crear-Permiso' placeholder='Escribir aquí'
+                                    onChange={(e) => {
+                                        setRuta(e.target.value)
+                                    }}
+                                    value={ruta}
+                                />
                             </Col>
                         </Row>
                     </div>
                     <div className='Contenedor-Botones-Modal'>
-                        <button className='Boton-Aceptar-Eliminar-Modal'>
-                            Guardar
-                        </button>
+                        <Spin
+                            spinning={cargandoTablaPermisos}
+                        >
+                            <button 
+                                className='Boton-Aceptar-Eliminar-Modal'
+                                onClick={async () => {
+                                    await dispatch(CrearPermisoReducer(nombreTipoPermiso, permiso, slug, ruta, paginaActualTabla))
+                                    setmostrarModalCrear(false)
+                                    setNombreTipoPermiso("")
+                                    setPermiso("")
+                                    setSlug("")
+                                    setRuta("")
+
+                                }}
+                            >
+                                Guardar
+                            </button>
+                        </Spin>
                         <button 
                             className='Boton-Cancelar-Eliminar-Modal'
                             onClick={() => {

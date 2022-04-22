@@ -1,7 +1,8 @@
 import {
     CARGANDO_DATA_REBATE_TRIMESTRAL,
     OBTENER_DATA_REBATE_TRIMESTRAL,
-    SELECCIONAR_GRUPO_REBATE
+    SELECCIONAR_GRUPO_REBATE,
+    CARGANDO_BTN_GUARDAR_TRIMESTRE
 } from '../../../../Constantes/Rebate/Rebate'
 import config from '../../../../config'
 import { estadoRequestReducer } from "../../EstadoRequest"
@@ -264,6 +265,11 @@ export const CrearRebatesTrimestralReducer = (reiniciar) => async (dispatch, get
 
     if(await dispatch(ValidarDatosCrearRebateTrimestralReducer())){
 
+        dispatch({
+            type : CARGANDO_BTN_GUARDAR_TRIMESTRE,
+            payload : true
+        })
+
         await fetch(config.api+'crear-varios-rebate-trimestral',
             {
                 mode:'cors',
@@ -301,6 +307,11 @@ export const CrearRebatesTrimestralReducer = (reiniciar) => async (dispatch, get
         }).catch((error)=> {
             console.log(error)
         });
+
+        dispatch({
+            type : CARGANDO_BTN_GUARDAR_TRIMESTRE,
+            payload : false
+        })
 
     }else{
 

@@ -73,6 +73,7 @@ const Rebate = () => {
                     setEditandoRebate(!editandoRebate)
                 }}
                 cargando_guardar = {cargando_guardar_rebate_mensual}
+                editandoRebate = {editandoRebate}
             />
 
             {/* <Link 
@@ -328,7 +329,9 @@ const Rebate = () => {
                                                     <tr 
                                                         className='W600-S14-H19-C1E1E1E'
                                                         onDoubleClick={() => {
-                                                            dispatch(EditarFilaRebateReducer(posData, pos, true))
+                                                            // dispatch(EditarFilaRebateReducer(posData, pos, true))
+                                                            dispatch(HabilitarEditarTodosReducer(!editandoRebate))
+                                                            setEditandoRebate(!editandoRebate)
                                                         }}
                                                     >
                                                         <td>

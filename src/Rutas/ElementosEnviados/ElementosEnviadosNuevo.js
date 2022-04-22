@@ -15,10 +15,14 @@ import IconoEliminar from '../../Assets/Img/ElementosEnviados/Eliminar.png'
 import {
     dataElementosEnviados,
     enviarCorreoPromociones,
-    eliminarCorreoPromociones
+    eliminarCorreoPromociones,
+    dataTiposElementosEnviados,
+    SeleccionarTodoFiltroTipoEnvio,
+    SeleccionarFiltroTipoEnvio
 } from '../../Redux/Acciones/ElementosEnviados/ElementosEnviados.js'
 import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
 import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
+import FiltroTipoEnvio from '../../Componentes/Rutas/ElementosEnviados/FiltroTipoEnvio';
 
 const ElementosEnviadosNuevo = () => {
 
@@ -28,6 +32,7 @@ const ElementosEnviadosNuevo = () => {
     let n = ['1','2','3','4','5','6','7','8','9']
     const [posicionFilaTabla, setposicionFilaTabla] = useState("")
     const [txtBuscarElementosEnviados, setTxtBuscarElementosEnviados] = useState("")
+    const [filtroTipoEnvio, setFiltroTipoEnvio] = useState(false)
 
     const dispatch = useDispatch()
     const { 
@@ -37,12 +42,14 @@ const ElementosEnviadosNuevo = () => {
         indexRegistro,
         cargandoTablaElementosEnviados,
         data_paginate_elementos_enviados,
-        cargandoBtnModal
+        cargandoBtnModal,
+        tiposElementosEnviados,
+        fil_selectodo_data_tipo_envio
     } = useSelector(({elementosEnviados}) => elementosEnviados);
 
-    console.log(elementosEnviados)
-
+    console.log(tiposElementosEnviados)
     const cargarDatosTabla = async(paginaActualTabla) => {
+        await dispatch(dataTiposElementosEnviados())
         await dispatch(dataElementosEnviados(paginaActualTabla))
     }
 
@@ -111,11 +118,24 @@ const ElementosEnviadosNuevo = () => {
                         <div style={{marginRight:'20px', marginLeft:'20px'}}>
                             <FiltroMesVentasPromociones />                    
                         </div>
-
-                        <div className='Btn-Elementos-Enviados' style={{width:'143px', paddingLeft:'12px'}}>
-                            <span>Tipo de Envio</span>
-                            <img src={FlechaAbajo} style={{width:'26px'}}/>
-                        </div>
+                        <FiltroTipoEnvio
+                            titulo = {"Tipo de Envio"}
+                            mostrarCuerpo = {filtroTipoEnvio}
+                            setMostrarCuerpo = {() => {
+                                setFiltroTipoEnvio(!filtroTipoEnvio)
+                            }}
+                            funSeleccionarTodo = {(valor) => {
+                                dispatch(SeleccionarTodoFiltroTipoEnvio(valor))
+                            }}
+                            seleccionartodo = {fil_selectodo_data_tipo_envio}
+                            aceptarFiltro = {() => {
+                                dispatch(dataElementosEnviados(paginaActualTabla))
+                            }}
+                            seleccionarTipo = {(posicion, valor) => {
+                                dispatch(SeleccionarFiltroTipoEnvio(posicion, valor))
+                            }}
+                            tiposElementosEnviados = {tiposElementosEnviados}
+                        />
                         {/* <div className='Btn-Elementos-Enviados' style={{width:'143px', paddingLeft:'12px'}}>
                             <span>Distribuidora</span>
                             <img src={FlechaAbajo} style={{width:'26px'}}/>
@@ -126,7 +146,7 @@ const ElementosEnviadosNuevo = () => {
                     <div className='Paginacion-Elementos-Enviados'>
                         <div className='Input-Buscar-Elementos-Enviados'
                             style={{
-                            width: '77%',
+                            width: '75%',
                             marginRight: '10px'
                         }}>
                             <Input 

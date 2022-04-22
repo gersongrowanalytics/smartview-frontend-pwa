@@ -100,14 +100,20 @@ const TiposUsuarios = () => {
         }
     }
     const imagenCircular = [
-        'https://i.blogs.es/05ff1f/incognitowhatsapp/1366_2000.jpg',
-        'https://w0.peakpx.com/wallpaper/419/208/HD-wallpaper-face-art-abstract-face-painting-profile.jpg',
-        'https://thumbs.dreamstime.com/z/pintura-de-perfil-serie-interna-retrato-abstracto-en-el-sobre-tema-del-arte-la-energ%C3%ADa-creatividad-y-emoci%C3%B3n-169706456.jpg'
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/Circular/tpu-mujer-1.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/Circular/tpu-hombre-5.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/Circular/tpu-hombre-3.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/Circular/tpu-hombre-1.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/Circular/tpu-hombre-2.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/Circular/tpu-hombre-4.png'
     ]
     const imagenPerfil = [
-        'https://i.blogs.es/05ff1f/incognitowhatsapp/1366_2000.jpg',
-        'https://w0.peakpx.com/wallpaper/419/208/HD-wallpaper-face-art-abstract-face-painting-profile.jpg',
-        'https://thumbs.dreamstime.com/z/pintura-de-perfil-serie-interna-retrato-abstracto-en-el-sobre-tema-del-arte-la-energ%C3%ADa-creatividad-y-emoci%C3%B3n-169706456.jpg'
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-m-1.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-1.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-3.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-2.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-2.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-2.png'
     ]
 
     const onFinish = async(valores) => {

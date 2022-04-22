@@ -2,7 +2,10 @@ import {
     OBTENER_DATOS_ELEMENTOS_ENVIADOS,
     CARGANDO_TABLA_DATOS_ELEMENTOS_ENVIADOS,
     OBTENER_DATOS_PAGINATE_ELEMENTOS_ENVIADOS,
-    CARGANDO_BTN_MODAL_ELEMENTOS_ENVIADOS
+    CARGANDO_BTN_MODAL_ELEMENTOS_ENVIADOS,
+    OBTENER_DATOS_TIPOS_ELEMENTOS_ENVIADOS,
+    FILTRO_TIPO_ENVIO_ELEMENTOS_ENVIADOS,
+    SELECCIONAR_TODO_FILTRO_TIPO_ENVIO_ELEMENTOS_ENVIADOS
 } from '../../../Constantes/ElementosEnviados/ElementosEnviados'
 
 const INIT_STATE = {
@@ -12,7 +15,11 @@ const INIT_STATE = {
     paginaActual: "",
     indexRegistro: "",
     data_paginate_elementos_enviados : {},
-    cargandoBtnModal: false
+    cargandoBtnModal: false,
+    tiposElementosEnviados: [],
+
+    //FILTRO
+    fil_selectodo_data_tipo_envio: false
 };
 
 export default (state = INIT_STATE, action) => {
@@ -43,6 +50,24 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 cargandoBtnModal: action.payload
+            }
+        }
+        case OBTENER_DATOS_TIPOS_ELEMENTOS_ENVIADOS: {
+            return {
+                ...state,
+                tiposElementosEnviados: action.payload
+            }
+        }
+        case FILTRO_TIPO_ENVIO_ELEMENTOS_ENVIADOS: {
+            return {
+                ...state,
+                tiposElementosEnviados: action.payload
+            }
+        }
+        case SELECCIONAR_TODO_FILTRO_TIPO_ENVIO_ELEMENTOS_ENVIADOS: {
+            return {
+                ...state,
+                fil_selectodo_data_tipo_envio: action.payload
             }
         }
         default:

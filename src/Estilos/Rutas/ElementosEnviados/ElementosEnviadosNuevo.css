@@ -157,3 +157,72 @@
     box-shadow: none !important;
     border-color: #000000 !important;
 }
+
+.Contenedor-Filtro-TipoEnvio{
+    position: absolute;
+    width: 120%;
+    height: 180px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
+    border-radius: 0px 0px 8px 8px;
+    top: 36px;
+    left: 0;
+    z-index: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.Titulo-Filtro-TipoEnvio{
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+
+.Titulo-Filtro-TipoEnvio{
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+
+.Cuerpo-Filtro-TipoEnvio{
+    width: 100%;
+    height: 115px;
+    overflow-y: auto;
+}
+
+.Btns-Filtro-TipoEnvio{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 6px;
+    width: 90%;
+}
+
+.Btn-Aceptar-Filtro-TipoEnvio{
+    background: #3646C3;
+    border: 1px solid #3646C3;
+    box-sizing: border-box;
+    border-radius: 14px;
+    width: 52.99px;
+    height: 19.27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.Btn-Cancelar-Filtro-TipoEnvio{
+    border: 1px solid #1E1E1E;
+    box-sizing: border-box;
+    border-radius: 14px;
+    width: 52.99px;
+    height: 19.27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.Check-Filtro-TipoEnvio .ant-checkbox{
+    width: 12px;
+}

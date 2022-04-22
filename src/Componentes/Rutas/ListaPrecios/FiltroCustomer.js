@@ -62,6 +62,7 @@ const FiltroCustomer = (props) => {
                                 // titulo == "Customer Group"
                                 // ?fil_data.map((grupo, pos) => {
                                 fil_grupo_customer_lista_precios.map((grupo, pos) => {
+                                    console.log('lista e',grupo)
                                     return(
                                         <div
                                             style={{marginBottom:'5px'}}

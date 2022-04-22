@@ -100,6 +100,10 @@ const Descargas = () => {
     } = useSelector(({descargas}) => descargas);
 
     const {
+        canal_seleccionado
+    } = useSelector(({auth}) => auth);
+
+    const {
         agrupacion_columnas_filtros_descargar_sellin,
         columnas_filtro_descargar_sellin,
         columnas_seleccionadas_filtro_descarga_sellin,
@@ -508,64 +512,68 @@ const Descargas = () => {
                     </Row>
                 }
 
-            
-                <Row>
-                    <Col xl={8} style={{marginBottom:'40px'}}>
-                        <div style={{marginBottom:'10px'}}>
-                            {
-                                modulo_descarga_seleccionado == "Catalogo"
-                                ?<div className='Wbold-S14-H19-C1E1E1E'>
-                                   Grupos 
-                                </div>
-                                :<Checkbox 
-                                    className='Wbold-S14-H19-C1E1E1E'
-                                    onChange={(e) => {
-                                        dispatch(SeleccionarTodosGruposReducer(e.target.checked))
-                                    }}
-                                >{"Grupos"}</Checkbox>
-                            }
-                        </div>
-                        {
-                            gsus.map((gsu, pos) => {
-                                return(
-                                    <div>
-                                        {
-                                            modulo_descarga_seleccionado == "Catalogo"
-                                            ?<div 
-                                                style={{display:'flex', position:'relative', height:'25px'}}
-                                                onClick={() => {
-                                                    dispatch(SeleccionarUnaSucursalesGrupoReduecer(pos, !gsu.gsupromociondescarga))
-                                                }}
-                                            >
-                                                <div className='Btn-Radio-Descargar'>
-                                                    {
-                                                        gsu.gsupromociondescarga == true
-                                                        ?<div className='Btn-Circulo-Radio-Descargar'>
-
-                                                        </div>
-                                                        :null
-                                                    }
-                                                </div>
-                                                <div style={{position: "absolute", left: "25px"}}>
-                                                    {gsu.gsunombre}
-                                                </div>
-                                            </div>
-                                            :<Checkbox 
-                                                className='Wnormal-S14-H19-C1E1E1E'
-                                                onChange={(e) => {
-                                                    dispatch(SeleccionarSucursalesGrupoReduecer(pos, e.target.checked))
-                                                }}
-                                                checked={gsu.gsupromociondescarga}
-                                            >{gsu.gsunombre}</Checkbox>
-                                        }
+                
+                {
+                    canal_seleccionado == "Tradicional"
+                    ?<Row>
+                        <Col xl={8} style={{marginBottom:'40px'}}>
+                            <div style={{marginBottom:'10px'}}>
+                                {
+                                    modulo_descarga_seleccionado == "Catalogo"
+                                    ?<div className='Wbold-S14-H19-C1E1E1E'>
+                                    Grupos 
                                     </div>
-                                )
-                            })
-                        }
-                        
-                        
-                    </Col>
-                </Row>
+                                    :<Checkbox 
+                                        className='Wbold-S14-H19-C1E1E1E'
+                                        onChange={(e) => {
+                                            dispatch(SeleccionarTodosGruposReducer(e.target.checked))
+                                        }}
+                                    >{"Grupos"}</Checkbox>
+                                }
+                            </div>
+                            {
+                                gsus.map((gsu, pos) => {
+                                    return(
+                                        <div>
+                                            {
+                                                modulo_descarga_seleccionado == "Catalogo"
+                                                ?<div 
+                                                    style={{display:'flex', position:'relative', height:'25px'}}
+                                                    onClick={() => {
+                                                        dispatch(SeleccionarUnaSucursalesGrupoReduecer(pos, !gsu.gsupromociondescarga))
+                                                    }}
+                                                >
+                                                    <div className='Btn-Radio-Descargar'>
+                                                        {
+                                                            gsu.gsupromociondescarga == true
+                                                            ?<div className='Btn-Circulo-Radio-Descargar'>
+
+                                                            </div>
+                                                            :null
+                                                        }
+                                                    </div>
+                                                    <div style={{position: "absolute", left: "25px"}}>
+                                                        {gsu.gsunombre}
+                                                    </div>
+                                                </div>
+                                                :<Checkbox 
+                                                    className='Wnormal-S14-H19-C1E1E1E'
+                                                    onChange={(e) => {
+                                                        dispatch(SeleccionarSucursalesGrupoReduecer(pos, e.target.checked))
+                                                    }}
+                                                    checked={gsu.gsupromociondescarga}
+                                                >{gsu.gsunombre}</Checkbox>
+                                            }
+                                        </div>
+                                    )
+                                })
+                            }
+                            
+                            
+                        </Col>
+                    </Row>
+                    :null
+                }
                 
             </div>
 

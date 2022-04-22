@@ -272,3 +272,14 @@
     box-shadow: none !important;
     border-color: #000000 !important;
 }
+
+.Input-Editar-Permisos-Adminitrador{
+    outline: none;
+    border: 0;
+    width: 100%;
+}
+
+.Input-Editar-Permisos-Adminitrador{
+    outline: none;
+    border: 0;
+}

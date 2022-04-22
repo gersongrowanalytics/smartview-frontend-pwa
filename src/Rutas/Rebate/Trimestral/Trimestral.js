@@ -27,6 +27,7 @@ const Trimestral = () => {
         data_grupos_rebate,
         cargando_data_rebate_trimestral,
         grupo_seleccionado_rebate,
+        cargando_guardar_rebate_trimestral
     } = useSelector(({rebate}) => rebate);
 
     const [mostrarFilaAgregar, setMostrarFilaAgregar] = useState(false)
@@ -51,6 +52,7 @@ const Trimestral = () => {
                     setEditandoRebate(!editandoRebate)
                 }}
                 editandoRebate = {editandoRebate}
+                cargando_guardar = {cargando_guardar_rebate_trimestral}
             />
 
             

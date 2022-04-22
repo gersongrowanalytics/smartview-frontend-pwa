@@ -117,9 +117,9 @@
 }
 
 .Icono-Circulo-Total-Rebate-Bonus{
-    width: 90px;
-    height: 90px;
-    border-radius: 50px;
+    width: 110px;
+    height: 110px;
+    border-radius: 84px;
     background: #EF2206;
     position: absolute;
     /* left: 60px; */
@@ -127,7 +127,7 @@
 
 .Img-Icono-Total-Rebate-Bonus{
     position: absolute;
-    width: 130px;
+    width: 170px;
     /* left: 40px; */
     /* top: -25px; */
     animation: estrellaRotation 5s linear infinite;

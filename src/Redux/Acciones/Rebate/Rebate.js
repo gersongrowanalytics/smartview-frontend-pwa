@@ -250,6 +250,15 @@ export const EditarFilaRebateReducer = (postabla, posfila, editando) => (dispatc
         data_rebate[postabla]['data'][posfila]['editando'] = false
     }else{
         data_rebate[postabla]['data'][posfila]['editando'] = true
+        data_rebate[postabla]['data'][posfila]['treideditando'] = data_rebate[postabla]['treid']
+        data_rebate[postabla]['data'][posfila]['desdeeditando'] = data_rebate[postabla]['data'][posfila]['rtpporcentajedesde']
+        data_rebate[postabla]['data'][posfila]['hastaeditando'] = data_rebate[postabla]['data'][posfila]['rtpporcentajehasta']
+
+        if(data_rebate[postabla]['data'][posfila]['tprnombre'] == "Sell In"){
+            data_rebate[postabla]['data'][posfila]['tprideditando'] = 1
+        }else{
+            data_rebate[postabla]['data'][posfila]['tprideditando'] = 2
+        }
     }
     dispatch({
         type: OBTENER_REBATES_ACTUALES_REBATE,

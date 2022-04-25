@@ -8,7 +8,9 @@ import {
     SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
     SELECCIONAR_UNA_ZONA_DESCARGAR,
     SELECCIONAR_UN_GRUPO_DESCARGAR,
-    SELECCIONAR_UN_GSUID
+    SELECCIONAR_UN_GSUID,
+    FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS,
+    SELECCIONAR_TODO_FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS
 } from "../../Constantes/Sucursales";
 import { estadoRequestReducer } from "./EstadoRequest"
 
@@ -370,4 +372,33 @@ export const ObtenerSucursalesCanalModernoReducer = () => async (dispatch, getSt
         })
     });
 
+}
+
+export const SeleccionarTodoFiltroDistribuidora = (valor) => async (dispatch, getState) => {
+  let distribuidora = getState().sucursales.sucursalesUsuario
+
+    await distribuidora.map((tipo, pos) => {
+      distribuidora[pos]['seleccionado'] = valor
+    })
+
+    dispatch({
+        type: FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS,
+        payload : distribuidora
+    })
+
+    dispatch({
+        type: SELECCIONAR_TODO_FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS,
+        payload : valor
+    })
+}
+
+export const SeleccionarFiltroDistribuidora = (posicion, valor) => async (dispatch, getState) => {
+  let distribuidora = getState().sucursales.sucursalesUsuario
+
+  distribuidora[posicion]['seleccionado'] = valor
+
+  dispatch({
+      type: FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS,
+      payload : distribuidora
+  })
 }

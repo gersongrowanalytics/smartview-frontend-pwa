@@ -12,7 +12,9 @@ import {
 
 export const dataElementosEnviados = (pagina) => async ( dispatch, getState ) => {
     let tiposEnvio = getState().elementosEnviados.tiposElementosEnviados
+    let distribuidora = getState().sucursales.sucursalesUsuario
 
+    // console.log(distribuidora)
     dispatch({
         type: CARGANDO_TABLA_DATOS_ELEMENTOS_ENVIADOS,
         payload: {
@@ -26,7 +28,8 @@ export const dataElementosEnviados = (pagina) => async ( dispatch, getState ) =>
                 method: 'POST',
                 body: JSON.stringify({
                     usutoken : localStorage.getItem('usutoken'),
-                    $re_tiposEnvio: tiposEnvio
+                    re_tiposEnvio: tiposEnvio,
+                    re_distribuidora: distribuidora
                 }),
                 headers: {
                     'Accept' : 'application/json',
@@ -233,3 +236,4 @@ export const SeleccionarFiltroTipoEnvio = (posicion, valor) => async (dispatch, 
         payload : tiposEnvio
     })
 }
+

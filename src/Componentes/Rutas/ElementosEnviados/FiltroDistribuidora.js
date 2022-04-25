@@ -2,7 +2,7 @@ import React from 'react'
 import FlechaAbajo from '../../../Assets/Img/ElementosEnviados/Angulo-abajo.png'
 import { Checkbox  } from 'antd'
 
-const FiltroTipoEnvio = (props) => {
+const FiltroDistribuidora = (props) => {
 
     const titulo = props.titulo
     const mostrarCuerpo = props.mostrarCuerpo
@@ -10,7 +10,7 @@ const FiltroTipoEnvio = (props) => {
     const funSeleccionarTodo = props.funSeleccionarTodo
     const seleccionartodo = props.seleccionartodo
     const aceptarFiltro = props.aceptarFiltro
-    const tiposElementosEnviados = props.tiposElementosEnviados
+    const distribuidora = props.distribuidora
     const seleccionarTipo = props.seleccionarTipo
 
     return (
@@ -45,7 +45,7 @@ const FiltroTipoEnvio = (props) => {
                         </div>
                         <div className='Cuerpo-Filtro-TipoEnvio'>
                             {
-                                tiposElementosEnviados.map((tipo, pos) => {
+                                distribuidora.map((tipo, pos) => {
                                     return(
                                         <div
                                             style={{marginBottom:'5px'}}
@@ -58,7 +58,7 @@ const FiltroTipoEnvio = (props) => {
                                                 checked={tipo.seleccionado}
                                             >
                                                 {
-                                                    tipo.ucetipo
+                                                    tipo.sucnombre
                                                 }
                                             </Checkbox>
                                         </div>
@@ -92,8 +92,7 @@ const FiltroTipoEnvio = (props) => {
                 )
             }
         </div>
-        
     )
 }
 
-export default FiltroTipoEnvio
+export default FiltroDistribuidora

@@ -20,9 +20,15 @@ import {
     SeleccionarTodoFiltroTipoEnvio,
     SeleccionarFiltroTipoEnvio
 } from '../../Redux/Acciones/ElementosEnviados/ElementosEnviados.js'
+
+import {
+    SeleccionarTodoFiltroDistribuidora,
+    SeleccionarFiltroDistribuidora
+} from '../../Redux/Acciones/Sucursales'
 import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
 import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
 import FiltroTipoEnvio from '../../Componentes/Rutas/ElementosEnviados/FiltroTipoEnvio';
+import FiltroDistribuidora from '../../Componentes/Rutas/ElementosEnviados/FiltroDistribuidora';
 
 const ElementosEnviadosNuevo = () => {
 
@@ -33,6 +39,7 @@ const ElementosEnviadosNuevo = () => {
     const [posicionFilaTabla, setposicionFilaTabla] = useState("")
     const [txtBuscarElementosEnviados, setTxtBuscarElementosEnviados] = useState("")
     const [filtroTipoEnvio, setFiltroTipoEnvio] = useState(false)
+    const [filtroDistribuidora, setFiltroDistribuidora] = useState(false)
 
     const dispatch = useDispatch()
     const { 
@@ -47,7 +54,15 @@ const ElementosEnviadosNuevo = () => {
         fil_selectodo_data_tipo_envio
     } = useSelector(({elementosEnviados}) => elementosEnviados);
 
-    console.log(tiposElementosEnviados)
+    // console.log(elementosEnviados)
+
+    const {
+        sucursalesUsuario,
+        fil_selectodo_data_distribuidora
+    } = useSelector(({sucursales}) => sucursales)
+
+    // console.log('sucursales', sucursalesUsuario)
+
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataTiposElementosEnviados())
         await dispatch(dataElementosEnviados(paginaActualTabla))
@@ -136,6 +151,25 @@ const ElementosEnviadosNuevo = () => {
                             }}
                             tiposElementosEnviados = {tiposElementosEnviados}
                         />
+                        <FiltroDistribuidora
+                            titulo = {"Distribuidora"}
+                            mostrarCuerpo = {filtroDistribuidora}
+                            setMostrarCuerpo = {() => {
+                                setFiltroDistribuidora(!filtroDistribuidora)
+                            }}
+                            funSeleccionarTodo = {(valor) => {
+                                dispatch(SeleccionarTodoFiltroDistribuidora(valor))
+                            }}
+                            seleccionartodo = {fil_selectodo_data_distribuidora}
+                            aceptarFiltro = {() => {
+                                dispatch(dataElementosEnviados(paginaActualTabla))
+                            }}
+                            seleccionarTipo = {(posicion, valor) => {
+                                dispatch(SeleccionarFiltroDistribuidora(posicion, valor))
+                            }}
+                            distribuidora = {sucursalesUsuario}
+                        />
+                            
                         {/* <div className='Btn-Elementos-Enviados' style={{width:'143px', paddingLeft:'12px'}}>
                             <span>Distribuidora</span>
                             <img src={FlechaAbajo} style={{width:'26px'}}/>

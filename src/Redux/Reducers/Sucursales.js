@@ -12,7 +12,9 @@ import {
     SELECCIONAR_GRUPOS,
     SELECCIONAR_SUCURSALES,
     APLICANDO_FILTROS_CORRESPONDIENTES,
-    CAMBIAR_APLICANDO_FILTRO_ACUMULADO
+    CAMBIAR_APLICANDO_FILTRO_ACUMULADO,
+    FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS,
+    SELECCIONAR_TODO_FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS
 } from "../../Constantes/Sucursales";
 
 const INIT_STATE = {
@@ -28,7 +30,10 @@ const INIT_STATE = {
     aplicandoFiltroZona  : false,
     aplicandoFiltroGrupo : false,
     aplicandoFiltroDt    : false,
-    aplicandoFiltroAcumulado : false
+    aplicandoFiltroAcumulado : false,
+
+    //FILTRO
+    fil_selectodo_data_distribuidora : false
 };
 
 export default (state = INIT_STATE, action) => {
@@ -118,6 +123,18 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 aplicandoFiltroAcumulado : action.payload
+            }
+        }
+        case FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS: {
+            return {
+                ...state,
+                sucursalesUsuario: action.payload
+            }
+        }
+        case SELECCIONAR_TODO_FILTRO_DISTRIBUIDORA_ELEMENTOS_ENVIADOS: {
+            return {
+                ...state,
+                fil_selectodo_data_distribuidora: action.payload
             }
         }
         default:

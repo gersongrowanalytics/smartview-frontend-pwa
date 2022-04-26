@@ -2,7 +2,8 @@ import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
 import {
     OBTENER_DATOS_CONTROL_ARCHIVOS,
-    CARGANDO_TABLA_DATOS_CONTROL_ARCHIVOS
+    CARGANDO_TABLA_DATOS_CONTROL_ARCHIVOS,
+    CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS
 } from '../../../Constantes/ControlArchivos/ControlArchivos'
 
 export const dataControlArchivos = (pagina) => async ( dispatch, getState ) => {
@@ -54,4 +55,50 @@ export const dataControlArchivos = (pagina) => async ( dispatch, getState ) => {
     }).catch((error)=> {
         console.log(error)
     });
+}
+
+export const EliminarControlArchivosReducer = (idControlArchivo) => async (dispatch, getState) => {
+    
+    let respuesta = false
+
+    dispatch({
+        type: CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS,
+        payload: true
+    })
+
+    await fetch(config.api+'eliminar/archivos-subidos',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                re_carid : idControlArchivo
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken')
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))   
+        return res.json()
+    })
+    .then( async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                respuesta = true
+                dispatch({
+                    type: CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS,
+                    payload: false
+                })
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+    return respuesta
+
 }

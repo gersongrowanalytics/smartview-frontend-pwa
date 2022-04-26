@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Row, Col, Spin, Input } from 'antd'
+import { Row, Col, Spin, Input, Tooltip, Modal } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoControlArchivo.css'
@@ -7,10 +7,16 @@ import FlechaAbajo from '../../../Assets/Img/Administrativo/Usuarios/Angulo-pequ
 import Excel from '../../../Assets/Img/Administrativo/ControlArchivo/excel.png'
 import BanderaPeru from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Perú.png'
 import {
-    dataControlArchivos
+    dataControlArchivos,
+    EliminarControlArchivosReducer
 } from '../../../Redux/Acciones/ControlArchivos/ControlArchivos'
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
-
+import IconoEditar from '../../../Assets/Img/Administrativo/Permisos/editar.png'
+import IconoEditarBlanco from '../../../Assets/Img/Administrativo/Permisos/editarBlanco.png'
+import IconoEliminar from '../../../Assets/Img/Administrativo/Permisos/eliminar.png'
+import IconoEliminarBlanco from '../../../Assets/Img/Administrativo/Permisos/eliminarBlanco.png'
+import IconoGuardar from '../../../Assets/Img/Administrativo/Permisos/guardar.png'
+import IconoGuardarBlanco from '../../../Assets/Img/Administrativo/ControlArchivo/Guardar-white.png'
 
 const ControlArchivo = () => {
 
@@ -18,6 +24,8 @@ const ControlArchivo = () => {
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
     const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Set','Oct','Nov','Dic']
     const [txtBuscarControlArchivo, setTxtBuscarControlArchivo] = useState("")
+    const [mostrarModalEliminar, setMostrarModalEliminar] = useState(false)
+    const [idRegistroControlArchivo, setIdRegistroControlArchivo] = useState("")
 
     const dispatch = useDispatch()
     const { 
@@ -25,9 +33,11 @@ const ControlArchivo = () => {
         paginasTotales,
         paginaActual,
         indexRegistro,
-        cargandoTablaControlArchivos
+        cargandoTablaControlArchivos,
+        cargandoBtnModal
     } = useSelector(({controlArchivos}) => controlArchivos);
 
+    console.log(archivosSubidos)
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataControlArchivos(paginaActualTabla))
     }
@@ -75,6 +85,14 @@ const ControlArchivo = () => {
 
     const itemTabla = (posicion) => {
        return indexRegistro + posicion
+    }
+
+    const eliminarControlArchivos = async() => {
+        if (await dispatch(EliminarControlArchivosReducer(idRegistroControlArchivo)) == true) {
+            setMostrarModalEliminar(false)
+            setIdRegistroControlArchivo("")
+            cargarDatosTabla(paginaActualTabla)
+        }
     }
 
     useEffect(() => {
@@ -179,7 +197,7 @@ const ControlArchivo = () => {
                             <table className='Tabla-Adm-Control'>
                                 <thead>
                                     <tr>
-                                        <th style={{width:'8%'}}>
+                                        <th style={{width:'7%'}}>
                                             <div>
                                                 <span>Item</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
@@ -221,7 +239,7 @@ const ControlArchivo = () => {
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
                                             </div>
                                         </th>
-                                        <th style={{width:'8%'}}>
+                                        <th style={{ width: '9%' }}>
                                             <div>
                                                 <span>Hora</span>
                                                 <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
@@ -236,7 +254,9 @@ const ControlArchivo = () => {
                                                 archivo.carnombrearchivo.includes(txtBuscarControlArchivo) || archivo.carnombrearchivo.toLowerCase().includes(txtBuscarControlArchivo.toLowerCase()) ||
                                                 archivo.tcanombre.includes(txtBuscarControlArchivo) || archivo.tcanombre.toLowerCase().includes(txtBuscarControlArchivo.toLowerCase())
                                                 ?
-                                                <tr>
+                                                <tr
+                                                    className='Contenedor-Fila-Permisos'
+                                                >
                                                     <td>
                                                         {itemTabla(posicion)}
                                                     </td>
@@ -272,7 +292,77 @@ const ControlArchivo = () => {
                                                         {obtenerFechaHora(archivo.created_at,'fecha')}
                                                     </td>
                                                     <td>
-                                                        {obtenerFechaHora(archivo.created_at,'hora')}
+                                                        <div
+                                                            style={{
+                                                                // display:'flex',
+                                                                alignItems: 'center',
+                                                                placeContent: 'center'
+                                                            }}
+                                                            className="Contenedor-Opciones-Permisos"
+                                                        >
+                                                            <Tooltip
+                                                                placement="bottom" 
+                                                                title={"Editar"}
+                                                            >
+                                                                <div
+                                                                    style={{ marginRight: "12px"}}
+                                                                    className="Contenedor-Icono-Opciones-Permisos"
+                                                                    onClick={() => {
+                                                                        let editando = true
+                                                                        // if(permiso.editando == true){
+                                                                        //     editando = false
+                                                                        // }
+                                                                        
+                                                                        // dispatch(HabilitarEditarPermisosReducer(posicion, editando))
+
+                                                                    }}
+                                                                > 
+                                                                    <img className='Icono-Editar-Permisos' src={IconoEditar} /> 
+                                                                    <img className='Icono-Editar-Permisos-Blanco' src={IconoEditarBlanco} /> 
+                                                                </div>
+                                                            </Tooltip>
+
+                                                            <Tooltip
+                                                                placement="bottom" 
+                                                                title={"Eliminar"}
+                                                            >
+                                                                <div
+                                                                    style={{ marginRight: "10px", }}
+                                                                    className="Contenedor-Icono-Opciones-Permisos"
+                                                                    onClick={() => {
+                                                                        setMostrarModalEliminar(true)
+                                                                        setIdRegistroControlArchivo(archivo.carid)
+                                                                    }}
+                                                                > 
+                                                                    <img className='Icono-Eliminar-Permisos' src={IconoEliminar} />
+                                                                    <img className='Icono-Eliminar-Permisos-Blanco' src={IconoEliminarBlanco} />
+                                                                </div>
+                                                            </Tooltip>
+                                                            <Tooltip
+                                                                placement="bottom" 
+                                                                title={"Guardar"}
+                                                            >
+                                                                <div
+                                                                    style={{}}
+                                                                    className="Contenedor-Icono-Opciones-Permisos"
+                                                                    onClick={() => {
+                                                                        // dispatch(EditarPermisoReducer(
+                                                                        //     permiso.pemid,
+                                                                        //     permiso.nombreEditando,
+                                                                        //     permiso.slugEditando,
+                                                                        //     permiso.rutaEditando,
+                                                                        //     paginaActualTabla
+                                                                        // ))
+                                                                    }}
+                                                                > 
+                                                                    <img className='Icono-Guardar-Permisos' src={IconoGuardar} />
+                                                                    <img className='Icono-Guardar-Permisos-Blanco' src={IconoGuardarBlanco}/> 
+                                                                </div>
+                                                            </Tooltip>
+                                                        </div>
+                                                        <div className='Contenedor-Fecha-Permisos'>
+                                                            {obtenerFechaHora(archivo.created_at,'hora')}
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 : null
@@ -286,6 +376,46 @@ const ControlArchivo = () => {
                     </Spin>
                 </Col>
             </Row>
+            <Modal
+                centered
+                title={null}
+                visible={mostrarModalEliminar}
+                footer={null}
+                closeIcon={<div></div>}
+                width="371px"
+                // height="289px"
+                className='Caja-Modal-CrearPermiso'
+                onCancel={() => setMostrarModalEliminar(false)}
+            >
+                <div>
+                    <div className='Titulo-Modal-Reenviar-Elemento'>
+                        Eliminar Archivo
+                    </div>
+                    <div className='Texto-Modal-Reenviar-Elemento'>
+                        ¿Está seguro que desea eliminar el archivo?
+                    </div>
+                    <div className='Contenedor-Botones-Modal'>
+                        <Spin
+                            spinning={cargandoBtnModal}
+                        >
+                            <button 
+                                className='Boton-Aceptar-Eliminar-Modal'
+                                onClick={() => eliminarControlArchivos()}
+                            >
+                                Aceptar
+                            </button>
+                        </Spin>
+                        <button 
+                            className='Boton-Cancelar-Eliminar-Modal'
+                            onClick={() => {
+                                setMostrarModalEliminar(false)
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div> 
+            </Modal>
         </div>
     )
 }

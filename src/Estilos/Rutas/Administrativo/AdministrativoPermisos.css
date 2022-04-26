@@ -213,11 +213,19 @@
     display: none;
 }
 
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Guardar-Permisos{
+    display: none;
+}
+
 .Contenedor-Icono-Opciones-Permisos:hover .Icono-Editar-Permisos-Blanco{
     display: flex;
 }
 
 .Contenedor-Icono-Opciones-Permisos:hover .Icono-Eliminar-Permisos-Blanco{
+    display: flex;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Guardar-Permisos-Blanco{
     display: flex;
 }
 
@@ -227,6 +235,11 @@
 }
 
 .Icono-Eliminar-Permisos-Blanco{
+    display: none;
+    width: 13px;
+}
+
+.Icono-Guardar-Permisos-Blanco{
     display: none;
     width: 13px;
 }

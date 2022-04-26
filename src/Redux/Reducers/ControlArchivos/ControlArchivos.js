@@ -1,6 +1,7 @@
 import {
     OBTENER_DATOS_CONTROL_ARCHIVOS,
-    CARGANDO_TABLA_DATOS_CONTROL_ARCHIVOS
+    CARGANDO_TABLA_DATOS_CONTROL_ARCHIVOS,
+    CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS
 } from '../../../Constantes/ControlArchivos/ControlArchivos'
 
 const INIT_STATE = {
@@ -8,7 +9,8 @@ const INIT_STATE = {
     archivosSubidos : [],
     paginasTotales: "",
     paginaActual: "",
-    indexRegistro: ""
+    indexRegistro: "",
+    cargandoBtnModal: false
 };
 
 export default (state = INIT_STATE, action) => {
@@ -29,6 +31,13 @@ export default (state = INIT_STATE, action) => {
                 cargandoTablaControlArchivos: action.payload.cargandoSpin
             }
         }
+        case CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS: {
+            return {
+                ...state,
+                cargandoBtnModal : action.payload
+            }
+        }
+        
         default:
             return state;
     }

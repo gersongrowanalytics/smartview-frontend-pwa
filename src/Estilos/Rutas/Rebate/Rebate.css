@@ -267,6 +267,18 @@
     box-shadow: 0px 4px 4px #E5E5E5;
 }
 
+.Td-Icono-Rebate{
+    display: none;
+    place-content: center;
+}
+
+.Tabla-Principal-Rebate tbody tr:hover .Td-Normal-Porcentaje-Rebate{
+    display: none;
+}
+
+.Tabla-Principal-Rebate tbody tr:hover .Td-Icono-Rebate{
+    display: flex;
+}
 
 .Tabla-Principal-Rebate tbody tr:hover .Contenedor-Img-Nuevo-Banco-Imagenes{
     display: none;

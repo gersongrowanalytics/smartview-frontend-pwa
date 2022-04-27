@@ -17,7 +17,8 @@ const INIT_STATE = {
     tiposUsuarios: [],
 
     //FILTRO
-    fil_selectodo_data_tipo_usuario: true
+    fil_selectodo_data_tipo_usuario: true,
+    data_datos_adm_usuarios : {}
 };
 
 export default (state = INIT_STATE, action) => {
@@ -35,7 +36,8 @@ export default (state = INIT_STATE, action) => {
                 paginasTotales: action.payload.paginasTotales,
                 paginaActual: action.payload.paginaActual,
                 indexRegistro: action.payload.indexRegistro,
-                cargandoTablaUsuarios: action.payload.cargandoSpin
+                cargandoTablaUsuarios: action.payload.cargandoSpin,
+                data_datos_adm_usuarios : action.payload.data_datos_adm_usuarios
             }
         }
         case OBTENER_DATOS_PAISES: {

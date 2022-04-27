@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Row, Col, Switch, Input, Checkbox, Form } from 'antd'
 import FlechaAbajoNegro from '../../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
 import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
 import Persona from '../../../../Assets/Img/Administrativo/Usuarios/Persona-white.png'
 import Borrar from '../../../../Assets/Img/Administrativo/Usuarios/Cortar.png'
+import ModalSeleccionarDt from './ModalSeleccionarDt'
 
 const FormularioUsuarios = (props) => {
 
@@ -37,12 +38,14 @@ const FormularioUsuarios = (props) => {
     const estadoBooleanUsuario      = props.estadoBooleanUsuario
     const setestadoBooleanUsuario   = props.setestadoBooleanUsuario
     const editarFilaUsuario         = props.editarFilaUsuario
+    const ConfirmoEditar            = props.ConfirmoEditar
     const form   = props.form
 
+    const [mostrarModal, setMostrarModal] = useState(false)
 
     return (
         <div>
-            <div style={{marginLeft: '40px', marginRight: '58px'}}>
+            <div style={{marginLeft: '40px', marginRight: '58px', paddingBottom:'20px'}}>
                 <div className='Cabecera-Crear-Adm-Usuario'>
                     <img src={Persona} style={{width:'33px', marginRight: '8px'}}></img>
                     <span>Usuario</span>
@@ -167,16 +170,23 @@ const FormularioUsuarios = (props) => {
                                             value={fechaFinal}
                                             onChange={(e) => setfechaFinal(new Date(e.target.value))}
                                         />
-                                    )
+                                    )   
                                 } */}
                                 
                             </div>
                             <div className='Campo2-Crear-Adm-Usuario'>   
-                                <span>Zona:</span>
+                                <span>Distribuidora:</span>
                                 <div 
                                     className='Select-Pais-Adm-Usuario'
-                                    onClick={() => {setabrirModalZona(!abrirModalZona)}}
-                                ></div>
+                                    onClick={() => {
+                                        setMostrarModal(!mostrarModal)
+                                    }}
+                                    style={{
+                                        paddingLeft:'20px'
+                                    }}
+                                >
+                                    Selecciona Distribuidoras
+                                </div>
                             </div>
                             <div className='Campo2-Crear-Adm-Usuario'>   
                                 <span>País:</span>
@@ -265,7 +275,8 @@ const FormularioUsuarios = (props) => {
                                     />
                                 </div>
                             </div>
-                            <div className='Posicion-Btn-Crear-Adm-Usuario'>
+                            <div 
+                                className='Posicion-Btn-Crear-Adm-Usuario'>
                                 <Form.Item>
                                     <button 
                                         className='Btn-Crear-Adm-Usuario'
@@ -273,7 +284,9 @@ const FormularioUsuarios = (props) => {
                                     >
                                         {
                                             editarFilaUsuario == true
-                                            ?"Editar"
+                                            ?ConfirmoEditar == true
+                                                ?"Guardar Edición"
+                                                :"Editar"
                                             :"Guardar"
                                         }
                                     </button>
@@ -284,6 +297,13 @@ const FormularioUsuarios = (props) => {
                     </Form>
                 </div>
             </div>
+
+
+            <ModalSeleccionarDt
+                mostrarModal = {mostrarModal}
+                setMostrarModal = {setMostrarModal}
+            />
+
         </div>
     )
 }

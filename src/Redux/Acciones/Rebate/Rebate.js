@@ -553,3 +553,69 @@ export const ValidarDatosCrearRebateReducer = () => async (dispatch, getState) =
     
 
 }
+
+
+export const EliminarRebateMensualReducer = (
+    porcentajedesde,
+    porcentajehasta,
+    porcentajerebate,
+    tprid,
+    treid
+) => async (dispatch, getState) => {
+
+    const mesSeleccionadoFiltro = getState().fechas.mesSeleccionadoFiltro
+    const anioSeleccionadoFiltro = getState().fechas.anioSeleccionadoFiltro
+
+    dispatch({
+        type : CARGANDO_DATA_REBATE,
+        payload : true
+    })
+
+    await fetch(config.api+'eliminar-rebate-mensual',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                anio : anioSeleccionadoFiltro,
+                dia  : "01",
+                mes  : mesSeleccionadoFiltro,
+
+                porcentajedesde: porcentajedesde,
+                porcentajehasta: porcentajehasta,
+                porcentajerebate: porcentajerebate,
+                tprid: tprid,
+                treid: treid,
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken'),
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then(async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                
+                dispatch(ObtenerRebatesActualesReducer())
+                message.success(data.mensaje)
+            }else{
+                message.error(data.mensaje)
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
+    dispatch({
+        type : CARGANDO_DATA_REBATE,
+        payload : false
+    })
+
+}

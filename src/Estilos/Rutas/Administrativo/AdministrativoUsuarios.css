@@ -108,7 +108,7 @@
 
 .Cuerpo-Crear-Adm-Usuario{
     /* width: 773px; */
-    height: 337px;
+    height: 350px;
     border: 1px solid #E5E5E5;
     box-sizing: border-box;
 }
@@ -182,7 +182,7 @@
 }
 
 .Btn-Crear-Adm-Usuario{
-    width: 66px;
+    /* width: 66px; */
     height: 24px;
     background: #3646C4;
     border: 1px solid #3646C3;
@@ -204,6 +204,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 25px;
+    margin-bottom: 25px;
     padding-right: 51px;
 }
 
@@ -453,7 +454,7 @@
     border-radius: 8px;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 438px;
+    height: 738px;
 }
 
 .Titulo-Modal-Zona{

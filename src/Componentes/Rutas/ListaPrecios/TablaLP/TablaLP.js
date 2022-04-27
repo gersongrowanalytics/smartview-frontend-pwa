@@ -62,7 +62,7 @@ const TablaLP = (props) => {
                             <div
                                 style={{
                                     position:'absolute',
-                                    width:'2px',
+                                    width:'1.5px',
                                     height:'100%',
                                     background:'white',
                                     right:'-2px',
@@ -95,7 +95,7 @@ const TablaLP = (props) => {
                                 <div
                                     style={{
                                         position:'absolute',
-                                        width:'2px',
+                                        width:'1.5px',
                                         height:'100%',
                                         background:'white',
                                         right:'-2px',
@@ -118,7 +118,7 @@ const TablaLP = (props) => {
                             rowSpan={2}
                             style={{
                                 position: "sticky",
-                                left: "117px",
+                                left: "115px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
                                 textAlign: "left",
@@ -127,6 +127,9 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width: "92px"
+                                }}
                             >
                                 <div>
                                     Subcategoría
@@ -138,7 +141,7 @@ const TablaLP = (props) => {
                             <div
                                 style={{
                                     position:'absolute',
-                                    width:'2px',
+                                    width:'1.5px',
                                     height:'100%',
                                     background:'white',
                                     right:'-2px',
@@ -156,7 +159,7 @@ const TablaLP = (props) => {
                             rowSpan={2} 
                             style={{
                                 position: "sticky",
-                                left: "215px",
+                                left: "219px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
                                 textAlign: "left",
@@ -176,7 +179,7 @@ const TablaLP = (props) => {
                             <div
                                 style={{
                                     position:'absolute',
-                                    width:'2px',
+                                    width:'1.5px',
                                     height:'100%',
                                     background:'white',
                                     right:'-2px',
@@ -190,7 +193,8 @@ const TablaLP = (props) => {
                             rowSpan={2}
                             style={{
                                 position: "sticky",
-                                left: "304px",
+                                // left: "304px",
+                                left: "308px",
                                 zIndex: "2",
                                 backgroundColor: "#1EC0ED",
                                 textAlign: "left",
@@ -213,7 +217,7 @@ const TablaLP = (props) => {
                             <div
                                 style={{
                                     position:'absolute',
-                                    width:'2px',
+                                    width:'1.5px',
                                     height:'100%',
                                     background:'white',
                                     right:'-2px',
@@ -230,7 +234,8 @@ const TablaLP = (props) => {
                                 data_tabla_lista_precios.length > 0
                                 ?{
                                     position: "sticky",
-                                    left: "466px",
+                                    // left: "466px",
+                                    left: "470px",
                                     zIndex: "2",
                                     backgroundColor: "#1EC0ED",
                                     textAlign: "left",
@@ -258,7 +263,7 @@ const TablaLP = (props) => {
                             <div
                                 style={{
                                     position:'absolute',
-                                    width:'2px',
+                                    width:'1.5px',
                                     height:'100%',
                                     background:'white',
                                     right:'-2px',
@@ -283,14 +288,21 @@ const TablaLP = (props) => {
                         <th 
                             rowSpan={2}
                             style={{
-                                borderRight: "1px solid white",
+                                borderRight: "2px solid white",
                                 paddingLeft: "18px"
                             }}
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width: "74px"
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Unidad de<br/>
                                     Venta
                                 </div>
@@ -302,13 +314,20 @@ const TablaLP = (props) => {
                         <th 
                             rowSpan={2}
                             style={{
-                                borderRight: "1px solid white"
+                                borderRight: "2px solid white"
                             }}
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width: '100px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Precio Lista<br/>
                                     sin IGV
                                 </div>
@@ -320,13 +339,20 @@ const TablaLP = (props) => {
                         <th 
                             rowSpan={2}
                             style={{
-                                borderRight: "1px solid white"
+                                borderRight: "2px solid white"
                             }}
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'56px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     % Alza
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
@@ -337,13 +363,20 @@ const TablaLP = (props) => {
                         <th 
                             rowSpan={2}
                             style={{
-                                borderRight: "1px solid white"
+                                borderRight: "2px solid white"
                             }}
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'56px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     SD/TPR
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
@@ -354,13 +387,20 @@ const TablaLP = (props) => {
                         <th 
                             rowSpan={2}
                             style={{
-                                borderRight: "1px solid white"
+                                borderRight: "0px solid white"
                             }}
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'80px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Precio Lista<br/>
                                     con IGV
                                 </div>
@@ -374,7 +414,7 @@ const TablaLP = (props) => {
                             style={{
                                 background:'#004291', paddingTop:'5px', paddingBottom:'5px',
                                 borderRight:'2px solid white',
-                                borderLeft:'2px solid white',
+                                borderLeft:'3px solid white',
                                 height: "0px"
                             }}
 
@@ -420,9 +460,16 @@ const TablaLP = (props) => {
 
                             <div
                                 className='Contenedor-Cabecera-Tabla'
-                                style={{background:'#1E7DED'}}
+                                style={{
+                                    background:'#1E7DED',
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     MF Ruta
                                     {/* Mayorista */}
                                 </div>
@@ -437,8 +484,15 @@ const TablaLP = (props) => {
 
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Reventa
                                     {/* Mayorista */}
                                 </div>
@@ -453,8 +507,15 @@ const TablaLP = (props) => {
 
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Margen
                                     {/* Mayorista */}
                                 </div>
@@ -469,8 +530,15 @@ const TablaLP = (props) => {
 
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Marcaje
                                     {/* Mayorista */}
                                 </div>
@@ -482,14 +550,21 @@ const TablaLP = (props) => {
                         <th
                             style={{
                                 background:'#1E7DED',
-                                borderLeft: "1px solid white"
+                                borderLeft: "2px solid white"
                             }}
                         >
 
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     MF Ruta
                                     {/* Minorista */}
                                 </div>
@@ -503,8 +578,15 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Reventa
                                     {/* Minorista */}
                                 </div>
@@ -518,8 +600,15 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Margen
                                     {/* Minorista */}
                                 </div>
@@ -533,8 +622,15 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Marcaje
                                     {/* Minorista */}
                                 </div>
@@ -554,8 +650,15 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     MF Ruta
                                     {/* Horizontal */}
                                 </div>
@@ -570,8 +673,15 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Reventa
                                     {/* Bodega */}
                                 </div>
@@ -586,8 +696,15 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px'
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     Margen
                                     {/* Bodega */}
                                 </div>
@@ -602,8 +719,16 @@ const TablaLP = (props) => {
                         >
                             <div
                                 className='Contenedor-Cabecera-Tabla'
+                                style={{
+                                    width:'65px',
+                                    height: "22px"
+                                }}
                             >
-                                <div>
+                                <div
+                                    style={{
+                                        position:'absolute'
+                                    }}
+                                >
                                     PVP
                                 </div>
                                 <div className='Contenedor-Icono-Flecha-Tabla'>
@@ -828,9 +953,11 @@ const TablaLP = (props) => {
                                         :<td
                                             // className='W600-S12-H16-C1E1E1E Contenedor-Item-TablaLp'
                                             className={
-                                                dat.ltpduplicadocomplejo == true
-                                                ?'W600-S12-H16-CE41A37 Contenedor-Item-TablaLp'
-                                                :'W600-S12-H16-C1E1E1E Contenedor-Item-TablaLp'
+                                                dat.ltptienezona == true
+                                                ?'W600-S12-H16-C00CA8A Contenedor-Item-TablaLp'
+                                                :dat.ltpduplicadocomplejo == true
+                                                    ?'W600-S12-H16-CE41A37 Contenedor-Item-TablaLp'
+                                                    :'W600-S12-H16-C1E1E1E Contenedor-Item-TablaLp'
                                             }
                                         >
 
@@ -857,9 +984,11 @@ const TablaLP = (props) => {
                                         :<td 
                                             // className='W600-S12-H16-C1E1E1E Contenedor-Categoria-TablaLp'
                                             className={
-                                                dat.ltpduplicadocomplejo == true
-                                                ?'W600-S12-H16-CE41A37 Contenedor-Categoria-TablaLp'
-                                                :'W600-S12-H16-C1E1E1E Contenedor-Categoria-TablaLp'
+                                                dat.ltptienezona == true
+                                                ?'W600-S12-H16-C00CA8A Contenedor-Categoria-TablaLp'
+                                                :dat.ltpduplicadocomplejo == true
+                                                    ?'W600-S12-H16-CE41A37 Contenedor-Categoria-TablaLp'
+                                                    :'W600-S12-H16-C1E1E1E Contenedor-Categoria-TablaLp'
                                             }
                                             style={{
                                                 position: "sticky",
@@ -888,13 +1017,15 @@ const TablaLP = (props) => {
 
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A'
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                         style={{
                                             position: "sticky",
-                                            left: "117px",
+                                            left: "115px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
@@ -918,13 +1049,16 @@ const TablaLP = (props) => {
 
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                         style={{
                                             position: "sticky",
-                                            left: "215px",
+                                            // left: "215px",
+                                            left: "219px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
@@ -947,13 +1081,16 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                         style={{
                                             position: "sticky",
-                                            left: "304px",
+                                            // left: "304px",
+                                            left: "308px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
@@ -983,13 +1120,16 @@ const TablaLP = (props) => {
                                     {/* <td className='W600-S12-H16-C1E1E1E'>{dat.ltpcodigosap}</td> */}
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                         style={{
                                             position: "sticky",
-                                            left: "466px",
+                                            // left: "466px",
+                                            left: "470px",
                                             zIndex: "0",
                                             backgroundColor: "white",
                                             top: "48px",
@@ -998,8 +1138,18 @@ const TablaLP = (props) => {
                                     >
                                         <div
                                             style={{
-                                                width:'310px'
+                                                width:'310px',
+                                                textOverflow: 'ellipsis',
+                                                whiteSpace: 'nowrap',
+                                                overflow: 'hidden',
                                             }}
+                                            title={
+                                                dat.ltptienezona == true
+                                                    ?dat.ltpdescripcionproducto
+                                                    :dat.ltpeditandonombre == true
+                                                        ?dat.ltpdescripcionproducto
+                                                        :dat.pronombre
+                                            }
                                         >
                                             {
                                                 dat.editando == true
@@ -1014,9 +1164,13 @@ const TablaLP = (props) => {
                                                         }}
                                                     />
                                                 </div>
-                                                :dat.ltpeditandonombre == true
+                                                :dat.ltptienezona == true
                                                     ?dat.ltpdescripcionproducto
-                                                    :dat.pronombre
+                                                    :dat.ltpeditandonombre == true
+                                                        ?dat.ltpdescripcionproducto
+                                                        :dat.pronombre
+                                                
+                                                
                                             }
                                         </div>
                                         <div
@@ -1036,25 +1190,31 @@ const TablaLP = (props) => {
 
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >{dat.ltpunidadventa}</td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltppreciolistasinigv, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1063,9 +1223,11 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1074,18 +1236,22 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltppreciolistaconigv, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1094,18 +1260,22 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpreventamayorista, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1114,9 +1284,11 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpmarcajemayorista, 2)} displayType={'text'} thousandSeparator={true} />
@@ -1125,9 +1297,11 @@ const TablaLP = (props) => {
                                     {/* MINORISTA */}
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1136,18 +1310,22 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpreventaminorista, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1156,9 +1334,11 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpmarcajeminorista, 2)} displayType={'text'} thousandSeparator={true} />
@@ -1167,9 +1347,11 @@ const TablaLP = (props) => {
                                     {/* BODEGA */}
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1178,18 +1360,22 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltpreventabodega, 2)} displayType={'text'} thousandSeparator={true} />
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         {
@@ -1198,9 +1384,11 @@ const TablaLP = (props) => {
                                     </td>
                                     <td 
                                         className={
-                                            dat.ltpduplicadocomplejo == true
-                                            ?'W600-S12-H16-CE41A37'
-                                            :'W600-S12-H16-C1E1E1E'
+                                            dat.ltptienezona == true
+                                            ?'W600-S12-H16-C00CA8A '
+                                            :dat.ltpduplicadocomplejo == true
+                                                ?'W600-S12-H16-CE41A37'
+                                                :'W600-S12-H16-C1E1E1E'
                                         }
                                     >
                                         S/<NumberFormat value={funFormatoDecimal(dat.ltppvp, 2)} displayType={'text'} thousandSeparator={true} />

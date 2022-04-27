@@ -122,12 +122,12 @@ const FiltroZonaVentasPromociones = (props) => {
                     ?<div 
                         className='Linea-Filtro-Zona-Venta-Promociones'
                         onClick={() => {
-                            console.log(cass)
-                            console.log(zonas)
-                            console.log(gsus)
-                            console.log(sucursalesUsuario)
-                            console.log(idSucursalUsuarioSelec)
-                            console.log(aplicandoFiltroAcumulado)
+                            // console.log(cass)
+                            // console.log(zonas)
+                            // console.log(gsus)
+                            // console.log(sucursalesUsuario)
+                            // console.log(idSucursalUsuarioSelec)
+                            // console.log(aplicandoFiltroAcumulado)
                         }}
                     ></div>
                     :null

@@ -132,16 +132,18 @@ const Promociones = () => {
 
         }else{
     
-            // setTimeout(() => {
-            //     setMostrarNoticia(true)
-            // }, 3000);
+            setTimeout(() => {
+                setMostrarNoticia(true)
+            }, 3000);
     
         }
 
     }, [cargando_vista_inicio_sistema])
 
     return (
-        <div className='Cont-Promociones'>
+        <div 
+            className='Cont-Promociones'
+        >
 
             <Modal
                 title={null}
@@ -275,7 +277,8 @@ const Promociones = () => {
                                                         justifyContent: "center",
                                                         position: "sticky",
                                                         top: "0",
-                                                        zIndex: "0"
+                                                        zIndex: "1",
+                                                        background:'white'
                                                     }}
                                                 >
                                                     <div
@@ -337,7 +340,7 @@ const Promociones = () => {
                                                             // subiendo = false
                                                         }}
                                                     >
-                                                        {canal.cannombre} ({canal.cantidadPromociones})
+                                                        {canal.cannombre} (#{canal.cantidadPromociones})
                                                     </div>
                                                 </div>
         

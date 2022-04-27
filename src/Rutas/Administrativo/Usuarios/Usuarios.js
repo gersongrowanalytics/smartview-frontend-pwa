@@ -10,7 +10,9 @@ import {
     dataTiposUsuarios,
     crearUsuario,
     SeleccionarTodoFiltroTipoUsuario,
-    SeleccionarFiltroTipoUsuario
+    SeleccionarFiltroTipoUsuario,
+    SeleccionarSucursalCrearUsuarioReducer,
+    SeleccionarTodoSucursalesCrearUsuarioReducer
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
@@ -35,6 +37,7 @@ const Usuarios = () => {
     const [txtBuscarUsuario, setTxtBuscarUsuario] = useState("")
     const [editarFilaUsuario, setEditarFilaUsuario] = useState(false)
     const [filtroTipoUsuario, setFiltroTipoUsuario] = useState(false)
+    const [ConfirmoEditar, setConfirmoEditar] = useState(false)
 
     const [form] = Form.useForm()
     
@@ -46,7 +49,8 @@ const Usuarios = () => {
         indexRegistro,
         paisesUsuario,
         tiposUsuarios,
-        fil_selectodo_data_tipo_usuario
+        fil_selectodo_data_tipo_usuario,
+        data_datos_adm_usuarios
     } = useSelector(({usuarios}) => usuarios);
 
     const {
@@ -135,6 +139,7 @@ const Usuarios = () => {
 
     const crearAdmUsuario = () => {
         setEditarFilaUsuario(false)
+        setConfirmoEditar(false)
         form.resetFields()
         settipoUsuario("")
         setfechaInicio("")
@@ -144,8 +149,9 @@ const Usuarios = () => {
         setestadoBooleanUsuario(false)
     }
 
-    const seleccionarUsuarioEditar = (usuario) => {
-
+    const seleccionarUsuarioEditar = async (usuario) => {
+        // setpaisesSeleccionados([])
+        await dispatch(SeleccionarTodoSucursalesCrearUsuarioReducer(false))
         setEditarFilaUsuario(true)
 
         form.setFieldsValue({
@@ -167,45 +173,66 @@ const Usuarios = () => {
         setfechaFinal(usuario.usufechafinal)
         setfechaInicio(usuario.usufechainicio)
 
-        paisesUsuario.map((pais, pos) => {
-            usuario.paises.map((usuarioPais) => {
-                if(usuarioPais.paiid == pais.paiid){
-                    SeleccionarPais(true, pos)
+        let paises = []
+        await usuario.paises.map((pais) => {
+            paises.push(pais)
+        })
+
+        setpaisesSeleccionados(paises)
+        
+
+        // paisesUsuario.map((pais, pos) => {
+        //     usuario.paises.map((usuarioPais) => {
+        //         if(usuarioPais.paiid == pais.paiid){
+        //             SeleccionarPais(true, pos)
+        //         }
+        //     })
+        // })
+        cambiarEstado(usuario.estid)
+
+        await sucursalesUsuario.map((sucursal, posicionSucursal) => {
+            usuario.uss.map((sucursalUsuario) => {
+                if(sucursalUsuario.sucid == sucursal.sucid){
+                    dispatch(SeleccionarSucursalCrearUsuarioReducer(posicionSucursal, true))
                 }
             })
         })
-        cambiarEstado(usuario.estid)
     }
 
     const onFinish = async(valores) => {
-        let estado
-        if (estadoBooleanUsuario == true) {
-            estado = '1'
-        }else{
-            estado = '2'
-        }
-        let usuarioDatos = {
-            'nombre'      : valores['Nombre'],
-            'apellidos'   : valores['Apellidos'],
-            'correo_inst' : valores['CorreoCoorporativo'],
-            'correo'      : valores['CorreoPersonal'],
-            'contrasenia' : valores['Contraseña'],
-            'celular'     : valores['Celular'],
-            'tipo_usuario': valorFormularioTipoUsuario,
-            'fecha_inicio': fechaInicio,
-            'fecha_fin'   : fechaFinal,
-            // 'zonas: zonasSeelccionadas,
-            'paises' : paisesSeleccionados,
-            'estado' : estado,
-        }
 
-        if(await dispatch(crearUsuario(usuarioDatos)) == true){
-            crearAdmUsuario()
-            cargarDatosTabla(paginaActualTabla)
+        if(editarFilaUsuario == true && ConfirmoEditar == false){
+            setConfirmoEditar(true)
         }else{
-            // console.log("error")
+            let estado
+            if (estadoBooleanUsuario == true) {
+                estado = '1'
+            }else{
+                estado = '2'
+            }
+            let usuarioDatos = {
+                'nombre'      : valores['Nombre'],
+                'apellidos'   : valores['Apellidos'],
+                'correo_inst' : valores['CorreoCoorporativo'],
+                'correo'      : valores['CorreoPersonal'],
+                'contrasenia' : valores['Contraseña'],
+                'celular'     : valores['Celular'],
+                'tipo_usuario': valorFormularioTipoUsuario,
+                'fecha_inicio': fechaInicio,
+                'fecha_fin'   : fechaFinal,
+                // 'zonas: zonasSeelccionadas,
+                'paises' : paisesSeleccionados,
+                'estado' : estado,
+            }
+
+            if(await dispatch(crearUsuario(usuarioDatos)) == true){
+                crearAdmUsuario()
+                cargarDatosTabla(paginaActualTabla)
+            }else{
+            
+            }
         }
-        // console.log(usuarioDatos)
+        
     };
 
     useEffect(() => {
@@ -309,11 +336,8 @@ const Usuarios = () => {
                                 }}
                             />
                         </div>
-                        <div
-                            className='Paginacion-Control-Archivo'
-                            style={{ paddingTop: '0px', paddingRight: '15px' }}
-                        >
-                            <div>1 - {paginasTotales} de {paginaActual}</div>
+                        <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
+                            <div>{data_datos_adm_usuarios.from} - {data_datos_adm_usuarios.to} de {data_datos_adm_usuarios.total}</div>
                             <LeftOutlined 
                                 style={{marginLeft:'9px'}}
                                 onClick={() => paginaAnterior(paginaActualTabla)}
@@ -376,12 +400,18 @@ const Usuarios = () => {
                         fechaFinal              = {fechaFinal}
                         setfechaFinal           = {setfechaFinal}
                         editarFilaUsuario       = {editarFilaUsuario}
+                        ConfirmoEditar          = {ConfirmoEditar}
+
                         form = {form}
 
                     />
                 </Col>
             </Row>
-            <Modal
+
+
+            
+
+            {/* <Modal
                 centered
                 title={null}
                 visible={abrirModalZona}
@@ -408,9 +438,6 @@ const Usuarios = () => {
                                                         <Col xl={8}>
                                                             <div className='Titulo-Modal-Zona'>
                                                                 <Checkbox style={{marginRight:'7px'}}/>{zona.zonnombre}
-                                                                {/* <div>
-                                                                {zona.gsus}
-                                                                </div> */}
                                                             </div>
                                                             {
                                                                 gsus.map((eG,posG) => {
@@ -447,7 +474,7 @@ const Usuarios = () => {
                         </button>
                     </div>
                 </div>
-            </Modal>
+            </Modal> */}
         </div>
     )
 }

@@ -12,7 +12,8 @@ import {
     ACTUALIZAR_CANALES_DE_PROMOCIONES,
     CAMBIAR_DISENIO_PROMOCIONES,
     MOSTRAR_PROMOCIONES_NUEVAS,
-    OBTENER_DATA_RESUMEN_PROMOCIONES
+    OBTENER_DATA_RESUMEN_PROMOCIONES,
+    SELECCIONAR_CATEGORIA_PROMOCIONES
 } from '../../../Constantes/Promociones/Promociones'
 import config from '../../../config'
 import {
@@ -30,6 +31,11 @@ export const obtenerPromocionesReducer = () =>async (dispatch, getState) => {
     const idSucursalUsuarioSelec = getState().sucursales.idSucursalUsuarioSelec
     const mesSeleccionadoFiltro = getState().fechas.mesSeleccionadoFiltro
     const anioSeleccionadoFiltro = getState().fechas.anioSeleccionadoFiltro
+
+    dispatch({
+        type: SELECCIONAR_CATEGORIA_PROMOCIONES,
+        payload : ""
+    })
 
     await fetch(config.api+'promociones/mostrar/categorias',
         {
@@ -143,6 +149,11 @@ export const obtenerPromocionesReducer = () =>async (dispatch, getState) => {
 
     dispatch({
         type: CAMBIAR_APLICANDO_FILTRO_ACUMULADO,
+        payload : false
+    })
+
+    dispatch({
+        type: "CARGANDO_TODA_PLATAFORMA_CONFIGURACION",
         payload : false
     })
 
@@ -285,6 +296,12 @@ export const seleccionarCategoriaReducer = (scaid, limpiarCanales, posicion) => 
         if(categoria.scaid === scaid){
             categoriasPromociones[nuevaposicion]['seleccionado'] = true
             colorSeleccionado = categoria.catcolor
+
+            dispatch({
+                type: SELECCIONAR_CATEGORIA_PROMOCIONES,
+                payload : categoria.catnombre
+            })
+
         }else{
             categoriasPromociones[nuevaposicion]['seleccionado'] = false
         }
@@ -573,6 +590,11 @@ export const ObtenerPromocionesAcumuladasReducer = (eliminandoFiltro = false) =>
     const gsus = getState().sucursales.gsus
     const sucursalesUsuario = getState().sucursales.sucursalesUsuario
 
+    dispatch({
+        type: SELECCIONAR_CATEGORIA_PROMOCIONES,
+        payload : ""
+    })
+
     await fetch(config.api+'promociones/mostrar/categorias/acumulado',
         {
             mode:'cors',
@@ -684,6 +706,10 @@ export const SeleccionarCategoriaXZonaAcumuladaReducer = (scaid, limpiarCanales,
         if(categoria.scaid === scaid){
             categoriasPromociones[nuevaposicion]['seleccionado'] = true
             colorSeleccionado = categoria.catcolor
+            dispatch({
+                type: SELECCIONAR_CATEGORIA_PROMOCIONES,
+                payload : categoria.catnombre
+            })
         }else{
             categoriasPromociones[nuevaposicion]['seleccionado'] = false
         }

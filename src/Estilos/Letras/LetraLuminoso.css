@@ -807,3 +807,13 @@
     letter-spacing: -0.015em;
     color: #FFFFFF;
 }
+
+.W600-S12-H16-C00CA8A{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+    color: #00CA8A;
+}

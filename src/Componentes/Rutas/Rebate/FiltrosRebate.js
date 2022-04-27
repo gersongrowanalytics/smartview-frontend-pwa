@@ -178,7 +178,7 @@ const FiltrosRebate = (props) => {
                     </div>
                 </Tooltip>
 
-                <ExcelFile 
+                {/* <ExcelFile 
                     filename={"Rebate-"+anioSeleccionadoFiltro+"-"+mesSeleccionadoFiltro}
                     element={
                         <div
@@ -191,7 +191,7 @@ const FiltrosRebate = (props) => {
                         dataSet={data_rebate_descargar} 
                         name={"Rebate "+" "+mesSeleccionadoFiltro+" "+anioSeleccionadoFiltro}
                     />
-                </ExcelFile>
+                </ExcelFile> */}
                 
             </div>
 

@@ -222,7 +222,11 @@ const ElementosEnviadosNuevo = () => {
                             <table className='Tabla-Elementos-Enviados'>
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th
+                                            style={{
+                                                width: "64px"
+                                            }}
+                                        >
                                             <div>
                                                 <span>Item</span>
                                                 {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
@@ -319,7 +323,11 @@ const ElementosEnviadosNuevo = () => {
                                                     <td>
                                                         {pos+1}
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        style={{
+                                                            textAlign: "-webkit-left"
+                                                        }}
+                                                    >
                                                         {data.ucetipo}
                                                     </td>
                                                     <td
@@ -327,7 +335,10 @@ const ElementosEnviadosNuevo = () => {
                                                             // console.log(data.ucesucursales)
                                                             // console.log(JSON.parse(data.ucesucursales))
                                                         }}
-                                                        style={{position:'relative'}}
+                                                        style={{
+                                                            position:'relative',
+                                                            textAlign: "left"
+                                                        }}
                                                         className="Celda-Lista-Sucursales-Elementos-Enviados"
                                                     >
                                                         {
@@ -356,7 +367,11 @@ const ElementosEnviadosNuevo = () => {
                                                             </Row>
                                                         </div>
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        style={{
+                                                            textAlign: "left"
+                                                        }}
+                                                    >
                                                         {data.dcedestinatario}
                                                     </td>
                                                     <td
@@ -399,11 +414,19 @@ const ElementosEnviadosNuevo = () => {
                                                         
                                                         
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        style={{
+                                                            width:'100px'
+                                                        }}
+                                                    >
                                                         {/* {data.ucedia} {data.ucemes} {data.uceanio} */}
                                                         {dia} {mes} {anio}
                                                     </td>
-                                                    <td>
+                                                    <td
+                                                        style={{
+                                                            width: "45px"
+                                                        }}
+                                                    >
                                                         {data.ucehora}
                                                     </td>
                                                     <td>

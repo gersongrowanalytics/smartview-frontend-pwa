@@ -381,7 +381,7 @@ const ListaPrecios = () => {
                             }}
                         />
                         <RightOutlined
-                            style={{marginLeft:'34px'}}
+                            style={{marginLeft:'15px'}}
                             onClick={() => {
                                 dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0, data_config_tabla_lista_precios.current_page + 1))
                             }}

@@ -11,7 +11,7 @@ import {
 
 export const CargarArchivoReducer = (url, data, tipo) => async(dispatch, getState) => {
 
-    console.log(tipo)
+    // console.log(tipo)
 
     let respuesta = false
 
@@ -100,4 +100,13 @@ export const CargarArchivoReducer = (url, data, tipo) => async(dispatch, getStat
     });
 
     return respuesta
+}
+
+export const EliminarNotificacionReducer = (pos) => (dispatch, getState) => {
+
+    let notificaciones_data_carga_archivos = getState().cargaArchivos.notificaciones_data_carga_archivos
+
+    
+
+
 }

@@ -108,12 +108,12 @@ const TiposUsuarios = () => {
         'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/Circular/tpu-hombre-4.png'
     ]
     const imagenPerfil = [
-        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-m-1.png',
-        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-1.png',
-        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-3.png',
-        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-2.png',
-        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-2.png',
-        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-2.png'
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-m-2png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-4.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-5.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-6.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-7.png',
+        'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-4.png'
     ]
 
     const onFinish = async(valores) => {
@@ -413,7 +413,7 @@ const TiposUsuarios = () => {
                     <div className='Contenedor-Imagen-Perfil'>
                         {
                             (tpuimagen == " " || tpuimagen == null) ? (
-                                <img src={ImagenPerfil} style={{width: '80%'}}></img>
+                                <img src={"https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-4.png"} style={{width: '80%'}}></img>
                             ) : ( 
                                 <img src={tpuimagen} style={{width: '80%', marginTop:'100px'}}></img>
                             )

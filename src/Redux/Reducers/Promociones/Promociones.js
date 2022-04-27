@@ -10,7 +10,8 @@ import {
     ACTUALIZAR_CANALES_DE_PROMOCIONES,
     CAMBIAR_DISENIO_PROMOCIONES,
     MOSTRAR_PROMOCIONES_NUEVAS,
-    OBTENER_DATA_RESUMEN_PROMOCIONES
+    OBTENER_DATA_RESUMEN_PROMOCIONES,
+    SELECCIONAR_CATEGORIA_PROMOCIONES
 } from "../../../Constantes/Promociones/Promociones";
 
 const INIT_STATE = {
@@ -30,6 +31,8 @@ const INIT_STATE = {
     mostrarDisenioPromocionesPrincipal : false,
     mostrar_promociones_nuevas : false,
     arr_resumenPromociones : [],
+
+    categoria_seleccionada_promociones : ""
 };
 
 
@@ -121,6 +124,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 arr_resumenPromociones : action.payload
+            }
+        }
+        case SELECCIONAR_CATEGORIA_PROMOCIONES: {
+            return {
+                ...state,
+                categoria_seleccionada_promociones : action.payload
             }
         }
     default:

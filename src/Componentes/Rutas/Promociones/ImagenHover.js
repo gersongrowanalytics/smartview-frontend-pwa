@@ -99,10 +99,38 @@ const ImagenHover = (props) => {
                                                 style={ 
                                                     seleccionado == true 
                                                     ?{
-                                                        
+                                                        position: "relative",
+                                                        width: "100%",
+                                                        justifyContent: "center",
+                                                        alignItems: "center",
                                                     } 
                                                     :{}}
                                             >
+
+                                                {
+                                                    seleccionado == true 
+                                                    ?<div 
+                                                        style={{
+                                                            width: "100%",
+                                                            display: "flex",
+                                                            placeContent: "center",
+                                                        }}
+                                                    >
+                                                        <div 
+                                                            style={{
+                                                                width: "100px",
+                                                                height: "100px",
+                                                                background: color,
+                                                                position: "absolute",
+                                                                borderRadius: "100px",
+                                                            }}
+                                                        >
+
+                                                        </div>
+                                                    </div>
+                                                    :null
+                                                }
+
                                                 <img 
                                                     alt="Remy Sharp" 
                                                     id={

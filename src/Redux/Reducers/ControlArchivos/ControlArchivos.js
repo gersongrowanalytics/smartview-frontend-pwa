@@ -10,7 +10,8 @@ const INIT_STATE = {
     paginasTotales: "",
     paginaActual: "",
     indexRegistro: "",
-    cargandoBtnModal: false
+    cargandoBtnModal: false,
+    data_controlarchivos : {}
 };
 
 export default (state = INIT_STATE, action) => {
@@ -28,7 +29,8 @@ export default (state = INIT_STATE, action) => {
                 paginasTotales: action.payload.paginasTotales,
                 paginaActual: action.payload.paginaActual,
                 indexRegistro: action.payload.indexRegistro,
-                cargandoTablaControlArchivos: action.payload.cargandoSpin
+                cargandoTablaControlArchivos: action.payload.cargandoSpin,
+                data_controlarchivos: action.payload.data_controlarchivos,
             }
         }
         case CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS: {

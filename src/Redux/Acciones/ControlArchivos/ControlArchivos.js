@@ -87,8 +87,8 @@ export const EliminarControlArchivosReducer = (idControlArchivo) => async (dispa
     })
     .then( async data => {
         const estadoRequest = getState().estadoRequest.init_request
-        if(estadoRequest == true){
-            if(data.respuesta == true){
+        if (estadoRequest == true) {
+            if (data.respuesta == true) {
                 respuesta = true
                 dispatch({
                     type: CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS,

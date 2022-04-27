@@ -1,8 +1,8 @@
 import React from 'react'
-import FlechaAbajo from '../../../Assets/Img/ElementosEnviados/Angulo-abajo.png'
-import { Checkbox  } from 'antd'
+import FlechaAbajo from '../../../../Assets/Img/ElementosEnviados/Angulo-abajo.png'
+import { Checkbox } from 'antd'
 
-const FiltroTipoEnvio = (props) => {
+const FiltroTipoUsuario = (props) => {
 
     const titulo = props.titulo
     const mostrarCuerpo = props.mostrarCuerpo
@@ -10,14 +10,15 @@ const FiltroTipoEnvio = (props) => {
     const funSeleccionarTodo = props.funSeleccionarTodo
     const seleccionartodo = props.seleccionartodo
     const aceptarFiltro = props.aceptarFiltro
-    const tiposElementosEnviados = props.tiposElementosEnviados
+    const tiposUsuarios = props.tiposUsuarios
     const seleccionarTipo = props.seleccionarTipo
 
     return (
         <div 
             style={{
                 position: "relative",
-                height: "100%"
+                height: "100%",
+                marginLeft: '16px'
             }}
         >
             <div 
@@ -45,24 +46,26 @@ const FiltroTipoEnvio = (props) => {
                         </div>
                         <div className='Cuerpo-Filtro-TipoEnvio'>
                             {
-                                tiposElementosEnviados.map((tipo, pos) => {
-                                    return(
-                                        <div
-                                            style={{marginBottom:'5px'}}
-                                        >
-                                            <Checkbox 
-                                                onChange={(e) => {
-                                                    seleccionarTipo(pos, e.target.checked)
-                                                }}
-                                                className="Check-Filtro-TipoEnvio W400-S12-H16-C1E1E1E-L0015"
-                                                checked={tipo.seleccionado}
+                                tiposUsuarios.map((tipo, pos) => {
+                                    if (tipo.tpuid > '0') { 
+                                        return(
+                                            <div
+                                                style={{marginBottom:'5px'}}
                                             >
-                                                {
-                                                    tipo.ucetipo
-                                                }
-                                            </Checkbox>
-                                        </div>
-                                    )
+                                                <Checkbox 
+                                                    onChange={(e) => {
+                                                        seleccionarTipo(pos, e.target.checked)
+                                                    }}
+                                                    className="Check-Filtro-TipoEnvio W400-S12-H16-C1E1E1E-L0015"
+                                                    checked={tipo.seleccionado}
+                                                >
+                                                    {
+                                                        tipo.tpunombre
+                                                    }
+                                                </Checkbox>
+                                            </div>
+                                        )
+                                    }
                                 })
                             }
                         </div>
@@ -95,4 +98,4 @@ const FiltroTipoEnvio = (props) => {
     )
 }
 
-export default FiltroTipoEnvio
+export default FiltroTipoUsuario

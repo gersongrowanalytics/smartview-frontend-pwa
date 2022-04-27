@@ -4,11 +4,15 @@ import {
     OBTENER_DATOS_USUARIOS,
     CARGANDO_TABLA_DATOS_USUARIOS,
     OBTENER_DATOS_PAISES,
-    OBTENER_DATOS_TIPOS_USUARIOS
+    OBTENER_DATOS_TIPOS_USUARIOS,
+    FILTRO_TIPO_USUARIOS_ADM_USUARIO,
+    SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO
 } from '../../../../Constantes/Administrativo/Usuarios/Usuarios'
 import { message } from 'antd'
 
 export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
+
+    let tiposUsuario = getState().usuarios.tiposUsuarios
 
     dispatch({
         type: CARGANDO_TABLA_DATOS_USUARIOS,
@@ -22,7 +26,8 @@ export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
             mode:'cors',
             method: 'POST',
             body: JSON.stringify({
-                usutoken : localStorage.getItem('usutoken'),
+                usutoken: localStorage.getItem('usutoken'),
+                re_tipoUsuario : tiposUsuario
             }),
             headers: {
                 'Accept' : 'application/json',
@@ -121,10 +126,14 @@ export const dataTiposUsuarios = () => async ( dispatch, getState ) => {
     .then( async data => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
-            if(data){
+            if (data) {
+                let tipoUsuario = data.datos
+                 await tipoUsuario.map((tipo) => {
+                    tipo['seleccionado'] = true
+                })
                 dispatch({
                     type: OBTENER_DATOS_TIPOS_USUARIOS,
-                    payload: data.datos
+                    payload: tipoUsuario
                 })
             }else{
 
@@ -170,4 +179,33 @@ export const crearUsuario = (usuario) => async ( dispatch, getState ) => {
     });
 
     return respuesta
+}
+
+export const SeleccionarTodoFiltroTipoUsuario = (valor) => async (dispatch, getState) => {
+    let tiposUsuario = getState().usuarios.tiposUsuarios
+
+    await tiposUsuario.map((tipo, pos) => {
+        tiposUsuario[pos]['seleccionado'] = valor
+    })
+
+    dispatch({
+        type: FILTRO_TIPO_USUARIOS_ADM_USUARIO,
+        payload : tiposUsuario
+    })
+
+    dispatch({
+        type: SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO,
+        payload : valor
+    })
+}
+
+export const SeleccionarFiltroTipoUsuario = (posicion, valor) => async (dispatch, getState) => {
+    let tiposUsuario = getState().usuarios.tiposUsuarios
+
+    tiposUsuario[posicion]['seleccionado'] = valor
+
+    dispatch({
+        type: FILTRO_TIPO_USUARIOS_ADM_USUARIO,
+        payload : tiposUsuario
+    })
 }

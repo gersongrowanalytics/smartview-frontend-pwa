@@ -2,7 +2,9 @@ import {
     OBTENER_DATOS_USUARIOS,
     CARGANDO_TABLA_DATOS_USUARIOS,
     OBTENER_DATOS_PAISES,
-    OBTENER_DATOS_TIPOS_USUARIOS
+    OBTENER_DATOS_TIPOS_USUARIOS,
+    FILTRO_TIPO_USUARIOS_ADM_USUARIO,
+    SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO
 } from '../../../../Constantes/Administrativo/Usuarios/Usuarios'
 
 const INIT_STATE = {
@@ -12,7 +14,10 @@ const INIT_STATE = {
     paginaActual: "",
     indexRegistro: "",
     paisesUsuario: [],
-    tiposUsuarios: []
+    tiposUsuarios: [],
+
+    //FILTRO
+    fil_selectodo_data_tipo_usuario: true
 };
 
 export default (state = INIT_STATE, action) => {
@@ -43,6 +48,18 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 tiposUsuarios: action.payload
+            }
+        }
+        case FILTRO_TIPO_USUARIOS_ADM_USUARIO: {
+            return {
+                ...state,
+                tiposUsuarios: action.payload
+            }
+        }
+        case SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO: {
+            return {
+                ...state,
+                fil_selectodo_data_tipo_usuario: action.payload
             }
         }
         default:

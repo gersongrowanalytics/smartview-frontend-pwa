@@ -8,11 +8,14 @@ import {
     dataPaises,
     dataUsuarios,
     dataTiposUsuarios,
-    crearUsuario
+    crearUsuario,
+    SeleccionarTodoFiltroTipoUsuario,
+    SeleccionarFiltroTipoUsuario
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
 import FormularioUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/FormularioUsuarios';
+import FiltroTipoUsuario from '../../../Componentes/Rutas/Administrativo/Usuarios/FiltroTipoUsuario';
 
 const Usuarios = () => {
     const dispatch = useDispatch()
@@ -30,8 +33,8 @@ const Usuarios = () => {
     const [fechaInicio, setfechaInicio] = useState("")
     const [fechaFinal, setfechaFinal] = useState("")
     const [txtBuscarUsuario, setTxtBuscarUsuario] = useState("")
-
     const [editarFilaUsuario, setEditarFilaUsuario] = useState(false)
+    const [filtroTipoUsuario, setFiltroTipoUsuario] = useState(false)
 
     const [form] = Form.useForm()
     
@@ -42,7 +45,8 @@ const Usuarios = () => {
         paginaActual,
         indexRegistro,
         paisesUsuario,
-        tiposUsuarios
+        tiposUsuarios,
+        fil_selectodo_data_tipo_usuario
     } = useSelector(({usuarios}) => usuarios);
 
     const {
@@ -266,6 +270,24 @@ const Usuarios = () => {
                                 Control de archivo
                             </div>
                         </Link>
+                        <FiltroTipoUsuario
+                            titulo = {"Tipo Usuario"}
+                            mostrarCuerpo = {filtroTipoUsuario}
+                            setMostrarCuerpo = {() => {
+                                setFiltroTipoUsuario(!filtroTipoUsuario)
+                            }}
+                            funSeleccionarTodo = {(valor) => {
+                                dispatch(SeleccionarTodoFiltroTipoUsuario(valor))
+                            }}
+                            seleccionartodo = {fil_selectodo_data_tipo_usuario}
+                            aceptarFiltro = {() => {
+                                dispatch(dataUsuarios(paginaActualTabla))
+                            }}
+                            seleccionarTipo = {(posicion, valor) => {
+                                dispatch(SeleccionarFiltroTipoUsuario(posicion, valor))
+                            }}
+                            tiposUsuarios = {tiposUsuarios}
+                        />                   
                     </div>
                 </Col>
                 <Col lg={11} xl={11}>
@@ -287,14 +309,17 @@ const Usuarios = () => {
                                 }}
                             />
                         </div>
-                        <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
+                        <div
+                            className='Paginacion-Control-Archivo'
+                            style={{ paddingTop: '0px', paddingRight: '15px' }}
+                        >
                             <div>1 - {paginasTotales} de {paginaActual}</div>
                             <LeftOutlined 
                                 style={{marginLeft:'9px'}}
                                 onClick={() => paginaAnterior(paginaActualTabla)}
                             />
                             <RightOutlined
-                                style={{marginLeft:'34px'}}
+                                // style={{marginLeft:'34px'}}
                                 onClick={() => paginaSiguiente(paginaActualTabla)}
                             />
                         </div>

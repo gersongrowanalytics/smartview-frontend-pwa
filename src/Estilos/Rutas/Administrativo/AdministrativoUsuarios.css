@@ -566,3 +566,9 @@ input[type="date"]:focus { outline: 0; }
     box-shadow: none !important;
     border-color: #000000 !important;
 }
+
+@media screen and (max-width: 1437px) {
+    .Input-Buscar-Usuarios{
+        width: 40% !important;
+    }
+}

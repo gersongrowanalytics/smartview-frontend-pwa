@@ -336,7 +336,10 @@ const Usuarios = () => {
                                 }}
                             />
                         </div>
-                        <div className='Paginacion-Control-Archivo' style={{paddingTop:'0px'}}>
+                        <div
+                            className='Paginacion-Control-Archivo'
+                            style={{ paddingTop: '0px', paddingRight:'6px' }}
+                        >
                             <div>{data_datos_adm_usuarios.from} - {data_datos_adm_usuarios.to} de {data_datos_adm_usuarios.total}</div>
                             <LeftOutlined 
                                 style={{marginLeft:'9px'}}

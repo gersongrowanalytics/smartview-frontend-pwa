@@ -201,7 +201,7 @@ const CardResumenPromociones = (props) => {
                                     textAlign: "-webkit-center"
                                 }}
                             >
-                                <div className='W700-S16-H21-CFFFFFF-L0015'>Regular</div>
+                                <div className='W700-S16-H21-CFFFFFF-L0015'>Prom.<br/>Regular</div>
                             </Col>
                             <Col 
                                 xl={6}
@@ -209,7 +209,7 @@ const CardResumenPromociones = (props) => {
                                     textAlign: "-webkit-center"
                                 }}
                             >
-                                <div className='W700-S16-H21-CFFFFFF-L0015'>Nueva</div>
+                                <div className='W700-S16-H21-CFFFFFF-L0015'>Prom.<br/>Nueva</div>
                             </Col>
                             <Col 
                                 xl={6}
@@ -235,7 +235,8 @@ const CardResumenPromociones = (props) => {
                                             <Col 
                                                 xl={6}
                                                 style={{
-                                                    textAlign: "-webkit-center"
+                                                    textAlign: "-webkit-center",
+                                                    // font-weight: bold;
                                                 }}
                                             >
                                                 <div className='W400-S16-H21-CFFFFFF'>{resumen.regular}</div>

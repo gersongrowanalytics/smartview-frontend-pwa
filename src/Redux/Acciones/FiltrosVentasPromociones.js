@@ -4,13 +4,15 @@ import {
     SELECCIONAR_UNA_ZONA_DESCARGAR,
     SELECCIONAR_UN_GRUPO_DESCARGAR,
     APLICANDO_FILTROS_CORRESPONDIENTES,
-    CAMBIAR_APLICANDO_FILTRO_ACUMULADO
+    CAMBIAR_APLICANDO_FILTRO_ACUMULADO,
+    FILTRO_SELECCIONAR_SUCURSAL_USUARIO
 } from '../../Constantes/Sucursales'
 import {
     ObtenerVentasAcumuladaReducer
 } from '../../Redux/Acciones/Ventas/Ventas'
 import {
-    ObtenerPromocionesAcumuladasReducer
+    ObtenerPromocionesAcumuladasReducer,
+    obtenerPromocionesReducer
 } from '../../Redux/Acciones/Promociones/Promociones'
 
 export const SeleccionarFiltroCanalReducer = (posicion, estado) => async (dispatch, getState) => {
@@ -293,6 +295,8 @@ export const EliminarFiltroAplicadoReducer = (posicion, Filtro) => async (dispat
         const aplicandoFiltroGrupo = getState().sucursales.aplicandoFiltroGrupo
         const aplicandoFiltroDt    = getState().sucursales.aplicandoFiltroDt
 
+        let aplicarFiltroUnitario = false
+
         if(aplicandoFiltroCanal == true ){
             let cass = getState().sucursales.cass
 
@@ -332,6 +336,24 @@ export const EliminarFiltroAplicadoReducer = (posicion, Filtro) => async (dispat
                 type: SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
                 payload : sucursalesUsuario
             })
+
+            aplicarFiltroUnitario = false
+            let numeroDtSeleccionadas = 0
+            let sucursalSeleccionada = 0
+            await sucursalesUsuario.map((sucursal) => {
+                if(sucursal.check == true){
+                    numeroDtSeleccionadas = numeroDtSeleccionadas + 1
+                    sucursalSeleccionada = sucursal.sucid
+                }
+            })
+
+            if(numeroDtSeleccionadas == 1){
+                aplicarFiltroUnitario = true
+                dispatch({
+                    type: FILTRO_SELECCIONAR_SUCURSAL_USUARIO,
+                    payload : sucursalSeleccionada
+                })
+            }
         }
 
 
@@ -342,10 +364,17 @@ export const EliminarFiltroAplicadoReducer = (posicion, Filtro) => async (dispat
                 
             }
         }else if(Filtro == "PROMOCIONES"){
-            if(aplicandoFiltroAcumulado == true){
-                dispatch(ObtenerPromocionesAcumuladasReducer(true))
-            }else{
 
+            if(aplicarFiltroUnitario == true){
+                
+                dispatch(obtenerPromocionesReducer())
+
+            }else{
+                if(aplicandoFiltroAcumulado == true){
+                    dispatch(ObtenerPromocionesAcumuladasReducer(true))
+                }else{
+    
+                }
             }
         }
 

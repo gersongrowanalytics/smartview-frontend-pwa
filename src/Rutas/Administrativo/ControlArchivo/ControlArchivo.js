@@ -17,6 +17,7 @@ import IconoEliminar from '../../../Assets/Img/Administrativo/Permisos/eliminar.
 import IconoEliminarBlanco from '../../../Assets/Img/Administrativo/Permisos/eliminarBlanco.png'
 import IconoGuardar from '../../../Assets/Img/Administrativo/Permisos/guardar.png'
 import IconoGuardarBlanco from '../../../Assets/Img/Administrativo/ControlArchivo/Guardar-white.png'
+import Moment from 'moment';
 
 const ControlArchivo = () => {
 
@@ -34,31 +35,53 @@ const ControlArchivo = () => {
         paginaActual,
         indexRegistro,
         cargandoTablaControlArchivos,
-        cargandoBtnModal
+        cargandoBtnModal,
+        data_controlarchivos
     } = useSelector(({controlArchivos}) => controlArchivos);
 
-    console.log(archivosSubidos)
+    // console.log(archivosSubidos)
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataControlArchivos(paginaActualTabla))
     }
 
     const obtenerFechaHora = (fechaSinFormato, tipo) => {
-        if (fechaSinFormato == null) {
-            return "NaN"
-        }else{
-            let date = new Date(fechaSinFormato)
-            if (tipo == 'fecha') {
-                let dia = date.getDay() + 1
-                let mes = date.getMonth() 
-                let anio = date.getFullYear()
-                return dia+" "+meses[mes]+" "+anio
-            }else{
-                let hora = date.getHours()
-                let minutos = date.getMinutes()
-                let minutosTxt = minutos.toString();
-                return hora+":"+ minutosTxt.padStart(2,"0")
-            }
+
+        let nuevaFecha = fechaSinFormato.split(" ")
+        let dia  = nuevaFecha[0]
+        let mes  = nuevaFecha[1]
+        let anio = nuevaFecha[2]
+    
+        if(mes == "Apr"){
+            mes = "Abr"
+        }else if(mes == "Jan"){
+            mes = "Ene"
+        }else if(mes == "Dec"){
+            mes = "Dic"
+        }else if(mes == "Sep"){
+            mes = "Set"
+        }else if(mes == "Aug"){
+            mes = "Ago"
         }
+    
+        return dia+" "+mes+" "+anio
+        // return fechaSinFormato
+    
+        // if (fechaSinFormato == null) {
+        //     return "NaN"
+        // }else{
+        //     let date = new Date(fechaSinFormato)
+        //     if (tipo == 'fecha') {
+        //         let dia = date.getDay()
+        //         let mes = date.getMonth() 
+        //         let anio = date.getFullYear()
+        //         return dia+" "+meses[mes]+" "+anio
+        //     }else{
+        //         let hora = date.getHours()
+        //         let minutos = date.getMinutes()
+        //         let minutosTxt = minutos.toString();
+        //         return hora+":"+ minutosTxt.padStart(2,"0")
+        //     }
+        // }
     }
 
     const paginaAnterior = (pagina) => {
@@ -98,6 +121,8 @@ const ControlArchivo = () => {
     useEffect(() => {
         cargarDatosTabla(paginaActualTabla)
     },[paginaActualTabla])
+
+    Moment.locale('en');
 
     return (
         <div className='Contenedor-Administrativo'>
@@ -173,7 +198,7 @@ const ControlArchivo = () => {
                             />
                         </div>
                         <div className='Paginacion-Control-Archivo'>
-                            <div>1 - {paginasTotales} de {paginaActual}</div>
+                            <div>{data_controlarchivos.from} - {data_controlarchivos.to} de {data_controlarchivos.total}</div>
                             <LeftOutlined 
                                 style={{marginLeft:'9px'}}
                                 onClick={() => paginaAnterior(paginaActualTabla)}
@@ -200,49 +225,49 @@ const ControlArchivo = () => {
                                         <th style={{width:'7%'}}>
                                             <div>
                                                 <span>Item</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'22%'}}>
                                             <div>
                                                 <span>Archivo</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'16%'}}>
                                             <div>
                                                 <span>Tipo</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'22%'}}>
                                             <div className='Contenedor-Cabecera-Nombre-Apellido'>
                                                 <span>Nombre Apellido</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Pais</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Estado</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{width:'8%'}}>
                                             <div>
                                                 <span>Fecha</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                         <th style={{ width: '9%' }}>
                                             <div>
                                                 <span>Hora</span>
-                                                <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/>
+                                                {/* <img src={FlechaAbajo} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
                                     </tr>
@@ -276,7 +301,7 @@ const ControlArchivo = () => {
                                                         {archivo.tcanombre}
                                                     </td>
                                                     <td style={{textAlign:'initial'}}>
-                                                        <div className='Texto-Columna-Nombre'>Nombre Apellido Apellido</div>
+                                                        <div className='Texto-Columna-Nombre'>{archivo.pernombrecompleto}</div>
                                                     </td>
                                                     <td>
                                                         <div >
@@ -289,7 +314,7 @@ const ControlArchivo = () => {
                                                         Cargado
                                                     </td>
                                                     <td>
-                                                        {obtenerFechaHora(archivo.created_at,'fecha')}
+                                                        {obtenerFechaHora(Moment(archivo.created_at).format('D MMM YYYY'))}
                                                     </td>
                                                     <td>
                                                         <div
@@ -300,7 +325,7 @@ const ControlArchivo = () => {
                                                             }}
                                                             className="Contenedor-Opciones-Permisos"
                                                         >
-                                                            <Tooltip
+                                                            {/* <Tooltip
                                                                 placement="bottom" 
                                                                 title={"Editar"}
                                                             >
@@ -320,7 +345,7 @@ const ControlArchivo = () => {
                                                                     <img className='Icono-Editar-Permisos' src={IconoEditar} /> 
                                                                     <img className='Icono-Editar-Permisos-Blanco' src={IconoEditarBlanco} /> 
                                                                 </div>
-                                                            </Tooltip>
+                                                            </Tooltip> */}
 
                                                             <Tooltip
                                                                 placement="bottom" 
@@ -338,7 +363,7 @@ const ControlArchivo = () => {
                                                                     <img className='Icono-Eliminar-Permisos-Blanco' src={IconoEliminarBlanco} />
                                                                 </div>
                                                             </Tooltip>
-                                                            <Tooltip
+                                                            {/* <Tooltip
                                                                 placement="bottom" 
                                                                 title={"Guardar"}
                                                             >
@@ -358,10 +383,10 @@ const ControlArchivo = () => {
                                                                     <img className='Icono-Guardar-Permisos' src={IconoGuardar} />
                                                                     <img className='Icono-Guardar-Permisos-Blanco' src={IconoGuardarBlanco}/> 
                                                                 </div>
-                                                            </Tooltip>
+                                                            </Tooltip> */}
                                                         </div>
                                                         <div className='Contenedor-Fecha-Permisos'>
-                                                            {obtenerFechaHora(archivo.created_at,'hora')}
+                                                            {Moment(archivo.created_at).format('H:mm')}
                                                         </div>
                                                     </td>
                                                 </tr>

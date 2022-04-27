@@ -27,6 +27,10 @@ import IconoFlechaSiguienteBlanco from '../../Assets/Img/Filtros/flechablanco.pn
 import IconoCerrarNegro from '../../Assets/Img/Filtros/cerrarnegro.png'
 import IconoCerrarAzul from '../../Assets/Img/Filtros/cerrarazul.png'
 import GifPromNuevas from '../../Assets/Gif/promnuevas.gif'
+import {
+    obtenerPromocionesReducer,
+    ObtenerPromocionesAcumuladasReducer
+} from '../../Redux/Acciones/Promociones/Promociones'
 
 const FiltrosPromociones = () => {
     
@@ -42,12 +46,15 @@ const FiltrosPromociones = () => {
         zonas,
         gsus,
         sucursalesUsuario,
-        idSucursalUsuarioSelec
+        idSucursalUsuarioSelec,
+
+        aplicandoFiltroAcumulado
     } = useSelector(({sucursales}) => sucursales);
 
     const {
         mostrar_promociones_nuevas,
-        mostrarDisenioPromocionesPrincipal
+        mostrarDisenioPromocionesPrincipal,
+        categoria_seleccionada_promociones
     } = useSelector(({promociones}) => promociones);
     
     const refFiltrosAplicados = useRef(null);
@@ -85,7 +92,15 @@ const FiltrosPromociones = () => {
     }, [avanzarAutomaticamente])
 
 
-
+    const ObtenerPromociones = () => {
+        if(aplicandoFiltroAcumulado == true){
+            dispatch(ObtenerPromocionesAcumuladasReducer())
+        }else{
+            if(idSucursalUsuarioSelec != 0){
+                dispatch(obtenerPromocionesReducer())
+            }
+        }
+    }
 
     return (
         <div 
@@ -93,12 +108,48 @@ const FiltrosPromociones = () => {
             style={{
                 position:'fixed',
                 width: "100%",
-                height: "60px",
+                height: "75px",
                 background:'white',
-                zIndex:'1',
-                top:'90px'
+                zIndex:'2',
+                top:'90px',
+                paddingTop:'25px'
             }}
         >
+
+            <div
+                style={{
+                    position:'absolute',
+                    top:'4px'
+                }}
+                className="W600-S14-H19-CC4C4C4-L0015"
+            >
+                {
+                    categoria_seleccionada_promociones == ""
+                    ?<>
+                        {"Filtro  Aplicado: Promociones > Resumen"}
+                    </>
+                    :<div
+                        style={{
+                            display:'flex'
+                        }}
+                    >
+                        {"Filtro  Aplicado: Promociones > "}
+                        <div 
+                            onClick={() => {
+                                ObtenerPromociones()
+                            }}
+                            style={{
+                                cursor:'pointer'
+                            }}
+                        >
+                            {" Resumen "}
+                        </div>
+                        {" > "+categoria_seleccionada_promociones}    
+                    </div>
+                }
+                
+            </div>
+
 
             {/* <FiltroCanalVentasPromociones 
                 titulo = "Channel"

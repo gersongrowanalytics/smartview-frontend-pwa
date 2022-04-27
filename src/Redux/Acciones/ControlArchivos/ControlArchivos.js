@@ -45,7 +45,8 @@ export const dataControlArchivos = (pagina) => async ( dispatch, getState ) => {
                         paginasTotales: data.datos.last_page,
                         paginaActual: data.datos.current_page,
                         indexRegistro: data.datos.from,
-                        cargandoSpin: false 
+                        cargandoSpin: false,
+                        data_controlarchivos : data.datos
                     }
                 })
             }else{

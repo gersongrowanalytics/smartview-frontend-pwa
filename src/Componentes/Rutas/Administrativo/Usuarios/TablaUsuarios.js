@@ -90,9 +90,19 @@ const TablaUsuarios = (props) => {
                         <tbody>
                             {
                                 usuarios.map((usuario,posicion) => {
+
+                                    let mostarPais = false
+
+                                    usuario.paises.map((pais) => {
+                                        if(pais.painombre.includes(txtBuscarUsuario) || pais.painombre.toLowerCase().includes(txtBuscarUsuario.toLowerCase())){
+                                            mostarPais = true
+                                        }
+                                    })
+
                                     return (
                                         usuario.pernombrecompleto.includes(txtBuscarUsuario) || usuario.pernombrecompleto.toLowerCase().includes(txtBuscarUsuario.toLowerCase()) ||
                                         usuario.tpunombre.includes(txtBuscarUsuario) || usuario.tpunombre.toLowerCase().includes(txtBuscarUsuario.toLowerCase())  
+                                        || mostarPais == true
                                         ?<tr 
                                             onClick={() => seleccionarUsuarioEditar(usuario)}
                                         >
@@ -112,8 +122,14 @@ const TablaUsuarios = (props) => {
                                             </td>
                                             <td>
                                                 {
-                                                    ( usuario.paises.length >= '2' ) ? (
-                                                        <div className='Lista-Banderas'>
+                                                    ( usuario.paises.length >= '2' ) 
+                                                    ? (
+                                                        <div 
+                                                            className='Lista-Banderas'
+                                                            style={{
+                                                                marginLeft: "-22px"
+                                                            }}
+                                                        >
                                                             {
                                                                 usuario.paises.map((pais, posicion) => {
                                                                     if (posicion == '0') {
@@ -135,10 +151,14 @@ const TablaUsuarios = (props) => {
                                                                 }
                                                             </div>
                                                         </div>
-                                                    ) : (
+                                                    ) 
+                                                    : (
                                                         usuario.paises.map((pais) => {
                                                             return (
-                                                                <img src={pais.paiicono} className='Banderas-lista' />
+                                                                <>
+                                                                    <img src={pais.paiicono} className='Banderas-lista' />
+                                                                    {pais.painombre}
+                                                                </>
                                                             )
                                                         })
                                                     )                                                            

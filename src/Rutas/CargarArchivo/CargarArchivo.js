@@ -31,6 +31,7 @@ const CargarArchivo = () => {
     const [regresarNotificacionAbierta, setRegresarNotificacionAbierta] = useState(false)
 
     const [mostrarModalEliminarNoti, setMostrarModalEliminarNoti] = useState(false)
+    const [posNotificacionSeleccionada, setPosNotificacionSeleccionada] = useState(0)
 
     return (
         <div style={{marginLeft:'40px', marginRight:'40px', position:'relative', marginTop:'105px'}}>
@@ -420,7 +421,10 @@ const CargarArchivo = () => {
                                         <div className='Contenedor-Iconos-Notificacion-CargaArchivos'>
                                             <div 
                                                 style={{cursor:'pointer'}}
-                                                onClick={() => setMostrarModalEliminarNoti(true)}
+                                                onClick={() => {
+                                                    setMostrarModalEliminarNoti(true)
+                                                    setPosNotificacionSeleccionada(pos)
+                                                }}
                                             >
                                                 <img 
                                                     src={IconoEquisRojo}
@@ -617,7 +621,10 @@ const CargarArchivo = () => {
                 width="280px"
                 height="193px"
                 className='Modal-Eliminar-Noti-CargaArchivos'
-                onCancel={() => setMostrarModalEliminarNoti(false)}
+                onCancel={() => {
+                    setMostrarModalEliminarNoti(false)
+                    setPosNotificacionSeleccionada(0)
+                }}
             >
 
                 <div>
@@ -638,6 +645,7 @@ const CargarArchivo = () => {
                             className='Btn-Cancelar-Modal-Eliminar-Notificacion-CargaArchivos'
                             onClick={() => {
                                 setMostrarModalEliminarNoti(false)
+                                setPosNotificacionSeleccionada(0)
                             }}
                         >
                             Cancelar

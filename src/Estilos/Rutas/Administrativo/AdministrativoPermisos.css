@@ -190,6 +190,11 @@
     width: 28px;
 }
 
+.Icono-Guardar-Permisos-Blanco{
+    width: 15px;
+    display: none;
+}
+
 .Contenedor-Icono-Opciones-Permisos{
     border-radius: 50px;
     width: 25px;
@@ -223,6 +228,14 @@
 
 .Contenedor-Icono-Opciones-Permisos:hover .Icono-Eliminar-Permisos-Blanco{
     display: flex;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Guardar-Permisos-Blanco{
+    display: flex;
+}
+
+.Contenedor-Icono-Opciones-Permisos:hover .Icono-Guardar-Permisos{
+    display: none;
 }
 
 .Contenedor-Icono-Opciones-Permisos:hover .Icono-Guardar-Permisos-Blanco{

@@ -20,6 +20,7 @@ import IconoEditarBlanco from '../../../Assets/Img/Administrativo/Permisos/edita
 import IconoEliminar from '../../../Assets/Img/Administrativo/Permisos/eliminar.png'
 import IconoEliminarBlanco from '../../../Assets/Img/Administrativo/Permisos/eliminarBlanco.png'
 import IconoGuardar from '../../../Assets/Img/Administrativo/Permisos/guardar.png'
+import IconoGuardarBlanco from '../../../Assets/Img/Administrativo/Permisos/guardarBlanco.png'
 
 const Permisos = () => {
 
@@ -420,6 +421,7 @@ const Permisos = () => {
                                                                     }}
                                                                 > 
                                                                     <img className='Icono-Guardar-Permisos' src={IconoGuardar} /> 
+                                                                    <img className='Icono-Guardar-Permisos-Blanco' src={IconoGuardarBlanco} /> 
                                                                 </div>
                                                             </Tooltip>
                                                             

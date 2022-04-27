@@ -6,6 +6,12 @@ import {
     OBTENER_DATOS_PAISES,
     OBTENER_DATOS_TIPOS_USUARIOS
 } from '../../../../Constantes/Administrativo/Usuarios/Usuarios'
+
+import {
+    SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
+    SELECCIONAR_UNA_ZONA_DESCARGAR
+} from "../../../../Constantes/Sucursales";
+
 import { message } from 'antd'
 
 export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
@@ -47,7 +53,8 @@ export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
                         paginasTotales: data.datos.last_page,
                         paginaActual: data.datos.current_page,
                         indexRegistro: data.datos.from,
-                        cargandoSpin: false 
+                        cargandoSpin: false ,
+                        data_datos_adm_usuarios: data.datos
                     }
                 })
             }else{
@@ -138,6 +145,10 @@ export const dataTiposUsuarios = () => async ( dispatch, getState ) => {
 export const crearUsuario = (usuario) => async ( dispatch, getState ) => {
 
     let respuesta = false
+    const sucursalesUsuario = getState().sucursales.sucursalesUsuario
+
+    usuario.sucursales = sucursalesUsuario
+
     await fetch(config.api+'usuarios/crear',
         {
             mode:'cors',
@@ -170,4 +181,99 @@ export const crearUsuario = (usuario) => async ( dispatch, getState ) => {
     });
 
     return respuesta
+}
+
+
+// SELECCIONAR DISTRIBUIDORAS PARA CREAR UN USUARIO
+
+export const SeleccionarTodoSucursalesCrearUsuarioReducer = (accion) => (dispatch, getState) => {
+
+    let zonas = getState().sucursales.zonas
+    let sucursalesUsuario = getState().sucursales.sucursalesUsuario
+  
+    zonas.map((zona, pos) => {
+      zonas[pos]['zonpromocioncrear'] = accion
+    })
+  
+    sucursalesUsuario.map((sucursal, pos) => {
+      sucursalesUsuario[pos]['sucpromocioncrear'] = accion
+    })
+  
+    dispatch({
+      type : SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
+      payload: sucursalesUsuario
+    })
+  
+    dispatch({
+      type : SELECCIONAR_UNA_ZONA_DESCARGAR,
+      payload: zonas
+    })
+  
+}
+
+export const SeleccionarZonaCrearUsuarioReducer = (posicion, accion) => (dispatch, getState) => {
+  
+    let zonas = getState().sucursales.zonas
+    let sucursalesUsuario = getState().sucursales.sucursalesUsuario
+  
+    zonas[posicion]['zonpromocioncrear'] = accion
+    
+    sucursalesUsuario.map((sucursal, pos) => {
+      if(sucursal.zonid == zonas[posicion]['zonid']){
+        sucursalesUsuario[pos]['sucpromocioncrear'] = accion
+      }
+    })
+    
+    dispatch({
+      type : SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
+      payload: sucursalesUsuario
+    })
+  
+    dispatch({
+      type : SELECCIONAR_UNA_ZONA_DESCARGAR,
+      payload: zonas
+    })
+}
+
+export const SeleccionarSucursalCrearUsuarioReducer = (posicion, accion) => async (dispatch, getState) => {
+    let sucursalesUsuario = getState().sucursales.sucursalesUsuario
+    sucursalesUsuario[posicion]['sucpromocioncrear'] = accion
+    let zonidSelccionado = sucursalesUsuario[posicion]['zonid']
+  
+    let zonas = getState().sucursales.zonas
+  
+    let zonaMarcarSeleccionado = true
+  
+    await sucursalesUsuario.map((sucursal) => {
+      if(sucursal.zonid == zonidSelccionado){
+  
+        if(sucursal.sucpromocioncrear){
+          if(sucursal.sucpromocioncrear == false){
+            zonaMarcarSeleccionado = false
+          }
+        }else{
+          zonaMarcarSeleccionado = false
+        }
+      }
+    })
+  
+    if(accion == false){
+      zonaMarcarSeleccionado = false
+    }
+  
+    await zonas.map((zona, pos) => {
+      if(zona.zonid == zonidSelccionado){
+        zonas[pos]['zonpromocioncrear'] = zonaMarcarSeleccionado
+      }
+    })
+  
+    dispatch({
+      type : SELECCIONAR_UNA_SUCURSAL_DESCARGAR,
+      payload: sucursalesUsuario
+    })
+  
+    dispatch({
+      type : SELECCIONAR_UNA_ZONA_DESCARGAR,
+      payload: zonas
+    })
 }

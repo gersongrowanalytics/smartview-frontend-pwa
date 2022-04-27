@@ -13,18 +13,19 @@ import {
     EditandoFilaRebateReducer,
     CrearRebatesReducer,
     FiltrarGrupoReducer,
-    HabilitarEditarTodosReducer
+    HabilitarEditarTodosReducer,
+    EliminarRebateMensualReducer
 } from '../../Redux/Acciones/Rebate/Rebate'
-import {InputNumber, Select} from "antd";
+import {InputNumber, Select, Modal, Tooltip, Spin} from "antd";
 import {
     LeftOutlined,
     RightOutlined
 } from '@ant-design/icons';
 import IconoAgregar from '../../Assets/Img/Rebate/agregarceleste.png'
 import IconoFlechaBlanca from '../../Assets/Img/Rebate/flechaderechablanca.png'
-import { Tooltip } from 'antd';
 import ReactExport from 'react-data-export';
 import FiltrosRebate from '../../Componentes/Rutas/Rebate/FiltrosRebate';
+import IconoEliminar from '../../Assets/Img/ElementosEnviados/Eliminar.png'
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
@@ -50,6 +51,10 @@ const Rebate = () => {
     const [numeroFilasNuevas, setNumeroFilasNuevas] = useState(0)
 
     const [editandoRebate, setEditandoRebate] = useState(false)
+    const [posicionFilaTabla, setposicionFilaTabla] = useState("")
+    const [posicionTabla, setPosicionTabla] = useState("")
+    
+    const [modalAbiertoEliminar, setmodalAbiertoEliminar] = useState(false)
 
     useEffect(() => {
         if(cargando_data_rebate == false){
@@ -582,24 +587,53 @@ const Rebate = () => {
                                                         >
                                                             {
                                                                 rebate.editando == true
-                                                                ?<>
-                                                                    <InputNumber 
-                                                                        className="gx-mb-3 gx-w-100 Input-Editar-Porcentaje-Rebate" 
-                                                                        rules={[{ required: true, message: 'Es necesario un porcentaje desde' }]}
-                                                                        defaultValue={rebate["cat-5"]}
-                                                                        min={0}
-                                                                        max={10000}
-                                                                        formatter={value => `${value}%`}
-                                                                        parser={value => value.replace('%', '')}
-                                                                        onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateReducer(posData, pos, "cat-5", e))
-                                                                        }}
-                                                                    />
-                                                                </>
-                                                                :<>
-                                                                    {rebate["cat-5"]} %
-                                                                </>
+                                                                ?null
+                                                                :<div className='Td-Icono-Rebate'>
+                                                                    <div className='Fondo-Icono-Eliminar'>
+                                                                        <img 
+                                                                            className='Icono-Eliminar'
+                                                                            src={IconoEliminar} 
+                                                                            style={{width:'16px'}}
+                                                                            onClick={() => {
+                                                                                setmodalAbiertoEliminar(!modalAbiertoEliminar)
+                                                                                setposicionFilaTabla(pos)
+                                                                                setPosicionTabla(posData)
+                                                                            }}
+                                                                        />
+                                                                    </div>
+
+                                                                </div>
                                                             }
+
+                                                            <div 
+                                                                className={
+                                                                    rebate.editando == true
+                                                                    ?''
+                                                                    :'Td-Normal-Porcentaje-Rebate'
+                                                                }
+                                                            >
+                                                                {
+                                                                    rebate.editando == true
+                                                                    ?<>
+                                                                        <InputNumber 
+                                                                            className="gx-mb-3 gx-w-100 Input-Editar-Porcentaje-Rebate" 
+                                                                            rules={[{ required: true, message: 'Es necesario un porcentaje desde' }]}
+                                                                            defaultValue={rebate["cat-5"]}
+                                                                            min={0}
+                                                                            max={10000}
+                                                                            formatter={value => `${value}%`}
+                                                                            parser={value => value.replace('%', '')}
+                                                                            onChange={(e) => {
+                                                                                dispatch(EditandoFilaRebateReducer(posData, pos, "cat-5", e))
+                                                                            }}
+                                                                        />
+                                                                    </>
+                                                                    :<>
+                                                                        {rebate["cat-5"]} %
+                                                                    </>
+                                                                }
+                                                            </div>
+                                                            
                                                         </td>
 
                                                     </tr>
@@ -713,6 +747,57 @@ const Rebate = () => {
             <div style={{marginBottom: "80px"}}>
 
             </div>
+
+            <Modal
+                centered
+                title={null}
+                visible={modalAbiertoEliminar}
+                footer={null}
+                closeIcon={<div></div>}
+                width="310px"
+                height="139px"
+                className='Caja-Modal-ReenviarElemento'
+                onCancel={() => setmodalAbiertoEliminar(false)}
+            >
+                <div>
+                    <div className='Titulo-Modal-Reenviar-Elemento'>
+                        Eliminar Rebate
+                    </div>
+                    <div className='Texto-Modal-Reenviar-Elemento'>
+                        ¿Está seguro que desea eliminar el rebate?
+                    </div>
+                    <div className='Contenedor-Botones-Modal'>
+                        <Spin
+                            // spinning={false}
+                            spinning={false}
+                        >
+                            <button 
+                                className='Boton-Aceptar-Eliminar-Modal'
+                                onClick={async () => {
+                                    await dispatch(EliminarRebateMensualReducer(
+                                        data_rebate[posicionTabla]['data'][posicionFilaTabla]['rtpporcentajedesde'],
+                                        data_rebate[posicionTabla]['data'][posicionFilaTabla]['rtpporcentajehasta'],
+                                        data_rebate[posicionTabla]['data'][posicionFilaTabla]['rtpporcentajerebate'],
+                                        data_rebate[posicionTabla]['data'][posicionFilaTabla]['tprid'],
+                                        data_rebate[posicionTabla]['data'][posicionFilaTabla]['treid'],
+                                    ))
+                                    setmodalAbiertoEliminar(false)
+                                }}
+                            >
+                                Aceptar
+                            </button>
+                        </Spin>
+                        <button 
+                            className='Boton-Cancelar-Eliminar-Modal'
+                            onClick={() => {
+                                setmodalAbiertoEliminar(false)
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </>
     )
 }

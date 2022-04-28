@@ -8,7 +8,10 @@ import Excel from '../../../Assets/Img/Administrativo/ControlArchivo/excel.png'
 import BanderaPeru from '../../../Assets/Img/Administrativo/Usuarios/Bandera-Perú.png'
 import {
     dataControlArchivos,
-    EliminarControlArchivosReducer
+    dataTiposCargaArchivo,
+    EliminarControlArchivosReducer,
+    SeleccionarTodoFiltroTipoCarga,
+    SeleccionarFiltroTipoCarga
 } from '../../../Redux/Acciones/ControlArchivos/ControlArchivos'
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import IconoEditar from '../../../Assets/Img/Administrativo/Permisos/editar.png'
@@ -18,6 +21,7 @@ import IconoEliminarBlanco from '../../../Assets/Img/Administrativo/Permisos/eli
 import IconoGuardar from '../../../Assets/Img/Administrativo/Permisos/guardar.png'
 import IconoGuardarBlanco from '../../../Assets/Img/Administrativo/ControlArchivo/Guardar-white.png'
 import Moment from 'moment';
+import FiltroTipoCarga from '../../../Componentes/Rutas/Administrativo/ControlArchivos/FiltroTipoCarga';
 
 const ControlArchivo = () => {
 
@@ -27,21 +31,25 @@ const ControlArchivo = () => {
     const [txtBuscarControlArchivo, setTxtBuscarControlArchivo] = useState("")
     const [mostrarModalEliminar, setMostrarModalEliminar] = useState(false)
     const [idRegistroControlArchivo, setIdRegistroControlArchivo] = useState("")
+    const [filtroTipoCarga, setFiltroTipoCarga] = useState(false)
 
     const dispatch = useDispatch()
     const { 
         archivosSubidos,
+        tiposCargArchivos,
         paginasTotales,
         paginaActual,
         indexRegistro,
         cargandoTablaControlArchivos,
         cargandoBtnModal,
-        data_controlarchivos
+        data_controlarchivos,
+        fil_selectodo_data_tipo_carga
     } = useSelector(({controlArchivos}) => controlArchivos);
 
-    // console.log(archivosSubidos)
+    console.log(archivosSubidos)
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataControlArchivos(paginaActualTabla))
+        await dispatch(dataTiposCargaArchivo())
     }
 
     const obtenerFechaHora = (fechaSinFormato, tipo) => {
@@ -132,7 +140,7 @@ const ControlArchivo = () => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={13} xl={13}>
+                <Col lg={15} xl={15}>
                     <div className='Caja-Botones-Administrativo'>
                         <Link to='/administrativo'>
                             <div 
@@ -178,9 +186,27 @@ const ControlArchivo = () => {
                                 Control de archivo
                             </div>
                         </Link>
+                        <FiltroTipoCarga
+                            titulo = {"Tipo de Carga"}
+                            mostrarCuerpo = {filtroTipoCarga}
+                            setMostrarCuerpo = {() => {
+                                setFiltroTipoCarga(!filtroTipoCarga)
+                            }}
+                            funSeleccionarTodo = {(valor) => {
+                                dispatch(SeleccionarTodoFiltroTipoCarga(valor))
+                            }}
+                            seleccionartodo = {fil_selectodo_data_tipo_carga}
+                            aceptarFiltro = {() => {
+                                dispatch(dataControlArchivos(paginaActualTabla))
+                            }}
+                            seleccionarTipo = {(posicion, valor) => {
+                                dispatch(SeleccionarFiltroTipoCarga(posicion, valor))
+                            }}
+                            tiposControlArchivo = {tiposCargArchivos}
+                        />
                     </div>
                 </Col>
-                <Col xl={11}>
+                <Col xl={9}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
                         <div className='Input-Buscar-Control-Archivo'
                             style={{

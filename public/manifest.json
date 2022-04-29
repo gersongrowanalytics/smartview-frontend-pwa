@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "growicono192.png",
+      "src": "smart192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "growicono512.png",
+      "src": "smart512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

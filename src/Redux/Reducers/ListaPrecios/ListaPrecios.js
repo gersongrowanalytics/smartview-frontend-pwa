@@ -17,7 +17,8 @@ import {
     ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS,
 
     FILTRO_CUSTOMER_GROUP_LISTA_PRECIOS,
-    SELECCIONAR_TODO_FILTRO_GRUPO_LISTA_PRECIOS
+    SELECCIONAR_TODO_FILTRO_GRUPO_LISTA_PRECIOS,
+    ACTIVAR_DUPLICADOS_PRODUCTOS_LISTA_PRECIOS
 } from '../../../Constantes/ListaPrecios/ListaPrecios'
 
 const INIT_STATE = {
@@ -31,6 +32,7 @@ const INIT_STATE = {
     cargando_editar_fila_lista_precios : false,
 
     duplicados_complejos_activados_lista_precios : false,
+    duplicados_productos_activados_lista_precios : false,
 
     fil_grupo_customer_lista_precios : [],
 
@@ -239,6 +241,8 @@ const INIT_STATE = {
     fil_selectodo_dat_formato        : false,
     fil_selectodo_dat_codsap         : false,
     fil_selectodo_dat_material       : false,
+
+
 };
 
 
@@ -348,6 +352,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 duplicados_complejos_activados_lista_precios : action.payload
+            }
+        }
+        case ACTIVAR_DUPLICADOS_PRODUCTOS_LISTA_PRECIOS: {
+            return {
+                ...state,
+                duplicados_productos_activados_lista_precios : action.payload
             }
         }
         case FILTRO_CUSTOMER_GROUP_LISTA_PRECIOS: {

@@ -9,6 +9,7 @@ import {
     OBTENER_DATA_FILTRO_LISTA_PRECIOS,
     OBTENER_DATA_CONFIGURACION_PAGINATE_DATA_LISTA_PRECIOS,
     ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS,
+    ACTIVAR_DUPLICADOS_PRODUCTOS_LISTA_PRECIOS,
 
     FILTRO_CUSTOMER_GROUP_LISTA_PRECIOS,
     SELECCIONAR_TODO_FILTRO_GRUPO_LISTA_PRECIOS
@@ -85,6 +86,7 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagin
 
     let grupos_disponibles_lista_precios = getState().listaPrecios.grupos_disponibles_lista_precios
     const duplicados_complejos_activados_lista_precios = getState().listaPrecios.duplicados_complejos_activados_lista_precios
+    const duplicados_productos_activados_lista_precios = getState().listaPrecios.duplicados_productos_activados_lista_precios
 
     await grupos_disponibles_lista_precios.map((grupo, pos) => {
         if(pos == posicion){
@@ -117,6 +119,7 @@ export const ObtenerDataExcelListaPreciosReducer = (treid, posicion, numeropagin
                 mes      : mesSeleccionadoFiltro,
                 treid    : treid,
                 duplicados : duplicados_complejos_activados_lista_precios,
+                duplicadosProductos : duplicados_productos_activados_lista_precios,
                 tresid : tresid
             }),
             headers: {
@@ -412,9 +415,34 @@ export const ActivarDuplicadosComplejosListaPreciosReducer = () => async (dispat
         payload : !duplicados_complejos_activados_lista_precios
     })
 
+    dispatch({
+        type: ACTIVAR_DUPLICADOS_PRODUCTOS_LISTA_PRECIOS,
+        payload : false
+    })
+
     dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0))
     
 }
+
+export const ActivarDuplicadosProductosListaPreciosReducer = () => async (dispatch, getState) => {
+
+    const duplicados_productos_activados_lista_precios = getState().listaPrecios.duplicados_productos_activados_lista_precios
+    const grupos_disponibles_lista_precios = getState().listaPrecios.grupos_disponibles_lista_precios
+
+    dispatch({
+        type: ACTIVAR_DUPLICADOS_PRODUCTOS_LISTA_PRECIOS,
+        payload : !duplicados_productos_activados_lista_precios
+    })
+
+    dispatch({
+        type: ACTIVAR_DUPLICADOS_COMPLEJOS_LISTA_PRECIOS,
+        payload : false
+    })
+
+    dispatch(ObtenerDataExcelListaPreciosReducer(grupos_disponibles_lista_precios[0]['treid'], 0))
+    
+}
+
 
 
 export const SeleccionarGrupoCustomerFiltroListaPreciosReducer = (posicion, valor) => async (dispatch, getState) => {

@@ -16,7 +16,8 @@ import {
     ActivarDuplicadosComplejosListaPreciosReducer,
 
     SeleccionarGrupoCustomerFiltroListaPreciosReducer,
-    SeleccionarTodoGrupoCustomerFiltroListaPreciosReducer
+    SeleccionarTodoGrupoCustomerFiltroListaPreciosReducer,
+    ActivarDuplicadosProductosListaPreciosReducer
 } from '../../Redux/Acciones/ListaPrecios/ListaPrecios'
 import FiltroAnioVentasPromociones from '../../Componentes/Filtros/Botones/FiltroAnioVentasPromociones';
 import FiltroMesVentasPromociones from '../../Componentes/Filtros/Botones/FiltroMesVentasPromociones';
@@ -32,6 +33,7 @@ import {
     SeleccionarTodoFiltrosLPReducer
 } from '../../Redux/Acciones/ListaPrecios/ArmarFiltrosLp'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import IconoDuplicadosVerde from '../../Assets/Img/ListaPrecios/duplicados-verde.png'
 import IconoDuplicadosRojo from '../../Assets/Img/ListaPrecios/duplicados-rojo.png'
 import IconoDuplicadosBlanco from '../../Assets/Img/ListaPrecios/duplicados-blanco.png'
 import FiltroCustomer from '../../Componentes/Rutas/ListaPrecios/FiltroCustomer';
@@ -58,6 +60,7 @@ const ListaPrecios = () => {
         cargando_eliminar_fila_lista_precios,
         cargando_editar_fila_lista_precios,
         duplicados_complejos_activados_lista_precios,
+        duplicados_productos_activados_lista_precios,
 
         agrupacion_columnas_filtros_descargar_listaprecios,
         columnas_filtro_descargar_listaprecios,
@@ -238,7 +241,7 @@ const ListaPrecios = () => {
                     }}
                 />
 
-                <FiltroLp 
+                {/* <FiltroLp 
                     titulo = {"Formato"}
                     fil_data = {fil_dat_formato}
                     tamanio = "160"
@@ -261,7 +264,7 @@ const ListaPrecios = () => {
                         setFiltroNombMate(false)
                         setFiltroCustomerGroup(false)
                     }}
-                />
+                /> */}
 
                 <FiltroLp 
                     titulo = {"Cod SAP"}
@@ -313,6 +316,45 @@ const ListaPrecios = () => {
                     }}
                 />
 
+
+                <Tooltip
+                    placement="bottom" 
+                    title={"Productos"}
+                >
+                    <div
+                        className={
+                            duplicados_productos_activados_lista_precios == true
+                            ?'btn-filtrar-verde-seleccionado-listaprecios'
+                            :'btn-filtrar-Verde-listaprecios'
+                        }
+                        onClick={() => {
+                            dispatch(ActivarDuplicadosProductosListaPreciosReducer())
+                        }}
+                        style={
+                            duplicados_productos_activados_lista_precios == true
+                            ?{background:'#00CA8A', marginRight:'20px'}
+                            :{marginRight:'20px'}
+                        }
+                    >
+                        <img 
+                            src={
+                                duplicados_productos_activados_lista_precios == true
+                                ?IconoDuplicadosBlanco
+                                :IconoDuplicadosVerde
+                            }
+                            className="Icono-Duplicados-Complejos-Rojo-Lista-Precios"
+                        />
+
+                        <img 
+                            src={
+                                duplicados_productos_activados_lista_precios == true
+                                ?IconoDuplicadosVerde
+                                :IconoDuplicadosBlanco
+                            }
+                            className="Icono-Duplicados-Complejos-Blanco-Lista-Precios"
+                        />
+                    </div>
+                </Tooltip>
 
                 <Tooltip
                     placement="bottom" 
@@ -369,7 +411,7 @@ const ListaPrecios = () => {
                         style={{
                             paddingTop:'0px',
                             position: "absolute",
-                            right: "-25px",
+                            right: "15px",
                             top: "-10px"
                         }}
                     >

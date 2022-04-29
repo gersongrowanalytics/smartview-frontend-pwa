@@ -278,6 +278,33 @@
     width: 12px;
 }
 
+.btn-filtrar-Verde-listaprecios{
+    width: 43px;
+    height: 36px;
+    border: 1px solid #00CA8A;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.btn-filtrar-Verde-listaprecios:hover{
+    background: #00CA8A;
+}
+
+.btn-filtrar-Verde-listaprecios:hover .Icono-Duplicados-Complejos-Rojo-Lista-Precios{
+    display: none;
+}
+
+.btn-filtrar-Verde-listaprecios:hover .Icono-Duplicados-Complejos-Blanco-Lista-Precios{
+    display: flex;
+}
+
+
+
 .btn-filtrar-duplicados-complejos-listaprecios{
     width: 43px;
     height: 36px;
@@ -316,6 +343,19 @@
     width: 43px;
     height: 36px;
     border: 1px solid #E41A37;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.btn-filtrar-verde-seleccionado-listaprecios{
+    width: 43px;
+    height: 36px;
+    border: 1px solid #00CA8A;
     box-sizing: border-box;
     border-radius: 8px;
     cursor: pointer;

@@ -439,7 +439,7 @@ const Permisos = () => {
                                                         
                                                     </td>
                                                 </tr>
-                                                : null
+                                                : <div></div>
                                             )
                                         })
                                     }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import FiltrosRebate from '../../../Componentes/Rutas/Rebate/FiltrosRebate'
-import {Row, Col} from "antd";
+import {Row, Col, notification} from "antd";
 import '../../../Estilos/Rutas/Rebate/Bonus.css'
 import ImgIconoRebate from '../../../Assets/Img/Ventas/rebatebonus.png'
 import {useDispatch, useSelector} from "react-redux";
@@ -41,6 +41,7 @@ const Bonus = () => {
     const [txtPorcentaje, setTxtPorcentaje] = useState("")
     // const [txtDescripcion, setTxtDescripcion] = useState("Siempre que cumpla con lo siguiente: Cumplimiento de la cuota NIV al 100% sin incluir la categoría wipes. De lograr el cumplimiento, este rebate será cancelado el mes siguiente.")
     const [txtDescripcion, setTxtDescripcion] = useState("")
+    const [editandoRebateBonus, setEditandoRebateBonus] = useState(false)
 
     return (
         <>
@@ -58,7 +59,11 @@ const Bonus = () => {
                 }}
 
                 cargando_guardar = {cargando_guardar_rebate_bonus}
-
+                editarData = {() => {
+                    setEditandoRebateBonus(!editandoRebateBonus)
+                }}
+                editandoRebate = {editandoRebateBonus}
+                mostrarCustomerGroup = {false}
             />
 
             <div>
@@ -92,6 +97,11 @@ const Bonus = () => {
                                         setTxtPorcentaje(e.target.value)
                                     }}
                                     value={txtPorcentaje}
+                                    disabled={
+                                        editandoRebateBonus == true
+                                        ?false
+                                        :true
+                                    }
                                 />
                             </div>
 
@@ -142,18 +152,34 @@ const Bonus = () => {
                                                         }
                                                     }
                                                     onClick={async () => {
-                                                        await dispatch(SeleccionarCategoriaRebateBonusReducer(pos))
-                                                        let categoriasNoIncluidas = ""
 
-                                                        await data_rebate_bonus.cats.map((cat, pos) => {
-                                                            if(cat['seleccionado'] == true){
+                                                        if(editandoRebateBonus == true){
 
-                                                            }else{
-                                                                categoriasNoIncluidas = categoriasNoIncluidas+", "+cat.catnombreopcional
-                                                            }
-                                                        })
+                                                            await dispatch(SeleccionarCategoriaRebateBonusReducer(pos))
+                                                            let categoriasNoIncluidas = ""
 
-                                                        setTxtDescripcion("Siempre que cumpla con lo siguiente: Cumplimiento de la cuota NIV al 100% sin incluir la categoría "+categoriasNoIncluidas+". De lograr el cumplimiento, este rebate será cancelado el mes siguiente.")
+                                                            await data_rebate_bonus.cats.map((cat, pos) => {
+                                                                if(cat['seleccionado'] == true){
+
+                                                                }else{
+                                                                    categoriasNoIncluidas = categoriasNoIncluidas+", "+cat.catnombreopcional
+                                                                }
+                                                            })
+
+                                                            setTxtDescripcion("Siempre que cumpla con lo siguiente: Cumplimiento de la cuota NIV al 100% sin incluir la categoría "+categoriasNoIncluidas+". De lograr el cumplimiento, este rebate será cancelado el mes siguiente.")
+
+                                                        }else{
+                                                            
+                                                            
+                                                            notification.info({
+                                                                message: `Notificación`,
+                                                                description:'Lo sentimos debes habilitar la edición para poder cambiar las categorías.',
+                                                                placement: 'topRight',
+                                                            });
+
+                                                            
+                                                        }
+
                                                     }}
                                                 >
                                                     <img 
@@ -196,6 +222,11 @@ const Bonus = () => {
                                     // setTxtDescripcion("Hola")
                                 }}
                                 value={txtDescripcion}
+                                disabled={
+                                    editandoRebateBonus == true
+                                    ?false
+                                    :true
+                                }
                             >
                             </textarea>
                             {/* Siempre que cumpla con lo siguiente: Cumplimiento de la cuota NIV al 100% sin incluir la categoría wipes. De lograr el cumplimiento, este rebate será cancelado el mes siguiente. */}

@@ -55,6 +55,7 @@ const Rebate = () => {
     const [posicionTabla, setPosicionTabla] = useState("")
     
     const [modalAbiertoEliminar, setmodalAbiertoEliminar] = useState(false)
+    const [utilizarCarousel, setUtilizarCarousel] = useState(true)
 
     useEffect(() => {
         if(cargando_data_rebate == false){
@@ -70,8 +71,8 @@ const Rebate = () => {
         <>
 
             <FiltrosRebate 
-                guardarData = {(editando) => {
-                    dispatch(CrearRebatesReducer(editando))
+                guardarData = {async (editando) => {
+                    await dispatch(CrearRebatesReducer(editando))
                 }}
                 editarData = {() => {
                     dispatch(HabilitarEditarTodosReducer(!editandoRebate))
@@ -79,6 +80,16 @@ const Rebate = () => {
                 }}
                 cargando_guardar = {cargando_guardar_rebate_mensual}
                 editandoRebate = {editandoRebate}
+                mostrarCustomerGroup = {true}
+                seleccionarCustomerGroup = {(treid) => {
+                    if(treid == 0){
+                        setUtilizarCarousel(true)
+                    }else{
+                        setUtilizarCarousel(false)
+                    }
+                }}
+                tipoRebate = "RebateMensual"
+                data_rebate = {data_rebate}
             />
 
             {/* <Link 
@@ -706,8 +717,15 @@ const Rebate = () => {
                     className='Btn-Flecha-Retroceder-Rebate'
                     onClick={async () => {
                         // console.log(data_tablas_contraprestaciones)
-                        await dispatch(ActivarCarouselTablaRebateReducer("retroceder"))
+                        if(utilizarCarousel == true){
+                            await dispatch(ActivarCarouselTablaRebateReducer("retroceder"))
+                        }
                     }}
+                    style={
+                        utilizarCarousel == true
+                        ?{}
+                        :{cursor: 'not-allowed' }
+                    }
                 >
                     {/* <LeftOutlined /> */}
                     <img 
@@ -723,8 +741,15 @@ const Rebate = () => {
                     className='Btn-Flecha-Avanzar-Rebate'
                     onClick={async () => {
                         // console.log(data_tablas_contraprestaciones)
-                        await dispatch(ActivarCarouselTablaRebateReducer())
+                        if(utilizarCarousel == true){
+                            await dispatch(ActivarCarouselTablaRebateReducer())
+                        } 
                     }}
+                    style={
+                        utilizarCarousel == true
+                        ?{}
+                        :{cursor: 'not-allowed' }
+                    }
                 >
                     {/* <RightOutlined /> */}
                     <img 

@@ -12,6 +12,9 @@ import {
     HabilitarEditarTodosRebateTrimestralReducer,
     CrearRebatesTrimestralReducer
 } from '../../../Redux/Acciones/Rebate/Trimestre/Trimestre'
+import {
+    ObtenerGrupoRebateReducer
+} from '../../../Redux/Acciones/Rebate/Rebate'
 
 const Trimestral = () => {
 
@@ -33,10 +36,14 @@ const Trimestral = () => {
     const [mostrarFilaAgregar, setMostrarFilaAgregar] = useState(false)
     const [numeroFilasNuevas, setNumeroFilasNuevas] = useState(0)
     const [editandoRebate, setEditandoRebate] = useState(false)
+    const [utilizarCarousel, setUtilizarCarousel] = useState(true)
 
     useEffect(() => {
         if(cargando_data_rebate_trimestral == false){
             dispatch(ObtenerDataRebateTrimestralReducer())
+            if(data_grupos_rebate.length <= 0){
+                dispatch(ObtenerGrupoRebateReducer())
+            }
         }
     }, [mesSeleccionadoFiltro, anioSeleccionadoFiltro])
 
@@ -53,6 +60,16 @@ const Trimestral = () => {
                 }}
                 editandoRebate = {editandoRebate}
                 cargando_guardar = {cargando_guardar_rebate_trimestral}
+                mostrarCustomerGroup = {true}
+                tipoRebate = "RebateTrimestral"
+                seleccionarCustomerGroup = {(treid) => {
+                    if(treid == 0){
+                        setUtilizarCarousel(true)
+                    }else{
+                        setUtilizarCarousel(false)
+                    }
+                }}
+                data_rebate = {data_rebate_trimestral}
             />
 
             
@@ -487,8 +504,15 @@ const Trimestral = () => {
                 <div 
                     className='Btn-Flecha-Retroceder-Rebate'
                     onClick={async () => {
-                        await dispatch(ActivarCarouselTablaRebateTrimestralReducer("retroceder"))
+                        if(utilizarCarousel == true){
+                            await dispatch(ActivarCarouselTablaRebateTrimestralReducer("retroceder"))
+                        }
                     }}
+                    style={
+                        utilizarCarousel == true
+                        ?{}
+                        :{cursor: 'not-allowed' }
+                    }
                 >
                     <img 
                         style={{
@@ -501,9 +525,16 @@ const Trimestral = () => {
                 </div>
                 <div 
                     className='Btn-Flecha-Avanzar-Rebate'
-                    onClick={async () => {       
-                        await dispatch(ActivarCarouselTablaRebateTrimestralReducer())
+                    onClick={async () => {      
+                        if(utilizarCarousel == true){
+                            await dispatch(ActivarCarouselTablaRebateTrimestralReducer())
+                        }
                     }}
+                    style={
+                        utilizarCarousel == true
+                        ?{}
+                        :{cursor: 'not-allowed' }
+                    }
                 >
                     <img 
                         src={IconoFlechaBlanca} 

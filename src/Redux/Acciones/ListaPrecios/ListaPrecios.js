@@ -381,7 +381,7 @@ export const ObtenerDataDescargarExcelReducer = () => async (dispatch, getState)
                 type: OBTENER_DATA_EXCEL_LISTA_PRECIOS,
                 payload : {
                     excel : data_excel_descargar,
-                    tabla : data.data,
+                    tabla : data.data.data,
 
                 }
             })

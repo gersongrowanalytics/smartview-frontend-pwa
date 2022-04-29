@@ -35,7 +35,7 @@ const FiltroSoporteTop = (props) => {
             >
 
                     <a 
-                        href="https://api.whatsapp.com/send?phone=+51949717789"
+                        href="https://api.whatsapp.com/send?phone=51949717789"
                         ref={refWsp}
                         style={{display:'none'}}
                         target="_blank"

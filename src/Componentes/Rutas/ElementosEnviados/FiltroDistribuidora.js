@@ -28,7 +28,7 @@ const FiltroDistribuidora = (props) => {
                 }}
             >
                 <span>{titulo}</span>
-                <img src={FlechaAbajo} style={{width:'26px'}}/>
+                <img src={FlechaAbajo} style={{width:'22px'}}/>
             </div>
             {
                 mostrarCuerpo == true ? (
@@ -56,10 +56,15 @@ const FiltroDistribuidora = (props) => {
                                                 }}
                                                 className="Check-Filtro-TipoEnvio W400-S12-H16-C1E1E1E-L0015"
                                                 checked={tipo.seleccionado}
+                                                title={tipo.sucnombre}
                                             >
-                                                {
-                                                    tipo.sucnombre
-                                                }
+                                                <div
+                                                    title={tipo.sucnombre}
+                                                >
+                                                    {
+                                                        tipo.sucnombre.substr(0, 21)
+                                                    }
+                                                </div>
                                             </Checkbox>
                                         </div>
                                     )

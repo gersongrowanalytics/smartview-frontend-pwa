@@ -421,7 +421,7 @@ class Slide extends React.Component {
 															id="txtProducto" >{producto.prpproductoppt}<br/></div>
 														<div id="txtSubProducto" title={producto.prpcomprappt}>
 															{
-															producto.prpcomprappt.substr(0, 25)
+															producto.prpcomprappt.substr(0, 28)
 															}
 														</div>
 													</Col>
@@ -496,7 +496,7 @@ class Slide extends React.Component {
 															{
 															productoBonificado.prbproductoppt == "Dscto"
 															?<div>{funFomratoDecimal((productoBonificado.prbcomprappt*100), 2)}% (S/{<NumberFormat value={funFomratoDecimal(((productoBonificado.prbcomprappt*100) * this.props.slide.csptotal), 2)} displayType={'text'} thousandSeparator={true} /> })</div>
-															:productoBonificado.prbcomprappt.substr(0, 25)
+															:productoBonificado.prbcomprappt.substr(0, 28)
 															}
 															
 														</div>

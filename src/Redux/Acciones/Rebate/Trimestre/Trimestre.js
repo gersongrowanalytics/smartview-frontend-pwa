@@ -6,7 +6,7 @@ import {
 } from '../../../../Constantes/Rebate/Rebate'
 import config from '../../../../config'
 import { estadoRequestReducer } from "../../EstadoRequest"
-import { message } from 'antd'
+import { message, notification } from 'antd'
 
 export const ObtenerDataRebateTrimestralReducer = () => async (dispatch, getState) => {
 
@@ -299,9 +299,17 @@ export const CrearRebatesTrimestralReducer = (reiniciar) => async (dispatch, get
                 if(data.respuesta == true){
                     
                     dispatch(ObtenerDataRebateTrimestralReducer())
-
+                    notification.success({
+                        message: `Notificación`,
+                        description: data.mensaje,
+                        placement: 'topRight',
+                    })
                 }else{
-                    
+                    notification.info({
+                        message: `Notificación`,
+                        description: data.mensaje,
+                        placement: 'topRight',
+                    })
                 }
             }
         }).catch((error)=> {

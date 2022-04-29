@@ -4,11 +4,12 @@ import {
     CARGANDO_DATA_REBATE,
     SELECCIONAR_GRUPO_REBATE,
     OBTENER_REBATE_DESCARGAR_REBATE,
-    CARGANDO_GUARDAR_REBATE_MENSUAL
+    CARGANDO_GUARDAR_REBATE_MENSUAL,
+    OBTENER_DATA_REBATE_TRIMESTRAL
 } from '../../../Constantes/Rebate/Rebate'
 import config from '../../../config'
 import { estadoRequestReducer } from "../EstadoRequest"
-import { message } from 'antd'
+import { message, notification } from 'antd'
 
 export const ObtenerRebatesActualesReducer = () => async (dispatch, getState) => {
 
@@ -351,9 +352,18 @@ export const CrearRebatesReducer = (reiniciar) => async (dispatch, getState) => 
                 if(data.respuesta == true){
                     
                     dispatch(ObtenerRebatesActualesReducer())
-
-                }else{
+                    notification.info({
+                        message: `Notificación`,
+                        description:'Los rebate se guardaron correctamente !',
+                        placement: 'topRight',
+                    });
                     
+                }else{
+                    notification.info({
+                        message: `Notificación`,
+                        description:'Lo sentimos, ocurrio un error al momento de guardar el rebate !',
+                        placement: 'topRight',
+                    });
                 }
             }
         }).catch((error)=> {
@@ -375,29 +385,55 @@ export const CrearRebatesReducer = (reiniciar) => async (dispatch, getState) => 
 
 }
 
-export const FiltrarGrupoReducer = (grupo) => async (dispatch, getState) => {
+export const FiltrarGrupoReducer = (grupo, tipoRebate = "RebateMensual") => async (dispatch, getState) => {
     let data_rebate = getState().rebate.data_rebate
+    let data_rebate_trimestral = getState().rebate.data_rebate_trimestral
 
-    await data_rebate.map((dat, pos) => {
-        if(dat.treid == grupo){
-            data_rebate[pos]['retroceder'] = true
-            data_rebate[pos]['mostrando'] = true
-            data_rebate[pos]['ocultando'] = false
-            dispatch({
-                type: SELECCIONAR_GRUPO_REBATE,
-                payload : data_rebate[pos]['trenombre']
-            })
-        }else{
-            data_rebate[pos]['retroceder'] = true
-            data_rebate[pos]['mostrando'] = false
-            data_rebate[pos]['ocultando'] = true
-        }
-    })
+    if(tipoRebate == "RebateMensual"){
+        await data_rebate.map((dat, pos) => {
+            if(dat.treid == grupo){
+                data_rebate[pos]['retroceder'] = true
+                data_rebate[pos]['mostrando'] = true
+                data_rebate[pos]['ocultando'] = false
+                dispatch({
+                    type: SELECCIONAR_GRUPO_REBATE,
+                    payload : data_rebate[pos]['trenombre']
+                })
+            }else{
+                data_rebate[pos]['retroceder'] = true
+                data_rebate[pos]['mostrando'] = false
+                data_rebate[pos]['ocultando'] = true
+            }
+        })
+    
+        dispatch({
+            type: OBTENER_REBATES_ACTUALES_REBATE,
+            payload : data_rebate
+        })
+    }else{
 
-    dispatch({
-        type: OBTENER_REBATES_ACTUALES_REBATE,
-        payload : data_rebate
-    })
+        await data_rebate_trimestral.map((dat, pos) => {
+            if(dat.treid == grupo){
+                data_rebate_trimestral[pos]['retroceder'] = true
+                data_rebate_trimestral[pos]['mostrando'] = true
+                data_rebate_trimestral[pos]['ocultando'] = false
+                dispatch({
+                    type: SELECCIONAR_GRUPO_REBATE,
+                    payload : data_rebate_trimestral[pos]['trenombre']
+                })
+            }else{
+                data_rebate_trimestral[pos]['retroceder'] = true
+                data_rebate_trimestral[pos]['mostrando'] = false
+                data_rebate_trimestral[pos]['ocultando'] = true
+            }
+        })
+    
+        dispatch({
+            type: OBTENER_DATA_REBATE_TRIMESTRAL,
+            payload : data_rebate_trimestral
+        })
+        
+    }
 }
 
 export const LimpiarArrayDescargarExcelReducer = async (data_excel_descargar) => {
@@ -604,9 +640,17 @@ export const EliminarRebateMensualReducer = (
             if(data.respuesta == true){
                 
                 dispatch(ObtenerRebatesActualesReducer())
-                message.success(data.mensaje)
+                notification.success({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                })
             }else{
-                message.error(data.mensaje)
+                notification.info({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                });
             }
         }
     }).catch((error)=> {

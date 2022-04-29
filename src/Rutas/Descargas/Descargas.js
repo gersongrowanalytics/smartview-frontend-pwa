@@ -514,7 +514,7 @@ const Descargas = () => {
 
                 
                 {
-                    canal_seleccionado == "Tradicional"
+                    canal_seleccionado == "Tradicional" && sucursalesUsuario.length > 2
                     ?<Row>
                         <Col xl={8} style={{marginBottom:'40px'}}>
                             <div style={{marginBottom:'10px'}}>

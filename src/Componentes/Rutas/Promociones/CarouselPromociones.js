@@ -201,7 +201,7 @@ class CarouselPromociones extends React.Component {
 
   render() {
     const { current, direction, activarCarouselAvanzar} = this.state
-    const { slides, heading, seleccionarCategoria, seleccionoPromocion, deseleccionarCategoria, totalPromos } = this.props 
+    const { slides, heading, seleccionarCategoria, seleccionoPromocion, deseleccionarCategoria, totalPromos, mostrar_promociones_nuevas } = this.props 
     const headingId = `slider-heading__${heading.replace(/\s+/g, '-').toLowerCase()}`
     const wrapperTransform = {
       'transform': `translateX(-${current * (100 / slides.length)}%)`,
@@ -284,59 +284,87 @@ class CarouselPromociones extends React.Component {
           {slides.map((slide, posicion) => {
             return (
               <>
-			  {
-				  posicion == 0
-				  ? seleccionoPromocion == true
-				  	?null
-					:<div
-							onClick={() => {
-								seleccionarCategoria(slide.scaid, posicion, slide.catid)
-							}}
-						>
-							<ResumenPromociones 
-								key                        = {posicion}
-								posicion                   = {posicion}
-								slide                      = {slide}
-								current                    = {current}
-								handleSlideClick           = {this.handleSlideClick}
-								seleccionado               = {slide.seleccionado}
-								nombre                     = {slide.catnombre}
-								fondo                      = {slide.catimagenfondo}
-								icono                      = {slide.caticono}
-								caticonoseleccionado       = {slide.caticonoseleccionado}
-								catcolor                   = {slide.catcolor}
-								colorhover                 = {slide.catcolorhover}
-								seleccionoPromocion        = {seleccionoPromocion}
-								catimagenfondoseleccionado = {slide.catimagenfondoseleccionado}
-							/>
-						</div>
-				  :null
-			  }
-				<div
-					onClick={() => {
-						seleccionarCategoria(slide.scaid, posicion, slide.catid)
-					}}
-					onDoubleClick = {() => deseleccionarCategoria()}
-				>
-					<Slide
-						key                        = {posicion}
-						posicion                   = {posicion}
-						slide                      = {slide}
-						current                    = {current}
-						handleSlideClick           = {this.handleSlideClick}
-						seleccionado               = {slide.seleccionado}
-						nombre                     = {slide.catnombre}
-						fondo                      = {slide.catimagenfondo}
-						icono                      = {slide.caticono}
-						caticonoseleccionado       = {slide.caticonoseleccionado}
-						catcolor                   = {slide.catcolor}
-						colorhover                 = {slide.catcolorhover}
-						seleccionoPromocion        = {seleccionoPromocion}
-						catimagenfondoseleccionado = {slide.catimagenfondoseleccionado}
-						totalPromos = {totalPromos}
-					/>
-				</div>
-              
+                {
+                  posicion == 0
+                  ? seleccionoPromocion == true
+                    ?null
+                  :<div
+                      onClick={() => {
+                        seleccionarCategoria(slide.scaid, posicion, slide.catid)
+                      }}
+                    >
+                      <ResumenPromociones 
+                        key                        = {posicion}
+                        posicion                   = {posicion}
+                        slide                      = {slide}
+                        current                    = {current}
+                        handleSlideClick           = {this.handleSlideClick}
+                        seleccionado               = {slide.seleccionado}
+                        nombre                     = {slide.catnombre}
+                        fondo                      = {slide.catimagenfondo}
+                        icono                      = {slide.caticono}
+                        caticonoseleccionado       = {slide.caticonoseleccionado}
+                        catcolor                   = {slide.catcolor}
+                        colorhover                 = {slide.catcolorhover}
+                        seleccionoPromocion        = {seleccionoPromocion}
+                        catimagenfondoseleccionado = {slide.catimagenfondoseleccionado}
+                      />
+                    </div>
+                  :null
+                }
+                {
+                  mostrar_promociones_nuevas == true
+                  ?slide.cantidadPromocionesNuevas > 0
+                    ?<div
+                      onClick={() => {
+                        seleccionarCategoria(slide.scaid, posicion, slide.catid)
+                      }}
+                      onDoubleClick = {() => deseleccionarCategoria()}
+                    >
+                      <Slide
+                        key                        = {posicion}
+                        posicion                   = {posicion}
+                        slide                      = {slide}
+                        current                    = {current}
+                        handleSlideClick           = {this.handleSlideClick}
+                        seleccionado               = {slide.seleccionado}
+                        nombre                     = {slide.catnombre}
+                        fondo                      = {slide.catimagenfondo}
+                        icono                      = {slide.caticono}
+                        caticonoseleccionado       = {slide.caticonoseleccionado}
+                        catcolor                   = {slide.catcolor}
+                        colorhover                 = {slide.catcolorhover}
+                        seleccionoPromocion        = {seleccionoPromocion}
+                        catimagenfondoseleccionado = {slide.catimagenfondoseleccionado}
+                        totalPromos = {totalPromos}
+                      />
+                    </div>
+                    :null
+                  :<div
+                    onClick={() => {
+                      seleccionarCategoria(slide.scaid, posicion, slide.catid)
+                    }}
+                    onDoubleClick = {() => deseleccionarCategoria()}
+                  >
+                    <Slide
+                      key                        = {posicion}
+                      posicion                   = {posicion}
+                      slide                      = {slide}
+                      current                    = {current}
+                      handleSlideClick           = {this.handleSlideClick}
+                      seleccionado               = {slide.seleccionado}
+                      nombre                     = {slide.catnombre}
+                      fondo                      = {slide.catimagenfondo}
+                      icono                      = {slide.caticono}
+                      caticonoseleccionado       = {slide.caticonoseleccionado}
+                      catcolor                   = {slide.catcolor}
+                      colorhover                 = {slide.catcolorhover}
+                      seleccionoPromocion        = {seleccionoPromocion}
+                      catimagenfondoseleccionado = {slide.catimagenfondoseleccionado}
+                      totalPromos = {totalPromos}
+                    />
+                  </div>
+                }
               </>
             )
           })}

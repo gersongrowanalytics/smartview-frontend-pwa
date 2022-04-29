@@ -219,6 +219,7 @@ const Promociones = () => {
                 seleccionarFiltroZona    = {false}
                 aplicandoFiltroAcumulado = {aplicandoFiltroAcumulado}
                 totalPromos = {totalPromos}
+                mostrar_promociones_nuevas = {mostrar_promociones_nuevas}
             />
 
 
@@ -340,7 +341,13 @@ const Promociones = () => {
                                                             // subiendo = false
                                                         }}
                                                     >
-                                                        {canal.cannombre} (#{canal.cantidadPromociones})
+                                                        {canal.cannombre} 
+                                                        (#{ 
+                                                            mostrar_promociones_nuevas == true
+                                                            ?canal.cantidadPromocionesNuevas
+                                                            :canal.cantidadPromociones
+                                                        })
+                                                        {/* MIOMIO */}
                                                     </div>
                                                 </div>
         
@@ -617,7 +624,7 @@ class CardPromocionClass extends React.Component {
                                             <div className="Nombre-Producto-Card-Promocion">{producto.prpproductoppt}</div>
                                             <div className="Descripcion-Producto-Card-Promocion" title={producto.prpcomprappt} >
                                             {
-                                                producto.prpcomprappt.substr(0, 25)
+                                                producto.prpcomprappt.substr(0, 28)
                                             }
                                             </div>
 
@@ -676,7 +683,7 @@ class CardPromocionClass extends React.Component {
                                                             :null
                                                         }
                                                     </div>
-                                                    :bonificado.prbcomprappt ? bonificado.prbcomprappt.substr(0, 25) : 0
+                                                    :bonificado.prbcomprappt ? bonificado.prbcomprappt.substr(0, 28) : 0
                                                 }
                                             </div>
                                             <div
@@ -870,7 +877,7 @@ class CardPromocionClass extends React.Component {
                                         <div className="Nombre-Producto-Card-Promocion">{producto.prpproductoppt}</div>
                                         <div className="Descripcion-Producto-Card-Promocion" title={producto.prpcomprappt} >
                                         {
-                                            producto.prpcomprappt.substr(0, 25)
+                                            producto.prpcomprappt.substr(0, 28)
                                         }
                                         </div>
 
@@ -929,7 +936,7 @@ class CardPromocionClass extends React.Component {
                                                         :null
                                                     }
                                                 </div>
-                                                :bonificado.prbcomprappt ? bonificado.prbcomprappt.substr(0, 25) : 0
+                                                :bonificado.prbcomprappt ? bonificado.prbcomprappt.substr(0, 28) : 0
                                             }
                                         </div>
                                         <div

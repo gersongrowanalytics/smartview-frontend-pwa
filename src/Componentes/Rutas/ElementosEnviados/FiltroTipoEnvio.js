@@ -28,7 +28,7 @@ const FiltroTipoEnvio = (props) => {
                 }}
             >
                 <span>{titulo}</span>
-                <img src={FlechaAbajo} style={{width:'26px'}}/>
+                <img src={FlechaAbajo} style={{width:'22px'}}/>
             </div>
             {
                 mostrarCuerpo == true ? (

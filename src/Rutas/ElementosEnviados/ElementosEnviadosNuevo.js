@@ -358,7 +358,11 @@ const ElementosEnviadosNuevo = () => {
                                                                                     paddingRight:'20px'
                                                                                 }}
                                                                             >
-                                                                                {sucursal}
+                                                                                <div
+                                                                                    title={sucursal}
+                                                                                >
+                                                                                    {sucursal.substr(0, 23)}
+                                                                                </div>
                                                                             </Col>
                                                                         )
                                                                     })

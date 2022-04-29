@@ -11,6 +11,9 @@ import {
     obtenerSucursalesReducer
 } from '../../Redux/Acciones/Sucursales'
 import { useDispatch, useSelector } from "react-redux";
+import {
+    funPermisosObtenidos
+} from '../../Funciones/funPermiso'
 
 const FiltroCanalTop = (props) => {
 
@@ -27,6 +30,8 @@ const FiltroCanalTop = (props) => {
         datosUsuarioLogeado,
         mostrar_terminos_condiciones_login
     } = useSelector(({auth}) => auth);
+    
+    const {permisos_usuario_configuracion} = useSelector(({setting}) => setting);
 
     return (
         <>
@@ -140,26 +145,33 @@ const FiltroCanalTop = (props) => {
                             <div className='Wnormal-S14-H19-C1E1E1E'>Tradicional</div>
                         </div>
 
-                        <div 
-                            className='Fila-Cuerpo-Item-Filtro-Top'
-                            onClick={() => {
-                                dispatch(CambiarCanalSeleccionadoReducer("Moderno"))
-                                setMostrarContenido(false)
-                                dispatch(ObtenerSucursalesCanalModernoReducer())
-                            }}
-                        >
-                            <div>
-                                <img 
-                                    className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoModerno} 
-                                    style={{
-                                        width:'25px',
-                                        left: "5px",
-                                        top: "2px",
+                        {
+                            funPermisosObtenidos(
+                                permisos_usuario_configuracion,
+                                "canal.moderno",
+                                <div 
+                                    className='Fila-Cuerpo-Item-Filtro-Top'
+                                    onClick={() => {
+                                        dispatch(CambiarCanalSeleccionadoReducer("Moderno"))
+                                        setMostrarContenido(false)
+                                        dispatch(ObtenerSucursalesCanalModernoReducer())
                                     }}
-                                />
-                            </div>
-                            <div className='Wnormal-S14-H19-C1E1E1E'>Moderno</div>
-                        </div>
+                                >
+                                    <div>
+                                        <img 
+                                            className='Icono-Fila-Cuerpo-Item-Filtro-Top' src={IconoModerno} 
+                                            style={{
+                                                width:'25px',
+                                                left: "5px",
+                                                top: "2px",
+                                            }}
+                                        />
+                                    </div>
+                                    <div className='Wnormal-S14-H19-C1E1E1E'>Moderno</div>
+                                </div>
+                            )
+                        }
+                        
                     </div>
                     :null
                 }

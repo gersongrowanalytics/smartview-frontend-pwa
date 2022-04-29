@@ -9,7 +9,7 @@ import {
 } from "../../Constantes/ActionTypes";
 import config from '../../config'
 import { estadoRequestReducer } from "./EstadoRequest"
-import { message } from "antd";
+import { message, notification } from "antd";
 import {ObtenerPermisosUsuarioReducer} from './Setting'
 
 export const MostrarCargandoLogin = () => (dispatch, getState) => {
@@ -208,7 +208,12 @@ export const RecuperarContraseniaReducer = (data, actualizar = true) => async (d
                 }
 
             }else{
-                message.error(data.mensaje);
+                // message.error(data.mensaje);
+                notification.error({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                })
             }
         }
     }).catch((error)=> {

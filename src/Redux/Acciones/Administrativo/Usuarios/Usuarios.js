@@ -6,7 +6,8 @@ import {
     OBTENER_DATOS_PAISES,
     OBTENER_DATOS_TIPOS_USUARIOS,
     FILTRO_TIPO_USUARIOS_ADM_USUARIO,
-    SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO
+    SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO,
+    OBTENER_DATOS_REPORTE_EXCEL_USUARIOS
 } from '../../../../Constantes/Administrativo/Usuarios/Usuarios'
 
 import {
@@ -19,6 +20,7 @@ import { message } from 'antd'
 export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
 
     let tiposUsuario = getState().usuarios.tiposUsuarios
+    let dataExcelDescargar = getState().usuarios.datosReporteExcelUsuarios
 
     dispatch({
         type: CARGANDO_TABLA_DATOS_USUARIOS,
@@ -26,49 +28,52 @@ export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
             cargandoSpin: true
         }
     })
-
-    await fetch(config.api+'usuarios/mostrar?page='+pagina,
-        {
-            mode:'cors',
-            method: 'POST',
-            body: JSON.stringify({
-                usutoken: localStorage.getItem('usutoken'),
-                re_tipoUsuario : tiposUsuario
-            }),
-            headers: {
-                'Accept' : 'application/json',
-                'Content-type' : 'application/json',
-                'api_token': localStorage.getItem('usutoken'),
-                'api-token': localStorage.getItem('usutoken')
+    
+    if(dataExcelDescargar){
+        await fetch(config.api+'usuarios/mostrar?page='+pagina,
+            {
+                mode:'cors',
+                method: 'POST',
+                body: JSON.stringify({
+                    usutoken: localStorage.getItem('usutoken'),
+                    re_tipoUsuario : tiposUsuario
+                }),
+                headers: {
+                    'Accept' : 'application/json',
+                    'Content-type' : 'application/json',
+                    'api_token': localStorage.getItem('usutoken'),
+                    'api-token': localStorage.getItem('usutoken')
+                }
             }
-        }
-    )
-    .then( async res => {
-        await dispatch(estadoRequestReducer(res.status))
-        return res.json()
-    })
-    .then( async data => {
-        const estadoRequest = getState().estadoRequest.init_request
-        if(estadoRequest == true){
-            if(data){
-                dispatch({
-                    type: OBTENER_DATOS_USUARIOS,
-                    payload: {
-                        datos: data.datos.data,
-                        paginasTotales: data.datos.last_page,
-                        paginaActual: data.datos.current_page,
-                        indexRegistro: data.datos.from,
-                        cargandoSpin: false ,
-                        data_datos_adm_usuarios: data.datos
-                    }
-                })
-            }else{
+        )
+        .then( async res => {
+            await dispatch(estadoRequestReducer(res.status))
+            return res.json()
+        })
+        .then( async data => {
+            const estadoRequest = getState().estadoRequest.init_request
+            if(estadoRequest == true){
+                if(data){
+                    dispatch({
+                        type: OBTENER_DATOS_USUARIOS,
+                        payload: {
+                            datos: data.datos.data,
+                            paginasTotales: data.datos.last_page,
+                            paginaActual: data.datos.current_page,
+                            indexRegistro: data.datos.from,
+                            cargandoSpin: false ,
+                            data_datos_adm_usuarios: data.datos
+                        }
+                    })
+                }else{
 
+                }
             }
-        }
-    }).catch((error)=> {
-        console.log(error)
-    });
+        }).catch((error)=> {
+            console.log(error)
+        });
+    }
+    
 }
 
 export const dataPaises = () => async ( dispatch, getState ) => {
@@ -312,4 +317,54 @@ export const SeleccionarSucursalCrearUsuarioReducer = (posicion, accion) => asyn
       type : SELECCIONAR_UNA_ZONA_DESCARGAR,
       payload: zonas
     })
+}
+
+export const ObtenerDatosReporteExcelUsuariosReducer = () => async (dispatch, getState) => {
+
+    await fetch(config.api+'reporte-usuarios',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                usutoken: localStorage.getItem('usutoken'),
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken')
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then( async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                let data_excel_descargar = await LimpiarArrayDescargarExcelReducer(data.datos)
+                dispatch({
+                    type: OBTENER_DATOS_REPORTE_EXCEL_USUARIOS,
+                    payload: data_excel_descargar
+                })
+            }else{
+
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+}
+
+export const LimpiarArrayDescargarExcelReducer = async (data_excel_descargar) => {
+
+    await data_excel_descargar[0]['data'].map((dato, posicion) => {
+        data_excel_descargar[0]['data'][posicion].map((dat) => {
+        dat.value = dat.value == null ?"" :dat.value
+      })
+    })
+  
+    return data_excel_descargar
 }

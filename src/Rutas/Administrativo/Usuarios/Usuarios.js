@@ -12,14 +12,20 @@ import {
     SeleccionarTodoFiltroTipoUsuario,
     SeleccionarFiltroTipoUsuario,
     SeleccionarSucursalCrearUsuarioReducer,
-    SeleccionarTodoSucursalesCrearUsuarioReducer
+    SeleccionarTodoSucursalesCrearUsuarioReducer,
+    ObtenerDatosReporteExcelUsuariosReducer
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
 import FormularioUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/FormularioUsuarios';
 import FiltroTipoUsuario from '../../../Componentes/Rutas/Administrativo/Usuarios/FiltroTipoUsuario';
+import ReactExport from 'react-data-export';
 
 const Usuarios = () => {
+
+    const ExcelFile = ReactExport.ExcelFile;
+    const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+
     const dispatch = useDispatch()
     const [btnSeleccionado, setBtnSeleccionado] = useState("USUARIOS")
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
@@ -50,7 +56,8 @@ const Usuarios = () => {
         paisesUsuario,
         tiposUsuarios,
         fil_selectodo_data_tipo_usuario,
-        data_datos_adm_usuarios
+        data_datos_adm_usuarios,
+        datosReporteExcelUsuarios
     } = useSelector(({usuarios}) => usuarios);
 
     const {
@@ -67,6 +74,7 @@ const Usuarios = () => {
 
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataUsuarios(paginaActualTabla))
+        await dispatch(ObtenerDatosReporteExcelUsuariosReducer())
         await dispatch(dataPaises())
         await dispatch(dataTiposUsuarios())
     }
@@ -251,7 +259,7 @@ const Usuarios = () => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={13} xl={13}>
+                <Col lg={15} xl={15}>
                     <div className='Caja-Botones-Administrativo'>
                         <Link to='/administrativo'>
                             <div 
@@ -317,7 +325,7 @@ const Usuarios = () => {
                         />                   
                     </div>
                 </Col>
-                <Col lg={11} xl={11}>
+                <Col lg={9} xl={9}>
                     <div className='Contenedor-Btn-Adm-Usuarios'>
                         <div 
                             className='Input-Buscar-Usuarios'
@@ -478,6 +486,16 @@ const Usuarios = () => {
                     </div>
                 </div>
             </Modal> */}
+            {/*<div>
+                <ExcelFile 
+                    filename="ReporteUsuarios"
+                    element={<button>Reporte Usuarios</button>}>
+                    <ExcelSheet 
+                        dataSet={datosReporteExcelUsuarios}                        
+                        name="ReporteUsuarios"
+                    />
+                </ExcelFile>
+            </div>*/}
         </div>
     )
 }

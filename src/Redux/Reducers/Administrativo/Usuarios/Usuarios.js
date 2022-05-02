@@ -4,7 +4,8 @@ import {
     OBTENER_DATOS_PAISES,
     OBTENER_DATOS_TIPOS_USUARIOS,
     FILTRO_TIPO_USUARIOS_ADM_USUARIO,
-    SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO
+    SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO,
+    OBTENER_DATOS_REPORTE_EXCEL_USUARIOS
 } from '../../../../Constantes/Administrativo/Usuarios/Usuarios'
 
 const INIT_STATE = {
@@ -15,6 +16,7 @@ const INIT_STATE = {
     indexRegistro: "",
     paisesUsuario: [],
     tiposUsuarios: [],
+    datosReporteExcelUsuarios : [],
 
     //FILTRO
     fil_selectodo_data_tipo_usuario: true,
@@ -62,6 +64,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 fil_selectodo_data_tipo_usuario: action.payload
+            }
+        }
+        case OBTENER_DATOS_REPORTE_EXCEL_USUARIOS: {
+            return {
+                ...state,
+                datosReporteExcelUsuarios: action.payload
             }
         }
         default:

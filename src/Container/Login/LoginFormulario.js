@@ -144,7 +144,7 @@ const LoginFormulario = () => {
                             </div>
                         }
                     >
-                        <Select.Option danger value="Peru">Peru</Select.Option>
+                        <Select.Option danger value="Peru">Perú</Select.Option>
                         <Select.Option value="Chile">Chile</Select.Option>
                         <Select.Option value="Bolivia">Bolivia</Select.Option>
                     </Select>

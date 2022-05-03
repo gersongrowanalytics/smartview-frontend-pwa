@@ -6,7 +6,8 @@ import {
     CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS,
     SELECCIONAR_TODO_FILTRO_TIPO_CARGA_CONTROL_ARCHIVOS,
     FILTRO_TIPO_CARGA_CONTROL_ARCHIVOS,
-    OBTENER_DATOS_TIPOS_CARGA
+    OBTENER_DATOS_TIPOS_CARGA,
+    OBTENER_DATOS_REPORTE_CONTROL_ARCHIVOS
 } from '../../../Constantes/ControlArchivos/ControlArchivos'
 
 export const dataControlArchivos = (pagina) => async ( dispatch, getState ) => {
@@ -184,3 +185,42 @@ export const SeleccionarFiltroTipoCarga = (posicion, valor) => async (dispatch, 
     })
 }
 
+export const dataReporteArchivosReducer = (fechaInicio, fechaFinal) => async (dispatch, getState) => {
+
+    await fetch(config.api+'reporte-archivos-subidos',
+            {
+                mode:'cors',
+                method: 'POST',
+                body: JSON.stringify({
+                    usutoken: localStorage.getItem('usutoken'),
+                    re_fechaInicio: fechaInicio,
+                    re_fechaFinal: fechaFinal 
+                }),
+                headers: {
+                    'Accept' : 'application/json',
+                    'Content-type' : 'application/json',
+                    'api_token': localStorage.getItem('usutoken'),
+                    'api-token': localStorage.getItem('usutoken')
+                }
+            }
+        )
+        .then( async res => {
+            await dispatch(estadoRequestReducer(res.status))
+            return res.json()
+        })
+        .then( async data => {
+            const estadoRequest = getState().estadoRequest.init_request
+            if(estadoRequest == true){
+                if(data.respuesta == true){
+                    dispatch({
+                        type: OBTENER_DATOS_REPORTE_CONTROL_ARCHIVOS,
+                        payload: data.datos
+                    })
+                }else{
+
+                }
+            }
+        }).catch((error)=> {
+            console.log(error)
+        });
+}

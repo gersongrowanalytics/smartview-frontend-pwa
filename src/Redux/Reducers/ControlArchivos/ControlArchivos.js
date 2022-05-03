@@ -4,7 +4,8 @@ import {
     CARGANDO_BTN_MODAL_CONTROL_ARCHIVOS,
     FILTRO_TIPO_CARGA_CONTROL_ARCHIVOS,
     SELECCIONAR_TODO_FILTRO_TIPO_CARGA_CONTROL_ARCHIVOS,
-    OBTENER_DATOS_TIPOS_CARGA
+    OBTENER_DATOS_TIPOS_CARGA,
+    OBTENER_DATOS_REPORTE_CONTROL_ARCHIVOS
 } from '../../../Constantes/ControlArchivos/ControlArchivos'
 
 const INIT_STATE = {
@@ -16,6 +17,7 @@ const INIT_STATE = {
     cargandoBtnModal: false,
     data_controlarchivos: {},
     tiposCargArchivos: [],
+    datosReporteExcelArchivosSubidos: [],
 
     //FILTRO
     fil_selectodo_data_tipo_carga: true
@@ -62,6 +64,12 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 fil_selectodo_data_tipo_carga: action.payload
+            }
+        }
+        case  OBTENER_DATOS_REPORTE_CONTROL_ARCHIVOS: {
+            return {
+                ...state,
+                datosReporteExcelArchivosSubidos: action.payload
             }
         }
         default:

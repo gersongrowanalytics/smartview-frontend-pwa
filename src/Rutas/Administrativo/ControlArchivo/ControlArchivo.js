@@ -11,7 +11,8 @@ import {
     dataTiposCargaArchivo,
     EliminarControlArchivosReducer,
     SeleccionarTodoFiltroTipoCarga,
-    SeleccionarFiltroTipoCarga
+    SeleccionarFiltroTipoCarga,
+    dataReporteArchivosReducer
 } from '../../../Redux/Acciones/ControlArchivos/ControlArchivos'
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import IconoEditar from '../../../Assets/Img/Administrativo/Permisos/editar.png'
@@ -22,8 +23,12 @@ import IconoGuardar from '../../../Assets/Img/Administrativo/Permisos/guardar.pn
 import IconoGuardarBlanco from '../../../Assets/Img/Administrativo/ControlArchivo/Guardar-white.png'
 import Moment from 'moment';
 import FiltroTipoCarga from '../../../Componentes/Rutas/Administrativo/ControlArchivos/FiltroTipoCarga';
+import ReactExport from 'react-data-export';
 
 const ControlArchivo = () => {
+
+    const ExcelFile = ReactExport.ExcelFile;
+    const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
     const [btnSeleccionado, setBtnSeleccionado] = useState("CONTROL")
     const [paginaActualTabla, setpaginaActualTabla] = useState("1")
@@ -43,13 +48,16 @@ const ControlArchivo = () => {
         cargandoTablaControlArchivos,
         cargandoBtnModal,
         data_controlarchivos,
-        fil_selectodo_data_tipo_carga
+        fil_selectodo_data_tipo_carga,
+        datosReporteExcelArchivosSubidos
     } = useSelector(({controlArchivos}) => controlArchivos);
 
-    console.log(archivosSubidos)
+    // console.log(datosReporteExcelArchivosSubidos)
+
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataControlArchivos(paginaActualTabla))
         await dispatch(dataTiposCargaArchivo())
+        await dispatch(dataReporteArchivosReducer('2021-07-01','2021-07-30'))
     }
 
     const obtenerFechaHora = (fechaSinFormato, tipo) => {
@@ -467,6 +475,16 @@ const ControlArchivo = () => {
                     </div>
                 </div> 
             </Modal>
+           {/* <div>
+                <ExcelFile 
+                    filename="ReporteControlArchivos"
+                    element={<button>Reporte Control Archivos</button>}>
+                    <ExcelSheet 
+                        dataSet={datosReporteExcelArchivosSubidos}                        
+                        name="ReporteControlArchivos"
+                    />
+                </ExcelFile>
+            </div>*/}
         </div>
     )
 }

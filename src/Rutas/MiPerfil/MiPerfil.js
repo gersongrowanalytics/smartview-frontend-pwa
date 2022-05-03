@@ -4,6 +4,9 @@ import '../../Estilos/Rutas/MiPerfil/MiPerfil.css'
 import Camara from '../../Assets/Img/MiPerfil/Foto_perfil_cámara.png'
 import {useDispatch, useSelector} from 'react-redux'
 import {Form, Input, Select, Button } from "antd";
+import {
+    EditarPerfilReducer
+} from '../../Redux/Acciones/MiPerfil/MiPerfil'
 
 const MiPerfil = () => {
 
@@ -18,24 +21,24 @@ const MiPerfil = () => {
 
     const seleccionarIdioma = (idioma) => {
         settxtIdioma(idioma)
-        console.log(idioma);
     }
 
     const onFinish = (datos) =>  {
 
         let datosUsuario = {
-            imagenPrev: localStorage.getItem('usuImagenPrev'),
-            nombre : datos['nombre'],
-            apellido : datos['apellido'],
-            email: datos['email'],
-            telefono: datos['telefono'],
-            idioma: datos['idioma'],
-            pais: datos['pais'],
-            direccion: datos['direccion']
+            // imagenPrev      : localStorage.getItem('usuImagenPrev'),
+            re_nombre          : datos['nombre'],
+            re_apellidoPaterno : datos['apellidoPaterno'],
+            re_apellidoMaterno : datos['apellidoMaterno'],
+            re_correo          : datos['email'],
+            re_telefono        : datos['telefono'],
+            // idioma             : datos['idioma'],
+            // pais               : datos['pais'],
+            re_direccion       : datos['direccion']
             
         }
-        console.log('datos',datosUsuario)
-        // dispatch(EditarPerfilReducer(datos));
+
+        dispatch(EditarPerfilReducer(datosUsuario));   
     };
 
 
@@ -46,11 +49,12 @@ const MiPerfil = () => {
             <Form
                 onFinish={onFinish}
                 initialValues={{
-                    nombre: localStorage.getItem('pernombre'),
-                    apellido: localStorage.getItem('pernombrecompleto'),
-                    email: localStorage.getItem('usucorreo'),
-                    telefono: localStorage.getItem('percelular'),
-                    direccion: localStorage.getItem('perdireccion'),
+                    nombre          : localStorage.getItem('pernombre'),
+                    apellidoPaterno : localStorage.getItem('perapellidopaterno'),
+                    apellidoMaterno : localStorage.getItem('perapellidomaterno'),
+                    email           : localStorage.getItem('usuusuario'),
+                    telefono        : localStorage.getItem('percelular'),
+                    direccion       : localStorage.getItem('perdireccion'),
                     idioma: "espanol"
                 }}
             >
@@ -130,16 +134,36 @@ const MiPerfil = () => {
                 <Row>
                     <Col xs={2} xl={6}></Col>
                     <Col xs={5} xl={3} className='Primera-Columna-Perfil'>
-                        <div className='Campos-Perfil'>Apellido *:</div>
+                        <div className='Campos-Perfil'>Apellido Paterno *:</div>
                     </Col>
                     <Col xs={14} xl={9} offset={1}>
                         <Form.Item
-                            name="apellido"
+                            name="apellidoPaterno"
                             className='InputFormPerfil'
                             rules= {[
                                 {
                                     required: true,
-                                    message:"Ingrese un apellido"
+                                    message:"Ingrese su apellido paterno"
+                                }
+                            ]}
+                        >
+                            <Input className='Input-Perfil'></Input>
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={2} xl={6}></Col>
+                    <Col xs={5} xl={3} className='Primera-Columna-Perfil'>
+                        <div className='Campos-Perfil'>Apellido Materno *:</div>
+                    </Col>
+                    <Col xs={14} xl={9} offset={1}>
+                        <Form.Item
+                            name="apellidoMaterno"
+                            className='InputFormPerfil'
+                            rules= {[
+                                {
+                                    required: true,
+                                    message:"Ingrese su apellido materno"
                                 }
                             ]}
                         >
@@ -211,8 +235,6 @@ const MiPerfil = () => {
                                 }
                             >
                                 <Select.Option value='espanol'>Español</Select.Option>
-                                <Select.Option value='ingles'>Ingles</Select.Option>
-                                <Select.Option value='ruso'>Ruso</Select.Option>
                             </Select>
                         </Form.Item>
                     </Col>

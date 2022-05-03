@@ -57,7 +57,7 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
 
                 dispatch(ObtenerPermisosUsuarioReducer())
 
-                // console.log(data.datos)
+                console.log(data.datos) 
                 localStorage.setItem('contrasena', usuario.contrasena)
                 localStorage.setItem('usuario', usuario.usuario)
                 localStorage.setItem('user_id', data.datos.usuid)
@@ -65,6 +65,8 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
                 localStorage.setItem('usuusuario', data.datos.usuusuario)
                 localStorage.setItem('pernombre', data.datos.pernombre)
                 localStorage.setItem('pernombrecompleto', data.datos.pernombrecompleto)
+                localStorage.setItem('perapellidopaterno', data.datos.perapellidopaterno)
+                localStorage.setItem('perapellidomaterno', data.datos.perapellidomaterno)
                 localStorage.setItem('tpunombre', data.datos.tpunombre)
                 localStorage.setItem('ejecutivo', data.datos.ejecutivo)          
                 localStorage.setItem('distribuidora', data.datos.pernombrecompleto)

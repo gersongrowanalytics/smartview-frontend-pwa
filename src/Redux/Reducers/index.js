@@ -25,6 +25,7 @@ import Notificaciones from './Notificaciones/Notificaciones'
 import Usuarios from './Administrativo/Usuarios/Usuarios'
 import Permisos from './Administrativo/Permisos/Permisos'
 import TiposUsuarios from './Administrativo/TiposUsuarios/TiposUsuarios'
+import MiPerfil from './MiPerfil/MiPerfil'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -52,7 +53,8 @@ const createRootReducer = (history) => combineReducers({
     notificaciones : Notificaciones,
     usuarios: Usuarios,
     permisos: Permisos,
-    tiposUsuarios: TiposUsuarios
+    tiposUsuarios: TiposUsuarios,
+    miperfil: MiPerfil
 });
 
 export default createRootReducer

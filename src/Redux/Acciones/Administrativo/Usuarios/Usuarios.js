@@ -161,7 +161,7 @@ export const crearUsuario = (usuario) => async ( dispatch, getState ) => {
     let respuesta = false
     const sucursalesUsuario = getState().sucursales.sucursalesUsuario
 
-    usuario.sucursales = sucursalesUsuario
+    usuario.re_sucursales = sucursalesUsuario
 
     await fetch(config.api+'usuarios/crear',
         {
@@ -185,9 +185,9 @@ export const crearUsuario = (usuario) => async ( dispatch, getState ) => {
         if(estadoRequest == true){
             if(data.respuesta == true){
                 respuesta = true
-                message.success(data.mensaje)
+                // message.success(data.mensaje)
             }else{
-                message.error(data.mensaje)
+                // message.error(data.mensaje)
             }
         }
     }).catch((error)=> {

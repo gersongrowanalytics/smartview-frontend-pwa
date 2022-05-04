@@ -1,8 +1,18 @@
 import config from '../../../config'
+import {
+    CARGANDO_BTN_EDITAR_PERFIL
+} from '../../../Constantes/MiPerfil/MiPerfil'
 import { estadoRequestReducer } from "../EstadoRequest"
 
-export const EditarPerfilReducer = (datos) => async(dispatch, getState) => {
+export const EditarPerfilReducer = (datos) => async (dispatch, getState) => {
     
+    let respuesta = false
+
+    dispatch({
+        type: CARGANDO_BTN_EDITAR_PERFIL,
+        payload: true
+    })
+
     await fetch(config.api+'perfil/editar',
         {
             mode:'cors',
@@ -25,21 +35,26 @@ export const EditarPerfilReducer = (datos) => async(dispatch, getState) => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
             if(data.respuesta == true){
-                console.log('EDICION CORRECTA')
+                respuesta = true
                 localStorage.setItem('pernombre', datos.re_nombre)
                 localStorage.setItem('perapellidopaterno', datos.re_apellidoPaterno)
                 localStorage.setItem('perapellidomaterno', datos.re_apellidoMaterno)
                 localStorage.setItem('usuusuario', datos.re_correo)
                 localStorage.setItem('percelular', datos.re_telefono)
                 localStorage.setItem('perdireccion', datos.re_direccion)
+
+                dispatch({
+                    type: CARGANDO_BTN_EDITAR_PERFIL,
+                    payload: false
+                })
             }else{
-                
+                console.log('Error', data.mensaje)
             }
         }
     }).catch((error)=> {
         console.log("EditarPerfilReducer: "+error)
     });
-
+    return respuesta
 }
 
 // export const AgregarImagenPerfilReducer = (imagen) => async(dispatch, getState) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Switch, Input, Checkbox, Modal, Form, Spin, DatePicker } from 'antd'
+import { Row, Col, Switch, Input, Checkbox, Modal, Form, Spin, DatePicker, notification } from 'antd'
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../../Estilos/Rutas/Administrativo/AdministrativoUsuarios.css'
@@ -15,7 +15,7 @@ import {
     SeleccionarTodoSucursalesCrearUsuarioReducer,
     ObtenerDatosReporteExcelUsuariosReducer
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
-import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, CloseCircleOutlined, LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
 import FormularioUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/FormularioUsuarios';
 import FiltroTipoUsuario from '../../../Componentes/Rutas/Administrativo/Usuarios/FiltroTipoUsuario';
@@ -165,8 +165,8 @@ const Usuarios = () => {
         form.setFieldsValue({
             Nombre: usuario.pernombre,
             Apellidos: usuario.perapellidopaterno,
-            CorreoPersonal: usuario.usucorreopersonal,
-            CorreoCoorporativo: usuario.usucorreo,
+            CorreoPersonal: usuario.usucorreo,
+            CorreoCoorporativo: usuario.usuusuario,
             // Contraseña: usuario.usucontrasena,
             Celular: usuario.percelular
         });
@@ -207,6 +207,18 @@ const Usuarios = () => {
         })
     }
 
+    const abrirNotificacion = (respuesta) => {
+        notification.info({
+            message: `Notificación de creación de usuario`,
+            description: respuesta == "true"
+                ? "El usuario fue creado exitosamente"
+                : "Lo sentimos, hubo un error al crear el usuario",
+            icon: respuesta == "true"
+                ? <CheckCircleOutlined style={{ color: '#00BB2D' }} />
+                : <CloseCircleOutlined style={{ color: '#FF0000' }} />,
+        });
+    };
+
     const onFinish = async(valores) => {
 
         if(editarFilaUsuario == true && ConfirmoEditar == false){
@@ -219,25 +231,26 @@ const Usuarios = () => {
                 estado = '2'
             }
             let usuarioDatos = {
-                'nombre'      : valores['Nombre'],
-                'apellidos'   : valores['Apellidos'],
-                'correo_inst' : valores['CorreoCoorporativo'],
-                'correo'      : valores['CorreoPersonal'],
-                'contrasenia' : valores['Contraseña'],
-                'celular'     : valores['Celular'],
-                'tipo_usuario': valorFormularioTipoUsuario,
-                'fecha_inicio': fechaInicio,
-                'fecha_fin'   : fechaFinal,
+                're_nombre'      : valores['Nombre'],
+                're_apellidos'   : valores['Apellidos'],
+                're_usuario'     : valores['CorreoCoorporativo'],
+                're_correo'      : valores['CorreoPersonal'],
+                're_contrasenia' : valores['Contraseña'],
+                're_celular'     : valores['Celular'],
+                're_tipo_usuario': valorFormularioTipoUsuario,
+                're_fecha_inicio': fechaInicio,
+                're_fecha_fin'   : fechaFinal,
                 // 'zonas: zonasSeelccionadas,
-                'paises' : paisesSeleccionados,
-                'estado' : estado,
+                're_paises'      : paisesSeleccionados,
+                're_estado'      : estado,
             }
 
             if(await dispatch(crearUsuario(usuarioDatos)) == true){
                 crearAdmUsuario()
+                abrirNotificacion('true')
                 cargarDatosTabla(paginaActualTabla)
             }else{
-            
+                abrirNotificacion('false')
             }
         }
         

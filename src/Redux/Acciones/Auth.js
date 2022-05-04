@@ -57,7 +57,7 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
 
                 dispatch(ObtenerPermisosUsuarioReducer())
 
-                console.log(data.datos) 
+                // console.log(data.datos) 
                 localStorage.setItem('contrasena', usuario.contrasena)
                 localStorage.setItem('usuario', usuario.usuario)
                 localStorage.setItem('user_id', data.datos.usuid)

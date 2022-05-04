@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Spin, notification } from 'antd'
 import '../../Estilos/Rutas/MiPerfil/MiPerfil.css'
 import Camara from '../../Assets/Img/MiPerfil/Foto_perfil_cámara.png'
 import {useDispatch, useSelector} from 'react-redux'
@@ -7,6 +7,8 @@ import {Form, Input, Select, Button } from "antd";
 import {
     EditarPerfilReducer
 } from '../../Redux/Acciones/MiPerfil/MiPerfil'
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 const MiPerfil = () => {
 
@@ -17,13 +19,29 @@ const MiPerfil = () => {
 
     const { 
         datosUsuarioLogeado
-    } = useSelector(({auth}) => auth);
+    } = useSelector(({ auth }) => auth);
+    
+    const {
+        cargandoBtnEditar
+    } = useSelector(({ miperfil }) => miperfil);
 
     const seleccionarIdioma = (idioma) => {
         settxtIdioma(idioma)
     }
 
-    const onFinish = (datos) =>  {
+    const abrirNotificacion = (respuesta) => {
+        notification.info({
+            message: `Notificación de edición`,
+            description: respuesta == "true"
+                ? "Los datos de su usuario fueron editados exitosamente"
+                : "Lo sentimos, hubo un error al editar su usuario",
+            icon: respuesta == "true"
+                ? <CheckCircleOutlined style={{ color: '#00BB2D' }} />
+                : <CloseCircleOutlined style={{ color: '#FF0000' }} />,
+        });
+    };
+    
+    const onFinish = async(datos) =>  {
 
         let datosUsuario = {
             // imagenPrev      : localStorage.getItem('usuImagenPrev'),
@@ -37,10 +55,12 @@ const MiPerfil = () => {
             re_direccion       : datos['direccion']
             
         }
-
-        dispatch(EditarPerfilReducer(datosUsuario));   
+        if ( await dispatch(EditarPerfilReducer(datosUsuario)) == true) {
+            abrirNotificacion('true')
+        } else {
+            abrirNotificacion('false')
+        }    
     };
-
 
     return (
         <div
@@ -270,19 +290,21 @@ const MiPerfil = () => {
                 <Row style={{marginTop:'50px', marginBottom: '58px'}}>
                     <Col xs={2} xl={6}></Col>
                     <Col xs={10} xl={3} className='Primera-Columna-Perfil Posicion'>
-                        <button
-                            type='submit'  
-                            className='Boton-Guardar-Perfil'
-                        >
-                            Guardar Cambios
-                        </button>
+                        <Spin spinning={cargandoBtnEditar}>
+                            <button
+                                type='submit'  
+                                className='Boton-Guardar-Perfil'
+                            >
+                                Guardar Cambios
+                            </button>
+                        </Spin>
                     </Col>
                     <Col xl={9}>
-                        <button  
-                            className='Boton-Cancelar-Perfil'
-                        >
-                            Cancelar Cambios
-                        </button>
+                        <Link to="/ventas">
+                            <div className='Boton-Cancelar-Perfil'>
+                                Cancelar Cambios
+                            </div>
+                        </Link>
                     </Col>
                     {/* <Col xs={0} xl={0} offset={1} className='Segunda-Columna-Perfil'>
                         <button 
@@ -299,3 +321,4 @@ const MiPerfil = () => {
 }
 
 export default MiPerfil
+

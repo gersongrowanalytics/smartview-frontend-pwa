@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { Row, Col, Spin, notification } from 'antd'
+import { Row, Col, Spin, notification} from 'antd'
 import '../../Estilos/Rutas/MiPerfil/MiPerfil.css'
 import Camara from '../../Assets/Img/MiPerfil/Foto_perfil_cámara.png'
 import {useDispatch, useSelector} from 'react-redux'
@@ -9,13 +9,20 @@ import {
 } from '../../Redux/Acciones/MiPerfil/MiPerfil'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import ModalImagen from '../../Componentes/Rutas/MiPerfil/ModalImagen'
 
 const MiPerfil = () => {
+
+    const dispatch = useDispatch()
 
     const [txtIdioma, settxtIdioma] = useState("")
     const [imagenPrevi, setimagenPrevi] = useState(Camara)
     const [imagenUsuario, setimagenUsuario] = useState(localStorage.getItem('usuimagen'))
-    const dispatch = useDispatch()
+    const [modalAbiertoEditarSinImagen, setModalAbiertoEditarSinImagen] = useState(false)
+    const [modalAbiertoEditarConImagen, setModalAbiertoEditarConImagen] = useState(false)
+    const [imagenRecortada, setImagenRecortada] = useState("")
+    console.log('ususario', imagenUsuario)
+    // console.log('usuimagen',localStorage.getItem('usuimagen'))
 
     const { 
         datosUsuarioLogeado
@@ -44,7 +51,7 @@ const MiPerfil = () => {
     const onFinish = async(datos) =>  {
 
         let datosUsuario = {
-            // imagenPrev      : localStorage.getItem('usuImagenPrev'),
+            re_imagen          : localStorage.getItem('usuimagen'),
             re_nombre          : datos['nombre'],
             re_apellidoPaterno : datos['apellidoPaterno'],
             re_apellidoMaterno : datos['apellidoMaterno'],
@@ -55,13 +62,14 @@ const MiPerfil = () => {
             re_direccion       : datos['direccion']
             
         }
+        console.log(datosUsuario)
         if ( await dispatch(EditarPerfilReducer(datosUsuario)) == true) {
             abrirNotificacion('true')
         } else {
             abrirNotificacion('false')
         }    
     };
-
+    
     return (
         <div
             style={{marginTop:'115px'}}
@@ -85,11 +93,11 @@ const MiPerfil = () => {
                     </Col>
                     <Col xl={10} offset={1}>
                         {
-                            localStorage.getItem('usuimagen') == null ? (
+                            localStorage.getItem('usuimagen') == 'null' ? (
                                 <>
                                     <div className='imagen-upload'>
                                         <label htmlFor="file-input">
-                                            <img className='Foto-Perfil' src={imagenPrevi}></img>
+                                            <img className='Foto-Perfil' src={imagenPrevi}/>
                                         </label>
                                         <input 
                                             id='file-input' 
@@ -99,19 +107,19 @@ const MiPerfil = () => {
                                                 reader.readAsDataURL(e.target.files[0]);
                                                 reader.onload = function(){
                                                     setimagenPrevi(reader.result)
+                                                    setModalAbiertoEditarSinImagen(true)
                                                     localStorage.setItem('usuImagenPrev', reader.result)
                                                     // dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
                                                 };
                                             }}  
                                         />
                                     </div>
-                                
                                 </>
                                 
                             ) : (
                                 <div className='imagen-upload'>
                                         <label htmlFor="file-input">
-                                            <img className='Foto-Perfil' src={imagenUsuario}></img>
+                                            <img className='Foto-Perfil' src={imagenUsuario}/>
                                         </label>
                                         <input 
                                             id='file-input' 
@@ -121,6 +129,7 @@ const MiPerfil = () => {
                                                 reader.readAsDataURL(e.target.files[0]);
                                                 reader.onload = function(){
                                                     setimagenUsuario(reader.result)
+                                                    setModalAbiertoEditarConImagen(true)
                                                     localStorage.setItem('usuImagenPrev', reader.result)
                                                     // dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
                                                 };
@@ -316,6 +325,37 @@ const MiPerfil = () => {
                     </Col> */}
                 </Row>
             </Form>
+            <ModalImagen
+                modalAbiertoEditarImagen={modalAbiertoEditarSinImagen}
+                imagenPrevi={ imagenPrevi }
+                imagenRecortada = {imagenRecortada}
+                setAbrilModal={() => {
+                    setModalAbiertoEditarSinImagen(false)
+                }}
+                setImagenPrevisualizar={(imagen) => {
+                    setimagenPrevi(imagen)
+                }}
+                setImagenRecortadaCircular={(imagen) => {
+                    setImagenRecortada(imagen)
+                }}
+                setImagenUsuario={(imagen) => {
+                    setimagenUsuario(imagen)
+                }}
+            />
+            <ModalImagen
+                modalAbiertoEditarImagen={modalAbiertoEditarConImagen}
+                imagenPrevi={ imagenUsuario }
+                imagenRecortada = {imagenRecortada}
+                setAbrilModal={() => {
+                    setModalAbiertoEditarConImagen(false)
+                }}
+                setImagenPrevisualizar={(imagen) => {
+                    setimagenPrevi(imagen)
+                }}
+                setImagenRecortadaCircular={(imagen) => {
+                    setImagenRecortada(imagen)
+                }}
+            />
         </div>
     )
 }

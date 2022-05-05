@@ -11,6 +11,7 @@ import config from '../../config'
 import { estadoRequestReducer } from "./EstadoRequest"
 import { message, notification } from "antd";
 import {ObtenerPermisosUsuarioReducer} from './Setting'
+import { defineLocale } from "moment";
 
 export const MostrarCargandoLogin = () => (dispatch, getState) => {
 
@@ -74,6 +75,7 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
                 localStorage.setItem('percelular', data.datos.percelular)
                 localStorage.setItem('perdireccion', data.datos.perdireccion)
                 localStorage.setItem('usucorreo', data.datos.usucorreo)
+                localStorage.setItem('usuimagen', data.datos.usuimagen)
 
                 await dispatch(loginCorrecto(data.datos))
                 await dispatch(obtenerDatosUsuarioLogin(data.datos))

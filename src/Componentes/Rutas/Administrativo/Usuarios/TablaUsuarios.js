@@ -11,6 +11,7 @@ const TablaUsuarios = (props) => {
         cargandoTablaUsuarios,
         indexRegistro,
     } = useSelector(({usuarios}) => usuarios);
+    // console.log(usuarios)
 
     const busquedaAbierto = props.busquedaAbierto
     const setbusquedaAbierto = props.setbusquedaAbierto
@@ -105,6 +106,7 @@ const TablaUsuarios = (props) => {
                                         || mostarPais == true
                                         ?<tr 
                                             onClick={() => seleccionarUsuarioEditar(usuario)}
+                                            key={usuario.usuid}
                                         >
                                             <td>
                                                 {indexRegistro + posicion}
@@ -134,7 +136,8 @@ const TablaUsuarios = (props) => {
                                                                 usuario.paises.map((pais, posicion) => {
                                                                     if (posicion == '0') {
                                                                         return (
-                                                                            <img src={pais.paiiconomas} className='Banderas-lista' />
+                                                                            <img src={pais.paiiconomas} className='Banderas-lista' 
+                                                                                key={pais.paiid}/>
                                                                         )
                                                                     }
                                                                 })
@@ -144,7 +147,8 @@ const TablaUsuarios = (props) => {
                                                                     usuario.paises.map((pais, posicion) => {
                                                                         if (posicion >= '1') {
                                                                             return (
-                                                                                <img src={pais.paiicono} className='Banderas-lista' />
+                                                                                <img src={pais.paiicono} className='Banderas-lista' 
+                                                                                    key={pais.paiid}/>
                                                                             )
                                                                         }
                                                                     })
@@ -156,7 +160,8 @@ const TablaUsuarios = (props) => {
                                                         usuario.paises.map((pais) => {
                                                             return (
                                                                 <>
-                                                                    <img src={pais.paiicono} className='Banderas-lista' />
+                                                                    <img src={pais.paiicono} className='Banderas-lista' 
+                                                                        key={pais.paiid}/>
                                                                     {pais.painombre}
                                                                 </>
                                                             )

@@ -42,7 +42,8 @@ export const EditarPerfilReducer = (datos) => async (dispatch, getState) => {
                 localStorage.setItem('usuusuario', datos.re_correo)
                 localStorage.setItem('percelular', datos.re_telefono)
                 localStorage.setItem('perdireccion', datos.re_direccion)
-
+                localStorage.setItem('usuimagen', datos.re_imagen)
+                
                 dispatch({
                     type: CARGANDO_BTN_EDITAR_PERFIL,
                     payload: false

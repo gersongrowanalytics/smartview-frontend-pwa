@@ -11,6 +11,7 @@ const ModalImagen = (props) => {
     const setImagenRecortadaCircular = props.setImagenRecortadaCircular
     const imagenRecortada = props.imagenRecortada
     const setImagenUsuario = props.setImagenUsuario
+    const imagenUsu = props.imagenUsu
 
     let cerrarEditor = () => {
         setImagenRecortadaCircular("")
@@ -22,7 +23,7 @@ const ModalImagen = (props) => {
     
     let antesCargarImagen = (elem) => {
         if(elem.target.files[0].size > 71680){
-          alert("File is too big!");
+          alert("¡El archivo es demasiado grande!");
           elem.target.value = "";
         };
     }
@@ -36,7 +37,9 @@ const ModalImagen = (props) => {
 
     const cancelarEdicionImagen = () => {
         setAbrilModal(false)
-        setImagenPrevisualizar(Camara)
+        if(imagenUsu){
+            setImagenUsuario(imagenUsu)
+        }
     }
 
     return (
@@ -59,7 +62,7 @@ const ModalImagen = (props) => {
                             height={295}
                             onCrop={(e) => recortarImagen(e)}
                             onClose={() => cerrarEditor()}
-                            onBeforeFileLoad={() => antesCargarImagen(imagenPrevi)}
+                            onBeforeFileLoad={(e) => antesCargarImagen(e)}
                             src={imagenPrevi}
                         />
                         <img
@@ -74,7 +77,7 @@ const ModalImagen = (props) => {
                     >
                         <button 
                             className='Boton-Aceptar-Eliminar-Modal'
-                            onClick={() => confirmarEdicionImagen(imagenRecortada)}
+                            onClick={() => {confirmarEdicionImagen(imagenRecortada)}}
                         >
                             Aceptar
                         </button>

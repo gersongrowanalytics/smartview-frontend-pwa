@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Row, Col, Switch, Input, Checkbox, Form } from 'antd'
 import FlechaAbajoNegro from '../../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo.png'
 import { LeftOutlined, LoadingOutlined, RightOutlined } from '@ant-design/icons';
@@ -13,7 +13,6 @@ const FormularioUsuarios = (props) => {
         paisesUsuario,
         tiposUsuarios
     } = useSelector(({usuarios}) => usuarios);
-
 
     const paisesSeleccionados       = props.paisesSeleccionados
     const EliminarPaisSeleccionado  = props.EliminarPaisSeleccionado
@@ -42,6 +41,9 @@ const FormularioUsuarios = (props) => {
     const form   = props.form
 
     const [mostrarModal, setMostrarModal] = useState(false)
+
+    console.log("PAISES USUARIO")
+    console.log(paisesUsuario)
 
     return (
         <div>
@@ -124,7 +126,8 @@ const FormularioUsuarios = (props) => {
                                                 return (
                                                     <div 
                                                         className='Opciones-Select-Adm-Usuario'
-                                                        onClick={() => seleccionarTipoUsuario(tipo)}    
+                                                        onClick={() => seleccionarTipoUsuario(tipo)}
+                                                        key={tipo.tpuid}
                                                     >
                                                         {tipo.tpunombre}
                                                     </div>   
@@ -208,7 +211,7 @@ const FormularioUsuarios = (props) => {
                                                             <div className='Contenedor-PreImagen-Pais-Seleccionado'>
                                                                 <span>{pais.painombre}</span>
                                                                 <img src={pais.paiicono} style={{width:'32px'}}></img>
-                                                                <img src={Borrar} style={{width:'11px'}} 
+                                                                <img src={Borrar} style={{width:'8px'}} 
                                                                     onClick={() => EliminarPaisSeleccionado(pos)}/>
                                                             </div>
                                                         )
@@ -251,6 +254,7 @@ const FormularioUsuarios = (props) => {
                                                             onChange={(e) => {
                                                                 SeleccionarPais(e.target.checked, posicion)
                                                             }}
+                                                            checked={pais.seleccionado}
                                                         />
                                                         <div className='Contenedor-Nombre-Img'>
                                                             <span style={{marginLeft:'10px'}}>{pais.painombre}</span>

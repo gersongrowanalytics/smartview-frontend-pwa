@@ -13,7 +13,8 @@ import {
     SeleccionarFiltroTipoUsuario,
     SeleccionarSucursalCrearUsuarioReducer,
     SeleccionarTodoSucursalesCrearUsuarioReducer,
-    ObtenerDatosReporteExcelUsuariosReducer
+    ObtenerDatosReporteExcelUsuariosReducer,
+    armarPaisesSeleccionadosReducer
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 import { CheckCircleOutlined, CloseCircleOutlined, LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
@@ -185,9 +186,9 @@ const Usuarios = () => {
         await usuario.paises.map((pais) => {
             paises.push(pais)
         })
-
         setpaisesSeleccionados(paises)
-        
+
+        await dispatch(armarPaisesSeleccionadosReducer(usuario))
 
         // paisesUsuario.map((pais, pos) => {
         //     usuario.paises.map((usuarioPais) => {
@@ -244,7 +245,7 @@ const Usuarios = () => {
                 're_paises'      : paisesSeleccionados,
                 're_estado'      : estado,
             }
-
+            console.log(usuarioDatos);
             if(await dispatch(crearUsuario(usuarioDatos)) == true){
                 crearAdmUsuario()
                 abrirNotificacion('true')

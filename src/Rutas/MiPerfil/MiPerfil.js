@@ -19,11 +19,9 @@ const MiPerfil = () => {
     const [imagenPrevi, setimagenPrevi] = useState(Camara)
     const [imagenUsuario, setimagenUsuario] = useState(localStorage.getItem('usuimagen'))
     const [modalAbiertoEditarSinImagen, setModalAbiertoEditarSinImagen] = useState(false)
-    const [modalAbiertoEditarConImagen, setModalAbiertoEditarConImagen] = useState(false)
+    const [modalAbiertoEditarImagen, setModalAbiertoEditarImagen] = useState(false)
     const [imagenRecortada, setImagenRecortada] = useState("")
-    console.log('ususario', imagenUsuario)
-    // console.log('usuimagen',localStorage.getItem('usuimagen'))
-
+    
     const { 
         datosUsuarioLogeado
     } = useSelector(({ auth }) => auth);
@@ -93,8 +91,11 @@ const MiPerfil = () => {
                     </Col>
                     <Col xl={10} offset={1}>
                         {
-                            localStorage.getItem('usuimagen') == 'null' ? (
+                            // localStorage.getItem('usuimagen') == 'null' || localStorage.getItem('usuimagen') ? (
+                            !localStorage.getItem('usuimagen') ? (
+
                                 <>
+                                primera
                                     <div className='imagen-upload'>
                                         <label htmlFor="file-input">
                                             <img className='Foto-Perfil' src={imagenPrevi}/>
@@ -105,10 +106,13 @@ const MiPerfil = () => {
                                             onChange={(e) => {
                                                 let reader = new FileReader()
                                                 reader.readAsDataURL(e.target.files[0]);
+                                                setimagenPrevi("hola1")
+                                                console.log('IMAGEN_PREV1_INPUT_SIN_IMAGEN',imagenPrevi)
                                                 reader.onload = function(){
                                                     setimagenPrevi(reader.result)
-                                                    setModalAbiertoEditarSinImagen(true)
-                                                    localStorage.setItem('usuImagenPrev', reader.result)
+                                                    console.log('IMAGEN_PREV2_SIN_IMAGEN',imagenPrevi)
+                                                    setModalAbiertoEditarImagen(true)
+                                                    // localStorage.setItem('usuImagenPrev', reader.result)
                                                     // dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
                                                 };
                                             }}  
@@ -118,6 +122,7 @@ const MiPerfil = () => {
                                 
                             ) : (
                                 <div className='imagen-upload'>
+                                segunda
                                         <label htmlFor="file-input">
                                             <img className='Foto-Perfil' src={imagenUsuario}/>
                                         </label>
@@ -125,15 +130,25 @@ const MiPerfil = () => {
                                             id='file-input' 
                                             type="file"
                                             onChange={(e) => {
+                                                console.log(e.target.files[0].name)
+                                                // e.target.files[0].name = Math.random()
+
+                                                let file  = document.getElementById('file-input');  
+                                                console.log(file)
                                                 let reader = new FileReader()
                                                 reader.readAsDataURL(e.target.files[0]);
+                                                // setimagenPrevi("hola2")
+                                                // console.log('IMAGEN_PREV1_INPUT_CON_IMAGEN',imagenPrevi)
                                                 reader.onload = function(){
-                                                    setimagenUsuario(reader.result)
-                                                    setModalAbiertoEditarConImagen(true)
-                                                    localStorage.setItem('usuImagenPrev', reader.result)
+
+                                                    setimagenPrevi(reader.result)
+                                                    // console.log('IMAGEN_PREV2_CON_IMAGEN',imagenPrevi)
+                                                    setModalAbiertoEditarImagen(true)
+                                                    // localStorage.setItem('usuImagenPrev', reader.result)
                                                     // dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
                                                 };
-                                            }}  
+                                                
+                                            }} 
                                         />
                                 </div> 
                             )
@@ -325,12 +340,13 @@ const MiPerfil = () => {
                     </Col> */}
                 </Row>
             </Form>
+             {/*
             <ModalImagen
                 modalAbiertoEditarImagen={modalAbiertoEditarSinImagen}
                 imagenPrevi={ imagenPrevi }
                 imagenRecortada = {imagenRecortada}
-                setAbrilModal={() => {
-                    setModalAbiertoEditarSinImagen(false)
+                setAbrilModal={(valor) => {
+                    setModalAbiertoEditarSinImagen(valor)
                 }}
                 setImagenPrevisualizar={(imagen) => {
                     setimagenPrevi(imagen)
@@ -341,19 +357,23 @@ const MiPerfil = () => {
                 setImagenUsuario={(imagen) => {
                     setimagenUsuario(imagen)
                 }}
-            />
+           />*/}
             <ModalImagen
-                modalAbiertoEditarImagen={modalAbiertoEditarConImagen}
-                imagenPrevi={ imagenUsuario }
+                modalAbiertoEditarImagen={modalAbiertoEditarImagen}
+                imagenPrevi={ imagenPrevi }
+                imagenUsu = { imagenUsuario }
                 imagenRecortada = {imagenRecortada}
-                setAbrilModal={() => {
-                    setModalAbiertoEditarConImagen(false)
+                setAbrilModal={(valor) => {
+                    setModalAbiertoEditarImagen(valor)
                 }}
                 setImagenPrevisualizar={(imagen) => {
                     setimagenPrevi(imagen)
                 }}
                 setImagenRecortadaCircular={(imagen) => {
                     setImagenRecortada(imagen)
+                }}
+                setImagenUsuario={(imagen) => {
+                    setimagenUsuario(imagen)
                 }}
             />
         </div>

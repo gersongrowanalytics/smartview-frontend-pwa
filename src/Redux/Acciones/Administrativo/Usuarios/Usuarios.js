@@ -7,7 +7,8 @@ import {
     OBTENER_DATOS_TIPOS_USUARIOS,
     FILTRO_TIPO_USUARIOS_ADM_USUARIO,
     SELECCIONAR_TODO_FILTRO_TIPO_USUARIOS_ADM_USUARIO,
-    OBTENER_DATOS_REPORTE_EXCEL_USUARIOS
+    OBTENER_DATOS_REPORTE_EXCEL_USUARIOS,
+    ARMAR_LISTA_PAISES_SELECCIONADOS_USUARIO
 } from '../../../../Constantes/Administrativo/Usuarios/Usuarios'
 
 import {
@@ -367,4 +368,26 @@ export const LimpiarArrayDescargarExcelReducer = async (data_excel_descargar) =>
     })
   
     return data_excel_descargar
+}
+
+export const armarPaisesSeleccionadosReducer = (usuario) => async (dispatch, getState) => {
+
+    let paisesUsuario = getState().usuarios.paisesUsuario
+
+    await paisesUsuario.map((pais,pos) => {
+        usuario.paises.map((paisSelec) => {
+            if(paisSelec.paiid == pais.paiid){
+                paisesUsuario[pos]['seleccionado'] = true
+            }else{
+                paisesUsuario[pos]['seleccionado'] = false
+            }
+        })
+    })
+    console.log("PAISES USUARIO ACTION")
+    console.log(paisesUsuario)
+    dispatch({
+        type: ARMAR_LISTA_PAISES_SELECCIONADOS_USUARIO,
+        payload: paisesUsuario
+    })
+
 }

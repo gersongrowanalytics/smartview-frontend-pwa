@@ -34,7 +34,9 @@ export const EditarPerfilReducer = (datos) => async (dispatch, getState) => {
     .then(data => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
-            if(data.respuesta == true){
+            if (data.respuesta == true) {
+                console.log("mensaje")
+                console.log(data.mensaje)
                 respuesta = true
                 localStorage.setItem('pernombre', datos.re_nombre)
                 localStorage.setItem('perapellidopaterno', datos.re_apellidoPaterno)

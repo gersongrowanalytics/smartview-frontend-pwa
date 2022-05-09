@@ -42,9 +42,6 @@ const FormularioUsuarios = (props) => {
 
     const [mostrarModal, setMostrarModal] = useState(false)
 
-    console.log("PAISES USUARIO")
-    console.log(paisesUsuario)
-
     return (
         <div>
             <div style={{marginLeft: '40px', marginRight: '58px', paddingBottom:'20px'}}>

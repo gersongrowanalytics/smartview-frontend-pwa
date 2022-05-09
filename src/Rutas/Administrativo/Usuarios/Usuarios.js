@@ -245,7 +245,7 @@ const Usuarios = () => {
                 're_paises'      : paisesSeleccionados,
                 're_estado'      : estado,
             }
-            console.log(usuarioDatos);
+
             if(await dispatch(crearUsuario(usuarioDatos)) == true){
                 crearAdmUsuario()
                 abrirNotificacion('true')

@@ -11,7 +11,6 @@ const TablaUsuarios = (props) => {
         cargandoTablaUsuarios,
         indexRegistro,
     } = useSelector(({usuarios}) => usuarios);
-    // console.log(usuarios)
 
     const busquedaAbierto = props.busquedaAbierto
     const setbusquedaAbierto = props.setbusquedaAbierto

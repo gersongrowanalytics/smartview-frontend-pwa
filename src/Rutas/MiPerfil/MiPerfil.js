@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { Row, Col, Spin, notification} from 'antd'
+import { Row, Col, Spin, notification, Switch} from 'antd'
 import '../../Estilos/Rutas/MiPerfil/MiPerfil.css'
 import Camara from '../../Assets/Img/MiPerfil/Foto_perfil_cámara.png'
 import {useDispatch, useSelector} from 'react-redux'
@@ -18,9 +18,9 @@ const MiPerfil = () => {
     const [txtIdioma, settxtIdioma] = useState("")
     const [imagenPrevi, setimagenPrevi] = useState(Camara)
     const [imagenUsuario, setimagenUsuario] = useState(localStorage.getItem('usuimagen'))
-    const [modalAbiertoEditarSinImagen, setModalAbiertoEditarSinImagen] = useState(false)
     const [modalAbiertoEditarImagen, setModalAbiertoEditarImagen] = useState(false)
     const [imagenRecortada, setImagenRecortada] = useState("")
+    const [editarContrasenia, setEditarContrasenia] = useState(false)
     
     const { 
         datosUsuarioLogeado
@@ -57,10 +57,12 @@ const MiPerfil = () => {
             re_telefono        : datos['telefono'],
             // idioma             : datos['idioma'],
             // pais               : datos['pais'],
-            re_direccion       : datos['direccion']
-            
+            re_direccion        : datos['direccion'],
+            re_editarContrasenia: editarContrasenia,
+            re_contrasenia      : editarContrasenia == true ? datos['contraseniaActual'] : "_",
+            re_nuevaContrasenia : editarContrasenia == true ? datos['contraseniaNueva'] : "_",
         }
-        console.log(datosUsuario)
+        // console.log(datosUsuario)
         if ( await dispatch(EditarPerfilReducer(datosUsuario)) == true) {
             abrirNotificacion('true')
         } else {
@@ -75,12 +77,12 @@ const MiPerfil = () => {
             <Form
                 onFinish={onFinish}
                 initialValues={{
-                    nombre          : localStorage.getItem('pernombre'),
-                    apellidoPaterno : localStorage.getItem('perapellidopaterno'),
-                    apellidoMaterno : localStorage.getItem('perapellidomaterno'),
-                    email           : localStorage.getItem('usuusuario'),
-                    telefono        : localStorage.getItem('percelular'),
-                    direccion       : localStorage.getItem('perdireccion'),
+                    nombre            : localStorage.getItem('pernombre') == "null" ? "" : localStorage.getItem('pernombre'),
+                    apellidoPaterno   : localStorage.getItem('perapellidopaterno') == "null" ? "" : localStorage.getItem('perapellidopaterno'),
+                    apellidoMaterno   : localStorage.getItem('perapellidomaterno') == "null" ? "" : localStorage.getItem('perapellidomaterno'),
+                    email             : localStorage.getItem('usuusuario') == "null" ? "" : localStorage.getItem('usuusuario'),
+                    telefono          : localStorage.getItem('percelular') == "null" ? "" : localStorage.getItem('percelular'),
+                    direccion         : localStorage.getItem('perdireccion') == "null" ? "" : localStorage.getItem('perdireccion'),
                     idioma: "espanol"
                 }}
             >
@@ -91,11 +93,10 @@ const MiPerfil = () => {
                     </Col>
                     <Col xl={10} offset={1}>
                         {
-                            // localStorage.getItem('usuimagen') == 'null' || localStorage.getItem('usuimagen') ? (
-                            !localStorage.getItem('usuimagen') ? (
-
+                            localStorage.getItem('usuimagen') == 'null' ? (
+                            // !localStorage.getItem('usuimagen') ? (
                                 <>
-                                primera
+                                {/* primera */}
                                     <div className='imagen-upload'>
                                         <label htmlFor="file-input">
                                             <img className='Foto-Perfil' src={imagenPrevi}/>
@@ -106,11 +107,8 @@ const MiPerfil = () => {
                                             onChange={(e) => {
                                                 let reader = new FileReader()
                                                 reader.readAsDataURL(e.target.files[0]);
-                                                setimagenPrevi("hola1")
-                                                console.log('IMAGEN_PREV1_INPUT_SIN_IMAGEN',imagenPrevi)
                                                 reader.onload = function(){
                                                     setimagenPrevi(reader.result)
-                                                    console.log('IMAGEN_PREV2_SIN_IMAGEN',imagenPrevi)
                                                     setModalAbiertoEditarImagen(true)
                                                     // localStorage.setItem('usuImagenPrev', reader.result)
                                                     // dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
@@ -122,7 +120,7 @@ const MiPerfil = () => {
                                 
                             ) : (
                                 <div className='imagen-upload'>
-                                segunda
+                                {/* segunda */}
                                         <label htmlFor="file-input">
                                             <img className='Foto-Perfil' src={imagenUsuario}/>
                                         </label>
@@ -130,19 +128,11 @@ const MiPerfil = () => {
                                             id='file-input' 
                                             type="file"
                                             onChange={(e) => {
-                                                console.log(e.target.files[0].name)
-                                                // e.target.files[0].name = Math.random()
-
-                                                let file  = document.getElementById('file-input');  
-                                                console.log(file)
+                                                // console.log(e.target.files[0].name)
                                                 let reader = new FileReader()
                                                 reader.readAsDataURL(e.target.files[0]);
-                                                // setimagenPrevi("hola2")
-                                                // console.log('IMAGEN_PREV1_INPUT_CON_IMAGEN',imagenPrevi)
                                                 reader.onload = function(){
-
                                                     setimagenPrevi(reader.result)
-                                                    // console.log('IMAGEN_PREV2_CON_IMAGEN',imagenPrevi)
                                                     setModalAbiertoEditarImagen(true)
                                                     // localStorage.setItem('usuImagenPrev', reader.result)
                                                     // dispatch(OpcionesImagenPrevImagenReducer(reader.result, row.index, row.original.proimagen))
@@ -311,6 +301,79 @@ const MiPerfil = () => {
                         </Form.Item>
                     </Col>
                 </Row>
+                <Row>
+                    <Col xs={2} xl={6}/>
+                    <Col xs={5} xl={3} className='Primera-Columna-Perfil'>
+                        <div className='Campos-Perfil'>Contraseña :</div>
+                    </Col>
+                    <Col xs={14} xl={9}>
+                        <div>
+                            {
+                                editarContrasenia == true
+                                    ? <div style={{marginLeft: '56px', paddingRight: '35px'}}>
+                                        <div className='Text-Inputs-Contrasenia'>
+                                            *Contraseña Actual
+                                        </div>
+                                        <Form.Item
+                                            name="contraseniaActual"
+                                            className='InputFormPerfil'
+                                        >
+                                            <Input.Password
+                                                className='Input-Perfil'
+                                                autoComplete={'new-password'}
+                                            />
+                                        </Form.Item>
+                                        <div className='Text-Inputs-Contrasenia'>
+                                            *Nueva Contraseña
+                                        </div>
+                                        <Form.Item
+                                            name="contraseniaNueva"
+                                            className='InputFormPerfil'
+                                        >
+                                            <Input.Password
+                                                className='Input-Perfil'
+                                                autoComplete={'new-password'}
+                                            />
+                                        </Form.Item>
+                                        <div className='Text-Inputs-Contrasenia'>
+                                            *Confirmar nueva contraseña
+                                        </div>
+                                        <Form.Item
+                                            name="contraseniaConfirmacion"
+                                            className='InputFormPerfil'
+                                            rules={[
+                                                ({ getFieldValue }) => ({
+                                                  validator(_, value) {
+                                                    if (!value || getFieldValue('contraseniaNueva') === value) {
+                                                      return Promise.resolve();
+                                                    }
+                                                    return Promise.reject(new Error('¡Las dos contraseñas que ingresaste no coinciden!'));
+                                                  },
+                                                }),
+                                              ]}
+                                        >
+                                            <Input.Password
+                                                className='Input-Perfil'
+                                                autoComplete={'new-password'}
+                                            />
+                                        </Form.Item>
+                                    </div>
+                                    : <div
+                                        className='Campos-Perfil'
+                                        style={{ marginLeft: '56px'}}
+                                      >
+                                        Cambiar contraseña
+                                      </div>
+                            }
+                        </div>
+                    </Col>
+                    <Col xl={1} style={{display:'flex', justifyContent: 'flex-end'}}>
+                        <Switch
+                            onChange={(e) => {setEditarContrasenia(e)}}
+                        />
+                    </Col>
+                    <Col xs={2} xl={5}/>
+                </Row>
                 <Row style={{marginTop:'50px', marginBottom: '58px'}}>
                     <Col xs={2} xl={6}></Col>
                     <Col xs={10} xl={3} className='Primera-Columna-Perfil Posicion'>
@@ -340,24 +403,6 @@ const MiPerfil = () => {
                     </Col> */}
                 </Row>
             </Form>
-             {/*
-            <ModalImagen
-                modalAbiertoEditarImagen={modalAbiertoEditarSinImagen}
-                imagenPrevi={ imagenPrevi }
-                imagenRecortada = {imagenRecortada}
-                setAbrilModal={(valor) => {
-                    setModalAbiertoEditarSinImagen(valor)
-                }}
-                setImagenPrevisualizar={(imagen) => {
-                    setimagenPrevi(imagen)
-                }}
-                setImagenRecortadaCircular={(imagen) => {
-                    setImagenRecortada(imagen)
-                }}
-                setImagenUsuario={(imagen) => {
-                    setimagenUsuario(imagen)
-                }}
-           />*/}
             <ModalImagen
                 modalAbiertoEditarImagen={modalAbiertoEditarImagen}
                 imagenPrevi={ imagenPrevi }

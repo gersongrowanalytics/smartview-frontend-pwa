@@ -101,10 +101,14 @@ export const dataPaises = () => async ( dispatch, getState ) => {
     .then( async data => {
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
-            if(data){
+            if (data.respuesta == true) {
+                let dataPaises = data.datos
+                await dataPaises.map((pais) => {
+                    pais['seleccionado'] = false
+                })
                 dispatch({
                     type: OBTENER_DATOS_PAISES,
-                    payload: data.datos
+                    payload: dataPaises
                 })
             }else{
 
@@ -378,13 +382,10 @@ export const armarPaisesSeleccionadosReducer = (usuario) => async (dispatch, get
         usuario.paises.map((paisSelec) => {
             if(paisSelec.paiid == pais.paiid){
                 paisesUsuario[pos]['seleccionado'] = true
-            }else{
-                paisesUsuario[pos]['seleccionado'] = false
             }
         })
     })
-    console.log("PAISES USUARIO ACTION")
-    console.log(paisesUsuario)
+
     dispatch({
         type: ARMAR_LISTA_PAISES_SELECCIONADOS_USUARIO,
         payload: paisesUsuario

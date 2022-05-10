@@ -54,7 +54,7 @@ const ElementosEnviadosNuevo = () => {
         fil_selectodo_data_tipo_envio
     } = useSelector(({elementosEnviados}) => elementosEnviados);
 
-    // console.log(elementosEnviados)
+    console.log(elementosEnviados)
 
     const {
         sucursalesUsuario,
@@ -234,7 +234,19 @@ const ElementosEnviadosNuevo = () => {
                                         </th>
                                         <th>
                                             <div>
+                                                <span>Mes aperturado</span>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
                                                 <span>Tipo</span>
+                                                {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div>
+                                                <span>Asunto correo</span>
                                                 {/* <img src={FlechaAbajoBlanco} style={{width:'7px', marginLeft: '10px'}}/> */}
                                             </div>
                                         </th>
@@ -323,12 +335,18 @@ const ElementosEnviadosNuevo = () => {
                                                     <td>
                                                         {pos+1}
                                                     </td>
+                                                    <td>
+                                                        {mes}
+                                                    </td>
                                                     <td
                                                         style={{
                                                             textAlign: "-webkit-left"
                                                         }}
                                                     >
                                                         {data.ucetipo}
+                                                    </td>
+                                                    <td>
+                                                        {data.uceasunto}
                                                     </td>
                                                     <td
                                                         onClick={() => {

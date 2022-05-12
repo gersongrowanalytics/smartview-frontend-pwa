@@ -467,3 +467,75 @@ export const ValidarDatosCrearRebateTrimestralReducer = () => async (dispatch, g
     
 
 }
+
+export const EliminarRebateTrimestreReducer = (
+    porcentajedesde,
+    porcentajehasta,
+    porcentajerebate,
+    tprid,
+    treid
+) => async (dispatch, getState) => {
+
+    const mesSeleccionadoFiltro = getState().fechas.mesSeleccionadoFiltro
+    const anioSeleccionadoFiltro = getState().fechas.anioSeleccionadoFiltro
+
+    dispatch({
+        type : CARGANDO_DATA_REBATE_TRIMESTRAL,
+        payload : true
+    })
+
+    await fetch(config.api+'eliminar-rebate-trimestral',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                anio : anioSeleccionadoFiltro,
+                dia  : "01",
+                mes  : mesSeleccionadoFiltro,
+
+                porcentajedesde: porcentajedesde,
+                porcentajehasta: porcentajehasta,
+                porcentajerebate: porcentajerebate,
+                tprid: tprid,
+                treid: treid,
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken'),
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then(async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                dispatch(ObtenerDataRebateTrimestralReducer())
+                notification.success({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                })
+            }else{
+                notification.info({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                });
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
+    dispatch({
+        type : CARGANDO_DATA_REBATE_TRIMESTRAL,
+        payload : false
+    })
+
+}

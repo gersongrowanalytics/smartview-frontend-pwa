@@ -16,7 +16,7 @@ import {
     SELECCIONAR_UNA_ZONA_DESCARGAR
 } from "../../../../Constantes/Sucursales";
 
-import { message } from 'antd'
+import { message, notification } from 'antd'
 
 export const dataUsuarios = (pagina) => async ( dispatch, getState ) => {
 
@@ -391,4 +391,52 @@ export const armarPaisesSeleccionadosReducer = (usuario) => async (dispatch, get
         payload: paisesUsuario
     })
 
+}
+
+export const EliminarUsuarioReducer = (id) => async (dispatch, getState) => {
+    let respuesta = false
+
+    await fetch(config.api+'/usuarios/eliminar',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                re_usuarioId : id,
+            }),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken'),
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then(async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if (data.respuesta == true) {
+                respuesta = true
+                dispatch(dataUsuarios('1'))
+                notification.success({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                })
+            }else{
+                notification.info({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                });
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
+    return respuesta
 }

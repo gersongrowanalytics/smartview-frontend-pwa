@@ -390,7 +390,10 @@ const Usuarios = () => {
                         }}
                         busquedaAbierto = {busquedaAbierto}
                         setbusquedaAbierto = {setbusquedaAbierto}
-                        txtBuscarUsuario = {txtBuscarUsuario}
+                        txtBuscarUsuario={txtBuscarUsuario}
+                        vaciarCamposFormulario={() => {
+                            crearAdmUsuario()
+                        }}
                     />
                 </Col>
                 <Col xl={15}>

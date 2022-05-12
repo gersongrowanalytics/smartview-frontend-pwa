@@ -1,10 +1,18 @@
 import React, {useState} from 'react'
-import { Input, Checkbox, Spin } from 'antd'
+import { Input, Checkbox, Spin, Modal } from 'antd'
 import FlechaAbajo from '../../../../Assets/Img/Administrativo/Usuarios/Angulo-pequeno-hacia-abajo-white.png'
 import { LoadingOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
+import IconoEliminar from '../../../../Assets/Img/ElementosEnviados/Eliminar.png'
+import {
+    EliminarUsuarioReducer
+} from '../../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
+
+
 
 const TablaUsuarios = (props) => {
+
+    const dispatch = useDispatch()
 
     const { 
         usuarios,
@@ -16,6 +24,17 @@ const TablaUsuarios = (props) => {
     const setbusquedaAbierto = props.setbusquedaAbierto
     const seleccionarUsuarioEditar = props.seleccionarUsuarioEditar
     const txtBuscarUsuario = props.txtBuscarUsuario
+    const vaciarCamposFormulario = props.vaciarCamposFormulario
+
+    const [modalAbiertoEliminar, setmodalAbiertoEliminar] = useState(false)
+    const [idUsuario, setIdUsuario] = useState("")
+
+    const eliminarUsuario = async() => {
+        if (await dispatch(EliminarUsuarioReducer(idUsuario)) == true){
+            vaciarCamposFormulario()
+        }
+        setmodalAbiertoEliminar(false)
+    }
 
     return (
         <div>
@@ -108,7 +127,21 @@ const TablaUsuarios = (props) => {
                                             key={usuario.usuid}
                                         >
                                             <td>
-                                                {indexRegistro + posicion}
+                                                <div className='Td-Icono-Rebate'>
+                                                    <div className='Fondo-Icono-Eliminar'>
+                                                        <img 
+                                                            className='Icono-Eliminar'
+                                                            src={IconoEliminar} 
+                                                            style={{width:'16px'}}
+                                                            onClick={() => {
+                                                                setmodalAbiertoEliminar(!modalAbiertoEliminar)
+                                                                setIdUsuario(usuario.usuid)
+                                                                console.log(usuario)
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className='Texto-Indice-Tabla-Usuarios'>{indexRegistro + posicion}</div>
                                             </td>
                                             <td style={{textAlign:'initial'}}>
                                                 <div 
@@ -177,6 +210,47 @@ const TablaUsuarios = (props) => {
                     </table>
                 </div>
             </Spin>
+            <Modal
+                centered
+                title={null}
+                visible={modalAbiertoEliminar}
+                footer={null}
+                closeIcon={<div></div>}
+                width="310px"
+                height="139px"
+                className='Caja-Modal-ReenviarElemento'
+                onCancel={() => setmodalAbiertoEliminar(false)}
+            >
+                <div>
+                    <div className='Titulo-Modal-Reenviar-Elemento'>
+                        Eliminar Usuario
+                    </div>
+                    <div className='Texto-Modal-Reenviar-Elemento'>
+                        ¿Está seguro que desea eliminar el usuario?
+                    </div>
+                    <div className='Contenedor-Botones-Modal'>
+                        <Spin
+                            // spinning={false}
+                            spinning={false}
+                        >
+                            <button 
+                                className='Boton-Aceptar-Eliminar-Modal'
+                                onClick={async () => {eliminarUsuario()}}
+                            >
+                                Aceptar
+                            </button>
+                        </Spin>
+                        <button 
+                            className='Boton-Cancelar-Eliminar-Modal'
+                            onClick={() => {
+                                setmodalAbiertoEliminar(false)
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

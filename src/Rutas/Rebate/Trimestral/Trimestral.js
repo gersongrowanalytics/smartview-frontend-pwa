@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import FiltrosRebate from '../../../Componentes/Rutas/Rebate/FiltrosRebate'
-import {InputNumber, Select} from "antd";
+import {InputNumber, Modal, Select, Spin} from "antd";
 import IconoFlechaBlanca from '../../../Assets/Img/Rebate/flechaderechablanca.png'
 import IconoAgregar from '../../../Assets/Img/Rebate/agregarceleste.png'
 import {useDispatch, useSelector} from "react-redux";
@@ -10,11 +10,13 @@ import {
     AgregarFilaRebateTrimestralReducer,
     EditandoFilaRebateTrimestralReducer,
     HabilitarEditarTodosRebateTrimestralReducer,
-    CrearRebatesTrimestralReducer
+    CrearRebatesTrimestralReducer,
+    EliminarRebateTrimestreReducer
 } from '../../../Redux/Acciones/Rebate/Trimestre/Trimestre'
 import {
     ObtenerGrupoRebateReducer
 } from '../../../Redux/Acciones/Rebate/Rebate'
+import IconoEliminar from '../../../Assets/Img/ElementosEnviados/Eliminar.png'
 
 const Trimestral = () => {
 
@@ -33,10 +35,14 @@ const Trimestral = () => {
         cargando_guardar_rebate_trimestral
     } = useSelector(({rebate}) => rebate);
 
+    console.log(data_rebate_trimestral)
     const [mostrarFilaAgregar, setMostrarFilaAgregar] = useState(false)
     const [numeroFilasNuevas, setNumeroFilasNuevas] = useState(0)
     const [editandoRebate, setEditandoRebate] = useState(false)
     const [utilizarCarousel, setUtilizarCarousel] = useState(true)
+    const [modalAbiertoEliminar, setmodalAbiertoEliminar] = useState(false)
+    const [posicionFilaTabla, setposicionFilaTabla] = useState("")
+    const [posicionTabla, setPosicionTabla] = useState("")
 
     useEffect(() => {
         if(cargando_data_rebate_trimestral == false){
@@ -415,24 +421,52 @@ const Trimestral = () => {
                                                         >
                                                             {
                                                                 rebate.editando == true
-                                                                ?<>
-                                                                    <InputNumber 
-                                                                        className="gx-mb-3 gx-w-100 Input-Editar-Porcentaje-Rebate" 
-                                                                        rules={[{ required: true, message: 'Es necesario un porcentaje desde' }]}
-                                                                        defaultValue={rebate["cat-5"]}
-                                                                        min={0}
-                                                                        max={10000}
-                                                                        formatter={value => `${value}%`}
-                                                                        parser={value => value.replace('%', '')}
-                                                                        onChange={(e) => {
-                                                                            dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "cat-5", e))
-                                                                        }}
-                                                                    />
-                                                                </>
-                                                                :<>
-                                                                    {rebate["cat-5"]} %
-                                                                </>
+                                                                ?null
+                                                                :<div className='Td-Icono-Rebate'>
+                                                                    <div className='Fondo-Icono-Eliminar'>
+                                                                        <img 
+                                                                            className='Icono-Eliminar'
+                                                                            src={IconoEliminar} 
+                                                                            style={{width:'16px'}}
+                                                                            onClick={() => {
+                                                                                setmodalAbiertoEliminar(!modalAbiertoEliminar)
+                                                                                setposicionFilaTabla(pos)
+                                                                                setPosicionTabla(posData)
+                                                                            }}
+                                                                        />
+                                                                    </div>
+
+                                                                </div>
                                                             }
+
+                                                            <div 
+                                                                className={
+                                                                    rebate.editando == true
+                                                                    ?''
+                                                                    :'Td-Normal-Porcentaje-Rebate'
+                                                                }
+                                                            >
+                                                                {
+                                                                    rebate.editando == true
+                                                                    ?<>
+                                                                        <InputNumber 
+                                                                            className="gx-mb-3 gx-w-100 Input-Editar-Porcentaje-Rebate" 
+                                                                            rules={[{ required: true, message: 'Es necesario un porcentaje desde' }]}
+                                                                            defaultValue={rebate["cat-5"]}
+                                                                            min={0}
+                                                                            max={10000}
+                                                                            formatter={value => `${value}%`}
+                                                                            parser={value => value.replace('%', '')}
+                                                                            onChange={(e) => {
+                                                                                dispatch(EditandoFilaRebateTrimestralReducer(posData, pos, "cat-5", e))
+                                                                            }}
+                                                                        />
+                                                                    </>
+                                                                    :<>
+                                                                        {rebate["cat-5"]} %
+                                                                    </>
+                                                                }
+                                                            </div>
                                                         </td>
 
                                                     </tr>
@@ -543,33 +577,56 @@ const Trimestral = () => {
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <Modal
+                centered
+                title={null}
+                visible={modalAbiertoEliminar}
+                footer={null}
+                closeIcon={<div></div>}
+                width="310px"
+                height="139px"
+                className='Caja-Modal-ReenviarElemento'
+                onCancel={() => setmodalAbiertoEliminar(false)}
+            >
+                <div>
+                    <div className='Titulo-Modal-Reenviar-Elemento'>
+                        Eliminar Rebate
+                    </div>
+                    <div className='Texto-Modal-Reenviar-Elemento'>
+                        ¿Está seguro que desea eliminar el rebate?
+                    </div>
+                    <div className='Contenedor-Botones-Modal'>
+                        <Spin
+                            // spinning={false}
+                            spinning={false}
+                        >
+                            <button 
+                                className='Boton-Aceptar-Eliminar-Modal'
+                                onClick={async () => {
+                                    await dispatch(EliminarRebateTrimestreReducer(
+                                        data_rebate_trimestral[posicionTabla]['data'][posicionFilaTabla]['ttrporcentajedesde'],
+                                        data_rebate_trimestral[posicionTabla]['data'][posicionFilaTabla]['ttrporcentajehasta'],
+                                        data_rebate_trimestral[posicionTabla]['data'][posicionFilaTabla]['ttrporcentajerebate'],
+                                        data_rebate_trimestral[posicionTabla]['data'][posicionFilaTabla]['tprid'],
+                                        data_rebate_trimestral[posicionTabla]['data'][posicionFilaTabla]['treid'],
+                                    ))
+                                    setmodalAbiertoEliminar(false)
+                                }}
+                            >
+                                Aceptar
+                            </button>
+                        </Spin>
+                        <button 
+                            className='Boton-Cancelar-Eliminar-Modal'
+                            onClick={() => {
+                                setmodalAbiertoEliminar(false)
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </>
     )
 }

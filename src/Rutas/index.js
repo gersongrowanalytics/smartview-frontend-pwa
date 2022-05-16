@@ -30,6 +30,7 @@ import RebateBonus from './Rebate/Bonus/Bonus';
 import RebateTrimestral from './Rebate/Trimestral/Trimestral';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import PruebasAutomatizacion from './PruebasAutomatizacion/PruebasAutomatizacion';
 
 const Rutas = () => {
 
@@ -164,7 +165,8 @@ const Rutas = () => {
                     <Route exact path='/administrativo/perfil' element={<TiposUsuarios/>}/>
                     <Route exact path='/administrativo/usuarios' element={<Usuarios/>}/>
                     <Route exact path='/administrativo/permisos' element={<Permisos/>}/>
-                    <Route exact path='/administrativo/control-archivo' element={<ControlArchivo/>}/>
+                    <Route exact path='/administrativo/control-archivo' element={<ControlArchivo />} />
+                    <Route exact path='/pruebasExcel' element={<PruebasAutomatizacion/> }/>
                     {
                         datosUsuarioLogeado.usuaceptoterminos
                         ?mostrar_terminos_condiciones_login == true

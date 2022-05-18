@@ -1,0 +1,8 @@
+.BTN-OBTENER-DATA{
+	background: red;
+    border-radius: 8px;
+    width: 118px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}

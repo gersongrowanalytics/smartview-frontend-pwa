@@ -15,12 +15,8 @@ import {
     dataReporteArchivosReducer
 } from '../../../Redux/Acciones/ControlArchivos/ControlArchivos'
 import { LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
-import IconoEditar from '../../../Assets/Img/Administrativo/Permisos/editar.png'
-import IconoEditarBlanco from '../../../Assets/Img/Administrativo/Permisos/editarBlanco.png'
 import IconoEliminar from '../../../Assets/Img/Administrativo/Permisos/eliminar.png'
 import IconoEliminarBlanco from '../../../Assets/Img/Administrativo/Permisos/eliminarBlanco.png'
-import IconoGuardar from '../../../Assets/Img/Administrativo/Permisos/guardar.png'
-import IconoGuardarBlanco from '../../../Assets/Img/Administrativo/ControlArchivo/Guardar-white.png'
 import Moment from 'moment';
 import FiltroTipoCarga from '../../../Componentes/Rutas/Administrativo/ControlArchivos/FiltroTipoCarga';
 import ReactExport from 'react-data-export';
@@ -51,8 +47,6 @@ const ControlArchivo = () => {
         fil_selectodo_data_tipo_carga,
         datosReporteExcelArchivosSubidos
     } = useSelector(({controlArchivos}) => controlArchivos);
-
-    // console.log(datosReporteExcelArchivosSubidos)
 
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataControlArchivos(paginaActualTabla))

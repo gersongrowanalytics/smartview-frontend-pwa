@@ -46,7 +46,7 @@ const MiPerfil = () => {
         });
     };
     
-    const onFinish = async(datos) =>  {
+    const ObtenerDatosFormulario = async(datos) =>  {
 
         let datosUsuario = {
             re_imagen          : localStorage.getItem('usuimagen'),
@@ -62,7 +62,6 @@ const MiPerfil = () => {
             re_contrasenia      : editarContrasenia == true ? datos['contraseniaActual'] : "_",
             re_nuevaContrasenia : editarContrasenia == true ? datos['contraseniaNueva'] : "_",
         }
-        // console.log(datosUsuario)
         if ( await dispatch(EditarPerfilReducer(datosUsuario)) == true) {
             abrirNotificacion('true')
         } else {
@@ -75,7 +74,7 @@ const MiPerfil = () => {
             style={{marginTop:'115px'}}
         >
             <Form
-                onFinish={onFinish}
+                onFinish={ObtenerDatosFormulario}
                 initialValues={{
                     nombre            : localStorage.getItem('pernombre') == "null" ? "" : localStorage.getItem('pernombre'),
                     apellidoPaterno   : localStorage.getItem('perapellidopaterno') == "null" ? "" : localStorage.getItem('perapellidopaterno'),
@@ -128,7 +127,6 @@ const MiPerfil = () => {
                                             id='file-input' 
                                             type="file"
                                             onChange={(e) => {
-                                                // console.log(e.target.files[0].name)
                                                 let reader = new FileReader()
                                                 reader.readAsDataURL(e.target.files[0]);
                                                 reader.onload = function(){

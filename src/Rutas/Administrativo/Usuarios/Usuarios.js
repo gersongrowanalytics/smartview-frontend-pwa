@@ -220,7 +220,7 @@ const Usuarios = () => {
         });
     };
 
-    const onFinish = async(valores) => {
+    const ObtenerDatosFormulario = async(valores) => {
 
         if(editarFilaUsuario == true && ConfirmoEditar == false){
             setConfirmoEditar(true)
@@ -419,7 +419,7 @@ const Usuarios = () => {
                         setestadoUsuario        = {setestadoUsuario}
                         tipoUsuario             = {tipoUsuario}
                         settipoUsuario          = {settipoUsuario}
-                        onFinish                = {onFinish}
+                        ObtenerDatosFormulario  = {ObtenerDatosFormulario}
                         seleccionarTipoUsuario  = {seleccionarTipoUsuario}
                         SeleccionarPais         = {SeleccionarPais}
                         cambiarEstado           = {cambiarEstado}

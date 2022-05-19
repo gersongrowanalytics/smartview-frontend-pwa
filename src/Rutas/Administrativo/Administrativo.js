@@ -4,11 +4,6 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import '../../Estilos/Rutas/Administrativo/Administrativo.css'
 import Adm from '../../Assets/Img/Administrativo/TiposUsuarios/Administrador.png'
-import Cliente from '../../Assets/Img/Administrativo/TiposUsuarios/Cliente.png'
-import Ejecutivo from '../../Assets/Img/Administrativo/TiposUsuarios/Ejecutivo.png'
-import Gerente from '../../Assets/Img/Administrativo/TiposUsuarios/Grente.png'
-import Otro from '../../Assets/Img/Administrativo/TiposUsuarios/Otro-two.png'
-import Otro2 from '../../Assets/Img/Administrativo/TiposUsuarios/Otro.png'
 import Agregar from '../../Assets/Img/Administrativo/TiposUsuarios/agregar.png'
 import {
     dataTiposUsuarios
@@ -31,14 +26,12 @@ const Administrativo = () => {
         tiposUsuarios
     } = useSelector(({usuarios}) => usuarios);
 
-    console.log(tiposUsuarios)
-
     let cantidadFilas = Math.round(tiposUsuarios.length / 4)
     let arrayCantidadFilas = []
     for (let i = 1; i <= cantidadFilas; i++) {
         arrayCantidadFilas.push(i)
     }
-    // console.log(arrayCantidadFilas)
+
     const cargarDatos = async() => {
         await dispatch(dataTiposUsuarios())
         await dispatch(dataPermisos())

@@ -46,7 +46,6 @@ const TiposUsuarios = () => {
         tpuid
     } = useSelector(({tiposUsuarios}) => tiposUsuarios);
 
-    console.log(tpuimagen)
     const SeleccionarAño = (valor) => {
         setanioSeleccionado(valor)
         setanioOpcionesAbierto(false)
@@ -116,7 +115,7 @@ const TiposUsuarios = () => {
         'https://pre-back.leadsmartview.com/Sistema/tiposUsuarios/tpu-h-4.png'
     ]
 
-    const onFinish = async(valores) => {
+    const ObtenerDatosFormulario = async(valores) => {
         let editarTipoUsuario = true
         let editarPermisos = false
         if (tpuid == '0') {
@@ -382,7 +381,7 @@ const TiposUsuarios = () => {
                         {
                             tpuid == '0' ? (
                                 <Form
-                                    onFinish={onFinish}
+                                    onFinish={ObtenerDatosFormulario}
                                     autoComplete="off"
                                     form={form}
                                 >
@@ -424,7 +423,7 @@ const TiposUsuarios = () => {
                                     {
                                         editando == true ? (
                                             <Form
-                                                onFinish={onFinish}
+                                                onFinish={ObtenerDatosFormulario}
                                                 autoComplete="off"
                                                 form={form}
                                             >
@@ -497,7 +496,7 @@ const TiposUsuarios = () => {
                                     }}
                                 >
                                     <Form
-                                        onFinish={onFinish}
+                                        onFinish={ObtenerDatosFormulario}
                                         autoComplete="off"
                                         form={form}
                                     >

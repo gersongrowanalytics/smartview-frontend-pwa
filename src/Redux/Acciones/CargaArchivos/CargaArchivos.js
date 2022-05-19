@@ -11,8 +11,6 @@ import {
 
 export const CargarArchivoReducer = (url, data, tipo) => async(dispatch, getState) => {
 
-    // console.log(tipo)
-
     let respuesta = false
 
     let headerFetch = {

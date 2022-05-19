@@ -47,8 +47,6 @@ export const ObtenerNotificacionesUsuarioReducer = () =>async (dispatch, getStat
         console.log(error)
     });
 
-
-
 }
 
 export const VerNotificacionesUsuarioReducer = () => async (dispatch, getState) => {

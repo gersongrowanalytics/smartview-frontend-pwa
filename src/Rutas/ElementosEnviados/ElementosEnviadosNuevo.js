@@ -54,14 +54,10 @@ const ElementosEnviadosNuevo = () => {
         fil_selectodo_data_tipo_envio
     } = useSelector(({elementosEnviados}) => elementosEnviados);
 
-    console.log(elementosEnviados)
-
     const {
         sucursalesUsuario,
         fil_selectodo_data_distribuidora
     } = useSelector(({sucursales}) => sucursales)
-
-    // console.log('sucursales', sucursalesUsuario)
 
     const cargarDatosTabla = async(paginaActualTabla) => {
         await dispatch(dataTiposElementosEnviados())

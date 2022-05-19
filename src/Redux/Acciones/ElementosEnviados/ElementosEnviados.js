@@ -14,7 +14,6 @@ export const dataElementosEnviados = (pagina) => async ( dispatch, getState ) =>
     let tiposEnvio = getState().elementosEnviados.tiposElementosEnviados
     let distribuidora = getState().sucursales.sucursalesUsuario
 
-    // console.log(distribuidora)
     dispatch({
         type: CARGANDO_TABLA_DATOS_ELEMENTOS_ENVIADOS,
         payload: {

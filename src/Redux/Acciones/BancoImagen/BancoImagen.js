@@ -40,8 +40,6 @@ export const dataBancoImagen = () => async ( dispatch, getState ) => {
         return res.json()
     })
     .then( async data => {
-        console.log('DATA OBTENEDIA')
-        console.log(data)
         const estadoRequest = getState().estadoRequest.init_request
         if(estadoRequest == true){
             if(data){

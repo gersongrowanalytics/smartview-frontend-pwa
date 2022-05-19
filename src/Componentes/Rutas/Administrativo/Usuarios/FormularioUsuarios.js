@@ -28,7 +28,7 @@ const FormularioUsuarios = (props) => {
     const setestadoUsuario          = props.setestadoUsuario
     const tipoUsuario               = props.tipoUsuario
     const settipoUsuario            = props.settipoUsuario
-    const onFinish                  = props.onFinish
+    const ObtenerDatosFormulario    = props.ObtenerDatosFormulario
     const seleccionarTipoUsuario    = props.seleccionarTipoUsuario
     const fechaFinal                = props.fechaFinal
     const setfechaFinal             = props.setfechaFinal
@@ -51,7 +51,7 @@ const FormularioUsuarios = (props) => {
                 </div>
                 <div className='Cuerpo-Crear-Adm-Usuario'>
                     <Form
-                        onFinish={onFinish}
+                        onFinish={ObtenerDatosFormulario}
                         autoComplete="off"
                         form={form}
                     >

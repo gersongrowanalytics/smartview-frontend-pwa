@@ -41,17 +41,19 @@ const ModalEnviarCorreo = (props) => {
         // dispatch(EnviarCorreoDescargarReducer(txtPara, txtAsunto, txtMensaje, infoDataCorreo, nombreArchivoCorreoExcel, tituloArchivoCorreoExcel ))
         let rpta = true
 
+        let mensajeCompletoCorreo = txtMensaje+"\n\n\n\n"+txtMensajeFooter
+
         if(props.modulo_descarga_seleccionado != "Catalogo"){
             rpta = await dispatch(
                 EnviarCorreoDescargarFormadoReducer(
-                    txtPara, txtAsunto, txtMensaje, nombre_archivo_enviar_correo_descargar, false,
+                    txtPara, txtAsunto, mensajeCompletoCorreo, nombre_archivo_enviar_correo_descargar, false,
                     
                 )
             )
         }else{
             rpta = await dispatch(
                 EnviarCorreoDescargarFormadoReducer(
-                    txtPara, txtAsunto, txtMensaje, localStorage.getItem('usutoken'), true,
+                    txtPara, txtAsunto, mensajeCompletoCorreo, localStorage.getItem('usutoken'), true,
                     
                 )
             )

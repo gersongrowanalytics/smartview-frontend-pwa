@@ -89,14 +89,19 @@ export const loginReducer = (usuario) => async ( dispatch, getState) => {
 
                 // message.success(data.mensaje);
             }else{
-                message.error(data.mensaje);
+                notification.error({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                })
+
                 if(localStorage.getItem('user_id') > 0){
                     // message.error(data.mensaje);
                     // console.log('ya existe una sesion y ahora esta equivocado')
                     dispatch(cerrarSesionReducer())
                 }else{
                     // console.log('No existe nada')
-                    message.error(data.mensaje);
+                    // message.error(data.mensaje);
                 }
             }
         }

@@ -171,6 +171,13 @@ const Usuarios = () => {
             // Contraseña: usuario.usucontrasena,
             Celular: usuario.percelular
         });
+
+        if(usuario.estid == 1){
+            cambiarEstado(true)
+        }else{
+            cambiarEstado(false)
+        }
+        
         // let dateInput = document.getElementById('fecha_final');
         // console.log(dateInput.value)
         // dateInput.value = usuario.usufechafinal;

@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.3071da3e.chunk.css",
-    "main.js": "/static/js/main.979f76ef.chunk.js",
-    "main.js.map": "/static/js/main.979f76ef.chunk.js.map",
+    "main.js": "/static/js/main.c122964f.chunk.js",
+    "main.js.map": "/static/js/main.c122964f.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c502d9b0.js",
     "runtime-main.js.map": "/static/js/runtime-main.c502d9b0.js.map",
     "static/css/2.7393f959.chunk.css": "/static/css/2.7393f959.chunk.css",
@@ -17,12 +17,7 @@
     "static/css/main.3071da3e.chunk.css.map": "/static/css/main.3071da3e.chunk.css.map",
     "static/js/2.e04134ff.chunk.js.LICENSE.txt": "/static/js/2.e04134ff.chunk.js.LICENSE.txt",
     "static/media/Administrador.2006e30f.png": "/static/media/Administrador.2006e30f.png",
-    "static/media/Cliente.884adc63.png": "/static/media/Cliente.884adc63.png",
     "static/media/Completo-Administrador.748fdcef.png": "/static/media/Completo-Administrador.748fdcef.png",
-    "static/media/Ejecutivo.dc4da53f.png": "/static/media/Ejecutivo.dc4da53f.png",
-    "static/media/Grente.96a86d4b.png": "/static/media/Grente.96a86d4b.png",
-    "static/media/Otro-two.08907ddb.png": "/static/media/Otro-two.08907ddb.png",
-    "static/media/Otro.908ecf57.png": "/static/media/Otro.908ecf57.png",
     "static/media/alertaGif.88bb470c.gif": "/static/media/alertaGif.88bb470c.gif",
     "static/media/bannerPromociones.2e25eb4f.png": "/static/media/bannerPromociones.2e25eb4f.png",
     "static/media/bannerVentas.6df95e02.png": "/static/media/bannerVentas.6df95e02.png",
@@ -46,6 +41,6 @@
     "static/css/2.7393f959.chunk.css",
     "static/js/2.e04134ff.chunk.js",
     "static/css/main.3071da3e.chunk.css",
-    "static/js/main.979f76ef.chunk.js"
+    "static/js/main.c122964f.chunk.js"
   ]
 }

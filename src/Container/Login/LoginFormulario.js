@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {
     loginReducer,
@@ -10,6 +10,7 @@ import GrowIcono from '../../Assets/Img/Login/Isotipo-Grow.png';
 import GrowLogoColor from '../../Assets/Logo/colorlogoCompletoKim.png';
 import {Link} from "react-router-dom";
 import IconoFechaAbajo from '../../Assets/Img/Login/flechaabajo.png'
+import IconoWhastapp from '../../Assets/Img/Login/whatsapp.png'
 
 const LoginFormulario = () => {
     
@@ -56,9 +57,29 @@ const LoginFormulario = () => {
         }, 14500);
     }, [])
     
+    const refWsp = useRef(null)
 
     return (
         <div id="Login-Contenedor-Formulario">
+
+            <div
+                className='Btn-Wsp-Login'
+                onClick={() => {
+                    refWsp.current.click()
+                }}
+            >
+                <img src={IconoWhastapp} className="Icono-Btn-Wsp-Login" />
+            </div>
+
+            <a 
+                href="https://api.whatsapp.com/send?phone=51951331671"
+                ref={refWsp}
+                style={{display:'none'}}
+                target="_blank"
+            >
+                
+            </a>
+
             <div className={ animacionInicial == true ? 'Login-Banner banner0' : 'Login-Banner ocultar'} style={{top:"0"}}>
                 <p>
                     <span className='Login-Banner-Letras-SinRelleno'>CRECIENDO JUNTOS</span>
@@ -186,6 +207,19 @@ const LoginFormulario = () => {
                         }}
                         placeholder="Contraseña" />
                 </Form.Item>  
+                <br/>
+                <span 
+                    id="Login-Formulario-Texto"
+                    onClick={() => {
+                        refWsp.current.click()
+                    }}
+                    style={{
+                        cursor:'pointer'
+                    }}
+
+                > 
+                    ¿No tienes cuenta? comunicate con nosotros 
+                </span>
                 <br/>
                     <Link to="/restablecer" >
                             <span id="Login-Formulario-Texto">¿Se te olvidó tu contraseña?</span>

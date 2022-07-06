@@ -63,8 +63,19 @@
 }
 
 #Login-Formulario-Texto:hover{
-    font-weight: bold;
+    /* font-weight: bold; */
 }
+
+
+
+
+
+
+
+
+
+
+
 
 #Login-Formulario-Boton{
     width: 299px;
@@ -471,4 +482,15 @@
     100% {
       transform:rotate(360deg);
     }
+}
+
+.Btn-Wsp-Login{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    background-color: #1BD741;
+    position: absolute;
+    bottom: 80px;
+    right: 40px;
+    cursor: pointer;
 }

@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.6ceadccb.chunk.css",
-    "main.js": "/static/js/main.91f5dd0d.chunk.js",
-    "main.js.map": "/static/js/main.91f5dd0d.chunk.js.map",
+    "main.css": "/static/css/main.eddd3793.chunk.css",
+    "main.js": "/static/js/main.8092dae4.chunk.js",
+    "main.js.map": "/static/js/main.8092dae4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c502d9b0.js",
     "runtime-main.js.map": "/static/js/runtime-main.c502d9b0.js.map",
     "static/css/2.7393f959.chunk.css": "/static/css/2.7393f959.chunk.css",
@@ -14,7 +14,7 @@
     "service-worker.js": "/service-worker.js",
     "service-worker.js.map": "/service-worker.js.map",
     "static/css/2.7393f959.chunk.css.map": "/static/css/2.7393f959.chunk.css.map",
-    "static/css/main.6ceadccb.chunk.css.map": "/static/css/main.6ceadccb.chunk.css.map",
+    "static/css/main.eddd3793.chunk.css.map": "/static/css/main.eddd3793.chunk.css.map",
     "static/js/2.e04134ff.chunk.js.LICENSE.txt": "/static/js/2.e04134ff.chunk.js.LICENSE.txt",
     "static/media/Administrador.2006e30f.png": "/static/media/Administrador.2006e30f.png",
     "static/media/Completo-Administrador.748fdcef.png": "/static/media/Completo-Administrador.748fdcef.png",
@@ -40,7 +40,7 @@
     "static/js/runtime-main.c502d9b0.js",
     "static/css/2.7393f959.chunk.css",
     "static/js/2.e04134ff.chunk.js",
-    "static/css/main.6ceadccb.chunk.css",
-    "static/js/main.91f5dd0d.chunk.js"
+    "static/css/main.eddd3793.chunk.css",
+    "static/js/main.8092dae4.chunk.js"
   ]
 }

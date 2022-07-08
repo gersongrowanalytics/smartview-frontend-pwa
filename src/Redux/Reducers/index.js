@@ -27,6 +27,7 @@ import Permisos from './Administrativo/Permisos/Permisos'
 import TiposUsuarios from './Administrativo/TiposUsuarios/TiposUsuarios'
 import MiPerfil from './MiPerfil/MiPerfil'
 import LogicaLP from './LogicaLP/LogicaLP'
+import Status from './Status/Status'
 
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -56,7 +57,8 @@ const createRootReducer = (history) => combineReducers({
     permisos: Permisos,
     tiposUsuarios: TiposUsuarios,
     miperfil: MiPerfil,
-    logicaLP: LogicaLP
+    logicaLP: LogicaLP,
+    status: Status
 });
 
 export default createRootReducer

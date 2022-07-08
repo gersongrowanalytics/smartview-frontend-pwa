@@ -31,6 +31,7 @@ import RebateTrimestral from './Rebate/Trimestral/Trimestral';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import LogicaLP from './LogicaLP/LogicaLP';
+import Status from './Status/Status';
 
 const Rutas = () => {
 
@@ -166,6 +167,7 @@ const Rutas = () => {
                     <Route exact path='/administrativo/usuarios' element={<Usuarios/>}/>
                     <Route exact path='/administrativo/permisos' element={<Permisos/>}/>
                     <Route exact path='/administrativo/control-archivo' element={<ControlArchivo />} />
+                    <Route exact path='/status' element={<Status />} />
                     <Route exact path='/logica-lp' element={<LogicaLP/> }/>
                     {
                         datosUsuarioLogeado.usuaceptoterminos

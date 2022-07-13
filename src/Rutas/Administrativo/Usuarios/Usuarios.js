@@ -14,7 +14,8 @@ import {
     SeleccionarSucursalCrearUsuarioReducer,
     SeleccionarTodoSucursalesCrearUsuarioReducer,
     ObtenerDatosReporteExcelUsuariosReducer,
-    armarPaisesSeleccionadosReducer
+    armarPaisesSeleccionadosReducer,
+    enviarCorreoReducer
 } from '../../../Redux/Acciones/Administrativo/Usuarios/Usuarios'
 import { CheckCircleOutlined, CloseCircleOutlined, LeftOutlined, LoadingOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 import TablaUsuarios from '../../../Componentes/Rutas/Administrativo/Usuarios/TablaUsuarios';
@@ -45,6 +46,7 @@ const Usuarios = () => {
     const [editarFilaUsuario, setEditarFilaUsuario] = useState(false)
     const [filtroTipoUsuario, setFiltroTipoUsuario] = useState(false)
     const [ConfirmoEditar, setConfirmoEditar] = useState(false)
+    const [estadoCrearUsuario, setEstadoCrearUsuario] = useState(true)
 
     const [form] = Form.useForm()
     
@@ -156,12 +158,14 @@ const Usuarios = () => {
         setpaisesSeleccionados([])
         setestadoUsuario("Inactivo")
         setestadoBooleanUsuario(false)
+        setEstadoCrearUsuario(true)
     }
 
     const seleccionarUsuarioEditar = async (usuario) => {
         // setpaisesSeleccionados([])
         await dispatch(SeleccionarTodoSucursalesCrearUsuarioReducer(false))
         setEditarFilaUsuario(true)
+        setEstadoCrearUsuario(false)
 
         form.setFieldsValue({
             Nombre: usuario.pernombre,
@@ -251,12 +255,22 @@ const Usuarios = () => {
                 // 'zonas: zonasSeelccionadas,
                 're_paises'      : paisesSeleccionados,
                 're_estado'      : estado,
+                're_corrrre'     : valores['CorreoConfirmacion']
             }
 
             if(await dispatch(crearUsuario(usuarioDatos)) == true){
                 crearAdmUsuario()
                 abrirNotificacion('true')
                 cargarDatosTabla(paginaActualTabla)
+                if (valores['CorreoConfirmacion'] == true) {
+                    let usuarioCorreo = {
+                        'req_usuario'     : valores['CorreoCoorporativo'],
+                        'req_correo'      : valores['CorreoPersonal'],
+                        'req_contrasenia' : valores['Contraseña'],
+                        'req_asunto'      : estadoCrearUsuario
+                    }
+                    dispatch(enviarCorreoReducer(usuarioCorreo))
+                }
             }else{
                 abrirNotificacion('false')
             }
@@ -436,6 +450,7 @@ const Usuarios = () => {
                         setfechaFinal           = {setfechaFinal}
                         editarFilaUsuario       = {editarFilaUsuario}
                         ConfirmoEditar          = {ConfirmoEditar}
+                        estadoCrearUsuario      = {estadoCrearUsuario}
 
                         form = {form}
 

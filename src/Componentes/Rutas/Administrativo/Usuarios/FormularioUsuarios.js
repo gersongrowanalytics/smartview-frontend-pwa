@@ -38,10 +38,12 @@ const FormularioUsuarios = (props) => {
     const setestadoBooleanUsuario   = props.setestadoBooleanUsuario
     const editarFilaUsuario         = props.editarFilaUsuario
     const ConfirmoEditar            = props.ConfirmoEditar
+    const estadoCrearUsuario        = props.estadoCrearUsuario
     const form   = props.form
 
     const [mostrarModal, setMostrarModal] = useState(false)
-
+    const [habilitarCorreo, setHabilitarCorreo] = useState(true)
+    
     return (
         <div>
             <div style={{marginLeft: '40px', marginRight: '58px', paddingBottom:'20px'}}>
@@ -84,13 +86,20 @@ const FormularioUsuarios = (props) => {
                             <div className='CampoA-Crear-Adm-Usuario'>
                                 <span>Contraseña:</span>
                                 <Form.Item name='Contraseña'>
-                                    <Input type='password' autoComplete={'new-password'}/>
+                                    <Input type='password' autoComplete={'new-password'} onChange={(e)=>setHabilitarCorreo(false)}/>
                                 </Form.Item>
                             </div>
                             <div className='CampoA-Crear-Adm-Usuario'>
                                 <span>Celular:</span>
                                 <Form.Item name='Celular'>
                                     <Input />
+                                </Form.Item>
+                            </div>
+                            <div className='CampoA-Crear-Adm-Usuario'>
+                                <Form.Item name='CorreoConfirmacion' valuePropName="checked">
+                                    <Checkbox disabled={habilitarCorreo}> 
+                                        {estadoCrearUsuario == true ? 'Enviar correo de bienvenida' : 'Reenviar nueva contraseña'} 
+                                    </Checkbox>
                                 </Form.Item>
                             </div>
                         </Col>

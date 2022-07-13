@@ -26,7 +26,7 @@ const Status = () => {
         dispatch(ObtenerDataControlArchivosReducer())
         dispatch(ObtenerDataAreasReducer())
     }, [])
-        console.log(data_areas)
+
     return (
         <>
             <div 
@@ -44,7 +44,7 @@ const Status = () => {
                                     return(
                                         <div 
                                             className='Caja-Opciones-Datos'
-                                            style={{marginRight: '36px'}}    
+                                            style={{marginRight: '52px'}}    
                                         >
                                             <img 
                                                 src={pos == 0 ? TradeMarketing : pos == 1 ? DataAnalytics : pos == 2 ? Soporte : null}

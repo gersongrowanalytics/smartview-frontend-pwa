@@ -440,3 +440,45 @@ export const EliminarUsuarioReducer = (id) => async (dispatch, getState) => {
 
     return respuesta
 }
+
+export const enviarCorreoReducer = (usuario) => async ( dispatch, getState ) => {
+
+    await fetch(config.api+'correo-usuarios-nuevos',
+        {
+            mode:'cors',
+            method: 'POST',
+            body: JSON.stringify(usuario),
+            headers: {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+                'api_token': localStorage.getItem('usutoken'),
+                'api-token': localStorage.getItem('usutoken')
+            }
+        }
+    )
+    .then( async res => {
+        await dispatch(estadoRequestReducer(res.status))
+        return res.json()
+    })
+    .then( async data => {
+        const estadoRequest = getState().estadoRequest.init_request
+        if(estadoRequest == true){
+            if(data.respuesta == true){
+                notification.success({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                })
+            }else{
+                notification.info({
+                    message: `Notificación`,
+                    description: data.mensaje,
+                    placement: 'topRight',
+                });
+            }
+        }
+    }).catch((error)=> {
+        console.log(error)
+    });
+
+}

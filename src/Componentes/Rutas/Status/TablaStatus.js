@@ -36,10 +36,10 @@ const TablaStatus = (props) => {
                                             <img src={TradeMarketing} style={{width:'35px'}}/>
                                             <div>{archivos.arenombre}</div>
                                         </td>
-                                        <td style={{textAlign: 'left', paddingLeft: '30px'}}>{archivos.coabasedatos}</td>
+                                        <td style={{textAlign: 'left', paddingLeft: '30px', borderLeft: '1px solid #E5E5E5'}}>{archivos.coabasedatos}</td>
                                         <td>{archivos.pernombrecompletoresponsable}</td>
                                         <td>{archivos.pernombrecompletosubida}</td>
-                                        <td>24 Mayo 2022</td>
+                                        <td>24 May 2022</td>
                                         <td>{archivos.fecfecha}</td>
                                         <td className='Columna-Dias-Retraso'>
                                             <div style={{marginRight: '6px'}}>{archivos.coadiasretraso} días</div>
@@ -51,7 +51,7 @@ const TablaStatus = (props) => {
                             }else if (archivos.coabasedatos == 'Mecánica Promocional Centro' && archivos.areid == '1') {
                                 return (
                                     <tr>
-                                        <td style={{textAlign: 'left', paddingLeft: '30px' , paddingTop: '8px', paddingBottom: '8px'}}>
+                                        <td style={{textAlign: 'left', paddingLeft: '30px' , paddingTop: '8px', paddingBottom: '8px', borderLeft: '1px solid #E5E5E5'}}>
                                             <div style={{marginBottom: '6px'}}>{archivos.coabasedatos}</div>
                                             <div className='Txt-Detalle' 
                                                 onClick={() => setModalAbierto(true)}
@@ -61,7 +61,7 @@ const TablaStatus = (props) => {
                                         </td>
                                         <td>{archivos.pernombrecompletoresponsable}</td>
                                         <td>{archivos.pernombrecompletosubida}</td>
-                                        <td>24 Mayo 2022</td>
+                                        <td>24 May 2022</td>
                                         <td>{archivos.fecfecha}</td>
                                         <td className='Columna-Dias-Retraso' style={{paddingTop: '16px', paddingBottom: '8px'}}>
                                             <div style={{marginRight: '6px'}}>{archivos.coadiasretraso} días</div>
@@ -73,10 +73,10 @@ const TablaStatus = (props) => {
                             }else if(archivos.areid == '1'){
                                 return (
                                     <tr>
-                                        <td style={{textAlign: 'left', paddingLeft: '30px'}}>{archivos.coabasedatos}</td>
+                                        <td style={{textAlign: 'left', paddingLeft: '30px', borderLeft: '1px solid #E5E5E5'}}>{archivos.coabasedatos}</td>
                                         <td>{archivos.pernombrecompletoresponsable}</td>
                                         <td>{archivos.pernombrecompletosubida}</td>
-                                        <td>24 Mayo 2022</td>
+                                        <td>24 May 2022</td>
                                         <td>{archivos.fecfecha}</td>
                                         <td className='Columna-Dias-Retraso'>
                                             <div style={{marginRight: '6px'}}>{archivos.coadiasretraso} días</div>
@@ -92,15 +92,15 @@ const TablaStatus = (props) => {
                         data_control_archivos.map((archivos, pos) => {
                             if (archivos.coabasedatos == 'Sell In Real' && archivos.areid == '2') {
                                 return(
-                                    <tr>
+                                    <tr style={{background: '#FFFFFF'}}>
                                         <td rowSpan={4} style={{background: 'white'}}>
                                             <img src={DataAnalytics} style={{width:'35px'}}/>
                                             <div>{archivos.arenombre}</div>
                                         </td>
-                                        <td style={{textAlign: 'left', paddingLeft: '30px'}}>{archivos.coabasedatos}</td>
+                                        <td style={{textAlign: 'left', paddingLeft: '30px', borderLeft: '1px solid #E5E5E5'}}>{archivos.coabasedatos}</td>
                                         <td>{archivos.pernombrecompletoresponsable}</td>
                                         <td>{archivos.pernombrecompletosubida}</td>
-                                        <td>24 Mayo 2022</td>
+                                        <td>24 May 2022</td>
                                         <td>{archivos.fecfecha}</td>
                                         <td className='Columna-Dias-Retraso'>
                                             <div style={{marginRight: '6px'}}>{archivos.coadiasretraso} días</div>
@@ -111,11 +111,11 @@ const TablaStatus = (props) => {
                                 )
                             }else if(archivos.areid == '2'){
                                 return (
-                                    <tr>
-                                        <td style={{textAlign: 'left', paddingLeft: '30px'}}>{archivos.coabasedatos}</td>
+                                    <tr style={{background: '#FFFFFF'}}>
+                                        <td style={{textAlign: 'left', paddingLeft: '30px', borderLeft: '1px solid #E5E5E5'}}>{archivos.coabasedatos}</td>
                                         <td>{archivos.pernombrecompletoresponsable}</td>
                                         <td>{archivos.pernombrecompletosubida}</td>
-                                        <td>24 Mayo 2022</td>
+                                        <td>24 May 2022</td>
                                         <td>{archivos.fecfecha}</td>
                                         <td className='Columna-Dias-Retraso'>
                                             <div style={{marginRight: '6px'}}>{archivos.coadiasretraso} días</div>
@@ -136,10 +136,10 @@ const TablaStatus = (props) => {
                                             <img src={Soporte} style={{width:'35px'}}/>
                                             <div>{archivos.arenombre}</div>
                                         </td>
-                                        <td style={{textAlign: 'left', paddingLeft: '30px'}}>{archivos.coabasedatos}</td>
+                                        <td style={{textAlign: 'left', paddingLeft: '30px', borderLeft: '1px solid #E5E5E5'}}>{archivos.coabasedatos}</td>
                                         <td>{archivos.pernombrecompletoresponsable}</td>
                                         <td>{archivos.pernombrecompletosubida}</td>
-                                        <td>24 Mayo 2022</td>
+                                        <td>24 May 2022</td>
                                         <td>{archivos.fecfecha}</td>
                                         <td className='Columna-Dias-Retraso'>
                                             <div style={{marginRight: '6px'}}>{archivos.coadiasretraso} días</div>
@@ -151,10 +151,10 @@ const TablaStatus = (props) => {
                             }else if(archivos.areid == '3'){
                                 return (
                                     <tr>
-                                        <td style={{textAlign: 'left', paddingLeft: '30px'}}>{archivos.coabasedatos}</td>
+                                        <td style={{textAlign: 'left', paddingLeft: '30px', borderLeft: '1px solid #E5E5E5'}}>{archivos.coabasedatos}</td>
                                         <td>{archivos.pernombrecompletoresponsable}</td>
                                         <td>{archivos.pernombrecompletosubida}</td>
-                                        <td>24 Mayo 2022</td>
+                                        <td>24 May 2022</td>
                                         <td>{archivos.fecfecha}</td>
                                         <td className='Columna-Dias-Retraso'>
                                             <div style={{marginRight: '6px'}}>{archivos.coadiasretraso} días</div>
